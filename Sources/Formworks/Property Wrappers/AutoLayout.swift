@@ -8,7 +8,7 @@
 import UIKit
 
 /// Property wrapper used to make it easier to instantiate a `UIView` or
-/// its subclasses. **You should only use this property wrapper if you only
+/// its subclasses ready for Auto layout. **You should only use this property wrapper if you only
 /// need the object to be initialized with the following init:** `init(frame: .zero)`.
 @propertyWrapper final class AutoLayout<View: UIView> {
     /// A lazily instantiated `UIView` or `UIView` subclass with the
