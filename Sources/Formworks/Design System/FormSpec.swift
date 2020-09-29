@@ -5,7 +5,7 @@
 //  Created by Artur Carneiro on 29/09/20.
 //
 
-import Foundation
+import UIKit
 
 enum FormSpec {
     // -MARK: UICollectionViewCompositionalLayout

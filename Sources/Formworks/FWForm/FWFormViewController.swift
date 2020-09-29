@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class FWFormController: UIViewController {
+final class FWFormViewController: UIViewController {
     // - MARK: Properties
     private lazy var formCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: setUpCollectionViewLayout())
@@ -42,14 +42,34 @@ final class FWFormController: UIViewController {
     //- MARK: Life cycle
     override func loadView() {
         super.loadView()
-
+        setUpCollectionViewConstraints()
     }
 
     private func setUpCollectionViewConstraints() {
         view.addSubview(formCollectionView)
-
+        let guides = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            
+            formCollectionView.topAnchor.constraint(equalTo: guides.topAnchor),
+            formCollectionView.leftAnchor.constraint(equalTo: guides.leftAnchor),
+            formCollectionView.bottomAnchor.constraint(equalTo: guides.bottomAnchor),
+            formCollectionView.rightAnchor.constraint(equalTo: guides.rightAnchor)
         ])
     }
+}
+//- MARK: UICollectionViewDelegate
+extension FWFormViewController: UICollectionViewDelegate {
+    
+}
+//- MARL: UICollectionViewDataSource
+extension FWFormViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+    }
+    
+    
 }
