@@ -20,4 +20,4 @@ jobs:
     - name: Run tests on iPhone 11 with iOS 14.0
       run:  xcodebuild test -destination 'platform=iOS Simulator,OS=14.0,name=iPhone 11' -scheme 'Formworks-Package'
     - name: SwiftLint
-      uses: norio-nomura/action-swiftlint@3.1.0    
+      run: bundle exec fastlane lint    
