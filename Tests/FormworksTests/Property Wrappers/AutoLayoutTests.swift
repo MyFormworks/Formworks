@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  ManualLayoutTests.swift
 //  
 //
 //  Created by Artur Carneiro on 28/09/20.
@@ -9,8 +9,8 @@ import XCTest
 import UIKit
 @testable import Formworks
 
-final class AutoLayoutTests: XCTestCase {
-    @AutoLayout var sut: UIView
+final class ManualLayoutTests: XCTestCase {
+    @ManualLayout var sut: UIView
 
     func testTranslatesAutoresizingMaskIntoConstraints() {
         XCTAssertFalse(sut.translatesAutoresizingMaskIntoConstraints)
