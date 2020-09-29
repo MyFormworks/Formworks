@@ -17,5 +17,5 @@ jobs:
       run:  sudo xcode-select --switch /Applications/Xcode_12.app
     - name: Generate XCode Project
       run:  swift package generate-xcodeproj
-    - name: Run tests
-      run:  xcodebuild test -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.0' -scheme 'Formworks-Package'
+    - name: Run tests on iPhone 11 with iOS 14.0
+      run:  xcodebuild test -destination 'platform:iOS Simulator,OS:14.0,name:iPhone 11' -scheme 'Formworks-Package'
