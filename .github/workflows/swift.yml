@@ -13,7 +13,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build
-      run: swift build -v
-    - name: Run tests
-      run: swift test -v
+    - name: Switch to XCode 12
+      run:  sudo xcode-select --switch /Applications/Xcode_12.app
+    - name: Generate XCode Project
+      run:  swift package generate-xcodeproj
+    - name: Run tests on iPhone 11 with iOS 14.0
+      run:  xcodebuild test -destination 'platform=iOS Simulator,OS=14.0,name=iPhone 11' -scheme 'Formworks-Package'
