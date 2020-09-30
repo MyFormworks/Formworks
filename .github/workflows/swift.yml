@@ -25,5 +25,5 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: SwiftLint
-      run: bundle exec fastlane lin
+    - name: GitHub Action for SwiftLint
+    - uses: norio-nomura/action-swiftlint@3.1.0
