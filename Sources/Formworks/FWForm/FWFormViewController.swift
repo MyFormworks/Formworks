@@ -14,6 +14,8 @@ public final class FWFormViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(FWFormViewControllerCell.self,
                                 forCellWithReuseIdentifier: FWFormViewControllerCell.identifier)
+        collectionView.delegate = self
+        collectionView.dataSource = self
         return collectionView
     }()
 
