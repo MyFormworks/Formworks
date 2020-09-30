@@ -81,7 +81,6 @@ extension FWFormViewController: UICollectionViewDataSource {
                                                             for: indexPath) as? FWFormViewControllerCell else {
             return UICollectionViewCell()
         }
-        cell.contentView.backgroundColor = .systemGray4
         return cell
     }
     

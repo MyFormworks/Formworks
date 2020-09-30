@@ -22,4 +22,9 @@ enum FormSpec {
     static let groupSpacingLeading: CGFloat = 16
     static let groupSpacingBottom: CGFloat = 16
     static let groupSpacingTrailing: CGFloat = 16
+    
+    enum Cell {
+        static let cornerRadius: CGFloat = 0.05
+    }
 }
+
