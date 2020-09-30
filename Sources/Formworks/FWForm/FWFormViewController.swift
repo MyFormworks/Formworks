@@ -7,11 +7,13 @@
 
 import UIKit
 
-final class FWFormViewController: UIViewController {
+public final class FWFormViewController: UIViewController {
     // - MARK: Properties
     private lazy var formCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: setUpCollectionViewLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(FWFormViewControllerCell.self,
+                                forCellWithReuseIdentifier: FWFormViewControllerCell.identifier)
         return collectionView
     }()
 
@@ -31,7 +33,7 @@ final class FWFormViewController: UIViewController {
     }
 
     //- MARK: Init
-    init() {
+    public init() {
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -40,7 +42,7 @@ final class FWFormViewController: UIViewController {
     }
 
     //- MARK: Life cycle
-    override func loadView() {
+    public override func loadView() {
         super.loadView()
         setUpCollectionViewConstraints()
     }
@@ -63,12 +65,17 @@ extension FWFormViewController: UICollectionViewDelegate {
 //- MARL: UICollectionViewDataSource
 extension FWFormViewController: UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FWFormViewControllerCell.identifier,
+                                                            for: indexPath) as? FWFormViewControllerCell else {
+            return UICollectionViewCell()
+        }
+        cell.contentView.backgroundColor = .systemRed
+        return cell
     }
     
     
