@@ -1,0 +1,12 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/edgarsgroi/git/Formworks/Sources/Formworks/Formworks.swift",
+      "line": 4,
+      "symbol": "Formworks.text",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/edgarsgroi/git/Formworks"
+}
