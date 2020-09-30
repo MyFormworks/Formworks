@@ -45,6 +45,7 @@ public final class FWFormViewController: UIViewController {
     public override func loadView() {
         super.loadView()
         setUpCollectionViewConstraints()
+        formCollectionView.backgroundColor = .systemPink
     }
 
     private func setUpCollectionViewConstraints() {
