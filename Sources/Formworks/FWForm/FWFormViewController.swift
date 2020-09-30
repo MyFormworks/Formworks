@@ -19,21 +19,6 @@ public final class FWFormViewController: UIViewController {
         return collectionView
     }()
 
-    @available(iOS 13.0, *)
-    private func setUpCollectionViewLayout() -> UICollectionViewCompositionalLayout {
-        let itemLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(FormSpec.itemFractionalWidth),
-                                                    heightDimension: .fractionalHeight(FormSpec.itemFractionalHeight))
-        let item = NSCollectionLayoutItem(layoutSize: itemLayoutSize)
-
-        let groupLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(FormSpec.groupFractionalWidth),
-                                                     heightDimension: .fractionalHeight(FormSpec.groupFractionalHeight))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupLayoutSize, subitems: [item])
-
-        let section = NSCollectionLayoutSection(group: group)
-
-        return UICollectionViewCompositionalLayout(section: section)
-    }
-
     //- MARK: Init
     public init() {
         super.init(nibName: nil, bundle: nil)
@@ -47,7 +32,26 @@ public final class FWFormViewController: UIViewController {
     public override func loadView() {
         super.loadView()
         setUpCollectionViewConstraints()
-        formCollectionView.backgroundColor = .systemPink
+        formCollectionView.backgroundColor = .systemBackground
+    }
+    
+    @available(iOS 13.0, *)
+    private func setUpCollectionViewLayout() -> UICollectionViewCompositionalLayout {
+        let itemLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(FormSpec.itemFractionalWidth),
+                                                    heightDimension: .fractionalHeight(FormSpec.itemFractionalHeight))
+        let item = NSCollectionLayoutItem(layoutSize: itemLayoutSize)
+
+        let groupLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(FormSpec.groupFractionalWidth),
+                                                     heightDimension: .fractionalHeight(FormSpec.groupFractionalHeight))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupLayoutSize, subitems: [item])
+        group.contentInsets = NSDirectionalEdgeInsets(top: FormSpec.groupSpacingTop,
+                                                      leading: FormSpec.groupSpacingLeading,
+                                                      bottom: FormSpec.groupSpacingBottom,
+                                                      trailing: FormSpec.groupSpacingTrailing)
+
+        let section = NSCollectionLayoutSection(group: group)
+
+        return UICollectionViewCompositionalLayout(section: section)
     }
 
     private func setUpCollectionViewConstraints() {
@@ -77,7 +81,7 @@ extension FWFormViewController: UICollectionViewDataSource {
                                                             for: indexPath) as? FWFormViewControllerCell else {
             return UICollectionViewCell()
         }
-        cell.contentView.backgroundColor = .systemRed
+        cell.contentView.backgroundColor = .systemGray4
         return cell
     }
     
