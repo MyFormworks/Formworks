@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ master ]
     paths:
-      - '.github/workflows/swiftlint.yml'
+      - '.github/workflows/swift.yml'
       - '.swiftlint.yml'
       - '**/*.swift'
 
