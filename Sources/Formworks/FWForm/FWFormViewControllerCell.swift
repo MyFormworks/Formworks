@@ -25,11 +25,11 @@ final class FWFormViewControllerCell: UICollectionViewCell {
     /// Use this function to make all needed visual set up for the cell
     private func setUpContentView() {
         /// Add corner radius to the cell
-        contentView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
+        contentView.backgroundColor = .fwComponentBackground
         contentView.layer.cornerRadius = contentView.frame.height * FormSpec.Cell.cornerRadius
         contentView.clipsToBounds = true
         /// Add shadow drop to the cell
-        contentView.layer.shadowColor = UIColor.black.cgColor
+        contentView.layer.shadowColor = UIColor.fwComponentShadow.cgColor
         contentView.layer.shadowOffset = CGSize(width: FormSpec.Cell.cellShadowOffSetX,
                                                 height: FormSpec.Cell.cellShadowOffSetY)
         contentView.layer.shadowRadius = FormSpec.Cell.cellShadowBlur

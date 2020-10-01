@@ -16,6 +16,7 @@ public final class FWFormViewController: UIViewController {
                                 forCellWithReuseIdentifier: FWFormViewControllerCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.backgroundColor = .fwFormBackground
         return collectionView
     }()
 
@@ -32,8 +33,12 @@ public final class FWFormViewController: UIViewController {
     //- MARK: Life cycle
     public override func loadView() {
         super.loadView()
+        view.backgroundColor = .fwFormBackground
+    }
+    
+    public override func viewDidLoad() {
+        super.viewDidLoad()
         setUpCollectionViewConstraints()
-        formCollectionView.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
     }
     
     /// This function will set up the layout of the CollectionView. It first configure
