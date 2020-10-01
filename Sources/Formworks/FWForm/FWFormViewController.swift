@@ -20,6 +20,7 @@ public final class FWFormViewController: UIViewController {
     }()
 
     //- MARK: Init
+    /// Initializes a new instance of this type.
     public init() {
         super.init(nibName: nil, bundle: nil)
     }
@@ -32,15 +33,18 @@ public final class FWFormViewController: UIViewController {
     public override func loadView() {
         super.loadView()
         setUpCollectionViewConstraints()
-        formCollectionView.backgroundColor = .systemBackground
+        formCollectionView.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
     }
     
+    /// This function will set up the layout of the CollectionView. It first configure
+    /// the item size that will be present on a group. And then configure
+    /// the group size so it specifies the portion of the screen that will occupy
     @available(iOS 13.0, *)
     private func setUpCollectionViewLayout() -> UICollectionViewCompositionalLayout {
+        
         let itemLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(FormSpec.itemFractionalWidth),
                                                     heightDimension: .fractionalHeight(FormSpec.itemFractionalHeight))
         let item = NSCollectionLayoutItem(layoutSize: itemLayoutSize)
-
         let groupLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(FormSpec.groupFractionalWidth),
                                                      heightDimension: .fractionalHeight(FormSpec.groupFractionalHeight))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupLayoutSize, subitems: [item])
@@ -48,12 +52,12 @@ public final class FWFormViewController: UIViewController {
                                                       leading: FormSpec.groupSpacingLeading,
                                                       bottom: FormSpec.groupSpacingBottom,
                                                       trailing: FormSpec.groupSpacingTrailing)
-
         let section = NSCollectionLayoutSection(group: group)
-
         return UICollectionViewCompositionalLayout(section: section)
     }
-
+    
+    /// This function will create the necessary constraints for the CollectionView
+    /// to occupy the entire ViewController.
     private func setUpCollectionViewConstraints() {
         view.addSubview(formCollectionView)
         let guides = view.safeAreaLayoutGuide

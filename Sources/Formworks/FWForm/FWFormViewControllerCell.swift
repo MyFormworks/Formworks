@@ -22,10 +22,20 @@ final class FWFormViewControllerCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    /// Use this function to make all needed visual set up for the cell
     private func setUpContentView() {
-        contentView.backgroundColor = .systemGray4
+        /// Add corner radius to the cell
+        contentView.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
         contentView.layer.cornerRadius = contentView.frame.height * FormSpec.Cell.cornerRadius
         contentView.clipsToBounds = true
+        /// Add shadow drop to the cell
+        contentView.layer.shadowColor = UIColor.black.cgColor
+        contentView.layer.shadowOffset = CGSize(width: FormSpec.Cell.cellShadowOffSetX,
+                                                height: FormSpec.Cell.cellShadowOffSetY)
+        contentView.layer.shadowRadius = FormSpec.Cell.cellShadowBlur
+        contentView.layer.shadowOpacity = FormSpec.Cell.cellShadowOppacity
+        contentView.layer.masksToBounds = false
+        contentView.layer.shadowPath = UIBezierPath(roundedRect: contentView.bounds,
+                                                    cornerRadius: contentView.layer.cornerRadius).cgPath
     }
 }
