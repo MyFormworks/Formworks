@@ -4,13 +4,15 @@ opt_in_rules:
   - closure_spacing
   - conditional_returns_on_newline
   - implicit_return
-  - trailing_whitespace
+  - weak_delegate
+  - force_unwrapping
+  - implicitly_unwrapped_optional
   
 disabled_rules:
-  - weak_delegate
   - identifier_name
+  - trailing_whitespace
 
-# special configuration for rules 
+# special configuration for rules
 colon:
   flexible_right_spacing: false
   apply_to_dictionaries: true
@@ -18,7 +20,7 @@ colon:
 cyclomatic_complexity:
   warning: 10
   error: 20
-  ignores_case_statements: false
+  ignores_case_statements: true
 
 file_length:
   warning: 400
@@ -37,7 +39,7 @@ large_tuple:
   error: 3
 
 line_length:
-  warning: 200
+  warning: 220
   error: 400
   ignores_urls: true
   ignores_function_declarations: true
