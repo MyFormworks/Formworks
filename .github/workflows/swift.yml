@@ -24,7 +24,7 @@ jobs:
     - name: SwiftPM Jazzy Docs
       uses: sersoft-gmbh/swifty-docs-action@v1
       with:
-        xcodebuild-destination: 'platform=iOS Simulator,OS=14.0,name=iPhone 11'
+        xcodebuild-destination-scheme: 'platform=iOS Simulator,OS=14.0,name=iPhone 11, Formworks-Package'
   
   build_syntax:
     runs-on: ubuntu-latest
