@@ -59,7 +59,7 @@ public final class FWSingleLine: UIViewController {
         let stack = UIStackView(frame: .zero)
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
-        stack.distribution = .equalSpacing
+        stack.distribution = .fill
         return stack
     }()
 
