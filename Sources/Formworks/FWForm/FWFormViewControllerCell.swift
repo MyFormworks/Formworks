@@ -15,7 +15,6 @@ final class FWFormViewControllerCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setUpContentView()
         
     }
     
@@ -25,6 +24,7 @@ final class FWFormViewControllerCell: UICollectionViewCell {
 
     func configure(_ view: UIView) {
         contentView.addSubview(view)
+        setUpContentView()
     }
 
     /// Use this function to make all needed visual set up for the cell
