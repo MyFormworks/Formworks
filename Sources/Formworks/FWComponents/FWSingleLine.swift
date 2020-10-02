@@ -96,7 +96,8 @@ public final class FWSingleLine: UIViewController {
 
             requiredLabel.widthAnchor.constraint(equalTo: titleContainerView.widthAnchor,
                                                  multiplier: ComponentSpec.SingleLine.requiredWidthMultiplier),
-            requiredLabel.heightAnchor.constraint(equalTo: titleContainerView.heightAnchor),
+            requiredLabel.heightAnchor.constraint(equalTo: titleContainerView.heightAnchor,
+                                                  multiplier: ComponentSpec.SingleLine.requiredHeightMultiplier),
             requiredLabel.trailingAnchor.constraint(equalTo: titleContainerView.trailingAnchor)
         ])
     }
