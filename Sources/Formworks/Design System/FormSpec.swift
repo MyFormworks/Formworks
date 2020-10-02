@@ -32,10 +32,10 @@ enum FormSpec {
         /// Cell corner radius
         static let cornerRadius: CGFloat = 0.05
         /// Cell shadow
-        static let cellShadowBlur: CGFloat = 10
-        static let cellShadowOffSetY: CGFloat = 4
-        static let cellShadowOffSetX: CGFloat = 2
-        static let cellShadowOppacity: Float = 0.25
+        static let cellShadowBlur: CGFloat = 8
+        static let cellShadowOffSetY: CGFloat = 5
+        static let cellShadowOffSetX: CGFloat = 1
+        static let cellShadowOppacity: Float = 0.20
         
     }
 }
