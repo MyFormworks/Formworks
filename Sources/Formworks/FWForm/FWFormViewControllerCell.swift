@@ -15,7 +15,7 @@ final class FWFormViewControllerCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        setUpContentView()
     }
     
     required init?(coder: NSCoder) {
@@ -23,8 +23,16 @@ final class FWFormViewControllerCell: UICollectionViewCell {
     }
 
     func configure(_ view: UIView) {
+        view.translatesAutoresizingMaskIntoConstraints = false
+
         contentView.addSubview(view)
-        setUpContentView()
+
+        NSLayoutConstraint.activate([
+            view.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            view.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            view.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            view.heightAnchor.constraint(equalTo: contentView.heightAnchor)
+        ])
     }
 
     /// Use this function to make all needed visual set up for the cell
