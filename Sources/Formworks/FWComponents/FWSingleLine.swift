@@ -9,65 +9,19 @@ import UIKit
 
 public final class FWSingleLine: UIViewController {
 
-    private lazy var textField: UITextField = {
-        let textfield = UITextField(frame: .zero)
-        textfield.translatesAutoresizingMaskIntoConstraints = false
-        textfield.placeholder = "Type here your answer"
-        textfield.borderStyle = .roundedRect
-        return textfield
-    }()
+    @ManualLayout private var textField: FWTextField
 
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Title"
-        label.font = UIFont.preferredFont(forTextStyle: .title2).bold()
-        return label
-    }()
+    @ManualLayout private var titleLabel: FWLabel
 
-    private lazy var requiredLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Required"
-        label.font = .preferredFont(forTextStyle: .footnote)
-        label.textColor = .white
-        label.backgroundColor = .systemRed
-        label.textAlignment = .center
-        label.layer.cornerRadius = 5
-        label.clipsToBounds = true
-        return label
-    }()
+    @ManualLayout private var requiredLabel: FWLabel
 
-    private lazy var titleContainerView: UIView = {
-        let view = UIView(frame: .zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    @ManualLayout private var titleContainerView: UIView
 
-    private lazy var descriptionLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Description"
-        label.font = .preferredFont(forTextStyle: .subheadline)
-        return label
-    }()
+    @ManualLayout private var descriptionLabel: FWLabel
 
-    private lazy var errorLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "ERROR"
-        label.font = .preferredFont(forTextStyle: .subheadline)
-        label.textColor = .systemRed
-        return label
-    }()
+    @ManualLayout private var errorLabel: FWLabel
 
-    private lazy var layoutStackView: UIStackView = {
-        let stack = UIStackView(frame: .zero)
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.distribution = .fillEqually
-        return stack
-    }()
+    @ManualLayout private var layoutStackView: UIStackView
 
     public init() {
         super.init(nibName: nil, bundle: nil)
@@ -79,9 +33,28 @@ public final class FWSingleLine: UIViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-
+        setUpViews()
         setUpTitleContainer()
         setUpLayoutStack()
+    }
+
+    private func setUpViews() {
+        textField.placeholder = "Write your one-line text here"
+
+        titleLabel.text = "One-line textfield"
+        titleLabel.style(.title)
+
+        requiredLabel.text = "Required"
+        requiredLabel.style(.required)
+
+        descriptionLabel.text = "Optional description for this field"
+        descriptionLabel.style(.description)
+
+        errorLabel.text = "If there are any errors with your input, it will appear here."
+        errorLabel.style(.error)
+
+        layoutStackView.axis = .vertical
+        layoutStackView.distribution = .fillEqually
     }
 
     private func setUpTitleContainer() {
