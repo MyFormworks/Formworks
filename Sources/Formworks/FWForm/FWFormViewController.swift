@@ -20,8 +20,6 @@ public final class FWFormViewController: UIViewController {
         return collectionView
     }()
 
-    private let singleLine = FWSingleLine()
-
     //- MARK: Init
     /// Initializes a new instance of this type.
     public init() {
@@ -92,6 +90,7 @@ extension FWFormViewController: UICollectionViewDataSource {
                                                             for: indexPath) as? FWFormViewControllerCell else {
             return UICollectionViewCell()
         }
+        let singleLine = FWSingleLine()
         cell.configure(singleLine.view)
         return cell
     }
