@@ -27,11 +27,13 @@ final class FWFormViewControllerCell: UICollectionViewCell {
 
         contentView.addSubview(view)
 
+        let guides = contentView.safeAreaLayoutGuide
+
         NSLayoutConstraint.activate([
-            view.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            view.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            view.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            view.heightAnchor.constraint(equalTo: contentView.heightAnchor)
+            view.centerXAnchor.constraint(equalTo: guides.centerXAnchor),
+            view.centerYAnchor.constraint(equalTo: guides.centerYAnchor),
+            view.widthAnchor.constraint(equalTo: guides.widthAnchor),
+            view.heightAnchor.constraint(equalTo: guides.heightAnchor)
         ])
     }
 
