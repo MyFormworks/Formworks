@@ -33,7 +33,7 @@ final class FWFormViewControllerCell: UICollectionViewCell {
             view.centerXAnchor.constraint(equalTo: guides.centerXAnchor),
             view.centerYAnchor.constraint(equalTo: guides.centerYAnchor),
             view.widthAnchor.constraint(equalTo: guides.widthAnchor),
-            view.heightAnchor.constraint(equalTo: guides.heightAnchor)
+            view.heightAnchor.constraint(equalTo: guides.heightAnchor, multiplier: 0.8)
         ])
     }
 
