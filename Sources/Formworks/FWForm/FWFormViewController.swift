@@ -9,16 +9,7 @@ import UIKit
 
 public final class FWFormViewController: UIViewController {
     // - MARK: Properties
-    private lazy var formCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: setUpCollectionViewLayout())
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(FWFormViewControllerCell.self,
-                                forCellWithReuseIdentifier: FWFormViewControllerCell.identifier)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.backgroundColor = .fwFormBackground
-        return collectionView
-    }()
+    @ManualLayout private var formCollectionView: FWFormCollectionView
 
     //- MARK: Init
     /// Initializes a new instance of this type.
@@ -38,27 +29,13 @@ public final class FWFormViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        setUpCollectionView()
         setUpCollectionViewConstraints()
     }
     
-    /// This function will set up the layout of the CollectionView. It first configure
-    /// the item size that will be present on a group. And then configure
-    /// the group size so it specifies the portion of the screen that will occupy
-    @available(iOS 13.0, *)
-    private func setUpCollectionViewLayout() -> UICollectionViewCompositionalLayout {
-        
-        let itemLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(FormSpec.itemFractionalWidth),
-                                                    heightDimension: .fractionalHeight(FormSpec.itemFractionalHeight))
-        let item = NSCollectionLayoutItem(layoutSize: itemLayoutSize)
-        let groupLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(FormSpec.groupFractionalWidth),
-                                                     heightDimension: .fractionalHeight(FormSpec.groupFractionalHeight))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupLayoutSize, subitems: [item])
-        group.contentInsets = NSDirectionalEdgeInsets(top: FormSpec.groupSpacingTop,
-                                                      leading: FormSpec.groupSpacingLeading,
-                                                      bottom: FormSpec.groupSpacingBottom,
-                                                      trailing: FormSpec.groupSpacingTrailing)
-        let section = NSCollectionLayoutSection(group: group)
-        return UICollectionViewCompositionalLayout(section: section)
+    private func setUpCollectionView() {
+        formCollectionView.delegate = self
+        formCollectionView.dataSource = self
     }
     
     /// This function will create the necessary constraints for the CollectionView
