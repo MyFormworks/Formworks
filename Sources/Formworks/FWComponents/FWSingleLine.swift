@@ -29,10 +29,11 @@ public final class FWSingleLine: UIViewController {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Required"
-        label.font = .preferredFont(forTextStyle: .headline)
+        label.font = .preferredFont(forTextStyle: .footnote)
         label.textColor = .white
         label.backgroundColor = .systemRed
-        label.layer.cornerRadius = 0.05
+        label.textAlignment = .center
+        label.layer.cornerRadius = 5
         label.clipsToBounds = true
         return label
     }()
@@ -47,7 +48,7 @@ public final class FWSingleLine: UIViewController {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Description"
-        label.font = .preferredFont(forTextStyle: .body)
+        label.font = .preferredFont(forTextStyle: .subheadline)
         return label
     }()
 
@@ -64,7 +65,7 @@ public final class FWSingleLine: UIViewController {
         let stack = UIStackView(frame: .zero)
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
-        stack.distribution = .fill
+        stack.distribution = .fillEqually
         return stack
     }()
 
