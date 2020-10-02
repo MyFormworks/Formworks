@@ -101,6 +101,8 @@ public final class FWSingleLine: UIViewController {
         layoutStackView.addArrangedSubview(textField)
         layoutStackView.addArrangedSubview(errorLabel)
 
+        view.addSubview(layoutStackView)
+
         let layoutGuides = view.layoutMarginsGuide
 
         NSLayoutConstraint.activate([
