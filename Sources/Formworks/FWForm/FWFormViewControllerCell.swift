@@ -22,6 +22,11 @@ final class FWFormViewControllerCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func configure(_ view: UIView) {
+        contentView.addSubview(view)
+    }
+
     /// Use this function to make all needed visual set up for the cell
     private func setUpContentView() {
         /// Add corner radius to the cell

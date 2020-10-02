@@ -90,6 +90,8 @@ extension FWFormViewController: UICollectionViewDataSource {
                                                             for: indexPath) as? FWFormViewControllerCell else {
             return UICollectionViewCell()
         }
+        let singleLine = FWSingleLine()
+        cell.configure(singleLine.view)
         return cell
     }
     
