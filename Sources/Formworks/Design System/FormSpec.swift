@@ -18,7 +18,7 @@ enum FormSpec {
 
     /// Group layout
     static let groupFractionalWidth: CGFloat = 1
-    static let groupFractionalHeight: CGFloat = 0.3
+    static let groupFractionalHeight: CGFloat = 0.25
     
     /// Group spacing
     static let groupSpacingTop: CGFloat = 16
