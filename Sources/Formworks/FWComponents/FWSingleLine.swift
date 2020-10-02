@@ -41,13 +41,13 @@ public final class FWSingleLine: UIViewController {
     private func setUpViews() {
         textField.placeholder = "Write your one-line text here"
 
-        titleLabel.text = "One-line textfield"
+        titleLabel.text = "One-line textfield One-line textfield One-line textfield One-line textfield"
         titleLabel.style(.title)
 
         requiredLabel.text = "Required"
         requiredLabel.style(.required)
 
-        descriptionLabel.text = "Optional description for this field"
+        descriptionLabel.text = "Optional description for this field, Optional description for this field, Optional description for this field"
         descriptionLabel.style(.description)
 
         errorLabel.text = "If there are any errors with your input, it will appear here."

@@ -50,14 +50,18 @@ final class FWLabel: UILabel {
 
     private func styleTitle() {
         font = UIFont.preferredFont(forTextStyle: .title2).bold()
+        adjustsFontSizeToFitWidth = true
+        minimumScaleFactor = 0.5
     }
 
     private func styleDescription() {
         font = .preferredFont(forTextStyle: .subheadline)
+        numberOfLines = 0
     }
 
     private func styleError() {
         font = .preferredFont(forTextStyle: .subheadline)
         textColor = .systemRed
+        numberOfLines = 3
     }
 }
