@@ -13,6 +13,7 @@ public final class FWSingleLine: UIViewController {
         let textfield = UITextField(frame: .zero)
         textfield.translatesAutoresizingMaskIntoConstraints = false
         textfield.placeholder = "Type here your answer"
+        textfield.borderStyle = .roundedRect
         return textfield
     }()
 
@@ -20,7 +21,7 @@ public final class FWSingleLine: UIViewController {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Title"
-        label.font = .preferredFont(forTextStyle: .title1)
+        label.font = UIFont.preferredFont(forTextStyle: .title3).bold()
         return label
     }()
 
@@ -29,6 +30,10 @@ public final class FWSingleLine: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Required"
         label.font = .preferredFont(forTextStyle: .headline)
+        label.textColor = .white
+        label.backgroundColor = .systemRed
+        label.layer.cornerRadius = 0.05
+        label.clipsToBounds = true
         return label
     }()
 
@@ -50,7 +55,7 @@ public final class FWSingleLine: UIViewController {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "ERROR"
-        label.font = .preferredFont(forTextStyle: .headline)
+        label.font = .preferredFont(forTextStyle: .subheadline)
         label.textColor = .systemRed
         return label
     }()
