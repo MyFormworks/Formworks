@@ -13,24 +13,16 @@ on:
 jobs:
   build:
     runs-on: macos-latest
-    strategy:
-      matrix:
-        destination:
-          - platform=iOS Simulator,OS=14.0,name=iPhone 11
     steps:
     - uses: actions/checkout@v2
     - name: Switch to Xcode 12
       run: sudo xcode-select --switch /Applications/Xcode_12.app
     - name: Run tests on iPhone 11 with iOS 14.0
-      uses: sersoft-gmbh/xcodebuild-action@v1
-      with:
-         scheme: Formworks
-         destination: ${{matrix.destination}}
-         action: test
+      run: xcodebuild test -destination 'platform=iOS Simulator,OS=14.0,name=iPhone 11' -scheme 'Formworks'
     - name: SwiftPM Jazzy Docs
       uses: sersoft-gmbh/swifty-docs-action@v1
       with:
-        xcodebuild-destination: ${{matrix.destination}}
+        xcodebuild-destination: 'platform=iOS Simulator,OS=14.0,name=iPhone 11'
   
   build_syntax:
     runs-on: ubuntu-latest
