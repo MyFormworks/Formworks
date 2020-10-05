@@ -13,24 +13,26 @@ struct Component: Decodable, FieldDecoder {
 	///This variable is the title of the form. It will appear at first on screen.
 	let title: String
 	
-	///This variable is the subtitle of the form and represents a brief description about what is the form's porpose . It will appear at second on screen.
+	///This variable is the subtitle of the form and represents a brief description about what is the form's porpose. It will appear at second on screen.
 	let subtitle: String?
-		
+	
+	///This variable is the error message which will appear if user write something incompatible to field type.
 	let errorText: String
 	
-	let isObligatory: String
+	///This variable will appear if the field must be filled.
+	var isObligatory: String
 	
-	let field: Field?
+	
+	///This variable is the type of content that users can add in the fiel.
+	var field: FWField? = nil
 
+	
 	init(from decoder: Decoder) throws {
 		let container = try decoder.container(keyedBy: ComponentCodingkeys.self)
 		self.title = try container.decode(String.self, forKey: .title)
 		self.subtitle = try container.decode(String.self, forKey: .subtitle)
 		self.errorText = try container.decode(String.self, forKey: .errorText)
 		self.isObligatory = try container.decode(String.self, forKey: .isObligatory)
-		field = try decodeField(from: container)
-		
+		self.field = try decodeField(from: container)
 	}
-	
-	
 }

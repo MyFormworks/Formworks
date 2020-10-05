@@ -7,6 +7,7 @@
 
 import Foundation
 
+///This enum is used to decode of given JSON to the form's variables.
 enum ComponentCodingkeys: String, CodingKey {
 	case title
 	case subtitle

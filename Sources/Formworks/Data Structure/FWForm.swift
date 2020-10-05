@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  FWForm.swift
 //  
 //
 //  Created by Cassia Aparecida Barbosa on 02/10/20.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Form: Decodable  {
-	
+///This struct represents the form itself.
+struct FWForm: Decodable  {
 	let title: String
 	let components: [Component]
 }
