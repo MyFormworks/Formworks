@@ -39,16 +39,17 @@ final class FWSingleLineComponent: UIViewController {
 	// MARK: Life Cycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		setUpViewModel()
 		setUpViews()
 		setUpTitleContainer()
 		setUpLayoutStack()
+		setUpViewModel()
 	}
 	
 	
 	// MARK: ViewModel Setup
 	private func setUpViewModel() {
 		viewModel.delegate = self
+		viewModel.content = "testing did set"
 	}
 	
 	// MARK: Views Setup
