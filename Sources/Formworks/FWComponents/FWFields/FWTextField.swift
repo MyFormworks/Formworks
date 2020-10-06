@@ -12,7 +12,6 @@ final class FWTextField: UITextField {
     override init(frame: CGRect) {
         super.init(frame: frame)
         style()
-        delegate = self
     }
 
     required init?(coder: NSCoder) {
@@ -41,7 +40,4 @@ final class FWTextField: UITextField {
         
         return bounds.inset(by: UIEdgeInsets(top: 0, left: width, bottom: 0, right: width))
     }
-}
-
-extension FWTextField: UITextFieldDelegate {
 }
