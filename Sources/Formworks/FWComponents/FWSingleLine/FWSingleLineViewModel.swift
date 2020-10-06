@@ -20,6 +20,7 @@ final class FWSingleLineViewModel {
     
     var content: String = "" {
         didSet {
+			print("Content added")
             isValid = content.count < 6 ? false : true
         }
     }
