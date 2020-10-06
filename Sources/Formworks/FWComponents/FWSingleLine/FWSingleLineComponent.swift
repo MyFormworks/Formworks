@@ -10,7 +10,7 @@ import UIKit
 final class FWSingleLineComponent: UIViewController {
 
     // MARK: Properties
-    @ManualLayout private var textField: FWTextField
+    @ManualLayout private var textField: UITextField
 
     @ManualLayout private var titleLabel: FWLabel
 
@@ -62,7 +62,6 @@ final class FWSingleLineComponent: UIViewController {
         setUpBody()
         setUpFooter()
         setUpStack()
-        textField.addTarget(self, action: #selector(validateInput), for: .editingChanged)
     }
     
     private func setUpHeader() {
@@ -79,7 +78,7 @@ final class FWSingleLineComponent: UIViewController {
     private func setUpBody() {
         textField.placeholder = "Write your one-line text here"
         textField.layer.borderColor = UIColor.systemRed.cgColor
-        
+        textField.addTarget(self, action: #selector(validateInput), for: .editingChanged)
     }
     
     private func setUpFooter() {
