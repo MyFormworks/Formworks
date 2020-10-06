@@ -145,6 +145,6 @@ extension FWSingleLineComponent: UITextFieldDelegate {
 	}
 	
 	func textFieldDidEndEditing(_ textField: UITextField) {
-		print("End editing)
+		print("End editing")
 	}
 }
