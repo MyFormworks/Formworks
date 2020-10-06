@@ -20,7 +20,7 @@ protocol FWComponent: Decodable {
 
      Should match one of Helper.FWComponentTypes cases.
      */
-    var componentType: String { get set }
+    var componentType: FWComponentTypes { get set }
      /**
      Component's Subtitle or Description
 
@@ -31,11 +31,11 @@ protocol FWComponent: Decodable {
     /**
      Determines if the component will be obligatory in the form.
      */
-    var isObligatory: Bool { get set }
+    var required: Bool { get set }
     /**
-     The component's fields.
+     Contains the component's implementation specifications
      */
-    var fields: FWFields { get set }
+    var specfications: FWSpecs { get set }
     init(from decoder: Decoder) throws
     /**
      immediatly returns an memory allocation of the object. Should not be subclassed.
@@ -51,28 +51,16 @@ extension FWComponent {
 
         title = try container.decode(String.self, forKey: .title)
         subtitle = try container.decodeIfPresent(String.self, forKey: .subtitle)
-        isObligatory = try container.decode(Bool.self, forKey: .isObrigatory)
+        required = try container.decode(Bool.self, forKey: .required)
 
-        if let componentType = try container.decodeIfPresent(String.self, forKey: .componentType) {
-            let typeIs = Helper.FWComponentTypes.self
-            switch componentType {
-            case typeIs.plainText:
-                break
-            case typeIs.email:
-                break
-            case typeIs.password:
-                break
-            case typeIs.singleSelect:
-                break
-            case typeIs.multipleSelect:
-                break
-            case typeIs.datePicker:
-                break
-            default:
-                throw Helper.ComponentErrors.componentTypeUnavaiable
+        guard let type = try container.decodeIfPresent(FWComponentTypes.self, forKey: .componentType) else {
+            throw FWComponentKeys.Errors.couldNotDecode
             }
-        } else {
-            throw Helper.ComponentErrors.couldNotDecodeType
-        }
+
+        componentType = type
+
+//TODO: Make [String:Any] decodable. 
+        let specsDict: [String:Any] = try container.decode([String:Any].self, forKey: .specs)
+        specfications = type.specsFor(specsDict)
     }
 }
