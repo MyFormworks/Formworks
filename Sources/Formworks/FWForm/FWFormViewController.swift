@@ -29,6 +29,7 @@ public final class FWFormViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        print("View Did Load")
         setUpCollectionView()
         setUpCollectionViewConstraints()
     }
