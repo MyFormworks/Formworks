@@ -68,6 +68,7 @@ extension FWFormViewController: UICollectionViewDataSource {
                                                                 return UICollectionViewCell()
         }
         let singleLine = FWSingleLineComponent(viewModel: FWSingleLineViewModel())
+		cell.contentView.isUserInteractionEnabled = false
         cell.configure(singleLine.view)
         return cell
     }
