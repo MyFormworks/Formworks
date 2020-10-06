@@ -49,7 +49,6 @@ final class FWSingleLineComponent: UIViewController {
 	// MARK: ViewModel Setup
 	private func setUpViewModel() {
 		viewModel.delegate = self
-		viewModel.content = "testing did set"
 	}
 	
 	// MARK: Views Setup
