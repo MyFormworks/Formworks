@@ -71,6 +71,7 @@ final class FWSingleLineComponent: UIViewController {
     
     private func setUpBody() {
         textField.placeholder = "Write your one-line text here"
+        textField.layer.borderWidth = 5
         textField.layer.borderColor = UIColor.systemRed.cgColor
     }
     
