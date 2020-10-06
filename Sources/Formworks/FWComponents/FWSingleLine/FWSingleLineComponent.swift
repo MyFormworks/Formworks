@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FWSingleLineComponent: UIViewController {
+final class FWSingleLineComponent: UIViewController {
 
     // MARK: Properties
     @ManualLayout private var textField: FWTextField
@@ -45,11 +45,6 @@ class FWSingleLineComponent: UIViewController {
         setUpLayoutStack()
     }
     
-    // MARK: @objc
-    @objc open func validateInput() {
-        print("Is validating input")
-        viewModel.content = textField.text ?? ""
-    }
     
     // MARK: ViewModel Setup
     private func setUpViewModel() {
@@ -78,7 +73,7 @@ class FWSingleLineComponent: UIViewController {
     private func setUpBody() {
         textField.placeholder = "Write your one-line text here"
         textField.layer.borderColor = UIColor.systemRed.cgColor
-        textField.addTarget(self, action: #selector(validateInput), for: .editingChanged)
+		textField.delegate = self
     }
     
     private func setUpFooter() {
@@ -140,4 +135,12 @@ extension FWSingleLineComponent: FWSingleLineViewModelDelegate {
             textField.layer.borderColor = UIColor.systemRed.cgColor
         }
     }
+}
+
+// MARK: Textfield Delegate
+extension FWSingleLineComponent: UITextFieldDelegate {
+	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+		viewModel.content = textField.text ?? ""
+		return true 
+	}
 }
