@@ -23,4 +23,12 @@ final class FWTextField: UITextField {
         layer.borderWidth = 1
         clipsToBounds = true
     }
+    
+    override func borderRect(forBounds bounds: CGRect) -> CGRect {
+        let width = bounds.width * 1.1
+        let height = bounds.height
+        let point = CGPoint(x: bounds.minX, y: bounds.minY)
+        
+        return CGRect(origin: point, size: CGSize(width: width, height: height))
+    }
 }
