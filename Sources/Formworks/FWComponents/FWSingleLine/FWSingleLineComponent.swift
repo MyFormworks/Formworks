@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class FWSingleLineComponent: UIViewController {
+class FWSingleLineComponent: UIViewController {
 
     // MARK: Properties
     @ManualLayout private var textField: FWTextField
