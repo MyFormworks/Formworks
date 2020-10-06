@@ -21,7 +21,6 @@ final class FWTextField: UITextField {
     private func style() {
         layer.cornerRadius = 5
         layer.borderWidth = 1
-        clipsToBounds = true
     }
     
     override func borderRect(forBounds bounds: CGRect) -> CGRect {
