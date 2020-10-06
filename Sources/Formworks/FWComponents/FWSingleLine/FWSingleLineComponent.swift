@@ -143,4 +143,8 @@ extension FWSingleLineComponent: UITextFieldDelegate {
 		viewModel.content = textField.text ?? ""
 		return true 
 	}
+	
+	func textFieldDidEndEditing(_ textField: UITextField) {
+		print("End editing)
+	}
 }
