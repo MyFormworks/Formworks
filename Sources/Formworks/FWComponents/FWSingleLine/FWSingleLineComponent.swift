@@ -24,10 +24,10 @@ final class FWSingleLineComponent: UIViewController {
 	
 	@ManualLayout private var layoutStackView: UIStackView
 	
-	private let viewModel: FWSingleLineViewModel
+	let viewModel: FWSingleLineViewModel
 	
 	// MARK: Init
-	init(viewModel: FWSingleLineViewModel) {
+	init(viewModel: FWSingleLineViewModel = FWSingleLineViewModel()) {
 		self.viewModel = viewModel
 		super.init(nibName: nil, bundle: nil)
 	}
