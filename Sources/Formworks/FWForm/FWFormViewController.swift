@@ -10,7 +10,7 @@ import UIKit
 public final class FWFormViewController: UIViewController {
     // - MARK: Properties
     @ManualLayout private var formCollectionView: FWFormCollectionView
-
+	let cells: [FWSingleLineComponent] = [FWSingleLineComponent(), FWSingleLineComponent()]
     //- MARK: Init
     /// Initializes a new instance of this type.
     public init() {
@@ -59,7 +59,7 @@ extension FWFormViewController: UICollectionViewDelegate {
 extension FWFormViewController: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -67,8 +67,7 @@ extension FWFormViewController: UICollectionViewDataSource {
                                                             for: indexPath) as? FWFormCollectionCell else {
                                                                 return UICollectionViewCell()
         }
-        let singleLine = FWSingleLineComponent()
-        cell.configure(singleLine.view)
+		cell.configure(cells[indexPath.row].view)
         return cell
     }
 }
