@@ -26,6 +26,7 @@ final class FWSingleLineViewModel {
     
     var isValid: Bool = false {
         didSet {
+            print("Checking isValid")
             delegate?.updateInterface()
         }
     }
