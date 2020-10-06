@@ -19,6 +19,8 @@ final class FWTextField: UITextField {
     }
 
     private func style() {
-        borderStyle = .roundedRect
+        layer.cornerRadius = 5
+        layer.borderWidth = 1
+        clipsToBounds = true
     }
 }
