@@ -24,19 +24,19 @@ final class FWTextField: UITextField {
     }
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        let width = bounds.width * 0.2
+        let width = bounds.width * 0.05
         
         return bounds.inset(by: UIEdgeInsets(top: 0, left: width, bottom: 0, right: width))
     }
     
     override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-        let width = bounds.width * 0.2
+        let width = bounds.width * 0.05
         
         return bounds.inset(by: UIEdgeInsets(top: 0, left: width, bottom: 0, right: width))
     }
     
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        let width = bounds.width * 0.2
+        let width = bounds.width * 0.05
         
         return bounds.inset(by: UIEdgeInsets(top: 0, left: width, bottom: 0, right: width))
     }
