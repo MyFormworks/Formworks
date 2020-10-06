@@ -61,7 +61,6 @@ final class FWSingleLineComponent: UIViewController {
         setUpBody()
         setUpFooter()
         setUpStack()
-        textField.addTarget(self, action: #selector(validateInput), for: .editingChanged)
     }
     
     private func setUpHeader() {
@@ -76,9 +75,10 @@ final class FWSingleLineComponent: UIViewController {
     }
     
     private func setUpBody() {
+        print("Is setuping body")
         textField.placeholder = "Write your one-line text here"
         textField.layer.borderColor = UIColor.systemRed.cgColor
-        
+        textField.addTarget(self, action: #selector(validateInput), for: .editingChanged)
     }
     
     private func setUpFooter() {
