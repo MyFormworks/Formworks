@@ -139,7 +139,7 @@ extension FWSingleLineComponent: FWSingleLineViewModelDelegate {
 
 // MARK: Textfield Delegate
 extension FWSingleLineComponent: UITextFieldDelegate {
-	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+	func textField(_ textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
 		viewModel.content = textField.text ?? ""
 		return true 
 	}
