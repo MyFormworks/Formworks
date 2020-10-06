@@ -132,6 +132,7 @@ final class FWSingleLineComponent: UIViewController {
 // MARK: ViewModel Delegate
 extension FWSingleLineComponent: FWSingleLineViewModelDelegate {
     func updateInterface() {
+        print("Did update interface")
         if viewModel.isValid {
             textField.layer.borderColor = UIColor.systemGreen.cgColor
         } else {
