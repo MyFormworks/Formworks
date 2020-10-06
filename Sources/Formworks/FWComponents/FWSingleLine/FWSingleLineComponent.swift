@@ -79,7 +79,6 @@ final class FWSingleLineComponent: UIViewController {
         textField.placeholder = "Write your one-line text here"
         textField.layer.borderColor = UIColor.systemRed.cgColor
         
-        print(textField.allTargets.description)
     }
     
     private func setUpFooter() {
@@ -115,6 +114,7 @@ final class FWSingleLineComponent: UIViewController {
         layoutStackView.addArrangedSubview(titleContainerView)
         layoutStackView.addArrangedSubview(descriptionLabel)
         layoutStackView.addArrangedSubview(textField)
+        textField.addTarget(self, action: #selector(validateInput), for: .editingChanged)
         layoutStackView.addArrangedSubview(errorLabel)
 
         view.addSubview(layoutStackView)
