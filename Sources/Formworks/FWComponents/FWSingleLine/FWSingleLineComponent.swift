@@ -79,7 +79,7 @@ final class FWSingleLineComponent: UIViewController {
         textField.placeholder = "Write your one-line text here"
         textField.layer.borderColor = UIColor.systemRed.cgColor
         textField.addTarget(self, action: #selector(validateInput), for: .editingChanged)
-        print(textField.allTargets)
+        print(textField.allTargets.description)
     }
     
     private func setUpFooter() {
