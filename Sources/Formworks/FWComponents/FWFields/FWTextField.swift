@@ -23,8 +23,24 @@ final class FWTextField: UITextField {
         layer.borderWidth = 1
     }
     
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        let width = bounds.width * 0.8
+        let height = bounds.height
+        let point = CGPoint(x: bounds.minX, y: bounds.minY)
+        
+        return CGRect(origin: point, size: CGSize(width: width, height: height))
+    }
+    
     override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-        let width = bounds.width * 1.5
+        let width = bounds.width * 0.8
+        let height = bounds.height
+        let point = CGPoint(x: bounds.minX, y: bounds.minY)
+        
+        return CGRect(origin: point, size: CGSize(width: width, height: height))
+    }
+    
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        let width = bounds.width * 0.8
         let height = bounds.height
         let point = CGPoint(x: bounds.minX, y: bounds.minY)
         
