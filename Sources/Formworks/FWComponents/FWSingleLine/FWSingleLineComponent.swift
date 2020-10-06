@@ -30,6 +30,7 @@ final class FWSingleLineComponent: UIViewController {
     init(viewModel: FWSingleLineViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+		self.viewModel.delegate = self
     }
 
     required init?(coder: NSCoder) {
@@ -48,7 +49,7 @@ final class FWSingleLineComponent: UIViewController {
     
     // MARK: ViewModel Setup
     private func setUpViewModel() {
-        viewModel.delegate = self
+//        viewModel.delegate = self
     }
     
     // MARK: Views Setup

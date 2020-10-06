@@ -71,6 +71,4 @@ extension FWFormViewController: UICollectionViewDataSource {
         cell.configure(singleLine.view)
         return cell
     }
-    
-    
 }
