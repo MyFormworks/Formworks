@@ -47,6 +47,7 @@ final class FWSingleLineComponent: UIViewController {
     
     // MARK: @objc
     @objc private func validateInput() {
+        print("Is validating input")
         viewModel.content = textField.text ?? ""
     }
     
@@ -75,7 +76,6 @@ final class FWSingleLineComponent: UIViewController {
     }
     
     private func setUpBody() {
-        print("Is setuping body!")
         textField.placeholder = "Write your one-line text here"
         textField.layer.borderColor = UIColor.systemRed.cgColor
         textField.addTarget(self, action: #selector(validateInput), for: .editingChanged)
