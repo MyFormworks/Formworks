@@ -1,5 +1,5 @@
 //
-//  FWSingleLine.swift
+//  FWSingleLineComponent.swift
 //  
 //
 //  Created by Artur Carneiro on 01/10/20.
@@ -7,8 +7,9 @@
 
 import UIKit
 
-public final class FWSingleLine: UIViewController {
+final class FWSingleLineComponent: UIViewController {
 
+    // MARK: Properties
     @ManualLayout private var textField: FWTextField
 
     @ManualLayout private var titleLabel: FWLabel
@@ -23,7 +24,11 @@ public final class FWSingleLine: UIViewController {
 
     @ManualLayout private var layoutStackView: UIStackView
 
-    public init() {
+    private let viewModel: FWSingleLineViewModel
+    
+    // MARK: Init
+    init(viewModel: FWSingleLineViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -31,32 +36,55 @@ public final class FWSingleLine: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public override func viewDidLoad() {
+    // MARK: Life Cycle
+    override func viewDidLoad() {
         super.viewDidLoad()
+        setUpViewModel()
         setUpViews()
         setUpTitleContainer()
         setUpLayoutStack()
     }
-
+    
+    // MARK: ViewModel Setup
+    private func setUpViewModel() {
+        viewModel.delegate = self
+    }
+    
+    // MARK: Views Setup
     private func setUpViews() {
-        textField.placeholder = "Write your one-line text here"
-
+        setUpHeader()
+        setUpBody()
+        setUpFooter()
+        setUpStack()
+    }
+    
+    private func setUpHeader() {
         titleLabel.text = "One-line textfield One-line textfield One-line textfield One-line textfield"
         titleLabel.style(.title)
 
         requiredLabel.text = "Required"
         requiredLabel.style(.required)
-
+        
         descriptionLabel.text = "Optional description for this field, Optional description for this field, Optional description for this field"
         descriptionLabel.style(.description)
-
+    }
+    
+    private func setUpBody() {
+        textField.placeholder = "Write your one-line text here"
+        textField.layer.borderColor = UIColor.systemRed.cgColor
+    }
+    
+    private func setUpFooter() {
         errorLabel.text = "If there are any errors with your input, it will appear here."
         errorLabel.style(.error)
-
+    }
+    
+    private func setUpStack() {
         layoutStackView.axis = .vertical
         layoutStackView.distribution = .fillEqually
     }
 
+    // MARK: Layout Constraints
     private func setUpTitleContainer() {
         titleContainerView.addSubview(titleLabel)
         titleContainerView.addSubview(requiredLabel)
@@ -93,4 +121,15 @@ public final class FWSingleLine: UIViewController {
         ])
     }
 
+}
+
+// MARK: ViewModel Delegate
+extension FWSingleLineComponent: FWSingleLineViewModelDelegate {
+    func updateInterface() {
+        if viewModel.isValid {
+            textField.layer.borderColor = UIColor.systemGreen.cgColor
+        } else {
+            textField.layer.borderColor = UIColor.systemRed.cgColor
+        }
+    }
 }

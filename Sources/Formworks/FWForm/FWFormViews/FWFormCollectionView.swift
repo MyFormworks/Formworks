@@ -19,8 +19,8 @@ final class FWFormCollectionView: UICollectionView {
     }
     
     private func setUpCollectionView() {
-        register(FWFormViewControllerCell.self,
-                 forCellWithReuseIdentifier: FWFormViewControllerCell.identifier)
+        register(FWFormCollectionCell.self,
+                 forCellWithReuseIdentifier: FWFormCollectionCell.identifier)
         backgroundColor = .fwFormBackground
     }
     

@@ -1,5 +1,5 @@
 //
-//  FWFormViewControllerCell.swift
+//  FWFormCollectionCell.swift
 //  
 //
 //  Created by Victor Falcetta do Nascimento on 30/09/20.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class FWFormViewControllerCell: UICollectionViewCell {
+final class FWFormCollectionCell: UICollectionViewCell {
     
     static var identifier: String {
         return String(describing: self)
