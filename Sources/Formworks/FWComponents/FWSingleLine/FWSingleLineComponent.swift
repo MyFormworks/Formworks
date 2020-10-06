@@ -46,7 +46,7 @@ final class FWSingleLineComponent: UIViewController {
     }
     
     // MARK: @objc
-    @objc public func validateInput() {
+    @objc open func validateInput() {
         print("Is validating input")
         viewModel.content = textField.text ?? ""
     }
