@@ -49,7 +49,6 @@ final class FWSingleLineComponent: UIViewController {
 	// MARK: ViewModel Setup
 	private func setUpViewModel() {
 		viewModel.delegate = self
-		textField.delegate = self
 	}
 	
 	// MARK: Views Setup
@@ -140,7 +139,7 @@ extension FWSingleLineComponent: FWSingleLineViewModelDelegate {
 
 // MARK: Textfield Delegate
 extension FWSingleLineComponent: UITextFieldDelegate {
-	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+	public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 		let currentText = textField.text ?? ""
 		guard let stringRange = Range(range, in: currentText) else { return false }
 		let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
@@ -148,7 +147,7 @@ extension FWSingleLineComponent: UITextFieldDelegate {
 		return true
 	}
 	
-	func textFieldDidEndEditing(_ textField: UITextField) {
+	public func textFieldDidEndEditing(_ textField: UITextField) {
 		print("End editing")
 	}
 	
