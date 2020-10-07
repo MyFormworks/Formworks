@@ -24,7 +24,7 @@ final class FWSingleLineComponent: UIViewController {
 	
 	@ManualLayout private var layoutStackView: UIStackView
 	
-	let viewModel: FWSingleLineViewModel
+	private let viewModel: FWSingleLineViewModel
 	
 	// MARK: Init
 	init(viewModel: FWSingleLineViewModel = FWSingleLineViewModel()) {
@@ -45,11 +45,16 @@ final class FWSingleLineComponent: UIViewController {
 		setUpViewModel()
 	}
 	
+	// MARK: @objc
+	@objc private func didEnterCharacter(_ textfield: FWTextField) {
+		viewModel.content = textfield.text ?? ""
+	}
 	
 	// MARK: ViewModel Setup
 	private func setUpViewModel() {
 		viewModel.delegate = self
 	}
+	
 	
 	// MARK: Views Setup
 	private func setUpViews() {
@@ -73,7 +78,7 @@ final class FWSingleLineComponent: UIViewController {
 	private func setUpBody() {
 		textField.placeholder = "Write your one-line text here"
 		textField.layer.borderColor = UIColor.systemRed.cgColor
-		textField.delegate = self
+		textField.addTarget(self, action: #selector(didEnterCharacter(_:)), for: .editingChanged)
 	}
 	
 	private func setUpFooter() {
@@ -135,16 +140,4 @@ extension FWSingleLineComponent: FWSingleLineViewModelDelegate {
 			textField.layer.borderColor = UIColor.systemRed.cgColor
 		}
 	}
-}
-
-// MARK: Textfield Delegate
-extension FWSingleLineComponent: UITextFieldDelegate {
-	public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-		let currentText = textField.text ?? ""
-		guard let stringRange = Range(range, in: currentText) else { return false }
-		let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-		viewModel.content = updatedText
-		return true
-	}
-	
 }
