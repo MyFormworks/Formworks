@@ -22,7 +22,10 @@ final class FWFormViewModel {
 	}
 	
 	var numberOfComponents: Int {
-		return viewModels[0].count
+		guard let section = viewModels.first else {
+			return 0
+		}
+		return section.count
 	}
 	
 	func build() {
