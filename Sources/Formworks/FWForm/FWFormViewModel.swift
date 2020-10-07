@@ -15,6 +15,9 @@ final class FWFormViewModel {
 	
 	private var viewModels: [[FWSingleLineViewModel]] = [[FWSingleLineViewModel]]()
 	
+	private let queue: DispatchQueue = DispatchQueue(label: "components-init")
+
+	
 	weak var delegate: FWFormViewModelDelegate?
 	
 	init() {
@@ -29,8 +32,12 @@ final class FWFormViewModel {
 	}
 	
 	func build() {
-		let components = FWComponentFactory.makeComponents(5)
-		viewModels = components.1
-		delegate?.didReceiveComponents(components.0)
+		queue.async { [weak self] in
+			guard let self = self else { return }
+			let components = FWComponentFactory.makeComponents(5)
+			self.viewModels = components.1
+			self.delegate?.didReceiveComponents(components.0)
+		}
+		
 	}
 }

@@ -86,7 +86,10 @@ extension FWFormViewController: UICollectionViewDataSource {
 // MARK: ViewModel Delegate
 extension FWFormViewController: FWFormViewModelDelegate {
 	func didReceiveComponents(_ components: [[FWSingleLineComponent]]) {
-		self.components = components
-		formCollectionView.reloadData()
+		DispatchQueue.main.async { [weak self] in
+			guard let self = self else { return }
+			self.components = components
+			self.formCollectionView.reloadData()
+		}
 	}
 }
