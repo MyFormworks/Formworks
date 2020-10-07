@@ -34,6 +34,7 @@ public final class FWFormViewController: UIViewController {
         super.viewDidLoad()
         setUpCollectionView()
         setUpCollectionViewConstraints()
+		setUpViewModel()
     }
 	
 	// MARK: ViewModel setup
