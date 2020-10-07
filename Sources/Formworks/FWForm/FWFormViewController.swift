@@ -8,12 +8,15 @@
 import UIKit
 
 public final class FWFormViewController: UIViewController {
-    // - MARK: Properties
+    // MARK: Properties
     @ManualLayout private var formCollectionView: FWFormCollectionView
-	let cells: [FWSingleLineComponent] = [FWSingleLineComponent(), FWSingleLineComponent()]
-    //- MARK: Init
+	private var components: [[FWSingleLineComponent]] = [[FWSingleLineComponent]]()
+	private let viewModel: FWFormViewModel
+	
+    // MARK: Init
     /// Initializes a new instance of this type.
     public init() {
+		self.viewModel = FWFormViewModel()
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -21,7 +24,7 @@ public final class FWFormViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    //- MARK: Life cycle
+    // MARK: Life cycle
     public override func loadView() {
         super.loadView()
         view.backgroundColor = .fwFormBackground
@@ -32,7 +35,14 @@ public final class FWFormViewController: UIViewController {
         setUpCollectionView()
         setUpCollectionViewConstraints()
     }
-    
+	
+	// MARK: ViewModel setup
+	private func setUpViewModel() {
+		viewModel.delegate = self
+		viewModel.build()
+	}
+	
+	
     private func setUpCollectionView() {
         formCollectionView.delegate = self
         formCollectionView.dataSource = self
@@ -51,23 +61,31 @@ public final class FWFormViewController: UIViewController {
         ])
     }
 }
-//- MARK: UICollectionViewDelegate
+// MARK: UICollectionViewDelegate
 extension FWFormViewController: UICollectionViewDelegate {
     
 }
-//- MARL: UICollectionViewDataSource
+// MARK: UICollectionViewDataSource
 extension FWFormViewController: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+		return viewModel.numberOfComponents
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FWFormCollectionCell.identifier,
-                                                            for: indexPath) as? FWFormCollectionCell else {
-                                                                return UICollectionViewCell()
-        }
-		cell.configure(cells[indexPath.row].view)
-        return cell
+		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FWFormCollectionCell.identifier, for: indexPath) as? FWFormCollectionCell else {
+			return UICollectionViewCell()
+		}
+		cell.configure(components[indexPath.section][indexPath.item].view)
+		
+		return cell
     }
+}
+
+// MARK: ViewModel Delegate
+extension FWFormViewController: FWFormViewModelDelegate {
+	func didReceiveComponents(_ components: [[FWSingleLineComponent]]) {
+		self.components = components
+		formCollectionView.reloadData()
+	}
 }
