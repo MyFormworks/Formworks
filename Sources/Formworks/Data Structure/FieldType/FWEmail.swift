@@ -8,6 +8,6 @@
 import Foundation
 
 ///This struct represents the fild type "email". This fild is used to users add e-mail on the form.
-struct FWEmail: FWField {
+struct FWEmail: FWSpec {
 	let placeholder: String?
 }

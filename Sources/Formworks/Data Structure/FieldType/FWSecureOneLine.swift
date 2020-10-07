@@ -8,6 +8,6 @@
 import Foundation
 
 ///This struct represents the fild type "secure-one-line". This fild is used to users add passwords on the form.
-struct FWSecureOneLine: FWField {
+struct FWSecureOneLine: FWSpec {
 	let placeholder: String?
 }

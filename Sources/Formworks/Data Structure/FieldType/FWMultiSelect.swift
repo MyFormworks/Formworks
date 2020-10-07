@@ -8,6 +8,6 @@
 import Foundation
 
 ///This struct represents the fild type "multi-select". This fild is used to users add multiple given options on the form.
-struct FWMultiSelect: FWField {
+struct FWMultiSelect: FWSpec {
 	var options: [String?]
 }
