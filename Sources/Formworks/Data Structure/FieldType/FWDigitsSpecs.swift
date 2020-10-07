@@ -8,7 +8,7 @@
 import Foundation
 
 ///This struct represents the fild type "digits". This fild is used to users add digits on the form.
-struct FWDigits: FWSpecs {
+struct FWDigitsSpecs: FWSpecs {
 	let placeholder: String?
 }
 

@@ -8,30 +8,19 @@
 import Foundation
 
 /// This class is reponsible to get the JSON and transform in data.
-class FWJSONDecoder {
-    
-    let jsonPath: String?
-    /// An init that needs a String that tell the path or URL that
-    /// the JSON will be obtained through.
-    init( _ jsonPath: String?) {
-        self.jsonPath = jsonPath
-    }
+enum FWJSONDecoder {
     /// Currently a function that gets a JSON from a local archive and
     /// tranforms into a Data.
-    func dataFetcher(_ jsonPath: String? ,completion: (Result<FWForm, Error>) -> Void) {
-        guard let path = jsonPath else { return }
+    static func dataFetcher(url: String,completion: (Result<FWForm, Error>) -> Void) {
+        let path = url
         guard let url = URL(string: path) else { return }
         do {
             let data = try Data(contentsOf: url)
             let decoder = JSONDecoder()
-            do {
-                let form = try decoder.decode(FWForm.self, from: data)
-                completion(.success(form))
-            } catch {
-                print("Couldn't decode the contents of the JSON file.")
-            }
+            let form = try decoder.decode(FWForm.self, from: data)
+            completion(.success(form))
         } catch {
-            print("Couldn't find or receive JSON.")
+            completion(.failure(error))
         }
     }
 }
