@@ -11,7 +11,8 @@ import Foundation
 class FWJSONDecoder {
     
     let jsonPath: String?
-    
+    /// An init that needs a String that tell the path or URL that
+    /// the JSON will be obtained through.
     init( _ jsonPath: String?) {
         self.jsonPath = jsonPath
     }

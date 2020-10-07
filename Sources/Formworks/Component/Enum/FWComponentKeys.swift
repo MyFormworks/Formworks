@@ -12,6 +12,7 @@
 enum FWComponentKeys: String, CodingKey{
     case title
     case subtitle
+    case errorMessage
     case componentType
     case required
     case specs

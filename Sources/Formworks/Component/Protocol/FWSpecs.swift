@@ -11,5 +11,5 @@
  Placeholder text for text-based components or selection options for seletion-based components.
  */
 protocol FWSpecs: Decodable {
-    init(_ options: [String:Any])
+//    init(_ options: [String:Any])
 }

@@ -8,6 +8,6 @@
 import Foundation
 
 ///This struct represents the fild type "single-select". This fild is used to users add just one given options on the form.
-struct FWSingleSelect: FWSpec {
+struct FWSingleSelect: FWSpecs {
 	var options: [String?]
 }
