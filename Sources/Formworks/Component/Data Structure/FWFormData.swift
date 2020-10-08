@@ -8,7 +8,7 @@
 import Foundation
 
 ///This struct represents the form itself.
-struct FWForm: Decodable  {
+struct FWFormData: Decodable  {
 	let title: String
 	let components: [FWComponentData]
 }

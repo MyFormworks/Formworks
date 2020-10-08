@@ -87,8 +87,15 @@ enum TestFixtures {
 }
 
 extension TestFixtures {
-    static let minimalForm = FWForm(title: "", components: [])
-    static let form = FWForm(title: "FormTitle", components: [plainTextComponent, singleSelectComponent])
-    static let plainTextComponent = FWComponentData(title: "Plain Text", subtitle: "Subtitle", errorMessage: "errorMessage", required: true, specs: FWPlainTextSpecs(placeholder: "Placeholder"))
-    static let singleSelectComponent = FWComponentData(title: "Single Select", subtitle: "Subtitle", errorMessage: "errorMessage", required: false, specs: FWSingleSelectSpecs(options: ["Option1", "Option2", "Option3"]))
+    static let minimalForm = FWFormData(title: "", components: [])
+    static let form = FWFormData(title: "FormTitle", components: [plainTextComponent, singleSelectComponent])
+    static let plainTextComponent = FWComponentData(title: "Plain Text",
+                                                    subtitle: "Subtitle", errorMessage: "errorMessage",
+                                                    required: true,
+                                                    specs: FWPlainTextSpecs(placeholder: "Placeholder"))
+    static let singleSelectComponent = FWComponentData(title: "Single Select",
+                                                       subtitle: "Subtitle",
+                                                       errorMessage: "errorMessage",
+                                                       required: false,
+                                                       specs: FWSingleSelectSpecs(options: ["Option1", "Option2", "Option3"]))
 }

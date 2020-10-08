@@ -18,7 +18,7 @@ final class FWJSONTests: XCTestCase {
 
     func testInvalidData() {
         sut = FWJSON(data: TestFixtures.badFormData)
-        sut.decode { (result: Result<FWForm, Error>) in
+        sut.decode { (result: Result<FWFormData, Error>) in
             switch result {
             case .success:
                 XCTFail("InvaldidData: Form successefully decoded.")
@@ -39,7 +39,7 @@ final class FWJSONTests: XCTestCase {
 
     func testDecodeForm() {
         sut = FWJSON(data: TestFixtures.formData)
-        sut.decode { (result: Result<FWForm, Error>) in
+        sut.decode { (result: Result<FWFormData, Error>) in
             switch result {
             case .success(let form):
                 let errorMessage = "Form does not match it's decoded format"

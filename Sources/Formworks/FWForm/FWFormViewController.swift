@@ -35,12 +35,10 @@ public final class FWFormViewController: UIViewController {
         super.loadView()
         view.backgroundColor = .fwFormBackground
     }
-    
     public override func viewDidLoad() {
         super.viewDidLoad()
         setUpCollectionViewConstraints()
     }
-    
     /// This function will set up the layout of the CollectionView. It first configure
     /// the item size that will be present on a group. And then configure
     /// the group size so it specifies the portion of the screen that will occupy
@@ -85,7 +83,8 @@ extension FWFormViewController: UICollectionViewDataSource {
         return 30
     }
     
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView,
+                               cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FWFormViewControllerCell.identifier,
                                                             for: indexPath) as? FWFormViewControllerCell else {
             return UICollectionViewCell()

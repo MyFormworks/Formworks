@@ -11,45 +11,55 @@ import Foundation
 struct FWJSON {
     private var data: Data
 
+    /// Initializes the structure's data instance with the passed URL parameter.
+    /// - Parameter url: An URL type parameter that will be used to instaciate a Data var.
     init(url: URL) throws {
         self.data = try Data(contentsOf: url)
     }
-
+    /// Initializes the structure's data instance with the passed data parameter.
+    /// - Parameter data: An Data type parameter that will be used for decoding.
     init(data: Data) {
         self.data = data
     }
 
-    /// Tries to decode the JSON into a form.
-    func decode<T: Decodable>(completion: (Result<T, Error>) -> Void) {
+    /// Tries to decode the JSON into a generic type and return as success completion case a generic type to create our form.
+    /// - Parameter completionHandler: Returns an generic structure on sucess and a generic error on failure.
+    /// - Parameter result: Enum containing the results of the operation.
+    func decode<T: Decodable>(completionHandler: @escaping (_ result: Result<T, Error>) -> Void) {
         do {
             let decoder = JSONDecoder()
             let form = try decoder.decode(T.self, from: data)
-            completion(.success(form))
+            completionHandler(.success(form))
         } catch {
-            completion(.failure(error))
+            completionHandler(.failure(error))
         }
     }
 
 
-    /// Tries to decode the JSON into a form.
-    func decode(completion: (Result<FWForm, Error>) -> Void) {
+    /// Tries to decode the JSON into a form structure type and return as a success completion case a FWFormData
+    /// to create our form.
+    /// - Parameter completionHandler: Returns an FWFormData structure on sucess and a generic error on failure.
+    /// - Parameter result: Enum containing the results of the operation.
+    func decode(completionHandler: @escaping (_ result: Result<FWFormData, Error>) -> Void) {
         do {
             let decoder = JSONDecoder()
-            let form = try decoder.decode(FWForm.self, from: data)
-            completion(.success(form))
+            let form = try decoder.decode(FWFormData.self, from: data)
+            completionHandler(.success(form))
         } catch {
-            completion(.failure(error))
+            completionHandler(.failure(error))
         }
     }
 
-    /// Tries to decode the JSON into a component.
-    func decode(completion: (Result<FWComponentData, Error>) -> Void) {
+    /// Tries to decode the JSON into a component and return as a completion case a FWComponent.
+    /// - Parameter completionHandler: Returns an FWComponentData on sucess and a generic error on failure
+    /// - Parameter result: Enum containing the results of the operation.
+    func decode(completionHandler: @escaping (_ result: Result<FWComponentData, Error>) -> Void) {
         do {
             let decoder = JSONDecoder()
             let component = try decoder.decode(FWComponentData.self, from: data)
-            completion(.success(component))
+            completionHandler(.success(component))
         } catch {
-            completion(.failure(error))
+            completionHandler(.failure(error))
         }
     }
 }

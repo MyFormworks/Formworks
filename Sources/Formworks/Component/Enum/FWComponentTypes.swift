@@ -26,11 +26,11 @@ enum FWComponentTypes: String, Decodable {
     case datePicker = "date_picker"
 
     /**
-     Function of the FieldDecoder protocol that decodes the JSON following the coding keys that specify the data of the JSON.
-     When sucessful it will return a FWField Structure of the case
+     Decodes the JSON following the coding keys that specify the data of the JSON.
+     
+     When sucessful it will return a FWField Structure of the case specified on the key type.
      - Parameter container: It is the container that will follow the ComponentCodingkeys.
      */
-    /// specified on the key type.
     static func specs(from container: KeyedDecodingContainer<FWComponentKeys>) throws -> FWSpecs? {
         guard let type = try container.decodeIfPresent(FWComponentTypes.self, forKey: .componentType) else {
             return nil
