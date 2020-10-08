@@ -7,9 +7,10 @@
 
 import UIKit
 
-/// This enum is used to specify all the numerical values used to
-/// create the visual of the CollectionView, such as the cell size,
-/// group size.
+/**This enum is used to specify all the numerical values used to
+ create the visual of the CollectionView, such as the cell size,
+ group size.
+ */
 enum FormSpec {
     // -MARK: UICollectionViewCompositionalLayout
     // Item layout
