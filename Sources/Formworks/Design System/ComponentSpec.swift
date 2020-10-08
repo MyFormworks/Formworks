@@ -7,8 +7,11 @@
 
 import UIKit
 
-enum ComponentSpec {
 
+/// Used to specificate the components settings.
+enum ComponentSpec {
+    
+    /// Used to spacificate the `SingleLine` component.
     enum SingleLine {
         // Title container specs
         static let titleWidthMultipler: CGFloat = 0.8

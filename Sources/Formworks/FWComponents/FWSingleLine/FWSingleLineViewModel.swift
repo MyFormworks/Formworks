@@ -7,16 +7,18 @@
 
 import Foundation
 
+/// Delegate responsible to binding the `FWSingleLineViewModel`
+/// with a `View`.
 protocol FWSingleLineViewModelDelegate: AnyObject {
     func updateInterface()
 }
 
+/// The `FWSingleLine`'s  `ViewModel`.
 final class FWSingleLineViewModel {
     
     weak var delegate: FWSingleLineViewModelDelegate?
     
-    init() {
-    }
+    init() {}
     
     var content: String = "" {
         didSet {
@@ -26,7 +28,6 @@ final class FWSingleLineViewModel {
     
     var isValid: Bool = false {
         didSet {
-            print("Checking isValid")
             delegate?.updateInterface()
         }
     }

@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// A representation of a `Formworks` `UICollectionView`'s cell.
 final class FWFormCollectionCell: UICollectionViewCell {
     
     static var identifier: String {
@@ -22,6 +23,7 @@ final class FWFormCollectionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// Configures the content of the `contentView`.
     func configure(_ view: UIView) {
         view.translatesAutoresizingMaskIntoConstraints = false
 
@@ -37,13 +39,13 @@ final class FWFormCollectionCell: UICollectionViewCell {
         ])
     }
 
-    /// Use this function to make all needed visual set up for the cell
+    /// Use this function to make all needed visual set up for the cell.
     private func setUpContentView() {
-        /// Add corner radius to the cell
+        // Add corner radius to the cell
         contentView.backgroundColor = .fwComponentBackground
         contentView.layer.cornerRadius = contentView.frame.height * FormSpec.Cell.cornerRadius
         contentView.clipsToBounds = true
-        /// Add shadow drop to the cell
+        // Add shadow drop to the cell
         contentView.layer.shadowColor = UIColor.fwComponentShadow.cgColor
         contentView.layer.shadowOffset = CGSize(width: FormSpec.Cell.cellShadowOffSetX,
                                                 height: FormSpec.Cell.cellShadowOffSetY)

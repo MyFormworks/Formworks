@@ -7,8 +7,10 @@
 
 import UIKit
 
+/// A  representation of a `Formworks` label.
 final class FWLabel: UILabel {
-
+    
+    /// Determines a `FWLabel` type.
     enum Style {
         case required
         case title
@@ -25,6 +27,7 @@ final class FWLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// Styles a `FWLabel`according to `Style`.
     func style(_ style: FWLabel.Style) {
         switch style {
         case .required:

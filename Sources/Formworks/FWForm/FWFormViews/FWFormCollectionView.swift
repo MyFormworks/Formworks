@@ -7,6 +7,12 @@
 
 import UIKit
 
+/**
+    A representation of a `Formworks` `UICollectionView`.
+
+    ## Important Notes ##
+    The `UICollectionView` uses a `UICollectionViewCompositionalLayout`, available only on iOS 13+.
+ */
 final class FWFormCollectionView: UICollectionView {
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {

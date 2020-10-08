@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// A representation of a `Formworks` text field.
 final class FWTextField: UITextField {
 
     override init(frame: CGRect) {
@@ -23,18 +24,21 @@ final class FWTextField: UITextField {
         layer.borderWidth = 1
     }
     
+    /// Defines the width rect size of the text rect.
     override func textRect(forBounds bounds: CGRect) -> CGRect {
         let width = bounds.width * 0.05
         
         return bounds.inset(by: UIEdgeInsets(top: 0, left: width, bottom: 0, right: width))
     }
     
+    /// Defines the placeholder rect size of the text rect.
     override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
         let width = bounds.width * 0.05
         
         return bounds.inset(by: UIEdgeInsets(top: 0, left: width, bottom: 0, right: width))
     }
     
+    /// Defines the editing rect size of the text rect.
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
         let width = bounds.width * 0.05
         
