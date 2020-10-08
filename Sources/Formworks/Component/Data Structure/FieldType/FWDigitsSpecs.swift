@@ -11,4 +11,3 @@ import Foundation
 struct FWDigitsSpecs: FWSpecs {
 	let placeholder: String?
 }
-

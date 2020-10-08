@@ -5,6 +5,7 @@ public func allTests() -> [XCTestCaseEntry] {
     return [
         testCase(FormworksTests.allTests),
         testCase(ManualLayoutTests.allTests),
+        testCase(FWJSONTests.allTests),
     ]
 }
 #endif
