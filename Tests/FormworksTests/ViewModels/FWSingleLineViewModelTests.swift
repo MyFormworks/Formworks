@@ -27,5 +27,8 @@ final class FWSingleLineViewModelTests: XCTestCase {
 		sut = nil
 		super.tearDown()
 	}
-	
+    
+    static var allTests = [
+        ("testContentIsValid", testContentIsValid)
+    ]
 }

@@ -4,4 +4,5 @@ import FormworksTests
 
 var tests = [XCTestCaseEntry]()
 tests += ManualLayoutTests.allTests()
+tests += FWSingleLineViewModelTests.allTests()
 XCTMain(tests)
