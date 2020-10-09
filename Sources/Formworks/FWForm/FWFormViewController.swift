@@ -44,7 +44,6 @@ public final class FWFormViewController: UIViewController {
 	// MARK: ViewModel setup
 	private func setUpViewModel() {
 		viewModel.delegate = self
-		viewModel.build()
 	}
 	
     private func setUpCollectionView() {

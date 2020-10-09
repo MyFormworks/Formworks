@@ -16,12 +16,16 @@ protocol FWFormViewModelDelegate: AnyObject {
 /// A representation of the `FWForm`'s `ViewModel`.
 final class FWFormViewModel {
 	
-	private var viewModels: [[FWSingleLineViewModel]] = [[FWSingleLineViewModel]]()
+    private var viewModels: [[FWSingleLineViewModel]] = [[FWSingleLineViewModel]]()
 	
     /// Should **only** be used to build `FWComponents`.
 	private let queue: DispatchQueue = DispatchQueue(label: "components-init")
 
-    private var data: FWFormData?
+    private var data: FWFormData? {
+        didSet {
+            build()
+        }
+    }
 
 	
 	weak var delegate: FWFormViewModelDelegate?
@@ -38,7 +42,7 @@ final class FWFormViewModel {
 	}
 	
     /// Builds the `FWComponents` required by the `FWForm`.
-	func build() {
+	private func build() {
 		queue.async { [weak self] in
 			guard let self = self else { return }
             guard let form = self.data else { return }
