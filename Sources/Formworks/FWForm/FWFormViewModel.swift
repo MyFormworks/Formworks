@@ -27,17 +27,7 @@ final class FWFormViewModel {
 	weak var delegate: FWFormViewModelDelegate?
 	
     init(_ json: Data) {
-        let fwjson = FWJSON(data: json)
-        fwjson.decode { [weak self] (result: Result<FWFormData, Error>) in
-            guard let self = self else { return }
-            switch result {
-            case .success(let formData):
-                self.data = formData
-            case .failure(let error):
-                // TODO: Handle user facing error
-                print(error.localizedDescription)
-            }
-        }
+        generate(json)
     }
 	
 	var numberOfComponents: Int {
@@ -59,4 +49,18 @@ final class FWFormViewModel {
 		}
 		
 	}
+
+    private func generate(_ form: Data) {
+        let fwjson = FWJSON(data: form)
+        fwjson.decode { [weak self] (result: Result<FWFormData, Error>) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let formData):
+                self.data = formData
+            case .failure(let error):
+                // TODO: Handle user facing error
+                print(error.localizedDescription)
+            }
+        }
+    }
 }

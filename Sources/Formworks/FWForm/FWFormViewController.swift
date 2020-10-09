@@ -11,8 +11,12 @@ import UIKit
 public final class FWFormViewController: UIViewController {
     // MARK: Properties
     @ManualLayout private var formCollectionView: FWFormCollectionView
-	private var components: [[FWSingleLineComponent]] = [[FWSingleLineComponent]]()
-	private let viewModel: FWFormViewModel
+    private var components: [[FWSingleLineComponent]] = [[FWSingleLineComponent]]() {
+        didSet {
+            formCollectionView.reloadData()
+        }
+    }
+    private let viewModel: FWFormViewModel
 	
     // MARK: Init
     /// Initializes a new instance of this type.
@@ -89,7 +93,6 @@ extension FWFormViewController: FWFormViewModelDelegate {
 		DispatchQueue.main.async { [weak self] in
 			guard let self = self else { return }
 			self.components = components
-			self.formCollectionView.reloadData()
 		}
 	}
 }
