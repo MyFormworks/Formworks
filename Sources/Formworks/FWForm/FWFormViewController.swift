@@ -16,6 +16,7 @@ public final class FWFormViewController: UIViewController {
             formCollectionView.reloadData()
         }
     }
+
     private let viewModel: FWFormViewModel
 	
     // MARK: Init
@@ -89,8 +90,7 @@ extension FWFormViewController: UICollectionViewDataSource {
 // MARK: ViewModel Delegate
 extension FWFormViewController: FWFormViewModelDelegate {
 	func didReceiveComponents(_ components: [[FWSingleLineComponent]]) {
-		DispatchQueue.main.async { [weak self] in
-			guard let self = self else { return }
+        DispatchQueue.main.async {
 			self.components = components
 		}
 	}
