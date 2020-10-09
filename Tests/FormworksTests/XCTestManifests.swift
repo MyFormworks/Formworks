@@ -4,6 +4,7 @@ import XCTest
 public func allTests() -> [XCTestCaseEntry] {
     return [
         testCase(ManualLayoutTests.allTests),
+        testCase(FWJSONTests.allTests),
         testCase(FWSingleLineViewModelTests.allTests)
     ]
 }

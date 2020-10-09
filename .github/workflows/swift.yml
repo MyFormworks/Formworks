@@ -23,6 +23,8 @@ jobs:
       uses: sersoft-gmbh/swifty-docs-action@v1
       with:
         xcodebuild-destination: 'platform=iOS Simulator,OS=14.0,name=iPhone 11'
+        output: docs
+        clean: true
   
   build_syntax:
     runs-on: ubuntu-latest

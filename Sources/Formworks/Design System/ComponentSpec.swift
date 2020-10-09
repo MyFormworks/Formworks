@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 /// Used to specificate the components settings.
 enum ComponentSpec {
     

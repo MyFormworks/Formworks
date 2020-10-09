@@ -30,7 +30,6 @@ public final class FWFormViewController: UIViewController {
         super.loadView()
         view.backgroundColor = .fwFormBackground
     }
-    
     public override func viewDidLoad() {
         super.viewDidLoad()
         setUpCollectionView()
@@ -72,7 +71,7 @@ extension FWFormViewController: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return viewModel.numberOfComponents
     }
-    
+
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FWFormCollectionCell.identifier, for: indexPath) as? FWFormCollectionCell else {
 			return UICollectionViewCell()
@@ -80,6 +79,7 @@ extension FWFormViewController: UICollectionViewDataSource {
 		cell.configure(components[indexPath.section][indexPath.item].view)
 		
 		return cell
+
     }
 }
 
