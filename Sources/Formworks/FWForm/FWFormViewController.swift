@@ -7,8 +7,10 @@
 
 import UIKit
 
+/// Representation of a form. It displays each component as a cell of a `UICollectionView`.
 public final class FWFormViewController: UIViewController {
     // - MARK: Properties
+    /// The form containing components as cells.
     private lazy var formCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: setUpCollectionViewLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -40,10 +42,12 @@ public final class FWFormViewController: UIViewController {
         super.viewDidLoad()
         setUpCollectionViewConstraints()
     }
-    
-    /// This function will set up the layout of the CollectionView. It first configure
-    /// the item size that will be present on a group. And then configure
-    /// the group size so it specifies the portion of the screen that will occupy
+
+    /**
+    This function will set up the layout of the CollectionView. It first configure
+    the item size that will be present on a group. And then configure
+    the group size so it specifies the portion of the screen that will occupy
+     */
     @available(iOS 13.0, *)
     private func setUpCollectionViewLayout() -> UICollectionViewCompositionalLayout {
         
