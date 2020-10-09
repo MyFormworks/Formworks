@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Representation of a form. It displays each component as a cell of a `UICollectionView`.
 public final class FWFormViewController: UIViewController {
     // MARK: Properties
     @ManualLayout private var formCollectionView: FWFormCollectionView
