@@ -17,6 +17,12 @@ protocol FWFormViewModelDelegate: AnyObject {
 final class FWFormViewModel {
 	
     private var viewModels: [[FWSingleLineViewModel]] = [[FWSingleLineViewModel]]()
+
+    private var components: [[FWSingleLineComponent]] = [[FWSingleLineComponent]]() {
+        didSet {
+            delegate?.didReceiveComponents(components)
+        }
+    }
 	
     /// Should **only** be used to build `FWComponents`.
 	private let queue: DispatchQueue = DispatchQueue(label: "components-init")
@@ -49,7 +55,7 @@ final class FWFormViewModel {
             let components = FWComponentFactory.makeComponents(form.components)
 
             self.viewModels = components.1
-            self.delegate?.didReceiveComponents(components.0)
+            self.components = components.0
 		}
 		
 	}
