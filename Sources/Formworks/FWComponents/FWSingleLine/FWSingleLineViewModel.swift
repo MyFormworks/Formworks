@@ -17,12 +17,16 @@ protocol FWSingleLineViewModelDelegate: AnyObject {
 final class FWSingleLineViewModel {
     
     weak var delegate: FWSingleLineViewModelDelegate?
+
+    private let validator: FWValidator
     
-    init() {}
+    init(_ validator: FWValidator) {
+        self.validator = validator
+    }
     
     var content: String = "" {
         didSet {
-            isValid = content.count < 6 ? false : true
+            isValid = validate(content)
         }
     }
     
@@ -30,5 +34,19 @@ final class FWSingleLineViewModel {
         didSet {
             delegate?.updateInterface()
         }
+    }
+
+    private func validate(_ content: String) -> Bool {
+        var valid = false
+        let regexs = validator.regex()
+
+        for regex in regexs {
+            let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
+            if predicate.evaluate(with: content) {
+                valid = true
+            }
+        }
+        
+        return valid
     }
 }

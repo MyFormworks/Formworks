@@ -28,7 +28,7 @@ final class FWSingleLineComponent: UIViewController {
 	private let viewModel: FWSingleLineViewModel
 	
 	// MARK: Init
-	init(viewModel: FWSingleLineViewModel = FWSingleLineViewModel()) {
+	init(viewModel: FWSingleLineViewModel) {
 		self.viewModel = viewModel
 		super.init(nibName: nil, bundle: nil)
 	}

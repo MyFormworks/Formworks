@@ -21,10 +21,24 @@ final class FWFormViewModel {
     /// Should **only** be used to build `FWComponents`.
 	private let queue: DispatchQueue = DispatchQueue(label: "components-init")
 
+    private var data: FWFormData?
+
 	
 	weak var delegate: FWFormViewModelDelegate?
 	
-	init() {}
+    init(_ json: Data) {
+        let fwjson = FWJSON(data: json)
+        fwjson.decode { [weak self] (result: Result<FWFormData, Error>) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let formData):
+                self.data = formData
+            case .failure(let error):
+                // TODO: Handle user facing error
+                print(error.localizedDescription)
+            }
+        }
+    }
 	
 	var numberOfComponents: Int {
 		guard let section = viewModels.first else {
@@ -37,9 +51,11 @@ final class FWFormViewModel {
 	func build() {
 		queue.async { [weak self] in
 			guard let self = self else { return }
-			let components = FWComponentFactory.makeComponents(5)
-			self.viewModels = components.1
-			self.delegate?.didReceiveComponents(components.0)
+            guard let form = self.data else { return }
+            let components = FWComponentFactory.makeComponents(form.components)
+
+            self.viewModels = components.1
+            self.delegate?.didReceiveComponents(components.0)
 		}
 		
 	}

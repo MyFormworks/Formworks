@@ -13,7 +13,7 @@ struct FWJSON {
 
     /// Initializes the structure's data instance with the passed URL parameter.
     /// - Parameter url: An URL type parameter that will be used to instaciate a Data var.
-    init(url: URL) throws {
+    public init(url: URL) throws {
         self.data = try Data(contentsOf: url)
     }
     /// Initializes the structure's data instance with the passed data parameter.

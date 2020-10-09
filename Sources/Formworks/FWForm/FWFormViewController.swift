@@ -16,8 +16,8 @@ public final class FWFormViewController: UIViewController {
 	
     // MARK: Init
     /// Initializes a new instance of this type.
-    public init() {
-		self.viewModel = FWFormViewModel()
+    public init(for json: Data) {
+		self.viewModel = FWFormViewModel(json)
         super.init(nibName: nil, bundle: nil)
     }
 
