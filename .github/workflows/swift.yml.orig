@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+    paths:
+      - '.github/workflows/swift.yml'
+      - '.swiftLint.yml'
+      - '**/*.swift'
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Switch to XCode 12
+      run:  sudo xcode-select --switch /Applications/Xcode_12.app
+    - name: Generate XCode Project
+      run:  swift package generate-xcodeproj
+    - name: Run tests on iPhone 11 with iOS 14.0
+      run:  xcodebuild test -destination 'platform=iOS Simulator,OS=14.0,name=iPhone 11' -scheme 'Formworks-Package'
+    - name: SwiftPM Jazzy Docs
+      uses: sersoft-gmbh/swifty-docs-action@v1
+  
+  build_syntax:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: GitHub Action for SwiftLint
+      uses: norio-nomura/action-swiftlint@3.1.0
+      env:
+        DIFF_BASE: ${{ github.base_ref }}

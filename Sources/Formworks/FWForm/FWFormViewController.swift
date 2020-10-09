@@ -9,22 +9,15 @@ import UIKit
 
 /// Representation of a form. It displays each component as a cell of a `UICollectionView`.
 public final class FWFormViewController: UIViewController {
-    // - MARK: Properties
-    /// The form containing components as cells.
-    private lazy var formCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: setUpCollectionViewLayout())
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(FWFormViewControllerCell.self,
-                                forCellWithReuseIdentifier: FWFormViewControllerCell.identifier)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.backgroundColor = .fwFormBackground
-        return collectionView
-    }()
-
-    //- MARK: Init
+    // MARK: Properties
+    @ManualLayout private var formCollectionView: FWFormCollectionView
+	private var components: [[FWSingleLineComponent]] = [[FWSingleLineComponent]]()
+	private let viewModel: FWFormViewModel
+	
+    // MARK: Init
     /// Initializes a new instance of this type.
     public init() {
+		self.viewModel = FWFormViewModel()
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -32,7 +25,7 @@ public final class FWFormViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    //- MARK: Life cycle
+    // MARK: Life cycle
     public override func loadView() {
         super.loadView()
         view.backgroundColor = .fwFormBackground
@@ -40,29 +33,20 @@ public final class FWFormViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        setUpCollectionView()
         setUpCollectionViewConstraints()
+		setUpViewModel()
     }
-
-    /**
-    This function will set up the layout of the CollectionView. It first configure
-    the item size that will be present on a group. And then configure
-    the group size so it specifies the portion of the screen that will occupy
-     */
-    @available(iOS 13.0, *)
-    private func setUpCollectionViewLayout() -> UICollectionViewCompositionalLayout {
-        
-        let itemLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(FormSpec.itemFractionalWidth),
-                                                    heightDimension: .fractionalHeight(FormSpec.itemFractionalHeight))
-        let item = NSCollectionLayoutItem(layoutSize: itemLayoutSize)
-        let groupLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(FormSpec.groupFractionalWidth),
-                                                     heightDimension: .fractionalHeight(FormSpec.groupFractionalHeight))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupLayoutSize, subitems: [item])
-        group.contentInsets = NSDirectionalEdgeInsets(top: FormSpec.groupSpacingTop,
-                                                      leading: FormSpec.groupSpacingLeading,
-                                                      bottom: FormSpec.groupSpacingBottom,
-                                                      trailing: FormSpec.groupSpacingTrailing)
-        let section = NSCollectionLayoutSection(group: group)
-        return UICollectionViewCompositionalLayout(section: section)
+	
+	// MARK: ViewModel setup
+	private func setUpViewModel() {
+		viewModel.delegate = self
+		viewModel.build()
+	}
+	
+    private func setUpCollectionView() {
+        formCollectionView.delegate = self
+        formCollectionView.dataSource = self
     }
     
     /// This function will create the necessary constraints for the CollectionView
@@ -78,24 +62,34 @@ public final class FWFormViewController: UIViewController {
         ])
     }
 }
-//- MARK: UICollectionViewDelegate
+// MARK: UICollectionViewDelegate
 extension FWFormViewController: UICollectionViewDelegate {
     
 }
-//- MARL: UICollectionViewDataSource
+// MARK: UICollectionViewDataSource
 extension FWFormViewController: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+		return viewModel.numberOfComponents
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FWFormViewControllerCell.identifier,
-                                                            for: indexPath) as? FWFormViewControllerCell else {
-            return UICollectionViewCell()
-        }
-        return cell
+		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FWFormCollectionCell.identifier, for: indexPath) as? FWFormCollectionCell else {
+			return UICollectionViewCell()
+		}
+		cell.configure(components[indexPath.section][indexPath.item].view)
+		
+		return cell
     }
-    
-    
+}
+
+// MARK: ViewModel Delegate
+extension FWFormViewController: FWFormViewModelDelegate {
+	func didReceiveComponents(_ components: [[FWSingleLineComponent]]) {
+		DispatchQueue.main.async { [weak self] in
+			guard let self = self else { return }
+			self.components = components
+			self.formCollectionView.reloadData()
+		}
+	}
 }
