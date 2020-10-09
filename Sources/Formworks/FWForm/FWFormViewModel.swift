@@ -25,7 +25,7 @@ final class FWFormViewModel {
     }
 	
     /// Should **only** be used to build `FWComponents`.
-	private let queue: DispatchQueue = DispatchQueue(label: "components-init")
+//	private let queue: DispatchQueue = DispatchQueue(label: "components-init")
 
     private var data: FWFormData? {
         didSet {
@@ -49,7 +49,7 @@ final class FWFormViewModel {
 	
     /// Builds the `FWComponents` required by the `FWForm`.
 	private func build() {
-		queue.async { [weak self] in
+        DispatchQueue.global().async { [weak self] in
 			guard let self = self else { return }
             guard let form = self.data else { return }
             let components = FWComponentFactory.makeComponents(form.components)
