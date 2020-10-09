@@ -7,13 +7,19 @@
 
 import Foundation
 
-/// This struct represents cell's configuration. All variables declared here will be components presented in each cell of CollectionView.
+/**
+ This struct represents cell's configuration.
+
+ All variables declared here will be components presented in each cell of CollectionView.
+ */
 struct FWComponentData: Decodable {
     ///This variable is the title of the form. It will appear at first on screen.
     var title: String
-    ///This variable is the subtitle of the form and represents a brief description about what is the form's porpose. It will appear at second on screen.
+    ///This variable is the subtitle of the form
+    ///and represents a brief description about what is the form's porpose.
     var subtitle: String?
-    ///This variable is the error message which will appear if user write something incompatible to field type.
+    ///This variable is the error message which will appear
+    ///if user write something incompatible to field type.
     let errorMessage: String?
     ///This variable will appear if the field must be filled.
     var required: Bool

@@ -4,9 +4,8 @@
 //
 //  Created by Rafael Galdino on 01/10/20.
 //
-/**
- Contains all the possible components types.
- */
+
+/// Contains all the possible components types.
 enum FWComponentTypes: String, Decodable {
     /// Text Field for general type of text
     case plainText = "plain_text"

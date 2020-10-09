@@ -7,13 +7,20 @@
 
 import UIKit
 
-/// Property wrapper used to make it easier to instantiate a `UIView` or
-/// its subclasses ready for Auto layout. **You should only use this property wrapper if you only**
-/// **need the object to be initialized with the following init:** `init(frame: .zero)`.
+/**
+ Property wrapper used to make it easier to instantiate a `UIView` or
+ its subclasses ready for Auto layout.
+
+ - important: You should only use this property wrapper if you only
+ need the object to be initialized with the following init:
+ `init(frame: .zero)`.
+ */
 @propertyWrapper final class ManualLayout<View: UIView> {
-    /// A lazily instantiated `UIView` or `UIView` subclass with the
-    /// `translatesAutoresizingMaskIntoConstraints` property set
-    /// as `false`.
+    /**
+     A lazily instantiated `UIView` or `UIView` subclass with the
+    `translatesAutoresizingMaskIntoConstraints` property set
+     as `false`.
+     */
     private lazy var view: View = {
         let view = View(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false

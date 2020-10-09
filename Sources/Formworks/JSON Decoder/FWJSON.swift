@@ -22,9 +22,15 @@ struct FWJSON {
         self.data = data
     }
 
-    /// Tries to decode the JSON into a generic type and return as success completion case a generic type to create our form.
-    /// - Parameter completionHandler: Returns an generic structure on sucess and a generic error on failure.
-    /// - Parameter result: Enum containing the results of the operation.
+    /**
+     Tries to decode the JSON into a generic type
+     and return as success completion case a generic
+     type to create our form.
+     - Parameters:
+     - completionHandler: Returns an generic structure on sucess and a generic error on failure.
+
+     - Parameter result: Enum containing the results of the operation.
+     */
     func decode<T: Decodable>(completionHandler: @escaping (_ result: Result<T, Error>) -> Void) {
         do {
             let decoder = JSONDecoder()
@@ -35,11 +41,17 @@ struct FWJSON {
         }
     }
 
+    /**
+     Tries to decode the JSON into a form structure type
+     and return as a success completion case a
+     FWFormData to create our form.
 
-    /// Tries to decode the JSON into a form structure type and return as a success completion case a FWFormData
-    /// to create our form.
-    /// - Parameter completionHandler: Returns an FWFormData structure on sucess and a generic error on failure.
-    /// - Parameter result: Enum containing the results of the operation.
+     - Parameters:
+     - completionHandler: Returns an FWFormData structure on sucess and a generic error on failure.
+
+     - Parameter result: Enum containing the results of the operation.
+
+     */
     func decode(completionHandler: @escaping (_ result: Result<FWFormData, Error>) -> Void) {
         do {
             let decoder = JSONDecoder()
@@ -49,10 +61,12 @@ struct FWJSON {
             completionHandler(.failure(error))
         }
     }
-
-    /// Tries to decode the JSON into a component and return as a completion case a FWComponent.
-    /// - Parameter completionHandler: Returns an FWComponentData on sucess and a generic error on failure
-    /// - Parameter result: Enum containing the results of the operation.
+/**
+     Tries to decode the JSON into a component and return as a completion case a FWComponent.
+     - Parameters:
+     - completionHandler: Returns an FWComponentData on sucess and a generic error on failure
+     - Parameter result: Enum containing the results of the operation.
+     */
     func decode(completionHandler: @escaping (_ result: Result<FWComponentData, Error>) -> Void) {
         do {
             let decoder = JSONDecoder()

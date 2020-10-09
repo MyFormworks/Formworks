@@ -7,9 +7,9 @@
 
 import UIKit
 
-/** This enum is used to specify all the numerical values used to
- create the visual of the CollectionView, such as the cell size,
- group size.
+/**
+ Numerical values used to create the visual of the CollectionView,
+ such as the cell size, group size.
  */
 enum FormSpec {
     // MARK: UICollectionViewCompositionalLayout
@@ -27,8 +27,7 @@ enum FormSpec {
     static let groupSpacingBottom: CGFloat = 16
     static let groupSpacingTrailing: CGFloat = 16
     
-    /// This enum is used to configure specific visual aspects of
-    /// the CollectionViewCell,  such as adding corner radius.
+    /// Visual aspects of the CollectionViewCell,  such as adding corner radius.
     enum Cell {
         // Cell corner radius
         static let cornerRadius: CGFloat = 0.05
