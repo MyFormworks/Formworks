@@ -15,15 +15,29 @@ protocol FWSingleLineViewModelDelegate: AnyObject {
 
 /// The `FWSingleLine`'s  `ViewModel`.
 final class FWSingleLineViewModel {
-    
+    // MARK: Properties
     weak var delegate: FWSingleLineViewModelDelegate?
 
     private let validator: FWValidator
-    
-    init(_ validator: FWValidator) {
+
+    // MARK: Init
+    init(_ data: FWComponentData, with validator: FWValidator) {
         self.validator = validator
+        self.title = data.title
+        self.subtitle = data.subtitle ?? ""
+        self.errorMessage = data.errorMessage ?? ""
+        self.required = data.required
     }
-    
+
+    // MARK: API
+    let title: String
+
+    let subtitle: String
+
+    let errorMessage: String
+
+    let required: Bool
+
     var content: String = "" {
         didSet {
             isValid = validate(content)
@@ -36,6 +50,7 @@ final class FWSingleLineViewModel {
         }
     }
 
+    // MARK: Private
     private func validate(_ content: String) -> Bool {
         var valid = false
         let regexs = validator.regex()

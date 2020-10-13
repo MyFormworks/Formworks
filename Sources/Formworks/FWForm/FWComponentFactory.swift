@@ -19,7 +19,7 @@ enum FWComponentFactory {
 		
 		for component in components {
             let validator = self.checkValidator(for: component)
-            let viewModel = FWSingleLineViewModel(validator)
+            let viewModel = FWSingleLineViewModel(component, with: validator)
 			let viewController = FWSingleLineComponent(viewModel: viewModel)
 			viewControllers.append(viewController)
 			viewModels.append(viewModel)

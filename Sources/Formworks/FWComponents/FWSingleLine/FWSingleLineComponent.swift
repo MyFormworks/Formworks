@@ -66,13 +66,13 @@ final class FWSingleLineComponent: UIViewController {
 	}
 	
 	private func setUpHeader() {
-		titleLabel.text = "One-line textfield One-line textfield One-line textfield One-line textfield"
+        titleLabel.text = viewModel.title
 		titleLabel.style(.title)
 		
-		requiredLabel.text = "Required"
+        requiredLabel.text = viewModel.required ? "Required" : ""
 		requiredLabel.style(.required)
 		
-		descriptionLabel.text = "Optional description for this field, Optional description for this field, Optional description for this field"
+        descriptionLabel.text = viewModel.subtitle
 		descriptionLabel.style(.description)
 	}
 	
@@ -83,7 +83,7 @@ final class FWSingleLineComponent: UIViewController {
 	}
 	
 	private func setUpFooter() {
-		errorLabel.text = "If there are any errors with your input, it will appear here."
+        errorLabel.text = viewModel.errorMessage
 		errorLabel.style(.error)
 	}
 	

@@ -30,6 +30,7 @@ public final class FWFormViewController: UIViewController {
         super.loadView()
         view.backgroundColor = .fwFormBackground
     }
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         setUpCollectionView()
