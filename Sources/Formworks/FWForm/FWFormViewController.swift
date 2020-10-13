@@ -11,11 +11,6 @@ import UIKit
 public final class FWFormViewController: UIViewController {
     // MARK: Properties
     @ManualLayout private var formCollectionView: FWFormCollectionView
-    private var components: [[FWSingleLineComponent]] = [[FWSingleLineComponent]]() {
-        didSet {
-            formCollectionView.reloadData()
-        }
-    }
     
     private let viewModel: FWFormViewModel
 	
@@ -80,7 +75,7 @@ extension FWFormViewController: UICollectionViewDataSource {
 		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FWFormCollectionCell.identifier, for: indexPath) as? FWFormCollectionCell else {
 			return UICollectionViewCell()
 		}
-		cell.configure(components[indexPath.section][indexPath.item].view)
+        cell.configure(viewModel.componentAt(index: indexPath).view)
 		
 		return cell
 
@@ -89,10 +84,10 @@ extension FWFormViewController: UICollectionViewDataSource {
 
 // MARK: ViewModel Delegate
 extension FWFormViewController: FWFormViewModelDelegate {
-	func didReceiveComponents(_ components: [[FWSingleLineComponent]]) {
+	func didReceiveComponents() {
         DispatchQueue.main.sync { [weak self] in
 			guard let self = self else { return }
-			self.components = components
+            self.formCollectionView.reloadData()
 		}
 	}
 }

@@ -10,7 +10,7 @@ import Foundation
 /// Delegate responsible to binding the `FWFormViewModel`
 /// with a `View`.
 protocol FWFormViewModelDelegate: AnyObject {
-	func didReceiveComponents(_ components: [[FWSingleLineComponent]])
+    func didReceiveComponents()
 }
 
 /// A representation of the `FWForm`'s `ViewModel`.
@@ -20,12 +20,12 @@ final class FWFormViewModel {
 
     private var components: [[FWSingleLineComponent]] = [[FWSingleLineComponent]]() {
         didSet {
-            delegate?.didReceiveComponents(components)
+            delegate?.didReceiveComponents()
         }
     }
 	
     /// Should **only** be used to build `FWComponents`.
-//	private let queue: DispatchQueue = DispatchQueue(label: "components-init")
+	private let queue: DispatchQueue = DispatchQueue(label: "components-init")
 
     private var data: FWFormData? {
         didSet {
@@ -46,10 +46,14 @@ final class FWFormViewModel {
 		}
 		return section.count
 	}
+
+    func componentAt(index: IndexPath) -> FWSingleLineComponent {
+        return components[index.section][index.row]
+    }
 	
     /// Builds the `FWComponents` required by the `FWForm`.
 	private func build() {
-        DispatchQueue.global().async { [weak self] in
+        queue.async { [weak self] in
 			guard let self = self else { return }
             guard let form = self.data else { return }
             let components = FWComponentFactory.makeComponents(form.components)
