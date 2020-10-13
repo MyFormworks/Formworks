@@ -24,7 +24,7 @@ final class FWComponentView: UICollectionViewCell {
     @ManualLayout private var descriptionLabel: FWLabel
     @ManualLayout private var errorMessageLabel: FWLabel
     @ManualLayout private var requiredLabel: FWLabel
-    @ManualLayout private var specsView: UIView
+    @ManualLayout private var specsView: FWTextField
 
     private var viewModel: FWComponentViewModel? {
         didSet {
@@ -61,6 +61,7 @@ final class FWComponentView: UICollectionViewCell {
         titleLabel.style(.title)
         requiredLabel.style(.required)
         descriptionLabel.style(.description)
+        specsView.placeholder = "This is a placeholder"
     }
 
     private func setUpFooter() {
