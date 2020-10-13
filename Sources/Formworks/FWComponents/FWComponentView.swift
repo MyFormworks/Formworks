@@ -14,7 +14,7 @@ struct  FWComponentViewModel {
     let required: Bool
 }
 
-final class FWComponentView<Specs: UIView>: UICollectionViewCell {
+final class FWComponentView: UICollectionViewCell {
     // MARK: Properties
     static var identifier: String {
         return String(describing: self)
@@ -24,11 +24,10 @@ final class FWComponentView<Specs: UIView>: UICollectionViewCell {
     @ManualLayout private var descriptionLabel: FWLabel
     @ManualLayout private var errorMessageLabel: FWLabel
     @ManualLayout private var requiredLabel: FWLabel
-    @ManualLayout private var specsView: Specs
+    @ManualLayout private var specsView: UIView
 
     private var viewModel: FWComponentViewModel? {
         didSet {
-            viewModel.delegate = self
             titleLabel.text = viewModel?.title
             descriptionLabel.text = viewModel?.description
             errorMessageLabel.text = viewModel?.error
