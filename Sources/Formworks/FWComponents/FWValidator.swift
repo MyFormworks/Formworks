@@ -18,7 +18,7 @@ extension FWValidator {
     func regex() -> [String] {
         switch self {
         case .email:
-            return ["0-9a-z._%+-]+@[a-z0-9.-]+\\.[a-z]{2,64}"]
+            return ["[0-9a-z._%+-]+@[a-z0-9.-]+\\.[a-z]{2,64}"]
         case .phonenumber:
             return ["[0-9]{2} [0-9]{8}", "[0-9]{2} [0-9]{4}-[0-9]{4}"]
         case .cellphone:
