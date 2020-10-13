@@ -53,6 +53,7 @@ final class FWComponentView: UICollectionViewCell {
 
     // MARK: Views setup
     private func setUpViews() {
+        setUpContentView()
         setUpHeader()
         setUpFooter()
     }
@@ -68,6 +69,23 @@ final class FWComponentView: UICollectionViewCell {
         errorMessageLabel.style(.error)
     }
 
+    /// Use this function to make all needed visual set up for the cell.
+    private func setUpContentView() {
+        // Add corner radius to the cell
+        contentView.backgroundColor = .fwComponentBackground
+        contentView.layer.cornerRadius = contentView.frame.height * FormSpec.Cell.cornerRadius
+        contentView.clipsToBounds = true
+        // Add shadow drop to the cell
+        contentView.layer.shadowColor = UIColor.fwComponentShadow.cgColor
+        contentView.layer.shadowOffset = CGSize(width: FormSpec.Cell.cellShadowOffSetX,
+                                                height: FormSpec.Cell.cellShadowOffSetY)
+        contentView.layer.shadowRadius = FormSpec.Cell.cellShadowBlur
+        contentView.layer.shadowOpacity = FormSpec.Cell.cellShadowOppacity
+        contentView.layer.masksToBounds = false
+        contentView.layer.shadowPath = UIBezierPath(roundedRect: contentView.bounds,
+                                                    cornerRadius: contentView.layer.cornerRadius).cgPath
+    }
+
     // MARK: Layout
     private func layoutConstraints() {
         layoutSpecsViewConstraints()
@@ -76,7 +94,7 @@ final class FWComponentView: UICollectionViewCell {
     }
 
     private func layoutSpecsViewConstraints() {
-        addSubview(specsView)
+        contentView.addSubview(specsView)
 
         let guide = layoutMarginsGuide
 
@@ -88,9 +106,9 @@ final class FWComponentView: UICollectionViewCell {
     }
 
     private func layoutHeaderConstraints() {
-        addSubview(titleLabel)
-        addSubview(requiredLabel)
-        addSubview(descriptionLabel)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(requiredLabel)
+        contentView.addSubview(descriptionLabel)
 
         let guide = layoutMarginsGuide
 
@@ -117,7 +135,7 @@ final class FWComponentView: UICollectionViewCell {
     }
 
     private func layoutFooterConstraints() {
-        addSubview(errorMessageLabel)
+        contentView.addSubview(errorMessageLabel)
 
         let guide = layoutMarginsGuide
 
