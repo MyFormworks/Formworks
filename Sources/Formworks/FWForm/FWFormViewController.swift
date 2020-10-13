@@ -79,7 +79,8 @@ extension FWFormViewController: UICollectionViewDataSource {
         let stubViewModel = FWComponentViewModel(title: "This is a title",
                                                  description: "This is a description",
                                                  error: "This is an error",
-                                                 required: true)
+                                                 required: true,
+                                                 specs: .plainText)
         cell.configure(with: stubViewModel)
 		
 		return cell

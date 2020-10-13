@@ -12,6 +12,7 @@ struct  FWComponentViewModel {
     let description: String
     let error: String
     let required: Bool
+    let specs: FWComponentTypes
 }
 
 final class FWComponentView: UICollectionViewCell {
@@ -24,7 +25,7 @@ final class FWComponentView: UICollectionViewCell {
     @ManualLayout private var descriptionLabel: FWLabel
     @ManualLayout private var errorMessageLabel: FWLabel
     @ManualLayout private var requiredLabel: FWLabel
-    @ManualLayout private var specsView: FWTextField
+    private var specsView: UIView = UIView(frame: .zero)
 
     private var viewModel: FWComponentViewModel? {
         didSet {
@@ -49,10 +50,28 @@ final class FWComponentView: UICollectionViewCell {
     // MARK: API
     func configure(with viewModel: FWComponentViewModel) {
         self.viewModel = viewModel
+        switch viewModel.specs {
+        case .plainText:
+            specsView = FWLabel(frame: .zero)
+            specsView.translatesAutoresizingMaskIntoConstraints = false
+            if let fwlabel = specsView as? FWLabel {
+                fwlabel.style(.error)
+                fwlabel.text = "This is a label"
+            }
+        case .email:
+            specsView = FWTextField(frame: .zero)
+            specsView.translatesAutoresizingMaskIntoConstraints = false
+            if let fwtextfield = specsView as? FWTextField {
+                fwtextfield.placeholder = "This is a placeholder"
+            }
+        default:
+            break
+        }
     }
 
     // MARK: Views setup
     private func setUpViews() {
+        specsView.translatesAutoresizingMaskIntoConstraints = false
         setUpContentView()
         setUpHeader()
         setUpFooter()
@@ -62,7 +81,6 @@ final class FWComponentView: UICollectionViewCell {
         titleLabel.style(.title)
         requiredLabel.style(.required)
         descriptionLabel.style(.description)
-        specsView.placeholder = "This is a placeholder"
     }
 
     private func setUpFooter() {

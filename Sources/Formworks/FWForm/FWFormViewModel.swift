@@ -32,7 +32,6 @@ final class FWFormViewModel {
             build()
         }
     }
-
 	
 	weak var delegate: FWFormViewModelDelegate?
 	
