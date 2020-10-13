@@ -57,12 +57,14 @@ final class FWComponentView: UICollectionViewCell {
             if let fwlabel = specsView as? FWLabel {
                 fwlabel.style(.error)
                 fwlabel.text = "This is a label"
+                layoutSpecsViewConstraints()
             }
         case .email:
             specsView = FWTextField(frame: .zero)
             specsView.translatesAutoresizingMaskIntoConstraints = false
             if let fwtextfield = specsView as? FWTextField {
                 fwtextfield.placeholder = "This is a placeholder"
+                layoutSpecsViewConstraints()
             }
         default:
             break
