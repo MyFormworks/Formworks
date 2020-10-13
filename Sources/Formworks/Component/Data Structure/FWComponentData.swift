@@ -24,7 +24,7 @@ struct FWComponentData: Decodable {
     ///This variable will appear if the field must be filled.
     var required: Bool
     ///This variable is the type of content that users can add in the fiel.
-    var specs: FWSpecs? = nil
+    var specs: FWSpecs?
 }
 
 extension FWComponentData {
