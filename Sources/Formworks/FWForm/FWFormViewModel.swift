@@ -53,15 +53,11 @@ final class FWFormViewModel {
 	
     /// Builds the `FWComponents` required by the `FWForm`.
 	private func build() {
-        queue.async { [weak self] in
-			guard let self = self else { return }
-            guard let form = self.data else { return }
-            let components = FWComponentFactory.makeComponents(form.components)
-
-            self.viewModels = components.1
-            self.components = components.0
-		}
-		
+        guard let form = self.data else { return }
+        let components = FWComponentFactory.makeComponents(form.components)
+        
+        self.viewModels = components.1
+        self.components = components.0
 	}
 
     private func generate(_ form: Data) {
