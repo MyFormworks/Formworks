@@ -32,7 +32,7 @@ enum FWComponentTypes: String, Decodable {
      */
     static func specs(from container: KeyedDecodingContainer<FWComponentKeys>) throws -> FWSpecs? {
         guard let type = try container.decodeIfPresent(FWComponentTypes.self, forKey: .componentType) else {
-            return try container.decodeIfPresent(FWPlainTextSpecs.self, forKey: .specs)
+            return nil
         }
             switch type {
             case .plainText:
