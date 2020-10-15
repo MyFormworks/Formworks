@@ -69,7 +69,7 @@ class FWBaseComponentView: UICollectionViewCell {
         
         contentView.layer.cornerRadius = contentView.frame.height * FormSpec.Cell.cornerRadius
         contentView.clipsToBounds = true
-        contentView.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        self.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
     }
 
     // MARK: Layout
