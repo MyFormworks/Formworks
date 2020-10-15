@@ -47,7 +47,7 @@ class FWBaseComponentView: UICollectionViewCell {
 
     // MARK: Views setup
     private func setUpViews() {
-        setUpContentView()
+        setUpComponentBackgroundView()
         setUpHeader()
         setUpFooter()
     }
@@ -63,28 +63,39 @@ class FWBaseComponentView: UICollectionViewCell {
     }
 
     /// Use this function to make all needed visual set up for the cell.
-    private func setUpContentView() {
+    private func setUpComponentBackgroundView() {
         // Add corner radius to the cell
-        contentView.backgroundColor = .fwComponentBackground
+        componentBackgroundView.backgroundColor = .fwComponentBackground
         
-        contentView.layer.cornerRadius = contentView.frame.height * FormSpec.Cell.cornerRadius
-        contentView.clipsToBounds = true
-        self.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        componentBackgroundView.layer.cornerRadius = componentBackgroundView.frame.height * FormSpec.Cell.cornerRadius
+        componentBackgroundView.clipsToBounds = true
     }
 
     // MARK: Layout
     private func layoutConstraints() {
+        layoutComponentBackgroundViewConstraints()
         layoutHeaderConstraints()
         layoutSpecsViewConstraints()
         layoutFooterConstraints()
     }
     
+    private func layoutComponentBackgroundViewConstraints() {
+        contentView.addSubview(componentBackgroundView)
+        
+        NSLayoutConstraint.activate([
+            componentBackgroundView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            componentBackgroundView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            componentBackgroundView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.8),
+            componentBackgroundView.heightAnchor.constraint(equalTo: contentView.heightAnchor)
+        ])
+    }
+    
     private func layoutHeaderConstraints() {
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(requiredLabel)
-        contentView.addSubview(descriptionLabel)
+        componentBackgroundView.addSubview(titleLabel)
+        componentBackgroundView.addSubview(requiredLabel)
+        componentBackgroundView.addSubview(descriptionLabel)
 
-        let guide = contentView.layoutMarginsGuide
+        let guide = componentBackgroundView.layoutMarginsGuide
 
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: guide.topAnchor),
@@ -104,9 +115,9 @@ class FWBaseComponentView: UICollectionViewCell {
     }
 
     private func layoutSpecsViewConstraints() {
-        contentView.addSubview(specsView)
+        componentBackgroundView.addSubview(specsView)
 
-        let guide = contentView.layoutMarginsGuide
+        let guide = componentBackgroundView.layoutMarginsGuide
         
         NSLayoutConstraint.activate([
             specsView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10),
@@ -118,9 +129,9 @@ class FWBaseComponentView: UICollectionViewCell {
 
 
     private func layoutFooterConstraints() {
-        contentView.addSubview(errorMessageLabel)
+        componentBackgroundView.addSubview(errorMessageLabel)
 
-        let guide = contentView.layoutMarginsGuide
+        let guide = componentBackgroundView.layoutMarginsGuide
 
         NSLayoutConstraint.activate([
             errorMessageLabel.topAnchor.constraint(equalTo: specsView.bottomAnchor, constant: 10),
