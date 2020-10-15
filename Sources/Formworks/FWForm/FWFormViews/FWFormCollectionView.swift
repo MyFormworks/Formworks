@@ -42,6 +42,7 @@ final class FWFormCollectionView: UICollectionView {
         let groupLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(FormSpec.groupFractionalWidth),
                                                      heightDimension: .estimated(200))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupLayoutSize, subitems: [item])
+        group.
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 20

@@ -13,6 +13,7 @@ class FWBaseComponentView: UICollectionViewCell {
         return String(describing: self)
     }
 
+    @ManualLayout private var componentBackgroundView: UIView
     @ManualLayout private var titleLabel: FWLabel
     @ManualLayout private var descriptionLabel: FWLabel
     @ManualLayout private var errorMessageLabel: FWLabel
@@ -68,6 +69,7 @@ class FWBaseComponentView: UICollectionViewCell {
         
         contentView.layer.cornerRadius = contentView.frame.height * FormSpec.Cell.cornerRadius
         contentView.clipsToBounds = true
+        contentView.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
     }
 
     // MARK: Layout
