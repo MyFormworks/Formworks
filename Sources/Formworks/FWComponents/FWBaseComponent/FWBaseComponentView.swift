@@ -25,7 +25,6 @@ class FWBaseComponentView: UICollectionViewCell {
             descriptionLabel.text = viewModel?.description
             errorMessageLabel.text = viewModel?.errorMessage
             requiredLabel.text = viewModel?.required ?? true ? "Required" : ""
-            layoutConstraints()
         }
     }
 
@@ -33,7 +32,7 @@ class FWBaseComponentView: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpViews()
-//        layoutConstraints()
+        layoutConstraints()
     }
 
     required init?(coder: NSCoder) {
@@ -119,7 +118,7 @@ class FWBaseComponentView: UICollectionViewCell {
             titleLabel.widthAnchor.constraint(equalTo: guide.widthAnchor,
                                               multiplier: 0.8),
             titleLabel.heightAnchor.constraint(equalToConstant: 50),
-
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
             requiredLabel.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
             requiredLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor,
                                                   constant: -20),
