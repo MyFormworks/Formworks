@@ -14,9 +14,8 @@ final class FWSingleLineComponentView: FWBaseComponentView {
     
     override func configure(with viewModel: FWBaseComponentViewModel) {
         if viewModel is FWSingleLineComponentViewModel {
-            self.viewModel = viewModel
             layoutTextField()
-            layoutIfNeeded()
+            self.viewModel = viewModel
         }
     }
     
