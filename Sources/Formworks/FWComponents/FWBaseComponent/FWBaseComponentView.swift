@@ -25,15 +25,15 @@ class FWBaseComponentView: UICollectionViewCell {
             descriptionLabel.text = viewModel?.description
             errorMessageLabel.text = viewModel?.errorMessage
             requiredLabel.text = viewModel?.required ?? true ? "Required" : ""
+            layoutConstraints()
         }
     }
 
     // MARK: Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layoutConstraints()
         setUpViews()
-        
+//        layoutConstraints()
     }
 
     required init?(coder: NSCoder) {
