@@ -1,5 +1,5 @@
 //
-//  FWComponentView.swift
+//  FWBaseComponentView.swift
 //  
 //
 //  Created by Artur Carneiro on 13/10/20.
@@ -7,15 +7,7 @@
 
 import UIKit
 
-struct  FWComponentViewModel {
-    let title: String
-    let description: String
-    let error: String
-    let required: Bool
-    let specs: FWComponentTypes
-}
-
-final class FWComponentView: UICollectionViewCell {
+class FWBaseComponentView: UICollectionViewCell {
     // MARK: Properties
     static var identifier: String {
         return String(describing: self)
@@ -25,13 +17,13 @@ final class FWComponentView: UICollectionViewCell {
     @ManualLayout private var descriptionLabel: FWLabel
     @ManualLayout private var errorMessageLabel: FWLabel
     @ManualLayout private var requiredLabel: FWLabel
-    private var specsView: UIView = UIView(frame: .zero)
+    @ManualLayout var specsView: UIView
 
-    private var viewModel: FWComponentViewModel? {
+    var viewModel: FWBaseComponentViewModel? {
         didSet {
             titleLabel.text = viewModel?.title
             descriptionLabel.text = viewModel?.description
-            errorMessageLabel.text = viewModel?.error
+            errorMessageLabel.text = viewModel?.errorMessage
             requiredLabel.text = viewModel?.required ?? true ? "Required" : ""
         }
     }
@@ -48,32 +40,12 @@ final class FWComponentView: UICollectionViewCell {
     }
 
     // MARK: API
-    func configure(with viewModel: FWComponentViewModel) {
+    func configure(with viewModel: FWBaseComponentViewModel) {
         self.viewModel = viewModel
-        switch viewModel.specs {
-        case .plainText:
-            specsView = FWLabel(frame: .zero)
-            specsView.translatesAutoresizingMaskIntoConstraints = false
-            if let fwlabel = specsView as? FWLabel {
-                fwlabel.style(.error)
-                fwlabel.text = "This is a label"
-                layoutSpecsViewConstraints()
-            }
-        case .email:
-            specsView = FWTextField(frame: .zero)
-            specsView.translatesAutoresizingMaskIntoConstraints = false
-            if let fwtextfield = specsView as? FWTextField {
-                fwtextfield.placeholder = "This is a placeholder"
-                layoutSpecsViewConstraints()
-            }
-        default:
-            break
-        }
     }
 
     // MARK: Views setup
     private func setUpViews() {
-        specsView.translatesAutoresizingMaskIntoConstraints = false
         setUpContentView()
         setUpHeader()
         setUpFooter()

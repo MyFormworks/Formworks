@@ -16,22 +16,10 @@ protocol FWFormViewModelDelegate: AnyObject {
 /// A representation of the `FWForm`'s `ViewModel`.
 final class FWFormViewModel {
 	
-    private var viewModels: [[FWSingleLineViewModel]] = [[FWSingleLineViewModel]]()
-
-    private var components: [[FWSingleLineComponent]] = [[FWSingleLineComponent]]() {
-        didSet {
-            delegate?.didReceiveComponents()
-        }
-    }
+    private var viewModels: [[FWBaseComponentViewModel]] = [[FWBaseComponentViewModel]]()
 	
     /// Should **only** be used to build `FWComponents`.
 	private let queue: DispatchQueue = DispatchQueue(label: "components-init")
-
-    private var data: FWFormData? {
-        didSet {
-            build()
-        }
-    }
 	
 	weak var delegate: FWFormViewModelDelegate?
 	
@@ -46,18 +34,9 @@ final class FWFormViewModel {
 		return section.count
 	}
 
-    func componentAt(index: IndexPath) -> FWSingleLineComponent {
-        return components[index.section][index.row]
+    func viewModelAt(index: IndexPath) -> FWBaseComponentViewModel {
+        return viewModels[index.section][index.row]
     }
-	
-    /// Builds the `FWComponents` required by the `FWForm`.
-	private func build() {
-        guard let form = self.data else { return }
-        let components = FWComponentFactory.makeComponents(form.components)
-        
-        self.viewModels = components.1
-        self.components = components.0
-	}
 
     private func generate(_ form: Data) {
         let fwjson = FWJSON(data: form)
@@ -65,7 +44,15 @@ final class FWFormViewModel {
             guard let self = self else { return }
             switch result {
             case .success(let formData):
-                self.data = formData
+                var viewModels: [FWBaseComponentViewModel] = []
+                for component in formData.components {
+                    let viewModel = FWSingleLineComponentViewModel(title: component.title,
+                                                                   description: component.subtitle ?? "",
+                                                                   errorMessage: component.errorMessage ?? "",
+                                                                   required: component.required)
+                    viewModels.append(viewModel)
+                }
+                self.viewModels.append(viewModels)
             case .failure(let error):
                 // TODO: Handle user facing error
                 print(error.localizedDescription)
