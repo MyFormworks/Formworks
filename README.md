@@ -51,17 +51,15 @@ Component | JSON key
 Single Line | "single_line"
 Email | "email"
 Numerical | "numerical"
-Telephone Number | "phone_number"
-Cellphone Number | "cellphone_number"
+Phone Number | "phone_number"
 
 ### Validating Components
 Our text fields can be validated using regex rules.
 To add a validation to your form component, pass a regex rule in the component's specification section in the JSON file.
-Components like "Email", "Telephone Number" and "Cellphone Number" already have their own validations, we accentuate that regex rules for Cellphone and Telephone Numbers can be changed according developers' requeriments.
+Components like "Email", "Phone Number" already have their own validations, we accentuate that regex rules for Phone Number can be changed according developers' requeriments.
 Component | Regex Rule
 ------------ | -------------
 Email | "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-Telephone Number | ""
-Cellphone Number | ""
+Phone Number | "(?:^\([0]?[1-9]{2}\)|^[0]?[1-9]{2}[\.-\s]?)[9]?[1-9]\d{3}[\.-\s]?\d{4}$"
 
 
