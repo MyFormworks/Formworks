@@ -40,7 +40,7 @@ final class FWFormCollectionView: UICollectionView {
                                                     heightDimension: .fractionalHeight(FormSpec.itemFractionalHeight))
         let item = NSCollectionLayoutItem(layoutSize: itemLayoutSize)
         let groupLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(FormSpec.groupFractionalWidth),
-                                                     heightDimension: .estimated(100))
+                                                     heightDimension: .estimated(300))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupLayoutSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(top: FormSpec.groupSpacingTop,
                                                       leading: FormSpec.groupSpacingLeading,
