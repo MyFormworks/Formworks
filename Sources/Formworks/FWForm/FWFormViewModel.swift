@@ -53,6 +53,7 @@ final class FWFormViewModel {
                     viewModels.append(viewModel)
                 }
                 self.viewModels.append(viewModels)
+                self.delegate?.didReceiveComponents()
             case .failure(let error):
                 // TODO: Handle user facing error
                 print(error.localizedDescription)
