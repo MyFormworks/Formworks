@@ -26,7 +26,11 @@ final class FWSingleLineComponentView: FWBaseComponentView {
             textField.widthAnchor.constraint(equalTo: specsView.widthAnchor),
             textField.centerXAnchor.constraint(equalTo: specsView.centerXAnchor),
             textField.centerYAnchor.constraint(equalTo: specsView.centerYAnchor),
-            textField.heightAnchor.constraint(equalToConstant: 50)
+            textField.heightAnchor.constraint(equalToConstant: ComponentSpec.SingleLine.textFieldHeight)
         ])
+    }
+    
+    private func setUpTextField() {
+        textField.addTarget(<#T##target: Any?##Any?#>, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
     }
 }

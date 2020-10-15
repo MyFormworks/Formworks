@@ -15,17 +15,14 @@ enum FormSpec {
     // MARK: UICollectionViewCompositionalLayout
     // Item layout
     static let itemFractionalWidth: CGFloat = 1
-    static let itemFractionalHeight: CGFloat = 1
+    static let itemEstimatedHeight: CGFloat = 200
 
     // Group layout
     static let groupFractionalWidth: CGFloat = 1
-    static let groupFractionalHeight: CGFloat = 0.25
+    static let groupEstimatedHeight: CGFloat = 200
     
     // Group spacing
-    static let groupSpacingTop: CGFloat = 20
-    static let groupSpacingLeading: CGFloat = 20
-    static let groupSpacingBottom: CGFloat = 20
-    static let groupSpacingTrailing: CGFloat = 20
+    static let groupSpacing: CGFloat = 20
     
     /// Visual aspects of the CollectionViewCell,  such as adding corner radius.
     enum Cell {

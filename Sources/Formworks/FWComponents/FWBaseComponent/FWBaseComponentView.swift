@@ -67,7 +67,7 @@ class FWBaseComponentView: UICollectionViewCell {
         // Add corner radius to the cell
         componentBackgroundView.backgroundColor = .fwComponentBackground
         
-        componentBackgroundView.layer.cornerRadius = 10
+        componentBackgroundView.layer.cornerRadius = ComponentSpec.componentBackgroundCornerRadius
         componentBackgroundView.clipsToBounds = true
     }
 
@@ -85,7 +85,8 @@ class FWBaseComponentView: UICollectionViewCell {
         NSLayoutConstraint.activate([
             componentBackgroundView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             componentBackgroundView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            componentBackgroundView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
+            componentBackgroundView.widthAnchor.constraint(equalTo: contentView.widthAnchor,
+                                                           multiplier: ComponentSpec.componentBackgroundWidthMultiplier),
             componentBackgroundView.heightAnchor.constraint(equalTo: contentView.heightAnchor)
         ])
     }
@@ -100,15 +101,16 @@ class FWBaseComponentView: UICollectionViewCell {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: guide.topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
-            titleLabel.widthAnchor.constraint(equalTo: guide.widthAnchor, multiplier: 0.75),
-            titleLabel.heightAnchor.constraint(equalToConstant: 50),
+            titleLabel.widthAnchor.constraint(equalTo: guide.widthAnchor,
+                                              multiplier: ComponentSpec.titleLabelWidthMultiplier),
+            titleLabel.heightAnchor.constraint(equalToConstant: ComponentSpec.titleLabelHeight),
             
             requiredLabel.topAnchor.constraint(equalTo: guide.topAnchor),
             requiredLabel.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
-            requiredLabel.widthAnchor.constraint(equalTo: guide.widthAnchor, multiplier: 0.25),
-            requiredLabel.heightAnchor.constraint(equalToConstant: 50),
+            requiredLabel.widthAnchor.constraint(equalTo: guide.widthAnchor, multiplier: ComponentSpec.requiredLabelWidthMultiplier),
+            requiredLabel.heightAnchor.constraint(equalToConstant: ComponentSpec.requiredLabelHeight),
             
-            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: ComponentSpec.descriptionLabelTopConstant),
             descriptionLabel.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
             descriptionLabel.widthAnchor.constraint(equalTo: guide.widthAnchor)
         ])
@@ -120,10 +122,10 @@ class FWBaseComponentView: UICollectionViewCell {
         let guide = componentBackgroundView.layoutMarginsGuide
         
         NSLayoutConstraint.activate([
-            specsView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10),
+            specsView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: ComponentSpec.specsViewTopConstant),
             specsView.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
             specsView.widthAnchor.constraint(equalTo: guide.widthAnchor),
-            specsView.heightAnchor.constraint(equalToConstant: 50)
+            specsView.heightAnchor.constraint(equalToConstant: ComponentSpec.specsViewHeightConstant)
         ])
     }
 
@@ -134,7 +136,7 @@ class FWBaseComponentView: UICollectionViewCell {
         let guide = componentBackgroundView.layoutMarginsGuide
 
         NSLayoutConstraint.activate([
-            errorMessageLabel.topAnchor.constraint(equalTo: specsView.bottomAnchor, constant: 10),
+            errorMessageLabel.topAnchor.constraint(equalTo: specsView.bottomAnchor, constant: ComponentSpec.errorMessageLabelTopConstant),
             errorMessageLabel.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
             errorMessageLabel.widthAnchor.constraint(equalTo: guide.widthAnchor),
             errorMessageLabel.bottomAnchor.constraint(equalTo: guide.bottomAnchor)

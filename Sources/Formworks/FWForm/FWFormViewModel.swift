@@ -49,7 +49,8 @@ final class FWFormViewModel {
                     let viewModel = FWSingleLineComponentViewModel(title: component.title,
                                                                    description: component.subtitle ?? "",
                                                                    errorMessage: component.errorMessage ?? "",
-                                                                   required: component.required)
+                                                                   required: component.required,
+                                                                   validator: .max32)
                     viewModels.append(viewModel)
                 }
                 self.viewModels.append(viewModels)

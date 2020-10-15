@@ -27,4 +27,15 @@ extension FWValidator {
             return ["[A-Za-z0-9 !\"#$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~]{0,32}"]
         }
     }
+    
+    func validate(_ content: String) -> Bool {
+        let regexs = self.regex()
+        for regex in regexs {
+            let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
+            if predicate.evaluate(with: content) {
+                return true
+            }
+        }
+        return false
+    }
 }

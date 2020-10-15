@@ -9,5 +9,9 @@ import Foundation
 
 /// The `FWSingleLine`'s  `ViewModel`.
 final class FWSingleLineComponentViewModel: FWBaseComponentViewModel {
-    
+    var content: String = "" {
+        didSet {
+            isValid = validator.validate(content)
+        }
+    }
 }

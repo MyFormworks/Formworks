@@ -37,14 +37,14 @@ final class FWFormCollectionView: UICollectionView {
     private static func setUpCollectionViewLayout() -> UICollectionViewCompositionalLayout {
         
         let itemLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(FormSpec.itemFractionalWidth),
-                                                    heightDimension: .estimated(200))
+                                                    heightDimension: .estimated(FormSpec.itemEstimatedHeight))
         let item = NSCollectionLayoutItem(layoutSize: itemLayoutSize)
         let groupLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(FormSpec.groupFractionalWidth),
-                                                     heightDimension: .estimated(200))
+                                                     heightDimension: .estimated(FormSpec.groupEstimatedHeight))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupLayoutSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 20
+        section.interGroupSpacing = FormSpec.groupSpacing
         
         return UICollectionViewCompositionalLayout(section: section)
     }
