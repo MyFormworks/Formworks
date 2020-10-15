@@ -16,6 +16,7 @@ final class FWSingleLineComponentView: FWBaseComponentView {
         if viewModel is FWSingleLineComponentViewModel {
             self.viewModel = viewModel
             layoutTextField()
+            layoutIfNeeded()
         }
     }
     
