@@ -37,10 +37,10 @@ final class FWFormCollectionView: UICollectionView {
     private static func setUpCollectionViewLayout() -> UICollectionViewCompositionalLayout {
         
         let itemLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(FormSpec.itemFractionalWidth),
-                                                    heightDimension: .fractionalHeight(FormSpec.itemFractionalHeight))
+                                                    heightDimension: .estimated(200))
         let item = NSCollectionLayoutItem(layoutSize: itemLayoutSize)
         let groupLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(FormSpec.groupFractionalWidth),
-                                                     heightDimension: .fractionalHeight(FormSpec.groupFractionalHeight))
+                                                     heightDimension: .estimated(200))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupLayoutSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(top: FormSpec.groupSpacingTop,
                                                       leading: FormSpec.groupSpacingLeading,
