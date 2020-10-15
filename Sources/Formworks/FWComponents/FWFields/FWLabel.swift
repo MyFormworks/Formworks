@@ -65,6 +65,6 @@ final class FWLabel: UILabel {
     private func styleError() {
         font = .preferredFont(forTextStyle: .subheadline)
         textColor = .systemRed
-        numberOfLines = 3
+        numberOfLines = 0
     }
 }

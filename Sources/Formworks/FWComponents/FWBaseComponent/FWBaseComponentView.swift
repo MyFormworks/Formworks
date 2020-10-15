@@ -68,15 +68,6 @@ class FWBaseComponentView: UICollectionViewCell {
         
         contentView.layer.cornerRadius = contentView.frame.height * FormSpec.Cell.cornerRadius
         contentView.clipsToBounds = true
-        // Add shadow drop to the cell
-        self.layer.shadowColor = UIColor.fwComponentShadow.cgColor
-        self.layer.shadowOffset = CGSize(width: FormSpec.Cell.cellShadowOffSetX,
-                                                height: FormSpec.Cell.cellShadowOffSetY)
-        self.layer.shadowRadius = FormSpec.Cell.cellShadowBlur
-        self.layer.shadowOpacity = FormSpec.Cell.cellShadowOppacity
-        self.layer.masksToBounds = false
-        self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds,
-                                                    cornerRadius: self.layer.cornerRadius).cgPath
     }
 
     // MARK: Layout

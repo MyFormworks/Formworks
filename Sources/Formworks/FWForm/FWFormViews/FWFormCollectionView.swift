@@ -45,6 +45,7 @@ final class FWFormCollectionView: UICollectionView {
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 20
+        
         return UICollectionViewCompositionalLayout(section: section)
     }
 }
