@@ -61,7 +61,7 @@ Components like "Email", "Telephone Number" and "Cellphone Number" already have 
 Component | Regex Rule
 ------------ | -------------
 Email | "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-Telephone Number | "+[0-9]{12}"
-Cellphone Number | "+[0-9]{13}"
+Telephone Number | ""
+Cellphone Number | ""
 
 
