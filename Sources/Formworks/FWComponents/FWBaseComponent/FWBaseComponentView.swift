@@ -93,8 +93,7 @@ class FWBaseComponentView: UICollectionViewCell {
         NSLayoutConstraint.activate([
             specsView.centerYAnchor.constraint(equalTo: guide.centerYAnchor),
             specsView.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
-            specsView.widthAnchor.constraint(equalTo: guide.widthAnchor),
-            specsView.heightAnchor.constraint(equalToConstant: 50)
+            specsView.widthAnchor.constraint(equalTo: guide.widthAnchor)
         ])
     }
 
