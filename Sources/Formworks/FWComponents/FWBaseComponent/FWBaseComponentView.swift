@@ -27,7 +27,9 @@ class FWBaseComponentView: UICollectionViewCell {
             requiredLabel.text = viewModel?.required ?? true ? "Required" : ""
             let constraints = contentView.constraints
             guard let specsTopAnchor = constraints.first(where: { $0.identifier == "specs-top" }),
-                  let errorTopAnchor = constraints.first(where: { $0.identifier == "error-top" }) else { return }
+                  let errorTopAnchor = constraints.first(where: { $0.identifier == "error-top" }) else {
+                print("did not find constraints")
+                return }
             NSLayoutConstraint.deactivate([specsTopAnchor, errorTopAnchor])
             NSLayoutConstraint.activate([specsTopAnchor, errorTopAnchor])
         }
