@@ -64,8 +64,7 @@ class FWBaseComponentView: UICollectionViewCell {
     /// Use this function to make all needed visual set up for the cell.
     private func setUpContentView() {
         // Add corner radius to the cell
-//        contentView.backgroundColor = .fwComponentBackground
-        contentView.backgroundColor = .blue
+        contentView.backgroundColor = .fwComponentBackground
         
         contentView.layer.cornerRadius = contentView.frame.height * FormSpec.Cell.cornerRadius
         contentView.clipsToBounds = true
@@ -82,23 +81,11 @@ class FWBaseComponentView: UICollectionViewCell {
 
     // MARK: Layout
     private func layoutConstraints() {
-        layoutSpecsViewConstraints()
         layoutHeaderConstraints()
+        layoutSpecsViewConstraints()
         layoutFooterConstraints()
     }
-
-    private func layoutSpecsViewConstraints() {
-        contentView.addSubview(specsView)
-
-        let guide = contentView.layoutMarginsGuide
-
-        NSLayoutConstraint.activate([
-            specsView.centerYAnchor.constraint(equalTo: guide.centerYAnchor),
-            specsView.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
-            specsView.widthAnchor.constraint(equalTo: guide.widthAnchor)
-        ])
-    }
-
+    
     private func layoutHeaderConstraints() {
         contentView.addSubview(titleLabel)
         contentView.addSubview(requiredLabel)
@@ -107,26 +94,34 @@ class FWBaseComponentView: UICollectionViewCell {
         let guide = contentView.layoutMarginsGuide
 
         NSLayoutConstraint.activate([
-            descriptionLabel.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
-            descriptionLabel.bottomAnchor.constraint(equalTo: specsView.topAnchor,
-                                                     constant: -20),
-            descriptionLabel.widthAnchor.constraint(equalTo: guide.widthAnchor),
-
+            titleLabel.topAnchor.constraint(equalTo: guide.topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor,
-                                               constant: -20),
-            titleLabel.widthAnchor.constraint(equalTo: guide.widthAnchor,
-                                              multiplier: 0.8),
+            titleLabel.widthAnchor.constraint(equalTo: guide.widthAnchor, multiplier: 0.75),
             titleLabel.heightAnchor.constraint(equalToConstant: 50),
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            
+            requiredLabel.topAnchor.constraint(equalTo: guide.topAnchor),
             requiredLabel.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
-            requiredLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor,
-                                                  constant: -20),
-            requiredLabel.widthAnchor.constraint(equalTo: guide.widthAnchor,
-                                                 multiplier: 0.2),
-            requiredLabel.heightAnchor.constraint(equalToConstant: 50)
+            requiredLabel.widthAnchor.constraint(equalTo: guide.widthAnchor, multiplier: 0.25),
+            requiredLabel.heightAnchor.constraint(equalToConstant: 50),
+            
+            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            descriptionLabel.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
+            descriptionLabel.widthAnchor.constraint(equalTo: guide.widthAnchor)
         ])
     }
+
+    private func layoutSpecsViewConstraints() {
+        contentView.addSubview(specsView)
+
+        let guide = contentView.layoutMarginsGuide
+
+        NSLayoutConstraint.activate([
+            specsView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10),
+            specsView.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
+            specsView.widthAnchor.constraint(equalTo: guide.widthAnchor)
+        ])
+    }
+
 
     private func layoutFooterConstraints() {
         contentView.addSubview(errorMessageLabel)
@@ -134,10 +129,9 @@ class FWBaseComponentView: UICollectionViewCell {
         let guide = contentView.layoutMarginsGuide
 
         NSLayoutConstraint.activate([
-            errorMessageLabel.topAnchor.constraint(equalTo: specsView.bottomAnchor,
-                                                   constant: 20),
-            errorMessageLabel.widthAnchor.constraint(equalTo: guide.widthAnchor),
-            errorMessageLabel.centerXAnchor.constraint(equalTo: guide.centerXAnchor)
+            errorMessageLabel.topAnchor.constraint(equalTo: specsView.bottomAnchor, constant: 10),
+            errorMessageLabel.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
+            errorMessageLabel.widthAnchor.constraint(equalTo: guide.widthAnchor)
         ])
     }
 }
