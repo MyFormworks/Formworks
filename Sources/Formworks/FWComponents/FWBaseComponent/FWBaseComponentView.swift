@@ -88,12 +88,13 @@ class FWBaseComponentView: UICollectionViewCell {
     private func layoutSpecsViewConstraints() {
         contentView.addSubview(specsView)
 
-        let guide = layoutMarginsGuide
+        let guide = contentView.layoutMarginsGuide
 
         NSLayoutConstraint.activate([
             specsView.centerYAnchor.constraint(equalTo: guide.centerYAnchor),
             specsView.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
-            specsView.widthAnchor.constraint(equalTo: guide.widthAnchor)
+            specsView.widthAnchor.constraint(equalTo: guide.widthAnchor),
+            specsView.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 
@@ -102,7 +103,7 @@ class FWBaseComponentView: UICollectionViewCell {
         contentView.addSubview(requiredLabel)
         contentView.addSubview(descriptionLabel)
 
-        let guide = layoutMarginsGuide
+        let guide = contentView.layoutMarginsGuide
 
         NSLayoutConstraint.activate([
             descriptionLabel.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
@@ -129,7 +130,7 @@ class FWBaseComponentView: UICollectionViewCell {
     private func layoutFooterConstraints() {
         contentView.addSubview(errorMessageLabel)
 
-        let guide = layoutMarginsGuide
+        let guide = contentView.layoutMarginsGuide
 
         NSLayoutConstraint.activate([
             errorMessageLabel.topAnchor.constraint(equalTo: specsView.bottomAnchor,
