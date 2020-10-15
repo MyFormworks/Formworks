@@ -25,13 +25,6 @@ class FWBaseComponentView: UICollectionViewCell {
             descriptionLabel.text = viewModel?.description
             errorMessageLabel.text = viewModel?.errorMessage
             requiredLabel.text = viewModel?.required ?? true ? "Required" : ""
-            let constraints = contentView.constraints
-            guard let specsTopAnchor = constraints.first(where: { $0.identifier == "specs-top" }),
-                  let errorTopAnchor = constraints.first(where: { $0.identifier == "error-top" }) else {
-                print("did not find constraints")
-                return }
-            NSLayoutConstraint.deactivate([specsTopAnchor, errorTopAnchor])
-            NSLayoutConstraint.activate([specsTopAnchor, errorTopAnchor])
         }
     }
 
@@ -122,12 +115,11 @@ class FWBaseComponentView: UICollectionViewCell {
 
         let guide = contentView.layoutMarginsGuide
         
-        let topAnchor = specsView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10)
-        topAnchor.identifier = "specs-top"
         NSLayoutConstraint.activate([
-            topAnchor,
+            specsView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10),
             specsView.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
-            specsView.widthAnchor.constraint(equalTo: guide.widthAnchor)
+            specsView.widthAnchor.constraint(equalTo: guide.widthAnchor),
+            specsView.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 
@@ -136,12 +128,9 @@ class FWBaseComponentView: UICollectionViewCell {
         contentView.addSubview(errorMessageLabel)
 
         let guide = contentView.layoutMarginsGuide
-        
-        let topAnchor = errorMessageLabel.topAnchor.constraint(equalTo: specsView.bottomAnchor, constant: 10)
-        topAnchor.identifier = "error-top"
 
         NSLayoutConstraint.activate([
-            topAnchor,
+            errorMessageLabel.topAnchor.constraint(equalTo: specsView.bottomAnchor, constant: 10),
             errorMessageLabel.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
             errorMessageLabel.widthAnchor.constraint(equalTo: guide.widthAnchor)
         ])
