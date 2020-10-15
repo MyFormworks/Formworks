@@ -46,8 +46,7 @@ class FWBaseComponentView: UICollectionViewCell {
 
     // MARK: Views setup
     private func setUpViews() {
-//        setUpContentView()
-        contentView.backgroundColor = .fwFormBackground
+        setUpContentView()
         setUpHeader()
         setUpFooter()
     }
@@ -67,17 +66,17 @@ class FWBaseComponentView: UICollectionViewCell {
         // Add corner radius to the cell
         contentView.backgroundColor = .fwComponentBackground
         
-        contentView.layer.cornerRadius = contentView.frame.height * FormSpec.Cell.cornerRadius
-        contentView.clipsToBounds = true
+        self.layer.cornerRadius = self.frame.height * FormSpec.Cell.cornerRadius
+        self.clipsToBounds = true
         // Add shadow drop to the cell
-        contentView.layer.shadowColor = UIColor.fwComponentShadow.cgColor
-        contentView.layer.shadowOffset = CGSize(width: FormSpec.Cell.cellShadowOffSetX,
+        self.layer.shadowColor = UIColor.fwComponentShadow.cgColor
+        self.layer.shadowOffset = CGSize(width: FormSpec.Cell.cellShadowOffSetX,
                                                 height: FormSpec.Cell.cellShadowOffSetY)
-        contentView.layer.shadowRadius = FormSpec.Cell.cellShadowBlur
-        contentView.layer.shadowOpacity = FormSpec.Cell.cellShadowOppacity
-        contentView.layer.masksToBounds = false
-        contentView.layer.shadowPath = UIBezierPath(roundedRect: contentView.bounds,
-                                                    cornerRadius: contentView.layer.cornerRadius).cgPath
+        self.layer.shadowRadius = FormSpec.Cell.cellShadowBlur
+        self.layer.shadowOpacity = FormSpec.Cell.cellShadowOppacity
+        self.layer.masksToBounds = false
+        self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds,
+                                                    cornerRadius: self.layer.cornerRadius).cgPath
     }
 
     // MARK: Layout
@@ -133,7 +132,8 @@ class FWBaseComponentView: UICollectionViewCell {
         NSLayoutConstraint.activate([
             errorMessageLabel.topAnchor.constraint(equalTo: specsView.bottomAnchor, constant: 10),
             errorMessageLabel.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
-            errorMessageLabel.widthAnchor.constraint(equalTo: guide.widthAnchor)
+            errorMessageLabel.widthAnchor.constraint(equalTo: guide.widthAnchor),
+            errorMessageLabel.bottomAnchor.constraint(equalTo: guide.bottomAnchor)
         ])
     }
 }
