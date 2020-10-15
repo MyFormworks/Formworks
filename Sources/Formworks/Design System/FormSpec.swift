@@ -22,10 +22,10 @@ enum FormSpec {
     static let groupFractionalHeight: CGFloat = 0.25
     
     // Group spacing
-    static let groupSpacingTop: CGFloat = 16
-    static let groupSpacingLeading: CGFloat = 16
-    static let groupSpacingBottom: CGFloat = 16
-    static let groupSpacingTrailing: CGFloat = 16
+    static let groupSpacingTop: CGFloat = 20
+    static let groupSpacingLeading: CGFloat = 20
+    static let groupSpacingBottom: CGFloat = 20
+    static let groupSpacingTrailing: CGFloat = 20
     
     /// Visual aspects of the CollectionViewCell,  such as adding corner radius.
     enum Cell {
