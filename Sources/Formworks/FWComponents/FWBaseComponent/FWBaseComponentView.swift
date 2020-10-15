@@ -46,7 +46,8 @@ class FWBaseComponentView: UICollectionViewCell {
 
     // MARK: Views setup
     private func setUpViews() {
-        setUpContentView()
+//        setUpContentView()
+        contentView.backgroundColor = .fwFormBackground
         setUpHeader()
         setUpFooter()
     }
