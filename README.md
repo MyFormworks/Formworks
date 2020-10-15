@@ -1,5 +1,5 @@
 # Formworks
-[plataform https://img.shields.io/static/v1?label=platform&message=iOS&color=orange]
+[![Build Status]https://img.shields.io/static/v1?label=platform&message=iOS&color=orange]
 ## Description
 Formworks is a framework for building forms from JSON files.
 
