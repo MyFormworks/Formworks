@@ -31,8 +31,9 @@ class FWBaseComponentView: UICollectionViewCell {
     // MARK: Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setUpViews()
         layoutConstraints()
+        setUpViews()
+        
     }
 
     required init?(coder: NSCoder) {
