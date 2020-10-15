@@ -65,6 +65,7 @@ class FWBaseComponentView: UICollectionViewCell {
     private func setUpContentView() {
         // Add corner radius to the cell
         contentView.backgroundColor = .fwComponentBackground
+        
         contentView.layer.cornerRadius = contentView.frame.height * FormSpec.Cell.cornerRadius
         contentView.clipsToBounds = true
         // Add shadow drop to the cell
