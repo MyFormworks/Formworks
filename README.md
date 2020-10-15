@@ -12,11 +12,11 @@ Formworks is a framework for building forms from JSON files.
 - [x] Every field has its own type validation.
 
 ## Requirements
-- Swift Language
+- Swift 5.0 or later 
 - iOS 13.0 or later
 - Xcode 10.0 or later
 - Swift Package Manager 
-- UIKit Development Framework
+- UIKit
 
 ## Adding Formworks to your project
 - Create a new Xcode Project
@@ -28,7 +28,7 @@ Formworks is a framework for building forms from JSON files.
 - Finish
 
 ## Using Formworks
-### Importing Formwroks to your project
+### Importing Formworks to your project
 ```swift
 import Formworks
 ```
