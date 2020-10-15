@@ -67,7 +67,7 @@ class FWBaseComponentView: UICollectionViewCell {
         // Add corner radius to the cell
         componentBackgroundView.backgroundColor = .fwComponentBackground
         
-        componentBackgroundView.layer.cornerRadius = componentBackgroundView.frame.height * FormSpec.Cell.cornerRadius
+        componentBackgroundView.layer.cornerRadius = 10
         componentBackgroundView.clipsToBounds = true
     }
 
