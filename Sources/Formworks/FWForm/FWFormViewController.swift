@@ -73,7 +73,7 @@ extension FWFormViewController: UICollectionViewDataSource {
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FWBaseComponentView.identifier, for: indexPath) as? FWBaseComponentView else {
+		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FWSingleLineComponentView.identifier, for: indexPath) as? FWSingleLineComponentView else {
 			return UICollectionViewCell()
 		}
         cell.configure(with: viewModel.viewModelAt(index: indexPath))
