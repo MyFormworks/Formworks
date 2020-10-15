@@ -1,6 +1,6 @@
 # Formworks
 ![Platform](https://img.shields.io/static/v1?label=platform&message=iOS&color=orange)
-![Dependency](https://img.shields.io/static/v1?label=dependency&message=Swift Package Manager&color=orange)
+![Dependency](https://img.shields.io/static/v1?label=dependency&message=SwiftPackageManager&color=orange)
 ## Description
 Formworks is a framework for building forms from JSON files.
 
