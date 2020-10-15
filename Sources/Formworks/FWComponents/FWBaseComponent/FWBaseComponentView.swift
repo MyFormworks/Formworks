@@ -85,7 +85,7 @@ class FWBaseComponentView: UICollectionViewCell {
         NSLayoutConstraint.activate([
             componentBackgroundView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             componentBackgroundView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            componentBackgroundView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.8),
+            componentBackgroundView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
             componentBackgroundView.heightAnchor.constraint(equalTo: contentView.heightAnchor)
         ])
     }
