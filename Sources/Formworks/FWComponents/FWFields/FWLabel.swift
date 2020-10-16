@@ -45,7 +45,7 @@ final class FWLabel: UILabel {
     private func styleRequired() {
         font = .preferredFont(forTextStyle: .headline)
         textColor = .fwComponentBackground
-        backgroundColor = .fwRequired
+        backgroundColor = .fwSubmit
         textAlignment = .center
         layer.cornerRadius = 5
         clipsToBounds = true
