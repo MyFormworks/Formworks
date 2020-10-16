@@ -43,9 +43,9 @@ final class FWLabel: UILabel {
     }
 
     private func styleRequired() {
-        font = .preferredFont(forTextStyle: .footnote)
-        textColor = .white
-        backgroundColor = .systemRed
+        font = .preferredFont(forTextStyle: .headline)
+        textColor = .fwComponentBackground
+        backgroundColor = .fwSubmit
         textAlignment = .center
         layer.cornerRadius = 5
         clipsToBounds = true
@@ -64,7 +64,7 @@ final class FWLabel: UILabel {
 
     private func styleError() {
         font = .preferredFont(forTextStyle: .subheadline)
-        textColor = .systemRed
-        numberOfLines = 3
+        textColor = .fwRequired
+        numberOfLines = 0
     }
 }

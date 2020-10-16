@@ -7,28 +7,15 @@
 
 import Foundation
 
-/// Delegate responsible to binding the `FWSingleLineViewModel`
-/// with a `View`.
-protocol FWSingleLineViewModelDelegate: AnyObject {
-    func updateInterface()
-}
-
 /// The `FWSingleLine`'s  `ViewModel`.
-final class FWSingleLineViewModel {
-    
-    weak var delegate: FWSingleLineViewModelDelegate?
-    
-    init() {}
-    
+final class FWSingleLineComponentViewModel: FWBaseComponentViewModel {
     var content: String = "" {
         didSet {
-            isValid = content.count < 6 ? false : true
+            isValid = validator.validate(content)
         }
     }
-    
-    var isValid: Bool = false {
-        didSet {
-            delegate?.updateInterface()
-        }
-    }
+	
+	override func snapshot() -> FWComponentSnapshot {
+		return FWComponentSnapshot(title: self.title, componentType: self.componentType.rawValue, required: self.required, content: self.content)
+	}
 }

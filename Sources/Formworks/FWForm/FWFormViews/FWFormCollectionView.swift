@@ -25,8 +25,9 @@ final class FWFormCollectionView: UICollectionView {
     }
     
     private func setUpCollectionView() {
-        register(FWFormCollectionCell.self,
-                 forCellWithReuseIdentifier: FWFormCollectionCell.identifier)
+        register(FWSingleLineComponentView.self,
+                 forCellWithReuseIdentifier: FWSingleLineComponentView.identifier)
+        register(FWFormSubmitCollectionCell.self, forCellWithReuseIdentifier: FWFormSubmitCollectionCell.identifier)
         backgroundColor = .fwFormBackground
     }
     
@@ -37,16 +38,15 @@ final class FWFormCollectionView: UICollectionView {
     private static func setUpCollectionViewLayout() -> UICollectionViewCompositionalLayout {
         
         let itemLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(FormSpec.itemFractionalWidth),
-                                                    heightDimension: .fractionalHeight(FormSpec.itemFractionalHeight))
+                                                    heightDimension: .estimated(FormSpec.itemEstimatedHeight))
         let item = NSCollectionLayoutItem(layoutSize: itemLayoutSize)
         let groupLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(FormSpec.groupFractionalWidth),
-                                                     heightDimension: .fractionalHeight(FormSpec.groupFractionalHeight))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupLayoutSize, subitems: [item])
-        group.contentInsets = NSDirectionalEdgeInsets(top: FormSpec.groupSpacingTop,
-                                                      leading: FormSpec.groupSpacingLeading,
-                                                      bottom: FormSpec.groupSpacingBottom,
-                                                      trailing: FormSpec.groupSpacingTrailing)
+                                                     heightDimension: .estimated(FormSpec.groupEstimatedHeight))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupLayoutSize, subitems: [item])
+        
         let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = FormSpec.groupSpacing
+        
         return UICollectionViewCompositionalLayout(section: section)
     }
 }

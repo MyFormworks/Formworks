@@ -7,17 +7,23 @@
 
 import UIKit
 
+public protocol FWFormDelegate: AnyObject {
+    func result(_ data: Data)
+}
+
 /// Representation of a form. It displays each component as a cell of a `UICollectionView`.
 public final class FWFormViewController: UIViewController {
     // MARK: Properties
     @ManualLayout private var formCollectionView: FWFormCollectionView
-	private var components: [[FWSingleLineComponent]] = [[FWSingleLineComponent]]()
-	private let viewModel: FWFormViewModel
+    
+    private let viewModel: FWFormViewModel
+
+    public weak var delegate: FWFormDelegate?
 	
     // MARK: Init
     /// Initializes a new instance of this type.
-    public init() {
-		self.viewModel = FWFormViewModel()
+    public init(for json: Data) {
+		self.viewModel = FWFormViewModel(json)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -29,7 +35,10 @@ public final class FWFormViewController: UIViewController {
     public override func loadView() {
         super.loadView()
         view.backgroundColor = .fwFormBackground
+        title = viewModel.title
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         setUpCollectionView()
@@ -40,7 +49,6 @@ public final class FWFormViewController: UIViewController {
 	// MARK: ViewModel setup
 	private func setUpViewModel() {
 		viewModel.delegate = self
-		viewModel.build()
 	}
 	
     private func setUpCollectionView() {
@@ -63,33 +71,54 @@ public final class FWFormViewController: UIViewController {
 }
 // MARK: UICollectionViewDelegate
 extension FWFormViewController: UICollectionViewDelegate {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == viewModel.numberOfComponents {
+            viewModel.submit()
+        }
+    }
     
 }
 // MARK: UICollectionViewDataSource
 extension FWFormViewController: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return viewModel.numberOfComponents
+		return viewModel.numberOfComponents + 1
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FWFormCollectionCell.identifier, for: indexPath) as? FWFormCollectionCell else {
-			return UICollectionViewCell()
-		}
-		cell.configure(components[indexPath.section][indexPath.item].view)
-		
-		return cell
+        if indexPath.row == viewModel.numberOfComponents {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FWFormSubmitCollectionCell.identifier,
+                                                                for: indexPath) as? FWFormSubmitCollectionCell else {
+                return UICollectionViewCell()
+            }
+            return cell
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FWSingleLineComponentView.identifier,
+                                                                for: indexPath) as? FWSingleLineComponentView else {
+                return UICollectionViewCell()
+            }
+            cell.configure(with: viewModel.viewModelAt(index: indexPath))
 
+            return cell
+        }
     }
 }
 
 // MARK: ViewModel Delegate
 extension FWFormViewController: FWFormViewModelDelegate {
-	func didReceiveComponents(_ components: [[FWSingleLineComponent]]) {
-		DispatchQueue.main.async { [weak self] in
-			guard let self = self else { return }
-			self.components = components
-			self.formCollectionView.reloadData()
-		}
-	}
+    func didSubmit(_ result: Result<Data, Error>) {
+        switch result {
+        case .success(let data):
+            delegate?.result(data)
+        case .failure(let error):
+            print(error.localizedDescription)
+        }
+    }
+
+    func didReceiveComponents() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.formCollectionView.reloadData()
+        }
+    }
 }
