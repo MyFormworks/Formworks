@@ -16,7 +16,7 @@ enum ComponentSpec {
     static let titleLabelWidthMultiplier: CGFloat = 0.75
     static let titleLabelHeight: CGFloat = 50
     
-    static let requiredLabelWidthMultiplier: CGFloat = 0.25
+    static let requiredLabelWidthMultiplier: CGFloat = 0.05
     static let requiredLabelHeight: CGFloat = 50
     
     static let descriptionLabelTopConstant: CGFloat = 10
