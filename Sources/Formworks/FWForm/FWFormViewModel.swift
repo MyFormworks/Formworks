@@ -46,12 +46,17 @@ final class FWFormViewModel {
             case .success(let formData):
                 var viewModels: [FWBaseComponentViewModel] = []
                 for component in formData.components {
-                    let viewModel = FWSingleLineComponentViewModel(title: component.title,
-                                                                   description: component.subtitle ?? "",
-                                                                   errorMessage: component.errorMessage ?? "",
-                                                                   required: component.required,
-                                                                   validator: .max32)
-                    viewModels.append(viewModel)
+					switch component.specs {
+						case is FWDigitsSpecs:
+							let viewModel = FWSingleLineComponentViewModel(title: component.title, description: component.subtitle ?? "", errorMessage: component.errorMessage ?? "", required: component.required, validator: .phonenumber, componentType: .numerical)
+							viewModels.append(viewModel)
+						case is FWEmailSpecs:
+							let viewModel = FWSingleLineComponentViewModel(title: component.title, description: component.subtitle ?? "", errorMessage: component.errorMessage ?? "", required: component.required, validator: .email, componentType: .email)
+							viewModels.append(viewModel)
+						default:
+							let viewModel = FWSingleLineComponentViewModel(title: component.title, description: component.subtitle ?? "", errorMessage: component.errorMessage ?? "", required: component.required, validator: .max32, componentType: .plainText)
+							viewModels.append(viewModel)
+					}
                 }
                 self.viewModels.append(viewModels)
                 self.delegate?.didReceiveComponents()

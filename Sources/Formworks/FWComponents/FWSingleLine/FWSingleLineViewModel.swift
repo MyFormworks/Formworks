@@ -14,4 +14,8 @@ final class FWSingleLineComponentViewModel: FWBaseComponentViewModel {
             isValid = validator.validate(content)
         }
     }
+	
+	override func snapshot() -> FWComponentSnapshot {
+		return FWComponentSnapshot(title: self.title, componentType: self.componentType.rawValue, required: self.required, content: self.content)
+	}
 }
