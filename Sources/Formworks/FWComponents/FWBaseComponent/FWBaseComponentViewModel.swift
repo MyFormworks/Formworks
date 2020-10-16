@@ -16,7 +16,11 @@ class FWBaseComponentViewModel {
     let errorMessage: String
     let required: Bool
     let validator: FWValidator
-    var isValid: Bool = false
+	var isValid: Bool = false {
+		didSet {
+			delegate?.updateUI()
+		}
+	}
     
 	weak var delegate: FWComponentViewModelDelegate?
 	
