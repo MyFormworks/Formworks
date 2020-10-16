@@ -50,7 +50,6 @@ extension FWSingleLineComponentView: FWComponentViewModelDelegate {
 	func updateUI() {
 		guard let viewModel = viewModel else { return }
 		if viewModel.isValid {
-			textField.textColor = .green
 		}
 	}
 }

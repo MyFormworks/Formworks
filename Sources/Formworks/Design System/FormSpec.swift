@@ -15,7 +15,7 @@ enum FormSpec {
     // MARK: UICollectionViewCompositionalLayout
     // Item layout
     static let itemFractionalWidth: CGFloat = 1
-    static let itemEstimatedHeight: CGFloat = 200
+    static let itemEstimatedHeight: CGFloat = 120
 
     // Group layout
     static let groupFractionalWidth: CGFloat = 1
