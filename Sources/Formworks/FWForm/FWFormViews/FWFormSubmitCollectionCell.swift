@@ -15,6 +15,7 @@ final class FWFormSubmitCollectionCell: UICollectionViewCell {
     static var identifier: String {
         return String(describing: self)
     }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUp()
@@ -26,6 +27,7 @@ final class FWFormSubmitCollectionCell: UICollectionViewCell {
 
     private func setUp() {
         submitLabel.style(.required)
+        submitLabel.text = "Submit"
     }
 
     private func layoutConstraints() {
@@ -36,10 +38,8 @@ final class FWFormSubmitCollectionCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             submitLabel.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
             submitLabel.centerYAnchor.constraint(equalTo: guide.centerYAnchor),
-            submitLabel.widthAnchor.constraint(equalTo: guide.widthAnchor,
-                                                multiplier: 0.5),
-            submitLabel.heightAnchor.constraint(equalTo: guide.heightAnchor,
-                                                 multiplier: 0.9)
+            submitLabel.widthAnchor.constraint(equalToConstant: 50),
+            submitLabel.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 }

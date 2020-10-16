@@ -84,7 +84,6 @@ extension FWFormViewController: UICollectionViewDataSource {
                                                                 for: indexPath) as? FWFormSubmitCollectionCell else {
                 return UICollectionViewCell()
             }
-            
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FWSingleLineComponentView.identifier,
