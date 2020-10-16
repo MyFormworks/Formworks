@@ -7,12 +7,18 @@
 
 import UIKit
 
+public protocol FWFormDelegate: AnyObject {
+    func result(_ data: Data)
+}
+
 /// Representation of a form. It displays each component as a cell of a `UICollectionView`.
 public final class FWFormViewController: UIViewController {
     // MARK: Properties
     @ManualLayout private var formCollectionView: FWFormCollectionView
     
     private let viewModel: FWFormViewModel
+
+    public weak var delegate: FWFormDelegate?
 	
     // MARK: Init
     /// Initializes a new instance of this type.
@@ -69,27 +75,44 @@ extension FWFormViewController: UICollectionViewDelegate {
 extension FWFormViewController: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return viewModel.numberOfComponents
+		return viewModel.numberOfComponents + 1
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FWSingleLineComponentView.identifier, for: indexPath) as? FWSingleLineComponentView else {
-			return UICollectionViewCell()
-		}
-        cell.configure(with: viewModel.viewModelAt(index: indexPath))
-		
-		return cell
+        if indexPath.row == viewModel.numberOfComponents {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FWFormSubmitCollectionCell.identifier,
+                                                                for: indexPath) as? FWFormSubmitCollectionCell else {
+                return UICollectionViewCell()
+            }
+            
+            return cell
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FWSingleLineComponentView.identifier,
+                                                                for: indexPath) as? FWSingleLineComponentView else {
+                return UICollectionViewCell()
+            }
+            cell.configure(with: viewModel.viewModelAt(index: indexPath))
 
+            return cell
+        }
     }
 }
 
 // MARK: ViewModel Delegate
 extension FWFormViewController: FWFormViewModelDelegate {
+    func didSubmit(_ result: Result<Data, Error>) {
+        switch result {
+        case .success(let data):
+            delegate?.result(data)
+        case .failure(let error):
+            print(error.localizedDescription)
+        }
+    }
+
     func didReceiveComponents() {
-        DispatchQueue.main.async {[weak self] in
+        DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.formCollectionView.reloadData()
         }
-        
     }
 }

@@ -11,6 +11,7 @@ import Foundation
 /// with a `View`.
 protocol FWFormViewModelDelegate: AnyObject {
     func didReceiveComponents()
+    func didSubmit(_ result: Result<Data, Error>)
 }
 
 /// A representation of the `FWForm`'s `ViewModel`.
@@ -52,6 +53,12 @@ final class FWFormViewModel {
 				#warning("Missing error propagation")
 			}
 		}
+        do {
+            let encoded = try JSONEncoder().encode(formSnapshot)
+            delegate?.didSubmit(.success(encoded))
+        } catch {
+            delegate?.didSubmit(.failure(error))
+        }
 	}
 
     private func generate(_ form: Data) {

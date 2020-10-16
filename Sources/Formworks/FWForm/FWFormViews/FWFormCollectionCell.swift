@@ -8,49 +8,38 @@
 import UIKit
 
 /// A representation of a `Formworks` `UICollectionView`'s cell.
-final class FWFormCollectionCell: UICollectionViewCell {
+final class FWFormSubmitCollectionCell: UICollectionViewCell {
+
+    @ManualLayout private var submitLabel: FWLabel
     
     static var identifier: String {
         return String(describing: self)
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setUpContentView()
+        setUp()
+        layoutConstraints()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    /// Configures the content of the `contentView`.
-    func configure(_ view: UIView) {
-        view.translatesAutoresizingMaskIntoConstraints = false
-
-        contentView.addSubview(view)
-
-        let guides = contentView.safeAreaLayoutGuide
-
-        NSLayoutConstraint.activate([
-            view.centerXAnchor.constraint(equalTo: guides.centerXAnchor),
-            view.centerYAnchor.constraint(equalTo: guides.centerYAnchor),
-            view.widthAnchor.constraint(equalTo: guides.widthAnchor),
-            view.heightAnchor.constraint(equalTo: guides.heightAnchor, multiplier: 0.9)
-        ])
+    private func setUp() {
+        submitLabel.style(.required)
     }
 
-    /// Use this function to make all needed visual set up for the cell.
-    private func setUpContentView() {
-        // Add corner radius to the cell
-        contentView.backgroundColor = .fwComponentBackground
-        contentView.layer.cornerRadius = contentView.frame.height * FormSpec.Cell.cornerRadius
-        contentView.clipsToBounds = true
-        // Add shadow drop to the cell
-        contentView.layer.shadowColor = UIColor.fwComponentShadow.cgColor
-        contentView.layer.shadowOffset = CGSize(width: FormSpec.Cell.cellShadowOffSetX,
-                                                height: FormSpec.Cell.cellShadowOffSetY)
-        contentView.layer.shadowRadius = FormSpec.Cell.cellShadowBlur
-        contentView.layer.shadowOpacity = FormSpec.Cell.cellShadowOppacity
-        contentView.layer.masksToBounds = false
-        contentView.layer.shadowPath = UIBezierPath(roundedRect: contentView.bounds,
-                                                    cornerRadius: contentView.layer.cornerRadius).cgPath
+    private func layoutConstraints() {
+        contentView.addSubview(submitLabel)
+
+        let guide = contentView.layoutMarginsGuide
+
+        NSLayoutConstraint.activate([
+            submitLabel.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
+            submitLabel.centerYAnchor.constraint(equalTo: guide.centerYAnchor),
+            submitLabel.widthAnchor.constraint(equalTo: guide.widthAnchor,
+                                                multiplier: 0.5),
+            submitLabel.heightAnchor.constraint(equalTo: guide.heightAnchor,
+                                                 multiplier: 0.9)
+        ])
     }
 }
