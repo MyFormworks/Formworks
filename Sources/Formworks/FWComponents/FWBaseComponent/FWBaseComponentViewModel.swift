@@ -6,6 +6,9 @@
 //
 
 import Foundation
+protocol FWComponentViewModelDelegate: AnyObject {
+	func updateUI()
+}
 
 class FWBaseComponentViewModel {
     let title: String
@@ -15,6 +18,8 @@ class FWBaseComponentViewModel {
     let validator: FWValidator
     var isValid: Bool = false
     
+	weak var delegate: FWComponentViewModelDelegate?
+	
     init(title: String, description: String, errorMessage: String, required: Bool, validator: FWValidator) {
         self.title = title
         self.description = description
