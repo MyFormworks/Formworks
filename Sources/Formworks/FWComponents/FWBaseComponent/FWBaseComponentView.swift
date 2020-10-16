@@ -30,7 +30,7 @@ class FWBaseComponentView: UICollectionViewCell {
             titleLabel.text = viewModel?.title
             descriptionLabel.text = viewModel?.description
             errorMessageLabel.text = viewModel?.errorMessage
-            requiredImage.isHidden = viewModel?.required ?? false ? true : false
+            requiredImage.isHidden = viewModel?.required ?? false ? false : true
         }
     }
 

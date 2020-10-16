@@ -35,6 +35,7 @@ public final class FWFormViewController: UIViewController {
     public override func loadView() {
         super.loadView()
         view.backgroundColor = .fwFormBackground
+        title = viewModel.title
     }
     
     public override func viewDidLoad() {
