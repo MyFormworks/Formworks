@@ -18,7 +18,7 @@ class FWBaseComponentView: UICollectionViewCell {
     @ManualLayout private var descriptionLabel: FWLabel
     @ManualLayout private var errorMessageLabel: FWLabel
     private lazy var requiredImage: UIImageView = {
-        let imageView = UIImageView(image: UIImage(systemName: "circle.fill"))
+        let imageView = UIImageView(image: UIImage(systemName: "asterisk.circle.fill"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
