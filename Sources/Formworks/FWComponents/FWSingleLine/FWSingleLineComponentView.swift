@@ -31,6 +31,6 @@ final class FWSingleLineComponentView: FWBaseComponentView {
     }
     
     private func setUpTextField() {
-        textField.addTarget(<#T##target: Any?##Any?#>, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
+//        textField.addTarget(<#T##target: Any?##Any?#>, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
     }
 }
