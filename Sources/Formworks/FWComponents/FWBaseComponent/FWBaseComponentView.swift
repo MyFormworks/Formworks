@@ -18,7 +18,7 @@ class FWBaseComponentView: UICollectionViewCell {
     @ManualLayout private var descriptionLabel: FWLabel
     @ManualLayout private var errorMessageLabel: FWLabel
     private lazy var requiredImage: UIImageView = {
-        let imageView = UIImageView(image: UIImage(systemName: "asterisk.fill"))
+        let imageView = UIImageView(image: UIImage(systemName: "circle.fill"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -113,7 +113,8 @@ class FWBaseComponentView: UICollectionViewCell {
             requiredImage.topAnchor.constraint(equalTo: guide.topAnchor),
             requiredImage.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
             requiredImage.widthAnchor.constraint(equalTo: guide.widthAnchor, multiplier: ComponentSpec.requiredLabelWidthMultiplier),
-            requiredImage.heightAnchor.constraint(equalToConstant: ComponentSpec.requiredLabelHeight),
+            requiredImage.heightAnchor.constraint(equalTo: guide.widthAnchor,
+                                                  multiplier: ComponentSpec.requiredLabelWidthMultiplier),
             
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: ComponentSpec.descriptionLabelTopConstant),
             descriptionLabel.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
