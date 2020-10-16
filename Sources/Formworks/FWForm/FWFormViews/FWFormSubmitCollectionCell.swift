@@ -37,7 +37,7 @@ final class FWFormSubmitCollectionCell: UICollectionViewCell {
 
         NSLayoutConstraint.activate([
             submitLabel.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
-            submitLabel.topAnchor.constraint(equalTo: guide.topAnchor)
+            submitLabel.topAnchor.constraint(equalTo: guide.topAnchor),
             submitLabel.widthAnchor.constraint(equalToConstant: 100),
             submitLabel.heightAnchor.constraint(equalToConstant: 50)
         ])
