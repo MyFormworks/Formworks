@@ -69,6 +69,11 @@ public final class FWFormViewController: UIViewController {
 }
 // MARK: UICollectionViewDelegate
 extension FWFormViewController: UICollectionViewDelegate {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == viewModel.numberOfComponents {
+            viewModel.submit()
+        }
+    }
     
 }
 // MARK: UICollectionViewDataSource
