@@ -2,17 +2,18 @@
 ![Platform](https://img.shields.io/static/v1?label=platform&message=iOS&color=orange)
 ![SPM](https://img.shields.io/static/v1?label=SwiftPackageManager&message=compatible&color=sucess)
 
-Formworks is a framework for building forms from JSON files.
+Formworks is a framework built on UIKit for building forms from JSON files on iOS.
 
 1. [Features](#features)
 2. [Requirements](#requirements)
 3. [Usage](#usage)
-    - [Importing Formworks to your project](#importing-formworks-to-your-project)
-    - [Supported Components](#supported-components)
+    - [Installing using Swift Package Manager](#installing-using-swift-package-manager)
     - [Creating a Form](#creating-a-form)
-    - [Getting the Results](#getting-the-results)
-    - [Validating Components](#validating-components)
-4. [Glossary](docs/glossary.md)
+    - [Input Validation](#input-validation)
+    - [Supported Components](#supported-components)
+4. [Resources](#resources)
+    - [Style Guide](#style-guide)
+    - [Glossary](docs/glossary.md)
 
 ## Features
 - [x] Support to Single Line Component.
@@ -28,38 +29,39 @@ Formworks is a framework for building forms from JSON files.
 - Xcode 10.0 or later
 
 ## Usage
-### Adding Formworks to your project
+### Installing using Swift Package Manager
 1. Create a new Xcode Project
 2. In Xcode, click on "File"
 3. Click on "Swift Packages"
 4. Click on "Add Package Dependency"
-5. Paste our url directory: https://github.com/Galdineris/Formworks.git
-6. Choose Rules: Branch -> master
+5. Paste the web url for this repository: https://github.com/Galdineris/Formworks.git
+6. Set Rules to Branch on "master"
 7. Finish
 
-### Importing Formworks to your project
+### Importing Formworks to your Project
 ```swift
 import Formworks
 ```
-### Creating a form
+### Creating a Form
+```swift
+let dataFromJSON: Data = // Fetch your JSON data.
+let formViewController = FWFormViewController(for: dataFromJSON)
+// present formViewController
+```
 
-### Getting the results
+### Input Validation
+Our text components can be validated using regular expressions. To add a custom validation to your form component, pass a regex rule in the component's specification section in the JSON file.
+Components like "Email" and "Phone Number" already have a validation rule in the supported components section.
 
 ### Supported Components
-Component | JSON key
------------- | -------------
-Single Line | "single_line"
-Email | "email"
-Numerical | "numerical"
-Phone Number | "phone_number"
+Component | JSON key | Default Validation Rule | Valid Examples
+------------ | ------------- | ------------- | -------------
+Single Line | "single_line" | - | N/A
+Email | "email" | Alphanumerical elements followed by a @ and a subsequent site address. | myemail@example.com , my2email@example.org
+Numerical | "numerical" | Decimal numerals | 0 , -42, +9000
+Phone Number | "phone_number" | Brazilian local phone numbers format, with or without punctuation. | 5512341234 , 912341234, (55)912341234
 
-### Validating Components
-Our text fields can be validated using regex rules.
-To add a validation to your form component, pass a regex rule in the component's specification section in the JSON file.
-Components like "Email", "Phone Number" already have their own validations, we accentuate that regex rules for Phone Number can be changed according developers' requeriments.
-Component | Regex Rule
------------- | -------------
-Email | "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-Phone Number | "(?:^\([0]?[1-9]{2}\)|^[0]?[1-9]{2}[\.-\s]?)[9]?[1-9]\d{3}[\.-\s]?\d{4}$"
-
-
+## Resources
+### Style Guide
+![Style_Guide](docs/StyleGuideV1.jpg)
+### [Glossary](docs/glossary.md)
