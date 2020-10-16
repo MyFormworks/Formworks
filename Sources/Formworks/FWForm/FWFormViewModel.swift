@@ -20,12 +20,14 @@ final class FWFormViewModel {
 	
     /// Should **only** be used to build `FWComponents`.
 	private let queue: DispatchQueue = DispatchQueue(label: "components-init")
-	
+		
 	weak var delegate: FWFormViewModelDelegate?
 	
     init(_ json: Data) {
         generate(json)
     }
+	
+	var title: String = ""
 	
 	var numberOfComponents: Int {
 		guard let section = viewModels.first else {
@@ -37,6 +39,20 @@ final class FWFormViewModel {
     func viewModelAt(index: IndexPath) -> FWBaseComponentViewModel {
         return viewModels[index.section][index.row]
     }
+	
+	func submit() {
+		var formSnapshot = FWFormSnapshot(title: self.title, components: [])
+		guard let viewModels = viewModels.first else {
+			return
+		}
+		for viewModel in viewModels {
+			if viewModel.isValid {
+				formSnapshot.components.append(viewModel.snapshot())
+			} else {
+				#warning("Missing error propagation")
+			}
+		}
+	}
 
     private func generate(_ form: Data) {
         let fwjson = FWJSON(data: form)
@@ -44,6 +60,7 @@ final class FWFormViewModel {
             guard let self = self else { return }
             switch result {
             case .success(let formData):
+				self.title = formData.title
                 var viewModels: [FWBaseComponentViewModel] = []
                 for component in formData.components {
 					switch component.specs {
