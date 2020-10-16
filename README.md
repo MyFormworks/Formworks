@@ -63,5 +63,5 @@ Phone Number | "phone_number" | Brazilian local phone numbers format, with or wi
 
 ## Resources
 ### Style Guide
-![Style_Guide](docs/StyleGuideV1.jpg)
+![Style_Guide](docs/FormWorksStyleGuide.jpg)
 ### [Glossary](docs/glossary.md)
