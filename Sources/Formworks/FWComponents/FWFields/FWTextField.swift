@@ -22,6 +22,7 @@ final class FWTextField: UITextField {
     private func style() {
         layer.cornerRadius = 5
         layer.borderWidth = 1
+        autocapitalizationType = .none
     }
     
     /// Defines the width rect size of the text rect.

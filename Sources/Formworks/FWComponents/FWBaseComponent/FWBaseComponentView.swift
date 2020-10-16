@@ -17,7 +17,11 @@ class FWBaseComponentView: UICollectionViewCell {
     @ManualLayout private var titleLabel: FWLabel
     @ManualLayout private var descriptionLabel: FWLabel
     @ManualLayout private var errorMessageLabel: FWLabel
-    @ManualLayout private var requiredLabel: FWLabel
+    private lazy var requiredImage: UIImageView = {
+        let imageView = UIImageView(image: UIImage(systemName: "asterisk.fill"))
+        return imageView
+    }()
+
     @ManualLayout var specsView: UIView
 
     var viewModel: FWBaseComponentViewModel? {
@@ -25,7 +29,7 @@ class FWBaseComponentView: UICollectionViewCell {
             titleLabel.text = viewModel?.title
             descriptionLabel.text = viewModel?.description
             errorMessageLabel.text = viewModel?.errorMessage
-            requiredLabel.text = viewModel?.required ?? true ? "Required" : ""
+            requiredImage.isHidden = viewModel?.required ?? false ? true : false
         }
     }
 
@@ -49,12 +53,12 @@ class FWBaseComponentView: UICollectionViewCell {
     private func setUpViews() {
         setUpComponentBackgroundView()
         setUpHeader()
-        setUpFooter()
+//        setUpFooter()
     }
 
     private func setUpHeader() {
         titleLabel.style(.title)
-        requiredLabel.style(.required)
+        requiredImage.tintColor = .systemRed
         descriptionLabel.style(.description)
     }
 
@@ -76,7 +80,7 @@ class FWBaseComponentView: UICollectionViewCell {
         layoutComponentBackgroundViewConstraints()
         layoutHeaderConstraints()
         layoutSpecsViewConstraints()
-        layoutFooterConstraints()
+//        layoutFooterConstraints()
     }
     
     private func layoutComponentBackgroundViewConstraints() {
@@ -93,7 +97,7 @@ class FWBaseComponentView: UICollectionViewCell {
     
     private func layoutHeaderConstraints() {
         componentBackgroundView.addSubview(titleLabel)
-        componentBackgroundView.addSubview(requiredLabel)
+        componentBackgroundView.addSubview(requiredImage)
         componentBackgroundView.addSubview(descriptionLabel)
 
         let guide = componentBackgroundView.layoutMarginsGuide
@@ -105,10 +109,10 @@ class FWBaseComponentView: UICollectionViewCell {
                                               multiplier: ComponentSpec.titleLabelWidthMultiplier),
             titleLabel.heightAnchor.constraint(equalToConstant: ComponentSpec.titleLabelHeight),
             
-            requiredLabel.topAnchor.constraint(equalTo: guide.topAnchor),
-            requiredLabel.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
-            requiredLabel.widthAnchor.constraint(equalTo: guide.widthAnchor, multiplier: ComponentSpec.requiredLabelWidthMultiplier),
-            requiredLabel.heightAnchor.constraint(equalToConstant: ComponentSpec.requiredLabelHeight),
+            requiredImage.topAnchor.constraint(equalTo: guide.topAnchor),
+            requiredImage.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
+            requiredImage.widthAnchor.constraint(equalTo: guide.widthAnchor, multiplier: ComponentSpec.requiredLabelWidthMultiplier),
+            requiredImage.heightAnchor.constraint(equalToConstant: ComponentSpec.requiredLabelHeight),
             
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: ComponentSpec.descriptionLabelTopConstant),
             descriptionLabel.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
