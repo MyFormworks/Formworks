@@ -53,6 +53,4 @@ extension FWSingleLineComponentView: FWComponentViewModelDelegate {
 			textField.textColor = .green
 		}
 	}
-	
-	
 }
