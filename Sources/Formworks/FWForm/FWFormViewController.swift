@@ -7,22 +7,23 @@
 
 import UIKit
 
-public final class FWFormViewController: UIViewController {
-    // - MARK: Properties
-    private lazy var formCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: setUpCollectionViewLayout())
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(FWFormViewControllerCell.self,
-                                forCellWithReuseIdentifier: FWFormViewControllerCell.identifier)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.backgroundColor = .fwFormBackground
-        return collectionView
-    }()
+public protocol FWFormDelegate: AnyObject {
+    func result(_ data: Data)
+}
 
-    //- MARK: Init
+/// Representation of a form. It displays each component as a cell of a `UICollectionView`.
+public final class FWFormViewController: UIViewController {
+    // MARK: Properties
+    @ManualLayout private var formCollectionView: FWFormCollectionView
+    
+    private let viewModel: FWFormViewModel
+
+    public weak var delegate: FWFormDelegate?
+	
+    // MARK: Init
     /// Initializes a new instance of this type.
-    public init() {
+    public init(for json: Data) {
+		self.viewModel = FWFormViewModel(json)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -30,35 +31,29 @@ public final class FWFormViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    //- MARK: Life cycle
+    // MARK: Life cycle
     public override func loadView() {
         super.loadView()
         view.backgroundColor = .fwFormBackground
+        title = viewModel.title
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        setUpCollectionView()
         setUpCollectionViewConstraints()
+		setUpViewModel()
     }
-    
-    /// This function will set up the layout of the CollectionView. It first configure
-    /// the item size that will be present on a group. And then configure
-    /// the group size so it specifies the portion of the screen that will occupy
-    @available(iOS 13.0, *)
-    private func setUpCollectionViewLayout() -> UICollectionViewCompositionalLayout {
-        
-        let itemLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(FormSpec.itemFractionalWidth),
-                                                    heightDimension: .fractionalHeight(FormSpec.itemFractionalHeight))
-        let item = NSCollectionLayoutItem(layoutSize: itemLayoutSize)
-        let groupLayoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(FormSpec.groupFractionalWidth),
-                                                     heightDimension: .fractionalHeight(FormSpec.groupFractionalHeight))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupLayoutSize, subitems: [item])
-        group.contentInsets = NSDirectionalEdgeInsets(top: FormSpec.groupSpacingTop,
-                                                      leading: FormSpec.groupSpacingLeading,
-                                                      bottom: FormSpec.groupSpacingBottom,
-                                                      trailing: FormSpec.groupSpacingTrailing)
-        let section = NSCollectionLayoutSection(group: group)
-        return UICollectionViewCompositionalLayout(section: section)
+	
+	// MARK: ViewModel setup
+	private func setUpViewModel() {
+		viewModel.delegate = self
+	}
+	
+    private func setUpCollectionView() {
+        formCollectionView.delegate = self
+        formCollectionView.dataSource = self
     }
     
     /// This function will create the necessary constraints for the CollectionView
@@ -74,24 +69,56 @@ public final class FWFormViewController: UIViewController {
         ])
     }
 }
-//- MARK: UICollectionViewDelegate
+// MARK: UICollectionViewDelegate
 extension FWFormViewController: UICollectionViewDelegate {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == viewModel.numberOfComponents {
+            viewModel.submit()
+        }
+    }
     
 }
-//- MARL: UICollectionViewDataSource
+// MARK: UICollectionViewDataSource
 extension FWFormViewController: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+		return viewModel.numberOfComponents + 1
     }
-    
+
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FWFormViewControllerCell.identifier,
-                                                            for: indexPath) as? FWFormViewControllerCell else {
-            return UICollectionViewCell()
+        if indexPath.row == viewModel.numberOfComponents {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FWFormSubmitCollectionCell.identifier,
+                                                                for: indexPath) as? FWFormSubmitCollectionCell else {
+                return UICollectionViewCell()
+            }
+            return cell
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FWSingleLineComponentView.identifier,
+                                                                for: indexPath) as? FWSingleLineComponentView else {
+                return UICollectionViewCell()
+            }
+            cell.configure(with: viewModel.viewModelAt(index: indexPath))
+
+            return cell
         }
-        return cell
     }
-    
-    
+}
+
+// MARK: ViewModel Delegate
+extension FWFormViewController: FWFormViewModelDelegate {
+    func didSubmit(_ result: Result<Data, Error>) {
+        switch result {
+        case .success(let data):
+            delegate?.result(data)
+        case .failure(let error):
+            print(error.localizedDescription)
+        }
+    }
+
+    func didReceiveComponents() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.formCollectionView.reloadData()
+        }
+    }
 }
