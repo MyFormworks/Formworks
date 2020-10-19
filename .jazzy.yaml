@@ -1,0 +1,14 @@
+clean: true
+
+theme: fullwidth
+
+output: docs
+source_directory: Sources
+readme: README.md
+
+xcodebuild_arguments:
+  -  -project
+  -  ../Xcode/Formworks.xcodeproj
+module: Formworks
+undocumented_text: ""
+github_url: https://github.com/galdineris/Formworks

@@ -11,7 +11,7 @@ on:
       - '**/*.swift'
 
 jobs:
-  build:
+  run-tests:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
@@ -26,7 +26,7 @@ jobs:
         output: docs
         clean: true
   
-  build_syntax:
+  run-lint:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -34,3 +34,12 @@ jobs:
       uses: norio-nomura/action-swiftlint@3.1.0
       env:
         DIFF_BASE: ${{ github.base_ref }}
+
+  generate-docs:
+    runs-on: macos-latest
+    steps:
+      - run: sudo xcode-select -s /Applications/Xcode_12.app/Contents/Developer
+      - uses: actions/checkout@v2
+      - uses: sersoft-gmbh/swifty-docs-action@v1
+        with:
+          output: docs
