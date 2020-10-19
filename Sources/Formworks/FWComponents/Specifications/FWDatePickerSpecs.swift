@@ -1,5 +1,5 @@
 //
-//  FWDatePickerSpecs.swift
+//  FWDatePickerSpecification.swift
 //  
 //
 //  Created by Cassia Aparecida Barbosa on 05/10/20.
@@ -10,5 +10,5 @@
 
  This specification is used to users add date on the form.
  */
-struct FWDatePickerSpecs: FWSpecs {
+struct FWDatePickerSpecification: FWSpecification {
 }

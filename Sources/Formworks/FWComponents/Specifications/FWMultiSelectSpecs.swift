@@ -1,5 +1,5 @@
 //
-//  FWMultiSelectSpecs.swift
+//  FWMultiSelectSpecification.swift
 //  
 //
 //  Created by Cassia Aparecida Barbosa on 05/10/20.
@@ -10,6 +10,6 @@
 
  This specification is used to users add multiple given options on the form.
  */
-struct FWMultiSelectSpecs: FWSpecs {
+struct FWMultiSelectSpecification: FWSpecification {
 	var options: [String?]
 }

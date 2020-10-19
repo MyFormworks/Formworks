@@ -1,5 +1,5 @@
 //
-//  FWComponentKeys.swift
+//  FWComponentKey.swift
 //  
 //
 //  Created by Rafael Galdino on 02/10/20.
@@ -10,7 +10,7 @@
  This enum holds all the attributes of a component.
  Used in decoding the object.
  */
-enum FWComponentKeys: String, CodingKey {
+enum FWComponentKey: String, CodingKey {
     case title
     case subtitle
     case errorMessage

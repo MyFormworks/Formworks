@@ -1,5 +1,5 @@
 //
-//  FWSingleSelectSpecs.swift
+//  FWSingleSelectSpecification.swift
 //  
 //
 //  Created by Cassia Aparecida Barbosa on 05/10/20.
@@ -10,6 +10,6 @@
 
  This specification is used to users add just one given options on the form.
  */
-struct FWSingleSelectSpecs: FWSpecs {
+struct FWSingleSelectSpecification: FWSpecification {
 	var options: [String?]
 }

@@ -1,5 +1,5 @@
 //
-//  FWSpecs.swift
+//  FWSpecification.swift
 //  
 //
 //  Created by Rafael Galdino on 01/10/20.
@@ -10,5 +10,5 @@
  i.e.
  Placeholder text for text-based components or selection options for seletion-based components.
  */
-protocol FWSpecs: Decodable {
+protocol FWSpecification: Decodable {
 }

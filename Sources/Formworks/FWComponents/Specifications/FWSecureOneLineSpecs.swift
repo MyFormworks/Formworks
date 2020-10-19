@@ -1,5 +1,5 @@
 //
-//  FWSecureOneLineSpecs.swift
+//  FWSecureOneLineSpecification.swift
 //  
 //
 //  Created by Cassia Aparecida Barbosa on 05/10/20.
@@ -10,6 +10,6 @@
 
  This specification is used to users add passwords on the form.
  */
-struct FWSecureOneLineSpecs: FWSpecs {
+struct FWSecureOneLineSpecification: FWSpecification {
 	let placeholder: String?
 }

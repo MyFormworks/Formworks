@@ -1,5 +1,5 @@
 //
-//  FWOneLineSpecs.swift
+//  FWOneLineSpecification.swift
 //  
 //
 //  Created by Cassia Aparecida Barbosa on 05/10/20.
@@ -10,6 +10,6 @@
 
  This specification is used to users add just one text line on the form.
  */
-struct FWPlainTextSpecs: FWSpecs {
+struct FWSingleLineSpecification: FWSpecification {
 	let placeholder: String?
 }

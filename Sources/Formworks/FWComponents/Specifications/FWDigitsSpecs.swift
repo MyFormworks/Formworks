@@ -1,5 +1,5 @@
 //
-//  FWDigitsSpecs.swift
+//  FWDigitsSpecification.swift
 //  
 //
 //  Created by Cassia Aparecida Barbosa on 05/10/20.
@@ -10,6 +10,6 @@
 
  This specification is used to users add digits on the form.
  */
-struct FWDigitsSpecs: FWSpecs {
+struct FWDigitsSpecification: FWSpecification {
 	let placeholder: String?
 }

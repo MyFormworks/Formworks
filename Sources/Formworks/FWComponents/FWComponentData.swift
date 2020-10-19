@@ -24,18 +24,18 @@ struct FWComponentData: Decodable {
     ///This variable will appear if the field must be filled.
     var required: Bool
     ///This variable is the type of content that users can add in the fiel.
-    var specs: FWSpecs?
+    var specs: FWSpecification?
 }
 
 extension FWComponentData {
     init(from decoder: Decoder) throws {
 
-        let container = try decoder.container(keyedBy: FWComponentKeys.self)
+        let container = try decoder.container(keyedBy: FWComponentKey.self)
 
         title = try container.decode(String.self, forKey: .title)
         subtitle = try container.decodeIfPresent(String.self, forKey: .subtitle)
         errorMessage = try container.decodeIfPresent(String.self, forKey: .errorMessage)
         required = try container.decode(Bool.self, forKey: .required)
-        specs = try FWComponentTypes.specs(from: container)
+        specs = try FWComponentType.specification(for: container)
     }
 }
