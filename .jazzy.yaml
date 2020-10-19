@@ -1,7 +1,9 @@
 clean: true
-min-acl: internal
+min_acl: internal
+hide_documentation_coverage: true
 
-theme: jony
+
+theme: fullwidth
 
 output: docs
 source_directory: Sources
