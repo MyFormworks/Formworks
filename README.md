@@ -18,11 +18,15 @@ Formworks is a framework built on UIKit for building forms from JSON files on iO
 
 ## Features
 - [x] Support to Plain Text Component, a field where user can input just a one line of characters.
-- [x] Every field type has the property to be optional or required.
-- [x] Every field has its own type validation.
 - [x] Support to Text Box, a field where user can input more than on line of characters.
 - [ ] Support to Single Selection, a field where user can choose just one given option.
-- [ ] Support Multiple Selection, a field where user can choose more than one given options.
+- [ ] Support to Multiple Selection, a field where user can choose more than one given options.
+- [ ] Support to Email, a field where user can input e-mails.
+- [ ] Support to Numerical, a field where user can input 
+- [ ] Support to Password, a field where user can input
+- [ ] Support to Date Picker, a field where user can input
+- [x] Every field type has the property to be optional or required.
+- [x] Every field has its own type validation.
 - [ ] Networking layer for API requests
 - [ ] Design customization.
 
@@ -60,7 +64,7 @@ subtitle | String | Component's description. It could be an aditional explanatio
 componentType | String | Defines what kind of data will be inputed in this field. <br> The types are specified on [Supported Components](#supported-components) section. | YES
 errorMessage | String | Message will be displayed if the data inputed by the user in the field is invalid. | YES
 required | Bool | Specifies if the field has to be filled or not.| YES
-specs | Element | Optinal field customization. The parameters are specified on [Supported Specs Parameters](#supported-specs-parameters) section. | NO
+specs | Element | Optinal field customization. The parameters are specified on [Supported Components Specifications Parameters](#supported-components-specifications-parameters) section. | NO
 
 ### JSON File Example
 ```json
@@ -94,14 +98,15 @@ Text Box | "text_box"| - | N/A
 Email | "email" | Alphanumerical elements followed by a @ and a subsequent site address. | myemail@example.com , my2email@example.org
 Numerical | "numerical" | Decimal numerals | 0 , -42, +9000
 Phone Number | "phone_number" | Brazilian local phone numbers format, with or without punctuation. | 5512341234 , 912341234, (55)912341234
+
 #### Input Validation
 Our text components can be validated using regular expressions. To add a custom validation to your form component, pass a regex rule in the component's specification section in the JSON file.
 Components like "Email" and "Phone Number" already have a validation rule in the supported components section.
 
-### Supported Specs Parameters
-Parameter | Type | Description | Required
------------- | ------------- | ------------- | -------------
-placeholder | String | The auxiliary message displayes in the field.| NO
+### Supported Components Specifications Parameters
+Parameter | Type | Components | Description 
+------------ | ------------- | ------------- | ------------- 
+placeholder | String? | Plain Text, Text Box, Email, Numerical, Phone Number | The auxiliary message displayed in the field
 
 ### Creating a Form
 ```swift
@@ -109,7 +114,6 @@ let dataFromJSON: Data = // Fetch your JSON data.
 let formViewController = FWFormViewController(for: dataFromJSON)
 // present formViewController
 ```
-
 
 ## Resources
 ### Style Guide
