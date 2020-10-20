@@ -23,7 +23,6 @@ Formworks is a framework built on UIKit for building forms from JSON files on iO
 - [ ] Support to Multiple Selection Component, a field where user can choose more than one given options.
 - [ ] Support to Email Component, a email input field.
 - [ ] Support to Numerical Component, a numerical input field.
-- [ ] Support to Password Component, a secure inpute field that hide information.
 - [ ] Support to Date Picker Component, a picker where user can select a date
 - [x] Every component has the property to be optional or required.
 - [x] Every component has its own type validation.
@@ -83,7 +82,7 @@ specs | Element | Optinal field customization. The parameters are specified on [
         {
             "title": "Leave a message about this framework!",
             "subtitle": "If you want, leave a comment, suggestion or a complaint.",
-            "componentType": "text_box",
+            "componentType": "email",
             "required": false
         }
     ]
@@ -94,9 +93,7 @@ specs | Element | Optinal field customization. The parameters are specified on [
 Component | JSON key | Default Validation Rule | Valid Examples
 ------------ | ------------- | ------------- | -------------
 Plain Text | "plain_text" | - | N/A
-Text Box | "text_box"| - | N/A
 Email | "email" | Alphanumerical elements followed by a @ and a subsequent site address. | myemail@example.com , my2email@example.org
-Numerical | "numerical" | Decimal numerals | 0 , -42, +9000
 Phone Number | "phone_number" | Brazilian local phone numbers format, with or without punctuation. | 5512341234 , 912341234, (55)912341234
 
 #### Input Validation
