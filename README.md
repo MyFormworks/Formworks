@@ -9,6 +9,7 @@ Formworks is a framework built on UIKit for building forms from JSON files on iO
 3. [Usage](#usage)
     - [Installing using Swift Package Manager](#installing-using-swift-package-manager)
     - [Creating a Form](#creating-a-form)
+    - [JSON Format ](#json-format)
     - [Input Validation](#input-validation)
     - [Supported Components](#supported-components)
 4. [Resources](#resources)
