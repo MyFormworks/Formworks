@@ -1,8 +1,6 @@
-name: CI
+name: Code Checks
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
     branches: [ master ]
     paths:
@@ -23,7 +21,7 @@ jobs:
   run-lint:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: GitHub Action for SwiftLint
       uses: norio-nomura/action-swiftlint@3.1.0
       env:
