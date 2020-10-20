@@ -100,8 +100,13 @@ Numerical | "numerical" | Decimal numerals | 0 , -42, +9000
 Phone Number | "phone_number" | Brazilian local phone numbers format, with or without punctuation. | 5512341234 , 912341234, (55)912341234
 
 #### Input Validation
-Our text components can be validated using regular expressions. To add a custom validation to your form component, pass a regex rule in the component's specification section in the JSON file.
-Components like "Email" and "Phone Number" already have a validation rule in the supported components section.
+Text components are validated with regular expressions. The following are all default validations:
+
+* email: ``` ["[0-9a-z._%+-]+@[a-z0-9.-]+\\.[a-z]{2,64}"] ```
+* phonenumber: ```["[0-9]{2} [0-9]{8}", "[0-9]{2} [0-9]{4}-[0-9]{4}"] ```
+* cellphone: ``` ["[0-9]{2} [0-9]{9}", "[0-9]{2} [0-9]{5}-[0-9]{4}"] ```
+* max32: ``` ["[A-Za-z0-9 !\"#$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~]{0,32}"] ```
+
 
 ### Supported Components Specifications Parameters
 Parameter | Type | Components | Description 
