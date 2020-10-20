@@ -16,10 +16,12 @@ Formworks is a framework built on UIKit for building forms from JSON files on iO
     - [Glossary](docs/glossary.md)
 
 ## Features
-- [x] Support to Single Line Component.
+- [x] Support to Plain Text Component, a field where user can input just a one line of characters.
 - [x] Every field type has the property to be optional or required.
 - [x] Every field has its own type validation.
-- [ ] Support to Multiple Line, Single Selection and Multiple Selection components.
+- [x] Support to Text Box, a field where user can input more than on line of characters.
+- [ ] Support to Single Selection, a field where user can choose just one given option.
+- [ ] Support Multiple Selection, a field where user can choose more than one given options.
 - [ ] Networking layer for API requests
 - [ ] Design customization.
 
