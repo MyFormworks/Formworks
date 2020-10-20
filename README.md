@@ -84,18 +84,6 @@ specs | Element | Optinal field customization. The parameters are specified on [
     ]
 }
 ```
-### Supported Specs Parameters
-Parameter | Type | Description | Required
------------- | ------------- | ------------- | -------------
-placeholder | String | The auxiliary message displayes in the field.| NO
-
-### Creating a Form
-```swift
-let dataFromJSON: Data = // Fetch your JSON data.
-let formViewController = FWFormViewController(for: dataFromJSON)
-// present formViewController
-```
-
 ### Input Validation
 Our text components can be validated using regular expressions. To add a custom validation to your form component, pass a regex rule in the component's specification section in the JSON file.
 Components like "Email" and "Phone Number" already have a validation rule in the supported components section.
@@ -108,6 +96,19 @@ Text Box | "text_box"| - | N/A
 Email | "email" | Alphanumerical elements followed by a @ and a subsequent site address. | myemail@example.com , my2email@example.org
 Numerical | "numerical" | Decimal numerals | 0 , -42, +9000
 Phone Number | "phone_number" | Brazilian local phone numbers format, with or without punctuation. | 5512341234 , 912341234, (55)912341234
+
+### Supported Specs Parameters
+Parameter | Type | Description | Required
+------------ | ------------- | ------------- | -------------
+placeholder | String | The auxiliary message displayes in the field.| NO
+
+### Creating a Form
+```swift
+let dataFromJSON: Data = // Fetch your JSON data.
+let formViewController = FWFormViewController(for: dataFromJSON)
+// present formViewController
+```
+
 
 ## Resources
 ### Style Guide
