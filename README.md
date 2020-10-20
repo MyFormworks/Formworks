@@ -42,6 +42,51 @@ Formworks is a framework built on UIKit for building forms from JSON files on iO
 ```swift
 import Formworks
 ```
+### JSON Format 
+#### Required Parameters in a JSON Form:
+Parameter | Type | Description 
+------------ | ------------- | -------------
+title | String | Form title. It will be presented in the top of the form.
+components | Array | An array that constains all the components that will be presented in the form.
+
+#### Parameters in a JSON Component:
+Parameter | Type | Description | Required
+------------ | ------------- | ------------- | -------------
+title | String | Component's title. It should be a definition about how the field could be filled. | YES
+subtitle | String | Component's description. It could be an aditional explanation about how the field could be filled. | NO
+componentType | String | Defines what kind of data will be inputed in this field. <br> The types are specified on [Supported Components](#supported-components) section. | YES
+errorMessage | String | Message will be displayed if the data inputed by the user in the field is invalid. | YES
+required | Bool | Specifies if the field has to be filled or not.| YES
+specs | Element | Optinal field customization. The parameters are specified on [Supported Specs Parameters](#supported-specs-parameters) section. | NO
+
+#### JSON File Example
+```json
+{
+    "title": "Formworks Research",
+    "components": [
+        {
+            "title": "What is your name?",
+            "componentType": "plain_text",
+            "errorMessage": "This field is obligatory. Please, answer it.",
+            "required": true,
+            "specs": {
+                "placeholder": "Type your name here."
+            }
+        },
+        {
+            "title": "Leave a message about this framework!",
+            "subtitle": "If you want, leave a comment, suggestion or a complaint.",
+            "componentType": "text_box",
+            "required": false
+        }
+    ]
+}
+```
+### Supported Specs Parameters
+Parameter | Type | Description | Required
+------------ | ------------- | ------------- | -------------
+placeholder | String | The auxiliary message displayes in the field.| NO
+
 ### Creating a Form
 ```swift
 let dataFromJSON: Data = // Fetch your JSON data.
@@ -56,7 +101,8 @@ Components like "Email" and "Phone Number" already have a validation rule in the
 ### Supported Components
 Component | JSON key | Default Validation Rule | Valid Examples
 ------------ | ------------- | ------------- | -------------
-Single Line | "single_line" | - | N/A
+Plain Text | "plain_text" | - | N/A
+Text Box | "text_box"| - | N/A
 Email | "email" | Alphanumerical elements followed by a @ and a subsequent site address. | myemail@example.com , my2email@example.org
 Numerical | "numerical" | Decimal numerals | 0 , -42, +9000
 Phone Number | "phone_number" | Brazilian local phone numbers format, with or without punctuation. | 5512341234 , 912341234, (55)912341234
