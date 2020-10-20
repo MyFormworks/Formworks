@@ -59,12 +59,12 @@ components | Array | An array that constains all the components that will be pre
 ### Parameters in a JSON Component:
 Parameter | Type | Description | Required
 ------------ | ------------- | ------------- | -------------
-title | String | Component's title. It should be a definition about how the field could be filled. | YES
-subtitle | String | Component's description. It could be an aditional explanation about how the field could be filled. | NO
-componentType | String | Defines what kind of data will be inputed in this field. <br> The types are specified on [Supported Components](#supported-components) section. | YES
-errorMessage | String | Message will be displayed if the data inputed by the user in the field is invalid. | YES
-required | Bool | Specifies if the field has to be filled or not.| YES
-specs | Element | Optinal field customization. The parameters are specified on [Supported Components Specifications Parameters](#supported-components-specifications-parameters) section. | NO
+title | String | Component's title. It should be a definition about how the field could be filled. | Yes
+subtitle | String | Component's description. It could be an aditional explanation about how the field could be filled. | No
+componentType | String | Defines what kind of data will be inputed in this field. <br> The types are specified on [Supported Components](#supported-components) section. | Yes
+errorMessage | String | Message will be displayed if the data inputed by the user in the field is invalid. | Yes
+required | Bool | Specifies if the field has to be filled or not.| Yes
+specs | Element | Optinal field customization. The parameters are specified on [Supported Components Specifications Parameters](#supported-components-specifications-parameters) section. | No
 
 ### JSON File Example
 ```json
