@@ -85,11 +85,7 @@ specs | Element | Optinal field customization. The parameters are specified on [
     ]
 }
 ```
-### Input Validation
-Our text components can be validated using regular expressions. To add a custom validation to your form component, pass a regex rule in the component's specification section in the JSON file.
-Components like "Email" and "Phone Number" already have a validation rule in the supported components section.
-
-### Supported Components
+#### Supported Components
 Component | JSON key | Default Validation Rule | Valid Examples
 ------------ | ------------- | ------------- | -------------
 Plain Text | "plain_text" | - | N/A
@@ -97,8 +93,11 @@ Text Box | "text_box"| - | N/A
 Email | "email" | Alphanumerical elements followed by a @ and a subsequent site address. | myemail@example.com , my2email@example.org
 Numerical | "numerical" | Decimal numerals | 0 , -42, +9000
 Phone Number | "phone_number" | Brazilian local phone numbers format, with or without punctuation. | 5512341234 , 912341234, (55)912341234
+##### Input Validation
+Our text components can be validated using regular expressions. To add a custom validation to your form component, pass a regex rule in the component's specification section in the JSON file.
+Components like "Email" and "Phone Number" already have a validation rule in the supported components section.
 
-### Supported Specs Parameters
+#### Supported Specs Parameters
 Parameter | Type | Description | Required
 ------------ | ------------- | ------------- | -------------
 placeholder | String | The auxiliary message displayes in the field.| NO
