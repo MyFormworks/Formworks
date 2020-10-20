@@ -80,8 +80,7 @@ specs | Element | Optinal field customization. The parameters are specified on [
             }
         },
         {
-            "title": "Leave a message about this framework!",
-            "subtitle": "If you want, leave a comment, suggestion or a complaint.",
+            "title": "Leave yout email to contact!",
             "componentType": "email",
             "required": false
         }
