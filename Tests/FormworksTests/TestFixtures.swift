@@ -92,10 +92,10 @@ extension TestFixtures {
     static let plainTextComponent = FWComponentData(title: "Plain Text",
                                                     subtitle: "Subtitle", errorMessage: "errorMessage",
                                                     required: true,
-                                                    specs: FWPlainTextSpecs(placeholder: "Placeholder"))
+                                                    specs: FWSingleLineSpecification(placeholder: "Placeholder"))
     static let singleSelectComponent = FWComponentData(title: "Single Select",
                                                        subtitle: "Subtitle",
                                                        errorMessage: "errorMessage",
                                                        required: false,
-                                                       specs: FWSingleSelectSpecs(options: ["Option1", "Option2", "Option3"]))
+                                                       specs: FWSingleSelectSpecification(options: ["Option1", "Option2", "Option3"]))
 }
