@@ -118,5 +118,5 @@ let formViewController = FWFormViewController(for: dataFromJSON)
 
 ## Resources
 ### Style Guide
-![Style_Guide](docs/FormWorksStyleGuide.jpg)
-### [Glossary](docs/glossary.md)
+![Style_Guide](Resources/FormWorksStyleGuide.jpg)
+### [Glossary](Resources/glossary.md)
