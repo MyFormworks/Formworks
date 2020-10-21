@@ -71,14 +71,14 @@ final class FWFormViewModel {
                 var viewModels: [FWBaseComponentViewModel] = []
                 for component in formData.components {
                     switch component.specs {
-                    case is FWDigitsSpecs:
+                    case is FWDigitsSpecification:
                         let viewModel = FWSingleLineComponentViewModel(title: component.title,
                                                                        description: component.subtitle ?? "",
                                                                        errorMessage: component.errorMessage ?? "",
                                                                        required: component.required, validator: .phonenumber,
                                                                        componentType: .numerical)
                         viewModels.append(viewModel)
-                    case is FWEmailSpecs:
+                    case is FWEmailSpecification:
                         let viewModel = FWSingleLineComponentViewModel(title: component.title,
                                                                        description: component.subtitle ?? "",
                                                                        errorMessage: component.errorMessage ?? "",
@@ -90,7 +90,7 @@ final class FWFormViewModel {
                                                                        description: component.subtitle ?? "",
                                                                        errorMessage: component.errorMessage ?? "",
                                                                        required: component.required, validator: .max32,
-                                                                       componentType: .plainText)
+                                                                       componentType: .singleLine)
                         viewModels.append(viewModel)
                     }
                 }

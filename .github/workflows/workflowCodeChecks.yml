@@ -1,0 +1,28 @@
+name: Code Checks
+
+on:
+  pull_request:
+    branches: [ master ]
+    paths:
+      - '.github/workflows/swift.yml'
+      - '.swiftLint.yml'
+      - '**/*.swift'
+
+jobs:
+  run-tests:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Switch to Xcode 12
+      run: sudo xcode-select --switch /Applications/Xcode_12.app
+    - name: Run tests on iPhone 11 with iOS 14.0
+      run: xcodebuild test -destination 'platform=iOS Simulator,OS=14.0,name=iPhone 11' -scheme 'Formworks'
+  
+  run-lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: GitHub Action for SwiftLint
+      uses: norio-nomura/action-swiftlint@3.1.0
+      env:
+        DIFF_BASE: ${{ github.base_ref }}
