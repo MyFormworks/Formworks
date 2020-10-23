@@ -25,3 +25,37 @@ A RootViewController is a UIViewController responsible for being the container o
 ### UI Component
 A UI Component is a representation of one of many types of inputs available in a form. It is composed of a UIViewController and a ViewModel, which communicates with its UIViewController through the Protocol-delegate pattern.
 **A UI Component should only be instantiated as part of a root UIViewController through UIViewController containment.**
+********************
+
+### FWFormGenerator
+É uma final class cuja responsabilidade é  ser o ponto de entrada dos desenvolvedores para poder inicializar form. 
+É o objeto do nosso framewwork a ser instanciado. Pense como quando inicializa uma label. 
+Ele recebe no init um FWConfiguration e um FWFormGeneratorDelegate por onde o dev vai receber os resultados finais.
+
+### FWConfiguration
+É uma struct que contém um JSON data e o FWStyle.
+
+### FWFormGeneratorDelegate
+É um protocolo responsável por retornar o resultado do formulário do desenvolvedor.
+O desenvolvedor usuário deve implementar esse delegate.
+
+### FWStyle
+É um enum que contém as definições de interface mostradas no FWFormGenerator; as customizações de cores estarão presentes aqui.
+
+### FWFormViewController
+É uma classe do tipo UIViewController que contém a representação do JSON data que FWConfiguration recebeu.
+
+### FWFormViewModel
+É o viewModel para o FWFormViewController e possui um array de FWComponentViewModel.
+
+### FWComponentViewModel
+É o viewModel de cada FWComponentCell.
+
+### FWCollectionViewCell
+É cada célula da FWCollectionView.
+
+### FWCollectionView
+É a UICollectionView base para a construção da interface.
+
+
+
