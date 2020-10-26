@@ -79,16 +79,33 @@ Contains all the currently supported form styles.
 
 ### FWFieldViewModel
 `Protocol`
+Represents the ViewModel of each FWFieldCellView.
+It contains title, description, validator and the required variables.
+
 ### FWTextFieldViewModel
 `Struct`
+Represents the ViewModel of FWTextCellView.
+It contains placeholder and isMultiline variables.
+
 ### FWSelectFieldViewModel
 `Struct`
-### FWFieldCell
-`Class`
-### FWSubmitCell
-`Final Class`
-### FWTextFieldCell
-`Final Class`
-### FWSelectFieldCell
-`Final Class`
+Represents the ViewModel of FWSelectCellView.
+It contains placeholder and options variables.
 
+### FWFieldCellView
+`Class`
+Represents the base subclass of a UICollectionViewCell for FWCollectionView.
+It's responsible for receiving an users' inputs.
+
+### FWSubmitCellView
+`Final Class`
+It's a subclass of FWFieldCell responsible for sending results. It should only be used at the end of the FWCollectionView. 
+It contains a button.
+
+### FWTextCellView
+`Final Class`
+It's a subclass of FWFieldCell responsible for receiving text inputs from the user.
+
+### FWSelectCellView
+`Final Class`
+It's a subclass of FWFieldCell responsible for receiving options selected by the user.
