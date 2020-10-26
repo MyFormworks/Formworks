@@ -49,46 +49,75 @@ Formworks is a framework built on UIKit for building forms from JSON files on iO
 import Formworks
 ```
 ## JSON Format 
-### Required Parameters in a JSON Form:
-Parameter | Type | Description 
------------- | ------------- | -------------
-title | String | Form title. It will be presented in the top of the form.
-components | Array | An array that constains all the components that will be presented in the form.
+### Parameters in a Form
+Parameter | Type | Description | Required | Default Value
+------------ | ------------- | ------------- | ---------- | ---------
+title | String | Form title. It will be presented in the top of the form. | Yes | -
+components | [Component] | An array that contains all the components that will be presented in the form. | Yes | -
 
-### Parameters in a JSON Component:
-Parameter | Type | Description | Required
------------- | ------------- | ------------- | -------------
-title | String | Component's title. It should be a definition about how the field could be filled. | Yes
-subtitle | String | Component's description. It could be an aditional explanation about how the field could be filled. | No
-componentType | String | Defines what kind of data will be inputed in this field. <br> The types are specified on [Supported Components](#supported-components) section. | Yes
-errorMessage | String | Message will be displayed if the data inputed by the user in the field is invalid. | Yes
-required | Bool | Specifies if the field has to be filled or not.| Yes
-specs | Element | Optinal field customization. The parameters are specified on [Supported Components Specifications Parameters](#supported-components-specifications-parameters) section. | No
+### Parameters in a Base Component
+Parameter | Type | Description | Required | Default Value
+------------ | ------------- | ------------- | ------------- | ---------
+title | String | Component's title. It should be a definition about how the field could be filled. | Yes | -
+description | String | Component's description. It could be an aditional explanation about how the field could be filled. | No | ""
+required | Bool | Specifies if the field has to be filled or not.| No | false
+validator | Validator | Determines the type of validation.| Yes | -
+
+### Parameters in a Text Component
+These parameters are in addition to the parameters in the base components.
+Parameter | Type | Description | Required | Default Value
+------------ | ------------- | ------------- | ------------- | ---------
+placeholder | String | Component's title. It should be a definition about how the field could be filled. | No | ""
+isMultiline | Bool | Component's description. It could be an aditional explanation about how the field could be filled. | No | false
+
+### Parameters in a Select Component
+These parameters are in addition to the parameters in the base components.
+Parameter | Type | Description | Required | Default Value
+------------ | ------------- | ------------- | ------------- | ---------
+options | [String] | All the available options. | Yes | -
 
 ### JSON File Example
 ```json
-{
-    "title": "Formworks Research",
-    "components": [
-        {
-            "title": "What is your name?",
-            "componentType": "plain_text",
-            "errorMessage": "This field is obligatory. Please, answer it.",
-            "required": true,
-            "specs": {
-                "placeholder": "Type your name here."
+    {
+        "title": "Formworks Title",
+        "components": [
+            "text": {
+                "title": "What is your name?",
+                "description": "Type your name.",
+                "required": true,
+                "validator": "max32",
+                "placeholder": "Your name",
+                "isMultiline": false
+            },
+            "text": {
+                "title": "What is your e-mail?",
+                "description": "Type your e-mail.",
+                "required": true,
+                "validator": "email",
+                "placeholder": "example@domain.com",
+                "isMultiline": false
+            },
+             "text": {
+                "title": "Tell us a little bit about yourself",
+                "description": "We want to know more about you.",
+                "validator": "max256",
+                "isMultiline": true
+            },
+            "select": {
+               "title": "Pick a color",
+                "required": true,
+                "validator": "single",
+                "options": [
+                    "Red",
+                    "Blue", 
+                    "Green"
+                ]
             }
-        },
-        {
-            "title": "Leave yout email to contact!",
-            "componentType": "email",
-            "required": false
-        }
-    ]
-}
+        ]
+    }
 ```
 
-### Supported Components
+### Supported Validators
 Component | JSON key | Default Validation Rule | Valid Examples
 ------------ | ------------- | ------------- | -------------
 Plain Text | "plain_text" | - | N/A
