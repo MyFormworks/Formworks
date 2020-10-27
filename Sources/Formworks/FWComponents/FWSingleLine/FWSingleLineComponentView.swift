@@ -27,10 +27,16 @@ final class FWSingleLineComponentView: FWBaseComponentView {
 		guard let viewModel = self.viewModel as? FWSingleLineComponentViewModel else { return }
 		viewModel.content = textfield.text ?? ""
 	}
-	
+
+    @objc func didReturn(_ textfield: FWTextField) {
+        textField.resignFirstResponder()
+    }
+
 	// MARK: Setup
 	private func setUpTextField() {
 		textField.addTarget(self, action: #selector(didEdit(_:)), for: .editingChanged)
+        let cancelGesture = UITapGestureRecognizer(target: self, action: #selector(didReturn(_:)))
+        self.contentView.addGestureRecognizer(cancelGesture)
 	}
 	
 	// MARK: Layout
