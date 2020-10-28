@@ -54,7 +54,6 @@ class FWBaseComponentView: UICollectionViewCell {
     private func setUpViews() {
         setUpComponentBackgroundView()
         setUpHeader()
-//        setUpFooter()
     }
 
     private func setUpHeader() {
@@ -81,7 +80,6 @@ class FWBaseComponentView: UICollectionViewCell {
         layoutComponentBackgroundViewConstraints()
         layoutHeaderConstraints()
         layoutSpecsViewConstraints()
-//        layoutFooterConstraints()
     }
     
     private func layoutComponentBackgroundViewConstraints() {
