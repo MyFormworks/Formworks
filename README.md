@@ -117,15 +117,13 @@ options | [String] | All the available options. | Yes | -
     }
 ```
 
-### Supported Validators
-Component | JSON key | Default Validation Rule | Valid Examples
------------- | ------------- | ------------- | -------------
-Plain Text | "plain_text" | - | N/A
-Email | "email" | Alphanumerical elements followed by a @ and a subsequent site address. | myemail@example.com , my2email@example.org
-Phone Number | "phone_number" | Brazilian local phone numbers format, with or without punctuation. | 5512341234 , 912341234, (55)912341234
+### Validators
 
-#### Input Validation
-Text components are validated with regular expressions. The following are all default validations:
+The default validator is based on regex. There is a protocol available for you to implement your own validator when needed.
+
+However, in the **current version** of Formworks registration of a custom validator **is not possible**.
+
+Formworks **current** default regex validators are stated below:
 
 * email: ``` ["[0-9a-z._%+-]+@[a-z0-9.-]+\\.[a-z]{2,64}"] ```
 * phonenumber: ```["[0-9]{2} [0-9]{8}", "[0-9]{2} [0-9]{4}-[0-9]{4}"] ```
