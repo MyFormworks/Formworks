@@ -87,7 +87,7 @@ options | [String] | All the available options. | Yes | -
         "components": [
             {
                 "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-                "type": "text,
+                "type": "text",
                 "title": "What is your name?",
                 "description": "Type your name.",
                 "required": true,
