@@ -9,12 +9,8 @@ Formworks is a framework built on UIKit for building forms from JSON files on iO
 3. [Usage](#usage)
     - [Installing using Swift Package Manager](#installing-using-swift-package-manager)
     - [Creating a Form](#creating-a-form)
-    - [JSON Format ](#json-format)
-    - [Input Validation](#input-validation)
-    - [Supported Components](#supported-components)
-4. [Resources](#resources)
-    - [Style Guide](#style-guide)
-    - [Glossary](docs/glossary.md)
+4. [JSON Format ](#json-format)
+5. [Glossary](docs/glossary.md)
 
 ## Features
 - [x] Support to [Plain Text Component](#supported-components-specifications-parameters), a one line text field.
@@ -48,6 +44,12 @@ Formworks is a framework built on UIKit for building forms from JSON files on iO
 ```swift
 import Formworks
 ```
+### Creating a Form
+```swift
+let dataFromJSON: Data = // Fetch your JSON data.
+let formViewController = FWFormViewController(for: dataFromJSON)
+// present formViewController
+```
 ## JSON Format 
 ### Parameters in a Form
 Parameter | Type | Description | Required | Default Value
@@ -76,12 +78,16 @@ Parameter | Type | Description | Required | Default Value
 ------------ | ------------- | ------------- | ------------- | ---------
 options | [String] | All the available options. | Yes | -
 
-### JSON File Example
+### JSON Input Example 
 ```json
     {
+        "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+        "responseType": "long",
         "title": "Formworks Title",
         "components": [
-            "text": {
+            {
+                "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+                "type": "text,
                 "title": "What is your name?",
                 "description": "Type your name.",
                 "required": true,
@@ -89,29 +95,23 @@ options | [String] | All the available options. | Yes | -
                 "placeholder": "Your name",
                 "isMultiline": false
             },
-            "text": {
+            {
+                "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+                "type": "text",
                 "title": "What is your e-mail?",
                 "description": "Type your e-mail.",
                 "required": true,
                 "validator": "email",
-                "placeholder": "example@domain.com",
+                "placeholder": "youremail@example.org",
                 "isMultiline": false
             },
-             "text": {
+            {
+                "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+                "type": "text",
                 "title": "Tell us a little bit about yourself",
                 "description": "We want to know more about you.",
                 "validator": "max256",
                 "isMultiline": true
-            },
-            "select": {
-               "title": "Pick a color",
-                "required": true,
-                "validator": "single",
-                "options": [
-                    "Red",
-                    "Blue", 
-                    "Green"
-                ]
             }
         ]
     }
@@ -138,14 +138,51 @@ Parameter | Type | Components | Description
 ------------ | ------------- | ------------- | ------------- 
 placeholder | String? | Plain Text, Text Box, Email, Numerical, Phone Number | The auxiliary message displayed in the field
 
-### Creating a Form
-```swift
-let dataFromJSON: Data = // Fetch your JSON data.
-let formViewController = FWFormViewController(for: dataFromJSON)
-// present formViewController
+### JSON Long Output Example 
+        
+```json
+{
+    "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+    "title": "Your Form Title",
+    "responseType": "long",
+    "components": [
+        {
+            "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+            "type": "text",
+            "title": "Text Field Title",
+            "description": "Text Field Description",
+            "validator": "max256",
+            "value": "Text Field Response Value"
+        },
+        {
+            "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+            "type": "text",
+            "title": "Text Field Title",
+            "description": "Text Field Description",
+            "validator": "max256",
+            "value": "Text Field Response Value"
+        }
+    ]
+}
 ```
-
-## Resources
-### Style Guide
-![Style_Guide](Resources/FormWorksStyleGuide.jpg)
-### [Glossary](Resources/glossary.md)
+### JSON Short Output Example 
+```json
+{
+    "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+    "title": "Your Form Title",
+    "responseType": "short",
+    "components": [
+        {
+            "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+            "type": "text",
+            "value": "Text Field Response Value"
+        },
+        {
+            "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+            "type": "text",
+            "value": "Text Field Response Value"
+        }
+    ]
+}
+```
+## [Glossary](Resources/glossary.md)
