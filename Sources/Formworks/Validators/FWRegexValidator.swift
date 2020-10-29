@@ -11,9 +11,16 @@ import Foundation
 enum FWRegex {
     /// Used to validade email  with the regex '[0-9a-z._%+-]+@[a-z0-9.-]+\\.[a-z]{2,64}'.
     case email
-    /// Used to validade brazilian lendline phone numbers with the regexes '[0-9]{2} [0-9]{8} and [0-9]{2} [0-9]{4}-[0-9]{4}'.
+    /**
+    Used to validade brazilian lendline phone numbers with DDD
+    using regexes '[0-9]{2} [0-9]{8} and [0-9]{2} [0-9]{4}-[0-9]{4}'.
+    The number format should be like:  00 12345678 or 00 1234-5678.
+     */
     case phonenumber
-    /// Used to validade brazilian cellphone numbers  with the regex '[0-9]{2} [0-9]{9} and [0-9]{2} [0-9]{5}-[0-9]{4}'.
+    /**
+     Used to validade brazilian cellphone numbers  with the regex '[0-9]{2} [0-9]{9} and [0-9]{2} [0-9]{5}-[0-9]{4}'.
+     The number format should be like:  00 123456789 or 00 1234-56789.
+     */
     case cellphone
     /// Used to validation with maximum 32 characters with the regex '[0-9]{2} [0-9]{9} and [0-9]{2} [0-9]{5}-[0-9]{4}'.
     case max32
