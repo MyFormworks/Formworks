@@ -34,7 +34,7 @@ public final class FWFormViewController: UIViewController {
     // MARK: Life cycle
     public override func loadView() {
         super.loadView()
-        view.backgroundColor = .fwFormBackground
+        view.backgroundColor = .fwBackground
         title = viewModel.title
         navigationController?.navigationBar.prefersLargeTitles = true
     }
