@@ -7,11 +7,17 @@
 
 import Foundation
 
+/// Presetted regexes used in validation in the following cases:
 enum FWRegex {
+    /// Used to validade email  with the regex '[0-9a-z._%+-]+@[a-z0-9.-]+\\.[a-z]{2,64}'.
     case email
+    /// Used to validade brazilian lendline phone numbers with the regexes '[0-9]{2} [0-9]{8} and [0-9]{2} [0-9]{4}-[0-9]{4}'.
     case phonenumber
+    /// Used to validade brazilian cellphone numbers  with the regex '[0-9]{2} [0-9]{9} and [0-9]{2} [0-9]{5}-[0-9]{4}'.
     case cellphone
+    /// Used to validation with maximum 32 characters with the regex '[0-9]{2} [0-9]{9} and [0-9]{2} [0-9]{5}-[0-9]{4}'.
     case max32
+    /// Used to validate custom regexes
     case custom(regex: [String])
 }
 
@@ -32,7 +38,8 @@ extension FWRegex {
     }
 }
 
-final class FWRegexValidator: FWValidator {
+/// A validator that uses regexes to validation.
+struct FWRegexValidator: FWValidator {
     let regexs: [String]
     
     init(regex: FWRegex) {
