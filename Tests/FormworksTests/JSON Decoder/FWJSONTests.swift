@@ -17,7 +17,7 @@ final class FWJSONTests: XCTestCase {
     }
 
     func testInvalidData() {
-        sut = FWJSON(data: TestFixtures.badFormData)
+        sut = FWJSON(data: TestFixtures.emptyFormData)
         sut.decode { (result: Result<FWFormData, Error>) in
             switch result {
             case .success:
@@ -27,7 +27,7 @@ final class FWJSONTests: XCTestCase {
             }
         }
         sut = FWJSON(data: TestFixtures.badComponentData)
-        sut.decode { (result: Result<FWComponentData, Error>) in
+        sut.decode { (result: Result<FWComponentModel, Error>) in
             switch result {
             case .success:
                 XCTFail("InvaldidData: Component successefully decoded.")
@@ -53,15 +53,13 @@ final class FWJSONTests: XCTestCase {
 
     func testDecodeComponents() {
         sut = FWJSON(data: TestFixtures.plainTextComponentData)
-        sut.decode { (result: Result<FWComponentData, Error>) in
+        sut.decode { (result: Result<FWComponentModel, Error>) in
             switch result {
             case .success(let component):
                 let errorMessage = "Text Component does not match it's decoded format"
                 XCTAssertEqual(component.title, TestFixtures.plainTextComponent.title, errorMessage)
-                XCTAssertEqual(component.subtitle, TestFixtures.plainTextComponent.subtitle, errorMessage)
+                XCTAssertEqual(component.description, TestFixtures.plainTextComponent.description, errorMessage)
                 XCTAssertEqual(component.required, TestFixtures.plainTextComponent.required, errorMessage)
-                XCTAssertEqual(component.errorMessage, TestFixtures.plainTextComponent.errorMessage, errorMessage)
-                XCTAssertNotNil(component.specs, errorMessage)
             case .failure(let error):
                 XCTAssertNil(error, "Error decoding single line component: \(error.localizedDescription)")
             }

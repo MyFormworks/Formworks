@@ -9,12 +9,6 @@ import Foundation
 @testable import Formworks
 
 enum TestFixtures {
-    static let badFormData = Data("""
-    {
-        "title":"FormTitle"
-    }
-    """.utf8)
-
     static let emptyFormData = Data("""
     {
         "title":"",
@@ -37,13 +31,13 @@ enum TestFixtures {
                         }
             },
             {
-                "title":"Single Select",
+                "title":"Plain Text",
                 "subtitle":"Subtitle",
                 "errorMessage":"errorMessage",
-                "componentType":"single_select",
-                "required":false,
+                "componentType":"plain_text",
+                "required":true,
                 "specs":{
-                            "options":["Option1", "Option2", "Option3"]
+                            "placeholder":"Placeholder"
                         }
             }
         ]
@@ -71,31 +65,10 @@ enum TestFixtures {
                 }
     }
     """.utf8)
-
-    static let singleSelectComponentData = Data("""
-    {
-        "title":"Single Select",
-        "subtitle":"Subtitle",
-        "errorMessage":"errorMessage",
-        "componentType":"single_select",
-        "required":false,
-        "specs":{
-                    "options":["Option1", "Option2", "Option3"]
-                }
-    }
-    """.utf8)
 }
 
 extension TestFixtures {
     static let minimalForm = FWFormData(title: "", components: [])
-    static let form = FWFormData(title: "FormTitle", components: [plainTextComponent, singleSelectComponent])
-    static let plainTextComponent = FWComponentData(title: "Plain Text",
-                                                    subtitle: "Subtitle", errorMessage: "errorMessage",
-                                                    required: true,
-                                                    specs: FWSingleLineSpecification(placeholder: "Placeholder"))
-    static let singleSelectComponent = FWComponentData(title: "Single Select",
-                                                       subtitle: "Subtitle",
-                                                       errorMessage: "errorMessage",
-                                                       required: false,
-                                                       specs: FWSingleSelectSpecification(options: ["Option1", "Option2", "Option3"]))
+    static let form = FWFormData(title: "FormTitle", components: [plainTextComponent, plainTextComponent])
+    static let plainTextComponent = FWTextDataModel(title: "Text Component")
 }

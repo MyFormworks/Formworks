@@ -11,12 +11,12 @@
  Used in decoding the object.
  */
 enum FWComponentKey: String, CodingKey {
+    case id
     case title
-    case subtitle
-    case errorMessage
-    case componentType
+    case description
+    case type
     case required
-    case specs
+    case validator
 
     /// Component Decodification  Errors
     enum Errors: Error, CustomStringConvertible {

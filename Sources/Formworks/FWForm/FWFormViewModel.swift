@@ -70,27 +70,14 @@ final class FWFormViewModel {
                 self.title = formData.title
                 var viewModels: [FWBaseComponentViewModel] = []
                 for component in formData.components {
-                    switch component.specs {
-                    case is FWDigitsSpecification:
+                    switch type(of: component).type{
+                    case .text:
                         let viewModel = FWSingleLineComponentViewModel(title: component.title,
-                                                                       description: component.subtitle ?? "",
-                                                                       errorMessage: component.errorMessage ?? "",
-                                                                       required: component.required, validator: .phonenumber,
-                                                                       componentType: .numerical)
-                        viewModels.append(viewModel)
-                    case is FWEmailSpecification:
-                        let viewModel = FWSingleLineComponentViewModel(title: component.title,
-                                                                       description: component.subtitle ?? "",
-                                                                       errorMessage: component.errorMessage ?? "",
-                                                                       required: component.required, validator: .email,
-                                                                       componentType: .email)
-                        viewModels.append(viewModel)
-                    default:
-                        let viewModel = FWSingleLineComponentViewModel(title: component.title,
-                                                                       description: component.subtitle ?? "",
-                                                                       errorMessage: component.errorMessage ?? "",
-                                                                       required: component.required, validator: .max32,
-                                                                       componentType: .singleLine)
+                                                                       description: component.description ?? "",
+                                                                       errorMessage:  "",
+                                                                       required: component.required,
+                                                                       validator: .max32,
+                                                                       componentType: .text)
                         viewModels.append(viewModel)
                     }
                 }
