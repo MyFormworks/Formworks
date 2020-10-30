@@ -9,16 +9,16 @@ import Foundation
 
 /// Presetted regexes used in validation in the following cases:
 enum FWRegex {
-    /// Used to validade email  with the regex '[0-9a-z._%+-]+@[a-z0-9.-]+\\.[a-z]{2,64}'.
+    /// Used to validate email  with the regex '[0-9a-z._%+-]+@[a-z0-9.-]+\\.[a-z]{2,64}'.
     case email
     /**
-    Used to validade brazilian lendline phone numbers with DDD
+    Used to validate Brazilian lendline phone numbers with DDD
     using regexes '[0-9]{2} [0-9]{8} and [0-9]{2} [0-9]{4}-[0-9]{4}'.
     The number format should be like:  00 12345678 or 00 1234-5678.
      */
     case phonenumber
     /**
-     Used to validade brazilian cellphone numbers  with the regex '[0-9]{2} [0-9]{9} and [0-9]{2} [0-9]{5}-[0-9]{4}'.
+     Used to validate Brazilian cellphone numbers  with the regex '[0-9]{2} [0-9]{9} and [0-9]{2} [0-9]{5}-[0-9]{4}'.
      The number format should be like:  00 123456789 or 00 1234-56789.
      */
     case cellphone

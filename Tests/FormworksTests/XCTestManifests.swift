@@ -5,7 +5,8 @@ public func allTests() -> [XCTestCaseEntry] {
     return [
         testCase(ManualLayoutTests.allTests),
         testCase(FWJSONTests.allTests),
-        testCase(FWSingleLineViewModelTests.allTests)
+        testCase(FWSingleLineViewModelTests.allTests),
+        testCase(FWRegexValidatorTests.allTests)
     ]
 }
 #endif
