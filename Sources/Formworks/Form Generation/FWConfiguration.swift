@@ -7,7 +7,11 @@
 
 import Foundation
 
+/// The configuration used to create a form.
 public struct FWConfiguration {
-	let json: Data
-	let style: FWStyle
+	/// The JSON provided as `Data`.
+	public let json: Data
+	
+	/// The form's color style.
+	public let style: FWStyle
 }

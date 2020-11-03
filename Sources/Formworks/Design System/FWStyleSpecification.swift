@@ -7,7 +7,9 @@
 
 import UIKit
 
+/// The custom color style specification.
 public struct FWStyleSpecification {
+	// TODO: Determine which color is applied to each elements.
 	let accent: UIColor
 	let background: UIColor
 	let componentBackground: UIColor
