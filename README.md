@@ -50,12 +50,30 @@ let dataFromJSON: Data = // Fetch your JSON data.
 let formViewController = FWFormViewController(for: dataFromJSON)
 // present formViewController
 ```
+### Getting data from a Form
+To get the data from a Form, it is necessary to implement the procotol `FWFormDelegate` in a given class.
+
+```swift
+class ExampleClass: FWFormDelegate {
+    func result(_ data: Data) {
+        // Get data from data variable
+    }
+}
+```
+
+
 ## JSON Format 
 ### Parameters in a Form
 Parameter | Type | Description | Required | Default Value
 ------------ | ------------- | ------------- | ---------- | ---------
 title | String | Form title. It will be presented in the top of the form. | Yes | -
 components | [Component] | An array that contains all the components that will be presented in the form. | Yes | -
+
+### Components types
+These keys are the type of component that you want. They need to be given as the component key followed by the parameters of Base Component and the parameters of the respective component.
+Key | Type | Description
+------------ | ------------- | -------------
+text | FWTextModel | A text component.
 
 ### Parameters in a Base Component
 Parameter | Type | Description | Required | Default Value
@@ -71,64 +89,76 @@ Parameter | Type | Description | Required | Default Value
 ------------ | ------------- | ------------- | ------------- | ---------
 placeholder | String | Component's title. It should be a definition about how the field could be filled. | No | ""
 isMultiline | Bool | Component's description. It could be an aditional explanation about how the field could be filled. | No | false
-
-### Parameters in a Select Component
-These parameters are in addition to the parameters in the base components.
-Parameter | Type | Description | Required | Default Value
------------- | ------------- | ------------- | ------------- | ---------
-options | [String] | All the available options. | Yes | -
+regex | String | This parameter is only necessary if the validator is of `custom` type. In this case, if regex value is wrong or missing, the validator will accept anything. | No | ""
 
 ### JSON Input Example 
 ```json
     {
-        "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-        "responseType": "long",
-        "title": "Formworks Title",
-        "components": [
-            {
-                "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-                "type": "text",
-                "title": "What is your name?",
-                "description": "Type your name.",
-                "required": true,
-                "validator": "max32",
-                "placeholder": "Your name",
-                "isMultiline": false
-            },
-            {
-                "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-                "type": "text",
-                "title": "What is your e-mail?",
-                "description": "Type your e-mail.",
-                "required": true,
-                "validator": "email",
-                "placeholder": "youremail@example.org",
-                "isMultiline": false
-            },
-            {
-                "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-                "type": "text",
-                "title": "Tell us a little bit about yourself",
-                "description": "We want to know more about you.",
-                "validator": "max256",
-                "isMultiline": true
-            }
-        ]
-    }
+	"id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+	"responseType": "long",
+	"title": "Formworks Title",
+	"components": [{
+			"text": {
+				"id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+				"title": "What is your name?",
+				"description": "Type your name.",
+				"required": true,
+				"validator": "max32",
+				"placeholder": "Your name",
+				"isMultiline": false
+			}
+		},
+		{
+			"text": {
+				"id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+				"title": "What is your e-mail?",
+				"description": "Type your e-mail.",
+				"required": true,
+				"validator": "email",
+				"placeholder": "youremail@example.org",
+				"isMultiline": false
+			}
+		},
+		{
+			"text": {
+				"id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+				"title": "Tell us a little bit about yourself",
+				"description": "We want to know more about you.",
+				"validator": "max32",
+				"isMultiline": true
+			}
+		},
+		{
+			"text": {
+				"id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+				"title": "What is your mother's name?",
+				"description": "Type your name.",
+				"required": true,
+				"validator": "custom",
+				"regex": "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
+				"placeholder": "Your mother's name",
+				"isMultiline": false
+			}
+		}
+	]
+}
 ```
 
 ### Validators
 
-The default validator is based on regex. There is a protocol available for you to implement your own validator when needed.
+The default validator is based on regex. There is the protocol `FWValidator` available for you to implement your own validator when needed.
 
-However, in the **current version** of Formworks registration of a custom validator **is not possible**.
+However, in the **current version** of Formworks registration of a custom validator **is not possible**. Nevertheless it is possible to use custom regexes with `FWRegexValidador`, which is the struct responsible to make validations using any viable regex structure.
 
 Formworks **current** default regex validators are stated below:
 
 * email: ``` ["[0-9a-z._%+-]+@[a-z0-9.-]+\\.[a-z]{2,64}"] ```
-* phonenumber: ```["[0-9]{2} [0-9]{8}", "[0-9]{2} [0-9]{4}-[0-9]{4}"] ```
-* cellphone: ``` ["[0-9]{2} [0-9]{9}", "[0-9]{2} [0-9]{5}-[0-9]{4}"] ```
+* phonenumber: ```["(?:^\([0]?[1-9]{2}\)|^[0]?[1-9]{2}[\.-\s]?)[9]?[1-9]\d{3}[\.-\s]?\d{4}"] ```
 * max32: ``` ["[A-Za-z0-9 !\"#$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~]{0,32}"] ```
+
+In case of a `custom` regex the rule will be determinated by the `regex` key.
+
+This regexes can be founded in the `FWRegex` enum.
 
 
 ### Supported Components Specifications Parameters
