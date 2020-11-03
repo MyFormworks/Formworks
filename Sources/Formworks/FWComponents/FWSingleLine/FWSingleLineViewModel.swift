@@ -16,6 +16,6 @@ final class FWSingleLineComponentViewModel: FWBaseComponentViewModel {
     }
 	
 	override func snapshot() -> FWComponentSnapshot {
-		return FWComponentSnapshot(title: self.title, componentType: self.componentType.rawValue, required: self.required, content: self.content)
+		return FWComponentSnapshot(title: self.title, componentType: self.componentType, required: self.required, content: self.content)
 	}
 }

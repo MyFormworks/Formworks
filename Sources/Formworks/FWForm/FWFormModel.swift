@@ -8,9 +8,11 @@
 import Foundation
 
 ///This struct represents the form itself.
-struct FWFormData  {
+struct FWFormModel  {
+    let id: String
+    let responseType: String
 	let title: String
-	let components: [FWComponentModel]
+	let components: [FWBaseComponentModel]
 
     /// Form Decodification  Errors
     enum Errors: Error, CustomStringConvertible {
@@ -23,9 +25,14 @@ struct FWFormData  {
             }
         }
     }
+    
+    enum Responses: String {
+        case short
+        case long
+    }
 }
 
-extension FWFormData: Codable {
+extension FWFormModel: Decodable {
     /**
      Form Coding Keys.
 
@@ -33,18 +40,15 @@ extension FWFormData: Codable {
      Used in decoding the JSON.
      */
     enum CodingKeys: String, CodingKey {
-        case title, components
+        case id,responseType,title, components
     }
 
     init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: FWFormData.CodingKeys.self)
+        let container = try decoder.container(keyedBy: FWFormModel.CodingKeys.self)
+        self.id = try container.decode(String.self, forKey: .id)
+        self.responseType = try container.decode(String.self, forKey: .responseType)
         self.title = try container.decode(String.self, forKey: .title)
-        self.components = try container.decode([FWAnyComponent].self, forKey: .components).map { $0.base }
+        self.components = try container.decode([FWDecodedComponentModel].self, forKey: .components).map { $0.base }
     }
 
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: FWFormData.CodingKeys.self)
-        try container.encode(components.map(FWAnyComponent.init), forKey: .components)
-        try container.encode(title, forKey: .title)
-    }
 }

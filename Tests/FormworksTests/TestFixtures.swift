@@ -11,34 +11,40 @@ import Foundation
 enum TestFixtures {
     static let emptyFormData = Data("""
     {
-        "title":"",
+        "id": "",
+        "responseType": "",
+        "title": "",
         "components": []
     }
     """.utf8)
 
     static let formData = Data("""
     {
-        "title":"FormTitle",
+        "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+        "responseType": "long",
+        "title": "FormTitle",
         "components": [
             {
-                "title":"Plain Text",
-                "subtitle":"Subtitle",
-                "errorMessage":"errorMessage",
-                "componentType":"plain_text",
-                "required":true,
-                "specs":{
-                            "placeholder":"Placeholder"
-                        }
+                "text": {
+                    "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+                    "title": "What is your name?",
+                    "description": "Type your name.",
+                    "required": true,
+                    "validator": "max32",
+                    "placeholder": "Your name",
+                    "isMultiline": false
+                }
             },
             {
-                "title":"Plain Text",
-                "subtitle":"Subtitle",
-                "errorMessage":"errorMessage",
-                "componentType":"plain_text",
-                "required":true,
-                "specs":{
-                            "placeholder":"Placeholder"
-                        }
+                "text": {
+                    "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+                    "title": "What is your name?",
+                    "description": "Type your name.",
+                    "required": true,
+                    "validator": "max32",
+                    "placeholder": "Your name",
+                    "isMultiline": false
+                }
             }
         ]
     }
@@ -53,22 +59,23 @@ enum TestFixtures {
     }
     """.utf8)
 
-    static let plainTextComponentData = Data("""
+    static let textComponentData = Data("""
     {
-        "title":"Plain Text",
-        "subtitle":"Subtitle",
-        "errorMessage":"errorMessage",
-        "componentType":"plain_text",
-        "required":true,
-        "specs":{
-                    "placeholder":"Placeholder"
-                }
+        "text": {
+            "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+            "title": "What is your name?",
+            "description": "Type your name.",
+            "required": true,
+            "validator": "max32",
+            "placeholder": "Your name",
+            "isMultiline": false
+        }
     }
     """.utf8)
 }
 
 extension TestFixtures {
-    static let minimalForm = FWFormData(title: "", components: [])
-    static let form = FWFormData(title: "FormTitle", components: [plainTextComponent, plainTextComponent])
-    static let plainTextComponent = FWTextDataModel(title: "Text Component")
+    static let minimalForm = FWFormModel(id: "87986E91-247F-4F36-A577-19DF6BD165D0", responseType: "long", title: "", components: [])
+    static let form = FWFormModel(id: "87986E91-247F-4F36-A577-19DF6BD165D0", responseType: "long", title: "FormTitle", components: [textComponent, textComponent])
+    static let textComponent = FWTextModel(id: "87986E91-247F-4F36-A577-19DF6BD165D0", title: "What is your name?", description: "Type your name.", required: true, validator: "max32", placeholder: "Your name", isMultiline: false)
 }

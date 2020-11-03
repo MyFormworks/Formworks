@@ -63,22 +63,24 @@ final class FWFormViewModel {
 
     private func generate(_ form: Data) {
         let fwjson = FWJSON(data: form)
-        fwjson.decode { [weak self] (result: Result<FWFormData, Error>) in
+        fwjson.decode { [weak self] (result: Result<FWFormModel, Error>) in
             guard let self = self else { return }
             switch result {
             case .success(let formData):
                 self.title = formData.title
                 var viewModels: [FWBaseComponentViewModel] = []
                 for component in formData.components {
-                    switch type(of: component).type{
-                    case .text:
+                    switch type(of: component){
+                    case is FWTextModel:
                         let viewModel = FWSingleLineComponentViewModel(title: component.title,
-                                                                       description: component.description ?? "",
+                                                                       description: component.description,
                                                                        errorMessage:  "",
                                                                        required: component.required,
                                                                        validator: .max32,
-                                                                       componentType: .text)
+                                                                       componentType: "text")
                         viewModels.append(viewModel)
+                    default:
+                        continue
                     }
                 }
                 self.viewModels.append(viewModels)

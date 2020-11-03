@@ -16,7 +16,7 @@ class FWBaseComponentViewModel {
     let errorMessage: String
     let required: Bool
     let validator: FWValidator
-	let componentType: FWComponentType
+	let componentType: String
 	var isValid: Bool = false {
 		didSet {
 			delegate?.updateUI()
@@ -25,7 +25,7 @@ class FWBaseComponentViewModel {
     
 	weak var delegate: FWComponentViewModelDelegate?
 	
-	init(title: String, description: String, errorMessage: String, required: Bool, validator: FWValidator, componentType: FWComponentType) {
+	init(title: String, description: String, errorMessage: String, required: Bool, validator: FWValidator, componentType: String) {
         self.title = title
         self.description = description
         self.errorMessage = errorMessage
@@ -35,7 +35,7 @@ class FWBaseComponentViewModel {
     }
 	
 	func snapshot() -> FWComponentSnapshot {
-		return FWComponentSnapshot(title: self.title, componentType: self.componentType.rawValue, required: self.required, content: "")
+		return FWComponentSnapshot(title: self.title, componentType: self.componentType, required: self.required, content: "")
 	}
 	
 }
