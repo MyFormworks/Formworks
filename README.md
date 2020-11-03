@@ -11,6 +11,14 @@ Formworks is a framework built on UIKit for building forms from JSON files on iO
     - [Creating a Form](#creating-a-form)
     - [Getting data from a Form](#getting-data-from-a-form)
 4. [JSON Format ](#json-format)
+    - [Parameters in a Form](#parameters-in-a-form)
+    - [Components Types](#components-types)
+    - [Parameters in a Base Component](#parameters-in-a-base-component)
+    - [Parameters in a Text Component](#parameters-in-a-text-component)
+    - [JSON Input Example ](#json-input-example)
+    - [Validators](#validators)
+    - [JSON Long Output Example ](#json-long-output-example)
+    - [JSON Short Output Example ](#json-short-output-example)
 5. [Glossary](docs/glossary.md)
 
 ## Features
@@ -62,7 +70,6 @@ class ExampleClass: FWFormDelegate {
 }
 ```
 
-
 ## JSON Format 
 ### Parameters in a Form
 Parameter | Type | Description | Required | Default Value
@@ -70,7 +77,7 @@ Parameter | Type | Description | Required | Default Value
 title | String | Form title. It will be presented in the top of the form. | Yes | -
 components | [Component] | An array that contains all the components that will be presented in the form. | Yes | -
 
-### Components types
+### Components Types
 These keys are the type of component that you want. They need to be given as the component key followed by the parameters of Base Component and the parameters of the respective component.
 Key | Type | Description
 ------------ | ------------- | -------------
@@ -160,12 +167,6 @@ Formworks **current** default regex validators are stated below:
 In case of a `custom` regex the rule will be determinated by the `regex` key.
 
 This regexes can be founded in the `FWRegex` enum.
-
-
-### Supported Components Specifications Parameters
-Parameter | Type | Components | Description 
------------- | ------------- | ------------- | ------------- 
-placeholder | String? | Plain Text, Text Box, Email, Numerical, Phone Number | The auxiliary message displayed in the field
 
 ### JSON Long Output Example 
         
