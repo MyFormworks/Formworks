@@ -7,23 +7,17 @@
 
 import Foundation
 
-/**
- This struct represents the component's data structure.
-
- All variables declared here will be components presented in each cell of CollectionView.
- */
+///This protocol represents a basic component's data structure.
 protocol FWBaseComponentModel: Decodable {
-    ///This variable is the title of the form. It will appear at first on screen.
+    ///The UUID of the component.
     var id: String { get }
-    ///This variable is the title of the form. It will appear at first on screen.
+    ///The title of the component.
     var title: String { get }
-    ///This variable is the subtitle of the form
-    ///and represents a brief description about what is the form's porpose.
+    ///A description or subtitle for the component
     var description: String { get }
-    ///This variable will appear if the field must be filled.
+    ///A Boolean value that determines if the component is required to be filled or not.
     var required: Bool { get }
-    ///This variable is the error message which will appear
-    ///if user write something incompatible to field type.
-    var validator: String? { get }
+    ///A string specifying what kind of validation will be performed on the component's text field.
+    var validator: String { get }
 }
 

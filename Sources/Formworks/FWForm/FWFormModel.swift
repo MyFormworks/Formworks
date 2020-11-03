@@ -7,15 +7,19 @@
 
 import Foundation
 
-///This struct represents the form itself.
+/// Data structure for the form.
 struct FWFormModel  {
+    /// The UUID of the component.
     let id: String
-    let responseType: String
-	let title: String
+    /// The title of the form.
+    let title: String
+    /// The format that the form response will have.
+    let responseFormat: ResponseFormats
+    /// A collection of component's data structure contained in this form.
 	let components: [FWBaseComponentModel]
 
     /// Form Decodification  Errors
-    enum Errors: Error, CustomStringConvertible {
+    private enum Errors: Error, CustomStringConvertible {
         case couldNotDecode
 
         var description: String {
@@ -25,8 +29,9 @@ struct FWFormModel  {
             }
         }
     }
-    
-    enum Responses: String {
+
+    /// Form response formats
+    private enum ResponseFormats: String, Decodable {
         case short
         case long
     }
@@ -46,7 +51,7 @@ extension FWFormModel: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: FWFormModel.CodingKeys.self)
         self.id = try container.decode(String.self, forKey: .id)
-        self.responseType = try container.decode(String.self, forKey: .responseType)
+        self.responseFormat = try container.decode(ResponseFormats.self, forKey: .responseType)
         self.title = try container.decode(String.self, forKey: .title)
         self.components = try container.decode([FWDecodedComponentModel].self, forKey: .components).map { $0.base }
     }
