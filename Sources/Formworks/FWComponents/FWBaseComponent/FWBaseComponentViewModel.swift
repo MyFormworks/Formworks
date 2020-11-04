@@ -10,17 +10,6 @@ protocol FWComponentViewModelDelegate: AnyObject {
 	func updateUI()
 }
 
-protocol FWComponentViewModel {
-	var title: String { get }
-	var description: String { get }
-	var errorMessage: String { get }
-	var required: Bool { get }
-	var validator: FWValidator { get }
-	var componentType: FWComponentType { get }
-	var isValid: Bool { get }
-	func takeSnapshot() -> FWComponentSnapshot
-}
-
 class FWBaseComponentViewModel {
     let title: String
     let description: String
@@ -48,6 +37,5 @@ class FWBaseComponentViewModel {
 	func snapshot() -> FWComponentSnapshot {
 		return FWComponentSnapshot(title: self.title, componentType: self.componentType.rawValue, required: self.required, content: "")
 	}
-	
 	
 }

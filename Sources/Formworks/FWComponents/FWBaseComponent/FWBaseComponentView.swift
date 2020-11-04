@@ -6,10 +6,6 @@
 //
 
 import UIKit
-protocol FWComponentCell: UICollectionView {
-	static var identifier: String { get }
-	func configure(with viewModel: FWComponentViewModel)
-}
 
 class FWBaseComponentView: UICollectionViewCell {
     // MARK: Properties
