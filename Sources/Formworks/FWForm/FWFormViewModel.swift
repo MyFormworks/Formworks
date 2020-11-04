@@ -75,21 +75,21 @@ final class FWFormViewModel {
                         let viewModel = FWSingleLineComponentViewModel(title: component.title,
                                                                        description: component.subtitle ?? "",
                                                                        errorMessage: component.errorMessage ?? "",
-                                                                       required: component.required, validator: .phonenumber,
+                                                                       required: component.required, validator: FWRegexValidator(regex: .phonenumber),
                                                                        componentType: .numerical)
                         viewModels.append(viewModel)
                     case is FWEmailSpecification:
                         let viewModel = FWSingleLineComponentViewModel(title: component.title,
                                                                        description: component.subtitle ?? "",
                                                                        errorMessage: component.errorMessage ?? "",
-                                                                       required: component.required, validator: .email,
+                                                                       required: component.required, validator: FWRegexValidator(regex: .email),
                                                                        componentType: .email)
                         viewModels.append(viewModel)
                     default:
                         let viewModel = FWSingleLineComponentViewModel(title: component.title,
                                                                        description: component.subtitle ?? "",
                                                                        errorMessage: component.errorMessage ?? "",
-                                                                       required: component.required, validator: .max32,
+                                                                       required: component.required, validator: FWRegexValidator(regex: .max32),
                                                                        componentType: .singleLine)
                         viewModels.append(viewModel)
                     }
