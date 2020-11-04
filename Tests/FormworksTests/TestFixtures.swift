@@ -75,7 +75,7 @@ enum TestFixtures {
 }
 
 extension TestFixtures {
-    static let minimalForm = FWFormModel(id: "87986E91-247F-4F36-A577-19DF6BD165D0", title: "", responseType: FWFormModel.Responses.long, components: [])
-    static let form = FWFormModel(id: "87986E91-247F-4F36-A577-19DF6BD165D0", title: "FormTitle", responseType: FWFormModel.Responses.long, components: [textComponent, textComponent])
+    static let minimalForm = FWFormModel(id: "87986E91-247F-4F36-A577-19DF6BD165D0", title: "", responseFormat: .long, components: [])
+    static let form = FWFormModel(id: "87986E91-247F-4F36-A577-19DF6BD165D0", title: "FormTitle", responseFormat: .long, components: [textComponent, textComponent])
     static let textComponent = FWTextModel(id: "87986E91-247F-4F36-A577-19DF6BD165D0", title: "What is your name?", description: "Type your name.", required: true, validator: "max32", placeholder: "Your name", isMultiline: false)
 }

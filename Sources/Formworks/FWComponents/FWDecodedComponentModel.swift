@@ -7,24 +7,19 @@
 
 import Foundation
 
+/// Data structure for components being decoded.
 struct FWDecodedComponentModel: Decodable {
+    /// Component data decoded in their respective format
     var base: FWBaseComponentModel
-    /**
-     Components Coding Keys.
 
-     This enum holds all the attributes of a component.
-     Used in decoding the object.
-     */
+    /// Component decoding errors
     private enum Errors: Error {
         case invalidComponent
     }
-    
+
+    /// Component possible types in the JSON.
     private enum Types: String, CodingKey {
         case text
-    }
-
-    init(_ base: FWBaseComponentModel) {
-        self.base = base
     }
 
     init(from decoder: Decoder) throws {

@@ -31,7 +31,7 @@ struct FWFormModel  {
     }
 
     /// Form response formats
-    private enum ResponseFormats: String, Decodable {
+    enum ResponseFormats: String, Decodable {
         case short
         case long
     }
@@ -44,7 +44,7 @@ extension FWFormModel: Decodable {
      This enum holds all the attributes of a form.
      Used in decoding the JSON.
      */
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case id,responseType,title, components
     }
 
