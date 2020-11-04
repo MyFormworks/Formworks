@@ -58,7 +58,7 @@ class FWBaseComponentView: UICollectionViewCell {
 
     private func setUpHeader() {
         titleLabel.style(.title)
-        requiredImage.tintColor = .fwRequired
+        requiredImage.tintColor = .fwComponentRequired
         descriptionLabel.style(.description)
     }
 
