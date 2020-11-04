@@ -59,10 +59,40 @@ class FWRegexValidatorTests: XCTestCase {
     func testPhonenumberValidationSuccess() {
         sut = FWRegexValidator(regex: .phonenumber)
         
-        var result = sut.validate("11 12345678")
+        var result = sut.validate("00 1234 1234")
         XCTAssertTrue(result)
         
-        result = sut.validate("11 1234-5678")
+        result = sut.validate("00 12345 1234")
+        XCTAssertTrue(result)
+        
+        result = sut.validate("(00)1234-1234")
+        XCTAssertTrue(result)
+        
+        result = sut.validate("(00)12345-1234")
+        XCTAssertTrue(result)
+        
+        result = sut.validate("(00)12345678")
+        XCTAssertTrue(result)
+        
+        result = sut.validate("(00)123456789")
+        XCTAssertTrue(result)
+        
+        result = sut.validate("(00) 1234 1234")
+        XCTAssertTrue(result)
+        
+        result = sut.validate("(00) 12345 1234")
+        XCTAssertTrue(result)
+        
+        result = sut.validate("(00) 12345678")
+        XCTAssertTrue(result)
+        
+        result = sut.validate("(00) 123456789")
+        XCTAssertTrue(result)
+        
+        result = sut.validate("(000)1234 1234")
+        XCTAssertTrue(result)
+        
+        result = sut.validate("(000)12345 1234")
         XCTAssertTrue(result)
     }
     
@@ -72,53 +102,26 @@ class FWRegexValidatorTests: XCTestCase {
         var result = sut.validate("This is not a phonenumber")
         XCTAssertFalse(result)
         
+        result = sut.validate("0012345678")
+        XCTAssertTrue(result)
+        
+        result = sut.validate("00123456789")
+        XCTAssertTrue(result)
+        
         result = sut.validate("12345678")
-        XCTAssertFalse(result)
-        
-        result = sut.validate("1112345678")
-        XCTAssertFalse(result)
-        
-        result = sut.validate("(11) 12345678")
-        XCTAssertFalse(result)
-        
-        result = sut.validate("11 1234@5678")
-        XCTAssertFalse(result)
-        
-        result = sut.validate("123")
-        XCTAssertFalse(result)
-        
-        result = sut.validate("")
-        XCTAssertFalse(result)
-    }
-    
-    // MARK: Cellphone
-    func testCellphoneValidationSuccess() {
-        sut = FWRegexValidator(regex: .cellphone)
-        
-        var result = sut.validate("11 123456789")
-        XCTAssertTrue(result)
-        
-        result = sut.validate("11 12345-6789")
-        XCTAssertTrue(result)
-    }
-    
-    func testCellphoneValidationFail() {
-        sut = FWRegexValidator(regex: .cellphone)
-        
-        var result = sut.validate("This is not a cellphone")
         XCTAssertFalse(result)
         
         result = sut.validate("123456789")
         XCTAssertFalse(result)
         
-        result = sut.validate("11123456789")
+        result = sut.validate("11 1234@5678")
         XCTAssertFalse(result)
         
-        result = sut.validate("(11) 123456789")
+        result = sut.validate("(0000)000000000")
         XCTAssertFalse(result)
         
-        result = sut.validate("11 12345@6789")
-        XCTAssertFalse(result)
+        result = sut.validate("0000000000000")
+        XCTAssertTrue(result)
         
         result = sut.validate("123")
         XCTAssertFalse(result)
@@ -190,9 +193,6 @@ class FWRegexValidatorTests: XCTestCase {
         
         ("testPhonenumberValidationSuccess", testPhonenumberValidationSuccess),
         ("testPhonenumberValidationFail", testPhonenumberValidationFail),
-        
-        ("testCellphoneValidationSuccess", testCellphoneValidationSuccess),
-        ("testCellphoneValidationFail", testCellphoneValidationFail),
         
         ("testMax32ValidationSuccess", testMax32ValidationSuccess),
         ("testMax32ValidationFail", testMax32ValidationFail),

@@ -160,9 +160,9 @@ However, in the **current version** of Formworks registration of a custom valida
 
 Formworks **current** default regex validators are stated below:
 
-* email: ``` ["[0-9a-z._%+-]+@[a-z0-9.-]+\\.[a-z]{2,64}"] ```
-* phonenumber: ```["(?:^\([0]?[1-9]{2}\)|^[0]?[1-9]{2}[\.-\s]?)[9]?[1-9]\d{3}[\.-\s]?\d{4}"] ```
-* max32: ``` ["[A-Za-z0-9 !\"#$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~]{0,32}"] ```
+* email: ``` [0-9a-z._%+-]+@[a-z0-9.-]+\\.[a-z]{2,64} ```
+* phonenumber: ``` \(?\b([0-9]{2,3}|0((x|[0-9]){2,3}[0-9]{2}))\)?\s*[0-9]{4,5}[- ]*[0-9]{4}\b ```
+* max32: ``` [A-Za-z0-9 !\"#$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~]{0,32} ```
 
 In case of a `custom` regex the rule will be determinated by the `regex` key.
 
