@@ -28,7 +28,7 @@ final class FWFormCollectionView: UICollectionView {
         register(FWSingleLineComponentView.self,
                  forCellWithReuseIdentifier: FWSingleLineComponentView.identifier)
         register(FWFormSubmitCollectionCell.self, forCellWithReuseIdentifier: FWFormSubmitCollectionCell.identifier)
-        backgroundColor = .fwFormBackground
+		backgroundColor = .fwBackground
     }
     
     /// This function will set up the layout of the CollectionView. It first configure

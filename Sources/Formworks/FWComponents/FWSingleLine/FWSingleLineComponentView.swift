@@ -18,7 +18,6 @@ final class FWSingleLineComponentView: FWBaseComponentView {
             layoutTextField()
 			viewModel.delegate = self
             self.viewModel = viewModel
-			
         }
     }
 	
