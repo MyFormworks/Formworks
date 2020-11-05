@@ -63,35 +63,23 @@ final class FWFormViewModel {
 
     private func generate(_ form: Data) {
         let fwjson = FWJSON(data: form)
-        fwjson.decode { [weak self] (result: Result<FWFormData, Error>) in
+        fwjson.decode { [weak self] (result: Result<FWFormModel, Error>) in
             guard let self = self else { return }
             switch result {
             case .success(let formData):
                 self.title = formData.title
                 var viewModels: [FWBaseComponentViewModel] = []
                 for component in formData.components {
-                    switch component.specs {
-                    case is FWDigitsSpecification:
+                    switch component{
+                    case is FWTextModel:
                         let viewModel = FWSingleLineComponentViewModel(title: component.title,
-                                                                       description: component.subtitle ?? "",
-                                                                       errorMessage: component.errorMessage ?? "",
+                                                                       description: component.description,
+                                                                       errorMessage: "",
                                                                        required: component.required, validator: FWRegexValidator(regex: .phonenumber),
-                                                                       componentType: .numerical)
-                        viewModels.append(viewModel)
-                    case is FWEmailSpecification:
-                        let viewModel = FWSingleLineComponentViewModel(title: component.title,
-                                                                       description: component.subtitle ?? "",
-                                                                       errorMessage: component.errorMessage ?? "",
-                                                                       required: component.required, validator: FWRegexValidator(regex: .email),
-                                                                       componentType: .email)
+                                                                       componentType: "text")
                         viewModels.append(viewModel)
                     default:
-                        let viewModel = FWSingleLineComponentViewModel(title: component.title,
-                                                                       description: component.subtitle ?? "",
-                                                                       errorMessage: component.errorMessage ?? "",
-                                                                       required: component.required, validator: FWRegexValidator(regex: .max32),
-                                                                       componentType: .singleLine)
-                        viewModels.append(viewModel)
+                        continue
                     }
                 }
                 self.viewModels.append(viewModels)
