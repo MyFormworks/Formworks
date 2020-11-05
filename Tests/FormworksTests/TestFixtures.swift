@@ -14,6 +14,7 @@ enum TestFixtures {
         "id": "",
         "responseType": "",
         "title": "",
+        "style": {},
         "components": []
     }
     """.utf8)
@@ -23,6 +24,17 @@ enum TestFixtures {
         "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
         "responseType": "long",
         "title": "FormTitle",
+        "style": {
+            "accent": "#F0F0F0FF",
+            "background": "#CACACAFF",
+            "componentBackground": "#F0F0F0FF",
+            "componentTitle": "#212121FF",
+            "componentDescription": "#212121FF",
+            "componentInputText": "#212121FF",
+            "componentInputBackground": "#FDFDFDFF",
+            "componentRequired": "#FD5C5CFF",
+            "componentCorrect": "#78C256FF"
+        },
         "components": [
             {
                 "text": {
@@ -67,15 +79,14 @@ enum TestFixtures {
             "description": "Type your name.",
             "required": true,
             "validator": "max32",
-            "placeholder": "Your name",
-            "isMultiline": false
+            "placeholder": "Your name"
         }
     }
     """.utf8)
 }
 
 extension TestFixtures {
-    static let minimalForm = FWFormModel(id: "87986E91-247F-4F36-A577-19DF6BD165D0", title: "", responseFormat: .long, components: [])
-    static let form = FWFormModel(id: "87986E91-247F-4F36-A577-19DF6BD165D0", title: "FormTitle", responseFormat: .long, components: [textComponent, textComponent])
+    static let minimalForm = FWFormModel(id: "87986E91-247F-4F36-A577-19DF6BD165D0", title: "", responseFormat: .long, components: [], style: FWStyleSpecification())
+    static let form = FWFormModel(id: "87986E91-247F-4F36-A577-19DF6BD165D0", title: "FormTitle", responseFormat: .long, components: [textComponent, textComponent], style: FWStyleSpecification())
     static let textComponent = FWTextModel(id: "87986E91-247F-4F36-A577-19DF6BD165D0", title: "What is your name?", description: "Type your name.", required: true, validator: "max32", placeholder: "Your name", isMultiline: false)
 }

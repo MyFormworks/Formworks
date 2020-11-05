@@ -17,6 +17,7 @@ struct FWFormModel  {
     let responseFormat: ResponseFormats
     /// A collection of component's data structure contained in this form.
 	let components: [FWBaseComponentModel]
+    let style: FWStyleSpecification
 
     /// Form Decodification  Errors
     private enum Errors: Error, CustomStringConvertible {
@@ -45,7 +46,7 @@ extension FWFormModel: Decodable {
      Used in decoding the JSON.
      */
     private enum CodingKeys: String, CodingKey {
-        case id,responseType,title, components
+        case id,responseType,title, components, style
     }
 
     init(from decoder: Decoder) throws {
@@ -54,6 +55,7 @@ extension FWFormModel: Decodable {
         self.responseFormat = try container.decode(ResponseFormats.self, forKey: .responseType)
         self.title = try container.decode(String.self, forKey: .title)
         self.components = try container.decode([FWDecodedComponentModel].self, forKey: .components).map { $0.base }
+        self.style = try container.decode(FWStyleSpecification.self, forKey: .style)
     }
 
 }
