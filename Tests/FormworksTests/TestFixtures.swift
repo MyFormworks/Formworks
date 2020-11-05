@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 @testable import Formworks
 
 enum TestFixtures {
@@ -86,7 +87,16 @@ enum TestFixtures {
 }
 
 extension TestFixtures {
-    static let minimalForm = FWFormModel(id: "87986E91-247F-4F36-A577-19DF6BD165D0", title: "", responseFormat: .long, components: [], style: FWStyleSpecification())
-    static let form = FWFormModel(id: "87986E91-247F-4F36-A577-19DF6BD165D0", title: "FormTitle", responseFormat: .long, components: [textComponent, textComponent], style: FWStyleSpecification())
+    static let styleSpec = FWStyleSpecification(accent: UIColor(hex: "#F0F0F0FF")!,
+                                                background: UIColor(hex: "#CACACAFF")!,
+                                                componentBackground: UIColor(hex:"#F0F0F0FF")!,
+                                                componentTitle: UIColor(hex:"#212121FF")!,
+                                                componentDescription: UIColor(hex: "#212121FF")!,
+                                                componentInputText: UIColor(hex:"#212121FF")!,
+                                                componentInputBackground: UIColor(hex: "#FDFDFDFF")!,
+                                                componentRequired: UIColor(hex: "#FD5C5CFF")!,
+                                                componentCorrect: UIColor(hex: "#78C256FF")!)
+    static let minimalForm = FWFormModel(id: "87986E91-247F-4F36-A577-19DF6BD165D0", title: "", responseFormat: .long, components: [], style: styleSpec)
+    static let form = FWFormModel(id: "87986E91-247F-4F36-A577-19DF6BD165D0", title: "FormTitle", responseFormat: .long, components: [textComponent, textComponent], style: styleSpec)
     static let textComponent = FWTextModel(id: "87986E91-247F-4F36-A577-19DF6BD165D0", title: "What is your name?", description: "Type your name.", required: true, validator: "max32", placeholder: "Your name", isMultiline: false)
 }

@@ -9,95 +9,61 @@ import UIKit
 
 /// The custom color style specification.
 public struct FWStyleSpecification: Decodable {
-	// TODO: Determine which color is applied to each elements.
-    let accent: UIColor
-    let background: UIColor
-    let componentBackground: UIColor
-    let componentTitle: UIColor
-    let componentDescription: UIColor
-    let componentInputText: UIColor
-    let componentInputBackground: UIColor
-    let componentRequired: UIColor
-    let componentCorrect: UIColor
-
-    private enum CodingKeys: String, CodingKey {
-        case accent, background, componentBackground, componentTitle, componentDescription, componentInputText, componentInputBackground, componentRequired, componentCorrect
-    }
-
-    init(accent: UIColor = .fwAccent,
-                background: UIColor = .fwBackground,
-                componentBackground: UIColor = .fwComponentBackground,
-                componentTitle: UIColor = .fwComponentTitle,
-                componentDescription: UIColor = .fwComponentDescription,
-                componentInputText: UIColor = .fwComponentInputText,
-                componentInputBackground: UIColor = .fwComponentInputBackground,
-                componentRequired: UIColor = .fwComponentRequired,
-                componentCorrect: UIColor = .fwComponentCorrect) {
-        self.accent = accent
-        self.background = background
-        self.componentBackground = componentBackground
-        self.componentTitle = componentTitle
-        self.componentDescription = componentDescription
-        self.componentInputText = componentInputText
-        self.componentInputBackground = componentInputBackground
-        self.componentRequired = componentRequired
-        self.componentCorrect = componentCorrect
-    }
+	
+    // TODO: Determine which color is applied to each elements.
+    var accent: UIColor = .fwAccent
+    var background: UIColor = .fwBackground
+    var componentBackground: UIColor = .fwComponentBackground
+    var componentTitle: UIColor = .fwComponentTitle
+    var componentDescription: UIColor = .fwComponentDescription
+    var componentInputText: UIColor = .fwComponentInputText
+    var componentInputBackground: UIColor = .fwComponentInputBackground
+    var componentRequired: UIColor = .fwComponentRequired
+    var componentCorrect: UIColor = .fwComponentCorrect
 }
 
-extension FWStyleSpecification {
+fileprivate struct FWStyleSpecificationDTO: Decodable {
+    // TODO: Determine which color is applied to each elements.
+    let accent: String?
+    let background: String?
+    let componentBackground: String?
+    let componentTitle: String?
+    let componentDescription: String?
+    let componentInputText: String?
+    let componentInputBackground: String?
+    let componentRequired: String?
+    let componentCorrect: String?
+}
+
+extension FWStyleSpecification: Equatable {
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: FWStyleSpecification.CodingKeys.self)
-        if let color = try container.decodeIfPresent(String.self, forKey: .accent) {
-            self.accent = UIColor(hex: color)
-        } else {
-            self.accent = .fwAccent
-        }
-        if let color = try container.decodeIfPresent(String.self, forKey: .background) {
-            self.background = UIColor(hex: color)
-        } else {
-            self.background = .fwBackground
-        }
-        if let color = try container.decodeIfPresent(String.self, forKey: .componentBackground) {
-            self.componentBackground = UIColor(hex: color)
-        } else {
-            self.componentBackground = .fwComponentBackground
-        }
-        if let color = try container.decodeIfPresent(String.self, forKey: .componentCorrect) {
-            self.componentCorrect = UIColor(hex: color)
-        } else {
-            self.componentCorrect = .fwComponentCorrect
-        }
-        if let color = try container.decodeIfPresent(String.self, forKey: .componentTitle) {
-            self.componentTitle = UIColor(hex: color)
-        } else {
-            self.componentTitle = .fwComponentTitle
-        }
-        if let color = try container.decodeIfPresent(String.self, forKey: .componentDescription) {
-            self.componentDescription = UIColor(hex: color)
-        } else {
-            self.componentDescription = .fwComponentDescription
-        }
-        if let color = try container.decodeIfPresent(String.self, forKey: .componentInputText) {
-            self.componentInputText = UIColor(hex: color)
-        } else {
-            self.componentInputText = .fwComponentInputText
-        }
-        if let color = try container.decodeIfPresent(String.self, forKey: .componentRequired) {
-            self.componentRequired = UIColor(hex: color)
-        } else {
-            self.componentRequired = .fwComponentRequired
-        }
-        if let color = try container.decodeIfPresent(String.self, forKey: .componentInputBackground) {
-            self.componentInputBackground = UIColor(hex: color)
-        } else {
-            self.componentInputBackground = .fwComponentInputBackground
-        }
+        let dto = try FWStyleSpecificationDTO.init(from: decoder)
+        self.accent = UIColor(hex: dto.accent ?? "") ?? .fwAccent
+        self.background = UIColor(hex: dto.background ?? "") ?? .fwBackground
+        self.componentBackground = UIColor(hex: dto.componentBackground ?? "") ?? .fwComponentBackground
+        self.componentTitle = UIColor(hex: dto.componentTitle ?? "") ?? .fwComponentTitle
+        self.componentDescription = UIColor(hex: dto.componentDescription ?? "") ?? .fwComponentDescription
+        self.componentInputText = UIColor(hex: dto.componentInputText ?? "") ?? .fwComponentInputText
+        self.componentInputBackground = UIColor(hex: dto.componentInputBackground ?? "") ?? .fwComponentInputBackground
+        self.componentRequired = UIColor(hex: dto.componentRequired ?? "") ?? .fwComponentRequired
+        self.componentCorrect = UIColor(hex: dto.componentCorrect ?? "") ?? .fwComponentCorrect
+    }
+    
+    public static func ==(lhs: FWStyleSpecification, rhs: FWStyleSpecification) -> Bool {
+        return lhs.accent == rhs.accent &&
+            lhs.background == rhs.background &&
+            lhs.componentBackground == rhs.componentBackground &&
+            lhs.componentTitle == rhs.componentTitle &&
+            lhs.componentDescription == rhs.componentDescription &&
+            lhs.componentInputText == rhs.componentInputText &&
+            lhs.componentInputBackground == rhs.componentInputBackground &&
+            lhs.componentRequired == rhs.componentRequired &&
+            lhs.componentCorrect == rhs.componentCorrect
     }
 }
 
-fileprivate extension UIColor {
-    convenience init(hex: String) {
+public extension UIColor {
+    convenience init?(hex: String) {
         let r, g, b, a: CGFloat
 
         if hex.hasPrefix("#") {
@@ -119,6 +85,6 @@ fileprivate extension UIColor {
                 }
             }
         }
-        self.init(red: 0, green: 0, blue: 0, alpha: 0)
+        return nil
     }
 }

@@ -16,7 +16,7 @@ final class FWJSONTests: XCTestCase {
         sut = nil
     }
 
-    func testInvalidData() {
+    func testEmptyData() {
         sut = FWJSON(data: TestFixtures.emptyFormData)
         sut.decode { (result: Result<FWFormModel, Error>) in
             switch result {
@@ -26,6 +26,9 @@ final class FWJSONTests: XCTestCase {
                 XCTAssertNotNil(error, "InvaldidData: Form error nil")
             }
         }
+    }
+    
+    func testBadComponentData() {
         sut = FWJSON(data: TestFixtures.badComponentData)
         sut.decode { (result: Result<FWBaseComponentModel, Error>) in
             switch result {
@@ -45,6 +48,9 @@ final class FWJSONTests: XCTestCase {
                 let errorMessage = "Form does not match it's decoded format"
                 XCTAssertEqual(form.title, TestFixtures.form.title, errorMessage)
                 XCTAssertEqual(form.components.count, TestFixtures.form.components.count, errorMessage)
+                XCTAssertEqual(form.id, TestFixtures.form.id, errorMessage)
+                XCTAssertEqual(form.responseFormat, TestFixtures.form.responseFormat, errorMessage)
+                XCTAssertEqual(form.style, TestFixtures.form.style, errorMessage)
             case .failure(let error):
                 XCTAssertNil(error, "Error decoding form: \(error.localizedDescription)")
             }
@@ -67,7 +73,8 @@ final class FWJSONTests: XCTestCase {
     }
 
     static var allTests = [
-        ("testInvalidData", testInvalidData),
+        ("testEmptyData", testEmptyData),
+        ("testBadComponentData", testBadComponentData),
         ("testDecodeForm", testDecodeForm),
         ("testDecodeComponents", testDecodeComponents)
     ]
