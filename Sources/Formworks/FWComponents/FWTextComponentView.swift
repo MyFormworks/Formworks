@@ -9,7 +9,7 @@ import UIKit
 
 public final class FWTextComponentView: UICollectionViewCell, FWComponentCell {
     // MARK: Properties
-    static var identifier: String {
+    public static var identifier: String {
         return String(describing: self)
     }
     
