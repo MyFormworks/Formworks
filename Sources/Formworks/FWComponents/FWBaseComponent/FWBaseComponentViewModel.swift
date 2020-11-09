@@ -10,6 +10,16 @@ protocol FWComponentViewModelDelegate: AnyObject {
 	func updateUI()
 }
 
+protocol FWComponentViewModel {
+    var title: String { get }
+    var description: String { get }
+    var required: String { get }
+    var validator: String { get }
+    var isValid: Bool { get }
+    
+    func takeSnapshot() -> FWComponentSnapshot
+}
+
 class FWBaseComponentViewModel {
     let title: String
     let description: String

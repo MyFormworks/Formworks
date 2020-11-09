@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol FWComponentCell: UICollectionViewCell {
+    static var identifier: String { get }
+    func configure(with viewModel: FWComponentViewModel)
+}
+
 class FWBaseComponentView: UICollectionViewCell {
     // MARK: Properties
     static var identifier: String {
@@ -63,7 +68,7 @@ class FWBaseComponentView: UICollectionViewCell {
     }
 
     private func setUpFooter() {
-        errorMessageLabel.style(.error)
+        errorMessageLabel.style(.validator)
     }
 
     /// Use this function to make all needed visual set up for the cell.

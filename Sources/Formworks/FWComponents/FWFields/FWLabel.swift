@@ -15,7 +15,7 @@ final class FWLabel: UILabel {
         case required
         case title
         case description
-        case error
+        case validator
     }
 
     override init(frame: CGRect) {
@@ -36,8 +36,8 @@ final class FWLabel: UILabel {
             styleTitle()
         case .description:
             styleDescription()
-        case .error:
-            styleError()
+        case .validator:
+            styleValidator()
         }
 
     }
@@ -54,7 +54,8 @@ final class FWLabel: UILabel {
     private func styleTitle() {
         font = UIFont.preferredFont(forTextStyle: .title2).bold()
         adjustsFontSizeToFitWidth = true
-        minimumScaleFactor = 0.5
+        minimumScaleFactor = 0.75
+        numberOfLines = 3
     }
 
     private func styleDescription() {
@@ -62,7 +63,7 @@ final class FWLabel: UILabel {
         numberOfLines = 0
     }
 
-    private func styleError() {
+    private func styleValidator() {
         font = .preferredFont(forTextStyle: .subheadline)
         textColor = .fwComponentRequired
         numberOfLines = 0
