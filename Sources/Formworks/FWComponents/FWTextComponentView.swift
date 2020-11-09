@@ -127,7 +127,7 @@ public final class FWTextComponentView: UICollectionViewCell, FWComponentCell {
             textField.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 8),
             textField.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
             textField.widthAnchor.constraint(equalTo: guide.widthAnchor),
-            textField.heightAnchor.constraint(equalToConstant: 24)
+            textField.heightAnchor.constraint(equalToConstant: 48)
         ])
     }
     
