@@ -95,12 +95,12 @@ public final class FWTextComponentView: UITableViewCell, FWComponentCell {
     }
     
     private func layoutSeparatorViewConstraints() {
-        self.addSubview(separatorView)
+        self.contentView.addSubview(separatorView)
         
         NSLayoutConstraint.activate([
-            separatorView.topAnchor.constraint(equalTo: self.topAnchor),
-            separatorView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            separatorView.widthAnchor.constraint(equalTo: self.widthAnchor),
+            separatorView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+            separatorView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
+            separatorView.widthAnchor.constraint(equalTo: self.contentView.widthAnchor),
             separatorView.heightAnchor.constraint(equalToConstant: 10)
         ])
     }
