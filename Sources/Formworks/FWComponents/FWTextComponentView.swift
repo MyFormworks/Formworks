@@ -13,9 +13,9 @@ public final class FWTextComponentView: UITableViewCell, FWComponentCell {
         return String(describing: self)
     }
     
-    @ManualLayout public var titleLabel: FWLabel
+    @ManualLayout private var titleLabel: FWLabel
     @ManualLayout private var descriptionLabel: FWLabel
-    @ManualLayout public var validatorLabel: FWLabel
+    @ManualLayout private var validatorLabel: FWLabel
     @ManualLayout private var textField: FWTextField
     private lazy var symbolImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(systemName: "asterisk.circle.fill"))
@@ -37,6 +37,10 @@ public final class FWTextComponentView: UITableViewCell, FWComponentCell {
     // MARK: API
     func configure(with viewModel: FWComponentViewModel) {
         return
+    }
+    
+    public func test(string: String) {
+        validatorLabel.text = string
     }
     
     // MARK: @objc
