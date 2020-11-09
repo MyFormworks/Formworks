@@ -19,6 +19,7 @@ public final class FWTextComponentView: UITableViewCell, FWComponentCell {
     @ManualLayout private var textField: FWTextField
     private lazy var symbolImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(systemName: "asterisk.circle.fill"))
+        imageView.tintColor = .fwComponentRequired
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -50,6 +51,7 @@ public final class FWTextComponentView: UITableViewCell, FWComponentCell {
     
     // MARK: Views Setup
     private func setUpViews() {
+        contentView.backgroundColor = .fwComponentBackground
         setUpTitleLabel()
         setUpDescriptionLabel()
         setUpValidatorLabel()
