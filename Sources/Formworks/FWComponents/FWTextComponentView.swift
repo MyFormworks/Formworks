@@ -13,9 +13,9 @@ public final class FWTextComponentView: UITableViewCell, FWComponentCell {
         return String(describing: self)
     }
     
-    @ManualLayout private var titleLabel: FWLabel
+    @ManualLayout public var titleLabel: FWLabel
     @ManualLayout private var descriptionLabel: FWLabel
-    @ManualLayout private var validatorLabel: FWLabel
+    @ManualLayout public var validatorLabel: FWLabel
     @ManualLayout private var textField: FWTextField
     private lazy var symbolImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(systemName: "asterisk.circle.fill"))
