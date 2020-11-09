@@ -13,6 +13,7 @@ public final class FWTextComponentView: UITableViewCell, FWComponentCell {
         return String(describing: self)
     }
     
+    @ManualLayout private var separatorView: UIView
     @ManualLayout private var titleLabel: FWLabel
     @ManualLayout private var descriptionLabel: FWLabel
     @ManualLayout private var validatorLabel: FWLabel
@@ -52,10 +53,15 @@ public final class FWTextComponentView: UITableViewCell, FWComponentCell {
     // MARK: Views Setup
     private func setUpViews() {
         contentView.backgroundColor = .fwComponentBackground
+        setUpSeparatorView()
         setUpTitleLabel()
         setUpDescriptionLabel()
         setUpValidatorLabel()
         setUpTextField()
+    }
+    
+    private func setUpSeparatorView() {
+        separatorView.backgroundColor = .fwBackground
     }
     
     private func setUpTitleLabel() {
@@ -80,11 +86,25 @@ public final class FWTextComponentView: UITableViewCell, FWComponentCell {
     
     // MARK: Layout
     private func layoutConstraints() {
+        layoutSeparatorViewConstraints()
         layoutTitleLabelConstraints()
         layoutSymbolImageView()
         layoutDescriptionLabel()
         layoutTextField()
         layoutValidatorLabel()
+    }
+    
+    private func layoutSeparatorViewConstraints() {
+        self.contentView.addSubview(separatorView)
+        
+        let guide = contentView.layoutMarginsGuide
+        
+        NSLayoutConstraint.activate([
+            separatorView.topAnchor.constraint(equalTo: guide.topAnchor),
+            separatorView.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
+            separatorView.widthAnchor.constraint(equalTo: guide.widthAnchor),
+            separatorView.heightAnchor.constraint(equalToConstant: 10)
+        ])
     }
     
     private func layoutTitleLabelConstraints() {
@@ -93,7 +113,7 @@ public final class FWTextComponentView: UITableViewCell, FWComponentCell {
         let guide = contentView.layoutMarginsGuide
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: guide.topAnchor),
+            titleLabel.topAnchor.constraint(equalTo: separatorView.topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
             titleLabel.widthAnchor.constraint(equalTo: guide.widthAnchor, multiplier: 0.80)
         ])
