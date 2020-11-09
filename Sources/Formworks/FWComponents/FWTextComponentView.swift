@@ -139,7 +139,8 @@ public final class FWTextComponentView: UICollectionViewCell, FWComponentCell {
         NSLayoutConstraint.activate([
             validatorLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 8),
             validatorLabel.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
-            validatorLabel.widthAnchor.constraint(equalTo: guide.widthAnchor)
+            validatorLabel.widthAnchor.constraint(equalTo: guide.widthAnchor),
+            validatorLabel.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -8)
         ])
     }
 }
