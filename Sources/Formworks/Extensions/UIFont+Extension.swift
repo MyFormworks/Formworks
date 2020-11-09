@@ -15,4 +15,12 @@ extension UIFont {
         
         return UIFont(descriptor: newDescriptor, size: 0)
     }
+    
+    func rounded() -> UIFont {
+        guard let newDescriptor = fontDescriptor.withDesign(.rounded) else {
+            return self
+        }
+        
+        return UIFont(descriptor: newDescriptor, size: 0)
+    }
 }

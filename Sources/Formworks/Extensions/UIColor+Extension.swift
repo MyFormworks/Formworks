@@ -141,9 +141,9 @@ extension UIColor {
 	class var fwComponentInputBackground: UIColor {
 		switch self.style {
 			case .light:
-				return UIColor(red: 243.0/255.0,
-							   green: 243.0/255.0,
-							   blue: 243.0/255.0,
+				return UIColor(red: 253.0/255.0,
+							   green: 253.0/255.0,
+							   blue: 253.0/255.0,
 							   alpha: 1.0)
 			case .dark:
 				return UIColor(red: 41.0/255.0,

@@ -52,20 +52,20 @@ final class FWLabel: UILabel {
     }
 
     private func styleTitle() {
-        font = UIFont.preferredFont(forTextStyle: .title2).bold()
+        font = UIFont.preferredFont(forTextStyle: .title3).bold().rounded()
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.75
         numberOfLines = 3
     }
 
     private func styleDescription() {
-        font = .preferredFont(forTextStyle: .subheadline)
+        font = UIFont.preferredFont(forTextStyle: .subheadline).rounded()
         numberOfLines = 0
     }
 
     private func styleValidator() {
-        font = .preferredFont(forTextStyle: .subheadline)
-        textColor = .fwComponentRequired
+        font = UIFont.preferredFont(forTextStyle: .caption1).rounded()
+        textColor = .fwComponentDescription
         numberOfLines = 0
     }
 }

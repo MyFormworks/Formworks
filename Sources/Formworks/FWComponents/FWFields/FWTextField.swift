@@ -20,6 +20,7 @@ final class FWTextField: UITextField {
     }
 
     private func style() {
+        backgroundColor = .fwComponentInputBackground
         borderStyle = .roundedRect
         autocapitalizationType = .none
     }

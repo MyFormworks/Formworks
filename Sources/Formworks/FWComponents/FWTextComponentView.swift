@@ -13,6 +13,17 @@ public final class FWTextComponentView: UITableViewCell, FWComponentCell {
         return String(describing: self)
     }
     
+    private var viewModel: FWTextComponentViewModel? {
+        didSet {
+            if let viewModel = viewModel {
+                self.titleLabel.text = viewModel.title
+                self.descriptionLabel.text = viewModel.description
+                self.validatorLabel.text = ""
+                self.textField.placeholder = viewModel.placeholder
+            }
+        }
+    }
+    
     @ManualLayout private var separatorView: UIView
     @ManualLayout private var titleLabel: FWLabel
     @ManualLayout private var descriptionLabel: FWLabel
@@ -38,7 +49,10 @@ public final class FWTextComponentView: UITableViewCell, FWComponentCell {
     
     // MARK: API
     func configure(with viewModel: FWComponentViewModel) {
-        return
+        if let textViewModel = viewModel as? FWTextComponentViewModel {
+            self.viewModel = textViewModel
+            self.viewModel?.delegate = self
+        }
     }
     
     public func test(string: String) {
@@ -101,7 +115,7 @@ public final class FWTextComponentView: UITableViewCell, FWComponentCell {
             separatorView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
             separatorView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
             separatorView.widthAnchor.constraint(equalTo: self.contentView.widthAnchor),
-            separatorView.heightAnchor.constraint(equalToConstant: 10)
+            separatorView.heightAnchor.constraint(equalToConstant: 12)
         ])
     }
     
@@ -111,9 +125,9 @@ public final class FWTextComponentView: UITableViewCell, FWComponentCell {
         let guide = contentView.layoutMarginsGuide
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: separatorView.bottomAnchor),
+            titleLabel.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 16),
             titleLabel.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
-            titleLabel.widthAnchor.constraint(equalTo: guide.widthAnchor, multiplier: 0.80)
+            titleLabel.widthAnchor.constraint(equalTo: guide.widthAnchor, multiplier: 0.85)
         ])
     }
     
@@ -123,10 +137,10 @@ public final class FWTextComponentView: UITableViewCell, FWComponentCell {
         let guide = contentView.layoutMarginsGuide
         
         NSLayoutConstraint.activate([
-            symbolImageView.topAnchor.constraint(equalTo: guide.topAnchor),
+            symbolImageView.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 16),
             symbolImageView.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
-            symbolImageView.widthAnchor.constraint(equalToConstant: 30),
-            symbolImageView.heightAnchor.constraint(equalToConstant: 30)
+            symbolImageView.widthAnchor.constraint(equalToConstant: 24),
+            symbolImageView.heightAnchor.constraint(equalToConstant: 24)
         ])
     }
     
@@ -148,10 +162,10 @@ public final class FWTextComponentView: UITableViewCell, FWComponentCell {
         let guide = contentView.layoutMarginsGuide
         
         NSLayoutConstraint.activate([
-            textField.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 8),
+            textField.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20),
             textField.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
             textField.widthAnchor.constraint(equalTo: guide.widthAnchor),
-            textField.heightAnchor.constraint(equalToConstant: 32)
+            textField.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     
@@ -161,10 +175,15 @@ public final class FWTextComponentView: UITableViewCell, FWComponentCell {
         let guide = contentView.layoutMarginsGuide
         
         NSLayoutConstraint.activate([
-            validatorLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 8),
+            validatorLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 16),
             validatorLabel.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
             validatorLabel.widthAnchor.constraint(equalTo: guide.widthAnchor),
             validatorLabel.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -8)
         ])
+    }
+}
+extension FWTextComponentView: FWTextComponentViewModelDelegate {
+    func update() {
+        self.symbolImageView.image = viewModel?.isValid ?? false ? UIImage(systemName: "checkmark.circle.fill") : UIImage(systemName: "asterisk.circle.fill")
     }
 }

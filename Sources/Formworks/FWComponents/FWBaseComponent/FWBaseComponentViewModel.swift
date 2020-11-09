@@ -13,9 +13,7 @@ protocol FWComponentViewModelDelegate: AnyObject {
 protocol FWComponentViewModel {
     var title: String { get }
     var description: String { get }
-    var required: String { get }
-    var validator: String { get }
-    var isValid: Bool { get }
+    var required: Bool { get }
     
     func takeSnapshot() -> FWComponentSnapshot
 }
