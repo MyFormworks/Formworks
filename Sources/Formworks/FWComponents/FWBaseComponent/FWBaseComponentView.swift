@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol FWComponentCell: UICollectionViewCell {
+protocol FWComponentCell: UITableViewCell {
     static var identifier: String { get }
     func configure(with viewModel: FWComponentViewModel)
 }

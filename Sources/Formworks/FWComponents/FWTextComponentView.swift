@@ -7,7 +7,7 @@
 
 import UIKit
 
-public final class FWTextComponentView: UICollectionViewCell, FWComponentCell {
+public final class FWTextComponentView: UITableViewCell, FWComponentCell {
     // MARK: Properties
     public static var identifier: String {
         return String(describing: self)
@@ -24,8 +24,8 @@ public final class FWTextComponentView: UICollectionViewCell, FWComponentCell {
     }()
     
     // MARK: Init
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUpViews()
         layoutConstraints()
     }
@@ -127,7 +127,7 @@ public final class FWTextComponentView: UICollectionViewCell, FWComponentCell {
             textField.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 8),
             textField.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
             textField.widthAnchor.constraint(equalTo: guide.widthAnchor),
-            textField.heightAnchor.constraint(equalToConstant: 48)
+            textField.heightAnchor.constraint(equalToConstant: 32)
         ])
     }
     
