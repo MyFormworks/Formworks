@@ -95,14 +95,12 @@ public final class FWTextComponentView: UITableViewCell, FWComponentCell {
     }
     
     private func layoutSeparatorViewConstraints() {
-        self.contentView.addSubview(separatorView)
-        
-        let guide = contentView.layoutMarginsGuide
+        self.addSubview(separatorView)
         
         NSLayoutConstraint.activate([
-            separatorView.topAnchor.constraint(equalTo: guide.topAnchor),
-            separatorView.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
-            separatorView.widthAnchor.constraint(equalTo: guide.widthAnchor),
+            separatorView.topAnchor.constraint(equalTo: self.topAnchor),
+            separatorView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            separatorView.widthAnchor.constraint(equalTo: self.widthAnchor),
             separatorView.heightAnchor.constraint(equalToConstant: 10)
         ])
     }
@@ -113,7 +111,7 @@ public final class FWTextComponentView: UITableViewCell, FWComponentCell {
         let guide = contentView.layoutMarginsGuide
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: separatorView.topAnchor),
+            titleLabel.topAnchor.constraint(equalTo: separatorView.bottomAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
             titleLabel.widthAnchor.constraint(equalTo: guide.widthAnchor, multiplier: 0.80)
         ])
