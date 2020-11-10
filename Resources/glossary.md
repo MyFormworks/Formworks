@@ -13,7 +13,7 @@
   * [FWFormGeneratorDelegate](#fwformgeneratordelegate)
   * [FWFormViewController](#fwformviewcontroller)
   * [FWFormViewModel](#fwformviewmodel)
-  * [FWCollectionView](#fwcollectionview)
+  * [FWTableView](#fwtableview)
   * [FWComponentCell](#fwcomponentcell)
   * [FWComponentViewModel](#fwcomponentviewmodel)
   * [FWStyle](#fwstyle)
@@ -59,14 +59,14 @@ Crafted based the JSON data contained in FWConfiguration.
 ViewModel for FWFormViewController. 
 Holds and array of FWComponentViewModel objects.
 
-### FWCollectionView
+### FWTableView
 `Final Class`
-The UICollectionView subclass containing the components of our form.
+The UITableView subclass containing the components of our form.
 
 ### FWComponentCell
 `Protocol`
-Represents a cell of FWCollectionView. 
-Demands classes to be subclassed from UICollenctionViewCell.
+Represents a cell of FWTableView. 
+Demands classes to be subclassed from UITableViewCell.
 
 ### FWComponentViewModel
 `Protocol`
@@ -94,12 +94,12 @@ It contains placeholder and options variables.
 
 ### FWFieldCellView
 `Class`
-Represents the base subclass of a UICollectionViewCell for FWCollectionView.
+Represents the base subclass of a UITableViewCell for FWTableView.
 It's responsible for receiving an users' inputs.
 
 ### FWSubmitCellView
 `Final Class`
-It's a subclass of FWFieldCell responsible for sending results. It should only be used at the end of the FWCollectionView. 
+It's a subclass of FWFieldCell responsible for sending results. It should only be used at the end of the FWTableView. 
 It contains a button.
 
 ### FWTextCellView

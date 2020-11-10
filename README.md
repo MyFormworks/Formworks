@@ -7,32 +7,29 @@ Formworks is a framework built on UIKit for building forms from JSON files on iO
 1. [Features](#features)
 2. [Requirements](#requirements)
 3. [Usage](#usage)
-    - [Installing using Swift Package Manager](#installing-using-swift-package-manager)
-    - [Creating a Form](#creating-a-form)
-    - [Getting data from a Form](#getting-data-from-a-form)
-4. [JSON Format ](#json-format)
-    - [Parameters in a Form](#parameters-in-a-form)
-    - [Components Types](#components-types)
-    - [Parameters in a Base Component](#parameters-in-a-base-component)
-    - [Parameters in a Text Component](#parameters-in-a-text-component)
-    - [JSON Input Example ](#json-input-example)
+  - [Installing using Swift Package Manager](#installing-using-swift-package-manager)
+  - [Creating a Form](#creating-a-form)
+  - [Getting data from a Form](#getting-data-from-a-form)
+4. [Form Input Format](#form-input-format)
+  - [Input Example](#input-example)
+  - [Parameters](#parameters)
+    - [Form](#form)
+    - [Components](#components)
+    - [Base Component](#base-component)
+    - [Text Component](#text-component)
     - [Validators](#validators)
-    - [JSON Long Output Example ](#json-long-output-example)
-    - [JSON Short Output Example ](#json-short-output-example)
-5. [Glossary](docs/glossary.md)
+5. [Form Output Format](#form-output-format)
+6. [Glossary](Resources/glossary.md)
+7. [Contribuiting](#contribuiting)
+8. [Authors](#authors)
 
 ## Features
-- [x] Support to [Plain Text Component](#supported-components-specifications-parameters), a one line text field.
-- [ ] Support to Text Box Component, a multiple lines text field.
-- [ ] Support to Single Selection Component, a field where user can choose just one given option.
-- [ ] Support to Multiple Selection Component, a field where user can choose more than one given options.
-- [ ] Support to Email Component, a email input field.
-- [ ] Support to Numerical Component, a numerical input field.
-- [ ] Support to Date Picker Component, a picker where user can select a date
-- [x] Every component has the property to be optional or required.
-- [x] Every component has its own type validation.
-- [ ] Networking layer for API requests
-- [ ] Design customization.
+- [x] Create form screens directly from json files.
+- [x] [Text Components](#supported-components-specifications-parameters) with input validation.
+- [x] Form component requirement: Components can be flaged as required, forcing the user to fill them to submit.
+- [x] Color style customization from the form file.
+- [ ] Support to other types of components such as option selection or date picker.
+- [ ] Support to networking calls.
 
 ## Requirements
 - Swift 5.0 or later 
@@ -41,116 +38,137 @@ Formworks is a framework built on UIKit for building forms from JSON files on iO
 
 ## Usage
 ### Installing using Swift Package Manager
-1. Create a new Xcode Project
-2. In Xcode, click on "File"
-3. Click on "Swift Packages"
-4. Click on "Add Package Dependency"
-5. Paste the web url for this repository: https://github.com/Galdineris/Formworks.git
-6. Set Rules to Branch on "master"
-7. Finish
+1. In a Xcode project, click on "File"
+2. Click on "Swift Packages" and select "Add Package Dependency"
+3. Paste the web url for this repository: https://github.com/Galdineris/Formworks.git
+4. Set Rules to Branch on "master"
+5. Done
+After this, you can fetch the latest changes to the framework  by selecting "Update to Latest Package Versions" in step 2.
 
 ### Importing Formworks to your Project
 ```swift
 import Formworks
 ```
+
 ### Creating a Form
 ```swift
 let dataFromJSON: Data = // Fetch your JSON data.
-let formViewController = FWFormViewController(for: dataFromJSON)
-// present formViewController
-```
-### Getting data from a Form
-To get the data from a Form, it is necessary to implement the procotol `FWFormDelegate` in a given class.
+let formConfiguration = FWConfiguration(json: dataFromJSON, style: .light)
+let formGenerator = FWFormGenerator(configuration: formConfiguration)
 
+formGenerator.setUp {[unowned self] (error) in
+    // Error handling
+  }
+}
+
+formGenerator.generate {[unowned self] (result: Result<FWFormViewController, Error>) in
+  switch result {
+  case .success(let formViewController):
+    // Present formViewController
+  case .failure(let error):
+    // Error handling
+  } 
+  }
+}
+
+
+
+```
+
+### Receiving data from a Form
+To get the data from a Form, it is necessary to implement the procotol `FWFormGeneratorDelegate` in a given class.
+The answers come in JSON format.
+(For more information, refer to [Form Output Format](#form-output-format))
 ```swift
-class ExampleClass: FWFormDelegate {
-    func result(_ data: Data) {
-        // Get data from data variable
-    }
+extension ExampleClass: FWFormGeneratorDelegate {
+  func userDidSubmit(_ answers: Data) {
+    // Handle answers
+  }
 }
 ```
 
-## JSON Format 
-### Parameters in a Form
+## Form Input Format
+
+### JSON Input Example 
+```json
+{
+  "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+  "responseFormat": "long",
+  "title": "Formworks Title",
+  "components": [{
+    "text": {
+      "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+      "title": "What is your name?",
+      "description": "Type your name.",
+      "required": true,
+      "validator": "max32",
+      "placeholder": "Your name"
+      }
+    },
+    {
+    "text": {
+      "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+      "title": "What is your e-mail?",
+      "description": "Type your e-mail.",
+      "required": true,
+      "validator": "email",
+      "placeholder": "youremail@example.org"
+      }
+    },
+    {
+    "text": {
+      "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+      "title": "Tell us a little bit about yourself",
+      "description": "We want to know more about you.",
+      "validator": "max32"
+      }
+    },
+    {
+    "text": {
+        "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+        "title": "What is your mother's name?",
+        "description": "Type your name.",
+        "required": true,
+        "validator": "custom",
+        "regex": "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
+        "placeholder": "Your mother's name"
+      }
+    }
+  ]
+}
+```
+
+### Parameters
+
+### Form
 Parameter | Type | Description | Required | Default Value
 ------------ | ------------- | ------------- | ---------- | ---------
+id | String | Object unique ID | Yes | -
+responseFormat | String | Response format for the form. Can either be "long" or "short" | Yes | -
 title | String | Form title. It will be presented in the top of the form. | Yes | -
 components | [Component] | An array that contains all the components that will be presented in the form. | Yes | -
 
-### Components Types
+### Components
 These keys are the type of component that you want. They need to be given as the component key followed by the parameters of Base Component and the parameters of the respective component.
 Key | Type | Description
 ------------ | ------------- | -------------
 text | FWTextModel | A text component.
 
-### Parameters in a Base Component
+### Base Component
 Parameter | Type | Description | Required | Default Value
 ------------ | ------------- | ------------- | ------------- | ---------
+id | String | Object unique ID | Yes | -
 title | String | Component's title. It should be a definition about how the field could be filled. | Yes | -
 description | String | Component's description. It could be an aditional explanation about how the field could be filled. | No | ""
 required | Bool | Specifies if the field has to be filled or not.| No | false
 validator | Validator | Determines the type of validation.| Yes | -
 
-### Parameters in a Text Component
-These parameters are in addition to the parameters in the base components.
+### Text Component
+These parameters are in addition to the parameters in the [base components](#base-component).
 Parameter | Type | Description | Required | Default Value
 ------------ | ------------- | ------------- | ------------- | ---------
 placeholder | String | Component's title. It should be a definition about how the field could be filled. | No | ""
-isMultiline | Bool | Component's description. It could be an aditional explanation about how the field could be filled. | No | false
 regex | String | This parameter is only necessary if the validator is of `custom` type. In this case, if regex value is wrong or missing, the validator will accept anything. | No | ""
-
-### JSON Input Example 
-```json
-    {
-	"id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-	"responseType": "long",
-	"title": "Formworks Title",
-	"components": [{
-			"text": {
-				"id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-				"title": "What is your name?",
-				"description": "Type your name.",
-				"required": true,
-				"validator": "max32",
-				"placeholder": "Your name",
-				"isMultiline": false
-			}
-		},
-		{
-			"text": {
-				"id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-				"title": "What is your e-mail?",
-				"description": "Type your e-mail.",
-				"required": true,
-				"validator": "email",
-				"placeholder": "youremail@example.org",
-				"isMultiline": false
-			}
-		},
-		{
-			"text": {
-				"id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-				"title": "Tell us a little bit about yourself",
-				"description": "We want to know more about you.",
-				"validator": "max32",
-				"isMultiline": true
-			}
-		},
-		{
-			"text": {
-				"id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-				"title": "What is your mother's name?",
-				"description": "Type your name.",
-				"required": true,
-				"validator": "custom",
-				"regex": "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-				"placeholder": "Your mother's name",
-				"isMultiline": false
-			}
-		}
-	]
-}
-```
 
 ### Validators
 
@@ -168,51 +186,49 @@ In case of a `custom` regex the rule will be determinated by the `regex` key.
 
 This regexes can be founded in the `FWRegex` enum.
 
-### JSON Long Output Example 
-        
+## Form Output Format
+
 ```json
 {
-    "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-    "title": "Your Form Title",
-    "responseType": "long",
-    "components": [
-        {
-            "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-            "type": "text",
-            "title": "Text Field Title",
-            "description": "Text Field Description",
-            "validator": "max256",
-            "value": "Text Field Response Value"
-        },
-        {
-            "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-            "type": "text",
-            "title": "Text Field Title",
-            "description": "Text Field Description",
-            "validator": "max256",
-            "value": "Text Field Response Value"
-        }
-    ]
+  "title": "Your Form Title",
+  "components": [
+    {
+      "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+      "type": "text",
+      "title": "Text Field Title",
+      "description": "Text Field Description",
+      "validator": "max256",
+      "required": "false",
+      "regex": "Your custom regex",
+      "placeholder": "Text Field Placeholder",
+      "isMultiline": "false",
+      "content": "Text Field Response Value"
+    },
+    {
+      "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+      "type": "text",
+      "title": "Text Field Title",
+      "description": "Text Field Description",
+      "validator": "max256",
+      "required": "false",
+      "regex": "Your custom regex",
+      "placeholder": "Text Field Placeholder",
+      "isMultiline": "false",
+      "content": "Text Field Response Value"
+    }
+  ]
 }
 ```
-### JSON Short Output Example 
-```json
-{
-    "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-    "title": "Your Form Title",
-    "responseType": "short",
-    "components": [
-        {
-            "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-            "type": "text",
-            "value": "Text Field Response Value"
-        },
-        {
-            "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-            "type": "text",
-            "value": "Text Field Response Value"
-        }
-    ]
-}
-```
+
 ## [Glossary](Resources/glossary.md)
+
+## Contribuiting
+Please see [CONTRIBUTING.md](Resources/CONTRIBUTING.md).
+
+## Authors
+This project was started by
+Artur Carneiro
+Cassia Barbosa
+Edgar Sgroi
+Rafael Galdino
+Victor Falcetta
