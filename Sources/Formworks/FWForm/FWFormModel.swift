@@ -16,7 +16,7 @@ struct FWFormModel  {
     /// The format that the form response will have.
     let responseFormat: ResponseFormats
     /// A collection of component's data structure contained in this form.
-	let components: [FWBaseComponentModel]
+	let components: [FWComponentModel]
     let style: FWStyleSpecification
 
     /// Form Decodification  Errors

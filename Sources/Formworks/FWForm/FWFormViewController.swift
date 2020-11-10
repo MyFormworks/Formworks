@@ -7,23 +7,17 @@
 
 import UIKit
 
-public protocol FWFormDelegate: AnyObject {
-    func result(_ data: Data)
-}
-
 /// Representation of a form. It displays each component as a cell of a `UICollectionView`.
 public final class FWFormViewController: UIViewController {
     // MARK: Properties
-    @ManualLayout private var formCollectionView: FWFormCollectionView
+    @ManualLayout private var formTableView: UITableView
     
     private let viewModel: FWFormViewModel
-
-    public weak var delegate: FWFormDelegate?
 	
     // MARK: Init
     /// Initializes a new instance of this type.
-    public init(for json: Data) {
-		self.viewModel = FWFormViewModel(json)
+    init(viewModel: FWFormViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -41,84 +35,71 @@ public final class FWFormViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        setUpCollectionView()
-        setUpCollectionViewConstraints()
-		setUpViewModel()
+        setUpViewModel()
+        setUpTableView()
+        setUpTableViewConstraints()
     }
 	
 	// MARK: ViewModel setup
 	private func setUpViewModel() {
-		viewModel.delegate = self
+		
 	}
 	
-    private func setUpCollectionView() {
-        formCollectionView.delegate = self
-        formCollectionView.dataSource = self
+    private func setUpTableView() {
+        formTableView.delegate = self
+        formTableView.dataSource = self
+        formTableView.register(FWTextComponentView.self,
+                 forCellReuseIdentifier: FWTextComponentView.identifier)
+        formTableView.register(FWFormSubmitTableCell.self, forCellReuseIdentifier: FWFormSubmitTableCell.identifier)
+        formTableView.backgroundColor = UIColor.fwBackground
+        formTableView.rowHeight = UITableView.automaticDimension
+        formTableView.estimatedRowHeight = 100
+        formTableView.separatorStyle = .none
     }
     
     /// This function will create the necessary constraints for the CollectionView
     /// to occupy the entire ViewController.
-    private func setUpCollectionViewConstraints() {
-        view.addSubview(formCollectionView)
+    private func setUpTableViewConstraints() {
+        view.addSubview(formTableView)
         let guides = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            formCollectionView.topAnchor.constraint(equalTo: guides.topAnchor),
-            formCollectionView.leftAnchor.constraint(equalTo: guides.leftAnchor),
-            formCollectionView.bottomAnchor.constraint(equalTo: guides.bottomAnchor),
-            formCollectionView.rightAnchor.constraint(equalTo: guides.rightAnchor)
+            formTableView.topAnchor.constraint(equalTo: guides.topAnchor),
+            formTableView.leftAnchor.constraint(equalTo: guides.leftAnchor),
+            formTableView.bottomAnchor.constraint(equalTo: guides.bottomAnchor),
+            formTableView.rightAnchor.constraint(equalTo: guides.rightAnchor)
         ])
     }
 }
-// MARK: UICollectionViewDelegate
-extension FWFormViewController: UICollectionViewDelegate {
-    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+// MARK: UITableViewDelegate
+extension FWFormViewController: UITableViewDelegate {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == viewModel.numberOfComponents {
-            viewModel.submit()
+            let didSubmit = viewModel.submit()
+            print(didSubmit)
         }
     }
-    
 }
-// MARK: UICollectionViewDataSource
-extension FWFormViewController: UICollectionViewDataSource {
-    
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return viewModel.numberOfComponents + 1
+
+// MARK: UITableViewDataSource
+extension FWFormViewController: UITableViewDataSource {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfComponents + 1
     }
 
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == viewModel.numberOfComponents {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FWFormSubmitCollectionCell.identifier,
-                                                                for: indexPath) as? FWFormSubmitCollectionCell else {
-                return UICollectionViewCell()
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: FWFormSubmitTableCell.identifier) as? FWFormSubmitTableCell else {
+                return UITableViewCell()
             }
             return cell
         } else {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FWSingleLineComponentView.identifier,
-                                                                for: indexPath) as? FWSingleLineComponentView else {
-                return UICollectionViewCell()
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: FWTextComponentView.identifier) as? FWTextComponentView else {
+                return UITableViewCell()
             }
             cell.configure(with: viewModel.viewModelAt(index: indexPath))
-
             return cell
         }
     }
-}
 
-// MARK: ViewModel Delegate
-extension FWFormViewController: FWFormViewModelDelegate {
-    func didSubmit(_ result: Result<Data, Error>) {
-        switch result {
-        case .success(let data):
-            delegate?.result(data)
-        case .failure(let error):
-            print(error.localizedDescription)
-        }
-    }
 
-    func didReceiveComponents() {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.formCollectionView.reloadData()
-        }
-    }
 }

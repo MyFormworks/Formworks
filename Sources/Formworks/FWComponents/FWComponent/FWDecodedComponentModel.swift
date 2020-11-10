@@ -10,7 +10,7 @@ import Foundation
 /// Data structure for components being decoded.
 struct FWDecodedComponentModel: Decodable {
     /// Component data decoded in their respective format
-    var base: FWBaseComponentModel
+    var base: FWComponentModel
 
     /// Component decoding errors
     private enum Errors: Error {

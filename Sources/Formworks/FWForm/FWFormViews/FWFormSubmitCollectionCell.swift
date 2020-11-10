@@ -7,8 +7,8 @@
 
 import UIKit
 
-/// A representation of a `Formworks` `UICollectionView`'s cell.
-final class FWFormSubmitCollectionCell: UICollectionViewCell {
+/// A representation of a `Formworks` `UITableViewCell`'s cell.
+final class FWFormSubmitTableCell: UITableViewCell {
 
     @ManualLayout private var submitLabel: FWLabel
     
@@ -16,29 +16,29 @@ final class FWFormSubmitCollectionCell: UICollectionViewCell {
         return String(describing: self)
     }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUp()
         layoutConstraints()
     }
+
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     private func setUp() {
-        submitLabel.style(.required)
+        submitLabel.style(.submit)
         submitLabel.text = "Submit"
     }
 
     private func layoutConstraints() {
         contentView.addSubview(submitLabel)
 
-        let guide = contentView.layoutMarginsGuide
-
         NSLayoutConstraint.activate([
-            submitLabel.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
-            submitLabel.topAnchor.constraint(equalTo: guide.topAnchor),
-            submitLabel.widthAnchor.constraint(equalToConstant: 100),
+            submitLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            submitLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            submitLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor),
             submitLabel.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
