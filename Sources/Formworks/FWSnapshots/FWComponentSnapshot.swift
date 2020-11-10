@@ -7,9 +7,4 @@
 
 import Foundation
 
-struct FWComponentSnapshot: Codable {
-	var title: String
-	var componentType: String
-	var required: Bool
-	var content: String
-}
+protocol FWComponentSnapshot: Encodable {}

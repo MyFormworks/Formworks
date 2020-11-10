@@ -8,7 +8,7 @@
 import Foundation
 
 /// A text component data struct. Title is the only required value for initialising.
-struct FWTextModel: FWBaseComponentModel {
+struct FWTextModel: FWComponentModel {
     var id: String = UUID().uuidString
     var title: String
     var description: String = ""

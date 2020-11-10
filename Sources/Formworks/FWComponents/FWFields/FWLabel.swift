@@ -15,7 +15,8 @@ final class FWLabel: UILabel {
         case required
         case title
         case description
-        case error
+        case validator
+        case submit
     }
 
     override init(frame: CGRect) {
@@ -36,8 +37,10 @@ final class FWLabel: UILabel {
             styleTitle()
         case .description:
             styleDescription()
-        case .error:
-            styleError()
+        case .validator:
+            styleValidator()
+        case .submit:
+            styleSubmit()
         }
 
     }
@@ -52,19 +55,27 @@ final class FWLabel: UILabel {
     }
 
     private func styleTitle() {
-        font = UIFont.preferredFont(forTextStyle: .title2).bold()
+        font = UIFont.preferredFont(forTextStyle: .title3).bold().rounded()
         adjustsFontSizeToFitWidth = true
-        minimumScaleFactor = 0.5
+        minimumScaleFactor = 0.75
+        numberOfLines = 3
     }
 
     private func styleDescription() {
-        font = .preferredFont(forTextStyle: .subheadline)
+        font = UIFont.preferredFont(forTextStyle: .subheadline).rounded()
         numberOfLines = 0
     }
 
-    private func styleError() {
-        font = .preferredFont(forTextStyle: .subheadline)
-        textColor = .fwComponentRequired
+    private func styleValidator() {
+        font = UIFont.preferredFont(forTextStyle: .caption1).rounded()
+        textColor = .fwComponentDescription
         numberOfLines = 0
+    }
+
+    private func styleSubmit() {
+        font =  UIFont.preferredFont(forTextStyle: .body).rounded().bold()
+        textAlignment = .center
+        textColor = .fwBackground
+        backgroundColor = .fwAccent
     }
 }
