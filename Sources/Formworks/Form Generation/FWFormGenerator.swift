@@ -22,6 +22,10 @@ public final class FWFormGenerator: FormGenerator {
         self.configuration = configuration
     }
 
+    
+    /// It will decode the data provided through a JSON and with the decoded data
+    /// it will generate the `FWFormViewModel` that will be used in the `FWFormViewController`.
+    /// - Parameter completion: When it fails the completion, it will provide a error. Otherwise, it returns nothing.
     public func setUp(completion: @escaping (Error?) -> Void) {
         let fwjson = FWJSON(data: configuration.json)
 
@@ -52,7 +56,10 @@ public final class FWFormGenerator: FormGenerator {
             }
         }
     }
-
+    
+    
+    /// It will create a `FWFormViewController` based on a provided ViewModel as a sucessful case for the completion handler.
+    /// - Parameter completion: If sucessful it will provide a `FWFormViewController` as a result; If failed, it will provide an error as result.
     public func generate(completion: (Result<FWFormViewController, Error>) -> Void) {
         guard let formViewModel = formViewModel else {
             completion(.failure(FWFormGeneratorError.invalidSetup))
