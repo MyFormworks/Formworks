@@ -7,4 +7,4 @@
 
 import Foundation
 
-protocol FWComponentSnapshot: Codable {}
+protocol FWComponentSnapshot: Encodable {}

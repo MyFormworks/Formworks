@@ -13,5 +13,5 @@ protocol FWComponentViewModel {
     var required: Bool { get }
     var isValid: Bool { get set }
     
-    func takeSnapshot() -> FWComponentSnapshot
+    func takeSnapshot() -> FWTextComponentSnapshot
 }

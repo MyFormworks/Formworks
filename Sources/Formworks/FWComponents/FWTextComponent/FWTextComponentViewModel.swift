@@ -65,7 +65,7 @@ final class FWTextComponentViewModel: FWComponentViewModel {
         }
     }
     
-    func takeSnapshot() -> FWComponentSnapshot {
+    func takeSnapshot() -> FWTextComponentSnapshot {
         return FWTextComponentSnapshot(id: model.id,
                                        title: model.title,
                                        description: model.description,

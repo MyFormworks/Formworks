@@ -78,12 +78,12 @@ final class FWTextComponentView: UITableViewCell, FWComponentCell {
     
     private func setUpTitleLabel() {
         titleLabel.style(.title)
-        titleLabel.text = "A very very big title so we can se how the line breaking really really works"
+        titleLabel.text = ""
     }
     
     private func setUpDescriptionLabel() {
         descriptionLabel.style(.description)
-        descriptionLabel.text = "This is a description for testing purposes so it will be able to see how the line breaking is working. Therefore, any errors we can make adjustments."
+        descriptionLabel.text = ""
     }
     
     private func setUpValidatorLabel() {
@@ -92,7 +92,7 @@ final class FWTextComponentView: UITableViewCell, FWComponentCell {
     }
     
     private func setUpTextField() {
-        textField.placeholder = "This is a placeholder for the test"
+        textField.placeholder = ""
         textField.addTarget(self, action: #selector(didEditingChange(_:)), for: .editingChanged)
     }
     

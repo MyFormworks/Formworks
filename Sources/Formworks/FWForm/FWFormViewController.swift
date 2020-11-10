@@ -50,6 +50,7 @@ public final class FWFormViewController: UIViewController {
         formTableView.dataSource = self
         formTableView.register(FWTextComponentView.self,
                  forCellReuseIdentifier: FWTextComponentView.identifier)
+        formTableView.register(FWFormSubmitTableCell.self, forCellReuseIdentifier: FWFormSubmitTableCell.identifier)
         formTableView.backgroundColor = UIColor.fwBackground
         formTableView.rowHeight = UITableView.automaticDimension
         formTableView.estimatedRowHeight = 100
@@ -73,11 +74,8 @@ public final class FWFormViewController: UIViewController {
 extension FWFormViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == viewModel.numberOfComponents {
-            if viewModel.submit() {
-
-            } else {
-                
-            }
+            let didSubmit = viewModel.submit()
+            print(didSubmit)
         }
     }
 }
@@ -89,7 +87,7 @@ extension FWFormViewController: UITableViewDataSource {
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == viewModel.numberOfComponents + 1 {
+        if indexPath.row == viewModel.numberOfComponents {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: FWFormSubmitTableCell.identifier) as? FWFormSubmitTableCell else {
                 return UITableViewCell()
             }

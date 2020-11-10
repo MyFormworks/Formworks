@@ -35,12 +35,10 @@ final class FWFormSubmitTableCell: UITableViewCell {
     private func layoutConstraints() {
         contentView.addSubview(submitLabel)
 
-        let guide = contentView.layoutMarginsGuide
-
         NSLayoutConstraint.activate([
-            submitLabel.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
-            submitLabel.topAnchor.constraint(equalTo: guide.topAnchor),
-            submitLabel.widthAnchor.constraint(equalTo: guide.widthAnchor),
+            submitLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            submitLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            submitLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor),
             submitLabel.heightAnchor.constraint(equalToConstant: 50)
         ])
     }

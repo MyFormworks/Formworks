@@ -30,7 +30,7 @@ final class FWJSONTests: XCTestCase {
     
     func testBadComponentData() {
         sut = FWJSON(data: TestFixtures.badComponentData)
-        sut.decode { (result: Result<FWBaseComponentModel, Error>) in
+        sut.decode { (result: Result<FWComponentModel, Error>) in
             switch result {
             case .success:
                 XCTFail("InvaldidData: Component successefully decoded.")
@@ -59,7 +59,7 @@ final class FWJSONTests: XCTestCase {
 
     func testDecodeComponents() {
         sut = FWJSON(data: TestFixtures.textComponentData)
-        sut.decode { (result: Result<FWBaseComponentModel, Error>) in
+        sut.decode { (result: Result<FWComponentModel, Error>) in
             switch result {
             case .success(let component):
                 let errorMessage = "Text Component does not match it's decoded format"

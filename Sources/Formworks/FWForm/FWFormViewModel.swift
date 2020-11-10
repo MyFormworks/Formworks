@@ -42,6 +42,7 @@ final class FWFormViewModel {
             }
         }
 
+        generator.receive(formSnapshot)
         return true
     }
 }

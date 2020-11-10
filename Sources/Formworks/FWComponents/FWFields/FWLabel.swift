@@ -73,7 +73,9 @@ final class FWLabel: UILabel {
     }
 
     private func styleSubmit() {
-        font =  UIFont.preferredFont(forTextStyle: .body).rounded()
-        textColor = .fwAccent
+        font =  UIFont.preferredFont(forTextStyle: .body).rounded().bold()
+        textAlignment = .center
+        textColor = .fwBackground
+        backgroundColor = .fwAccent
     }
 }

@@ -12,11 +12,17 @@ public enum FWFormGeneratorError: Error {
     case failedToSetUp
 }
 
+public protocol FWFormGeneratorDelegate: AnyObject {
+    func userDidSubmit(_ answers: Data)
+}
+
 public final class FWFormGenerator: FormGenerator {
 
     private let configuration: FWConfiguration
 
     private var formViewModel: FWFormViewModel?
+
+    weak var delegate: FWFormGeneratorDelegate?
 
     public init(configuration: FWConfiguration) {
         self.configuration = configuration
@@ -33,7 +39,7 @@ public final class FWFormGenerator: FormGenerator {
             guard let self = self else { return }
             switch result {
             case .success(let form):
-                UIColor.style = .custom(form.style)
+                UIColor.style = self.configuration.style
                 var viewModels: [FWComponentViewModel] = []
                 for component in form.components {
                     switch component {
@@ -63,6 +69,7 @@ public final class FWFormGenerator: FormGenerator {
     public func generate(completion: (Result<FWFormViewController, Error>) -> Void) {
         guard let formViewModel = formViewModel else {
             completion(.failure(FWFormGeneratorError.invalidSetup))
+            return
         }
 
         let formViewController = FWFormViewController(viewModel: formViewModel)
@@ -70,7 +77,12 @@ public final class FWFormGenerator: FormGenerator {
     }
 
     func receive(_ answers: FWFormSnapshot) {
-        <#code#>
+        do {
+            let data = try JSONEncoder().encode(answers)
+            delegate?.userDidSubmit(data)
+        } catch {
+            
+        }
     }
 
 
