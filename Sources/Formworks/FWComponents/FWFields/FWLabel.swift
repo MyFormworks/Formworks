@@ -16,6 +16,7 @@ final class FWLabel: UILabel {
         case title
         case description
         case validator
+        case submit
     }
 
     override init(frame: CGRect) {
@@ -38,6 +39,8 @@ final class FWLabel: UILabel {
             styleDescription()
         case .validator:
             styleValidator()
+        case .submit:
+            styleSubmit()
         }
 
     }
@@ -67,5 +70,10 @@ final class FWLabel: UILabel {
         font = UIFont.preferredFont(forTextStyle: .caption1).rounded()
         textColor = .fwComponentDescription
         numberOfLines = 0
+    }
+
+    private func styleSubmit() {
+        font =  UIFont.preferredFont(forTextStyle: .body).rounded()
+        textColor = .fwAccent
     }
 }

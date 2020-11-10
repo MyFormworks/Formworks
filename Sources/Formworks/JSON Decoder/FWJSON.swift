@@ -67,7 +67,7 @@ struct FWJSON {
      - completionHandler: Returns an FWComponentData on sucess and a generic error on failure
      - Parameter result: Enum containing the results of the operation.
      */
-    func decode(completionHandler: @escaping (_ result: Result<FWBaseComponentModel, Error>) -> Void) {
+    func decode(completionHandler: @escaping (_ result: Result<FWComponentModel, Error>) -> Void) {
         do {
             let decoder = JSONDecoder()
             let component = try decoder.decode(FWDecodedComponentModel.self, from: data)

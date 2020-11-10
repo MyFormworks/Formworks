@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FWFormSnapshot: Codable {
+struct FWFormSnapshot {
 	let title: String
 	var components: [FWComponentSnapshot]
 }

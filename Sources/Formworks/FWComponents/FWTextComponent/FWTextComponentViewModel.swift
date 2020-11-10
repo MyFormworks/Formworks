@@ -7,18 +7,20 @@
 
 import Foundation
 
+// MARK: Protocol-Delegate
 protocol FWTextComponentViewModelDelegate: AnyObject {
     func update()
     
 }
 
 final class FWTextComponentViewModel: FWComponentViewModel {
-    
+    // MARK: Properties
     weak var delegate: FWTextComponentViewModelDelegate?
     
     private let validator: FWRegexValidator
     private let model: FWTextModel
-    
+
+    // MARK: Init
     init(model: FWTextModel) {
         self.model = model
         switch model.validator {
@@ -34,6 +36,8 @@ final class FWTextComponentViewModel: FWComponentViewModel {
             self.validator = FWRegexValidator(regex: .max32)
         }
     }
+
+    // MARK: API
     var title: String {
         return model.title
     }
@@ -62,7 +66,15 @@ final class FWTextComponentViewModel: FWComponentViewModel {
     }
     
     func takeSnapshot() -> FWComponentSnapshot {
-        return FWComponentSnapshot(title: "", componentType: "", required: false, content: "")
+        return FWTextComponentSnapshot(id: model.id,
+                                       title: model.title,
+                                       description: model.description,
+                                       required: model.required,
+                                       validator: model.validator,
+                                       regex: model.regex,
+                                       placeholder: model.placeholder,
+                                       isMultiline: model.isMultiline,
+                                       content: content)
     }
     
 }

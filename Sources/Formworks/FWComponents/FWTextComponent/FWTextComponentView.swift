@@ -7,9 +7,9 @@
 
 import UIKit
 
-public final class FWTextComponentView: UITableViewCell, FWComponentCell {
+final class FWTextComponentView: UITableViewCell, FWComponentCell {
     // MARK: Properties
-    public static var identifier: String {
+    static var identifier: String {
         return String(describing: self)
     }
     
@@ -37,7 +37,7 @@ public final class FWTextComponentView: UITableViewCell, FWComponentCell {
     }()
     
     // MARK: Init
-    override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUpViews()
         layoutConstraints()
@@ -55,13 +55,11 @@ public final class FWTextComponentView: UITableViewCell, FWComponentCell {
         }
     }
     
-    public func test(string: String) {
-        validatorLabel.text = string
-    }
-    
     // MARK: @objc
     @objc private func didEditingChange(_ textField: FWTextField) {
-        
+        if let viewModel = viewModel {
+            viewModel.content = textField.text ?? ""
+        }
     }
     
     // MARK: Views Setup
@@ -182,8 +180,20 @@ public final class FWTextComponentView: UITableViewCell, FWComponentCell {
         ])
     }
 }
+
+// MARK: ViewModel Delegate
 extension FWTextComponentView: FWTextComponentViewModelDelegate {
     func update() {
-        self.symbolImageView.image = viewModel?.isValid ?? false ? UIImage(systemName: "checkmark.circle.fill") : UIImage(systemName: "asterisk.circle.fill")
+        guard let viewModel = viewModel else {
+            return
+        }
+
+        if viewModel.isValid {
+            symbolImageView.image = UIImage(systemName: "checkmark.circle.fill")
+            symbolImageView.tintColor = .fwComponentCorrect
+        } else {
+            symbolImageView.image = UIImage(systemName: "asterisk.circle.fill")
+            symbolImageView.tintColor = .fwComponentCorrect
+        }
     }
 }
