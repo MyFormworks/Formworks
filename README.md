@@ -7,17 +7,17 @@ Formworks is a framework built on UIKit for building forms from JSON files on iO
 1. [Features](#features)
 2. [Requirements](#requirements)
 3. [Usage](#usage)
-- [Installing using Swift Package Manager](#installing-using-swift-package-manager)
-- [Creating a Form](#creating-a-form)
-- [Getting data from a Form](#getting-data-from-a-form)
+  - [Installing using Swift Package Manager](#installing-using-swift-package-manager)
+  - [Creating a Form](#creating-a-form)
+  - [Getting data from a Form](#getting-data-from-a-form)
 4. [Form Input Format](#form-input-format)
-- [Input Example](#input-example)
-- [Parameters](#parameters)
-- [Form](#form)
-- [Components](#components)
-- [Base Component](#base-component)
-- [Text Component](#text-component)
-- [Validators](#validators)
+  - [Input Example](#input-example)
+  - [Parameters](#parameters)
+    - [Form](#form)
+    - [Components](#components)
+    - [Base Component](#base-component)
+    - [Text Component](#text-component)
+    - [Validators](#validators)
 5. [Form Output Format](#form-output-format)
 6. [Glossary](Resources/glossary.md)
 7. [Contribuiting](#contribuiting)
@@ -56,20 +56,20 @@ let dataFromJSON: Data = // Fetch your JSON data.
 let formConfiguration = FWConfiguration(json: dataFromJSON, style: .light)
 let formGenerator = FWFormGenerator(configuration: formConfiguration)
 
-formGenerator.setUp {​​​​​​​​ [unowned self] (error) in
-// Error handling
-}​​​​​​​​
+formGenerator.setUp {[unowned self] (error) in
+    // Error handling
+  }
 }
 
-formGenerator.generate {​​​​​​​​ [unowned self] (result: Result<FWFormViewController, Error>) in
-switch result {​​​​​​​​
-case .success(let formViewController):
-// Present formViewController
-case .failure(let error):
-// Error handling
-}​​​​​​​​
-}​​​​​​​​
-}​​​​​​​​
+formGenerator.generate {[unowned self] (result: Result<FWFormViewController, Error>) in
+  switch result {
+  case .success(let formViewController):
+    // Present formViewController
+  case .failure(let error):
+    // Error handling
+  } 
+  }
+}
 
 
 
@@ -81,9 +81,9 @@ The answers come in JSON format.
 (For more information, refer to [Form Output Format](#form-output-format))
 ```swift
 extension ExampleClass: FWFormGeneratorDelegate {
-func userDidSubmit(_ answers: Data) {
-// Handle answers
-}
+  func userDidSubmit(_ answers: Data) {
+    // Handle answers
+  }
 }
 ```
 
@@ -92,47 +92,49 @@ func userDidSubmit(_ answers: Data) {
 ### JSON Input Example 
 ```json
 {
-"title": "Formworks Title",
-"components": [{
-"text": {
-"id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-"title": "What is your name?",
-"description": "Type your name.",
-"required": true,
-"validator": "max32",
-"placeholder": "Your name"
-}
-},
-{
-"text": {
-"id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-"title": "What is your e-mail?",
-"description": "Type your e-mail.",
-"required": true,
-"validator": "email",
-"placeholder": "youremail@example.org"
-}
-},
-{
-"text": {
-"id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-"title": "Tell us a little bit about yourself",
-"description": "We want to know more about you.",
-"validator": "max32"
-}
-},
-{
-"text": {
-"id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-"title": "What is your mother's name?",
-"description": "Type your name.",
-"required": true,
-"validator": "custom",
-"regex": "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-"placeholder": "Your mother's name"
-}
-}
-]
+  "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+  "responseFormat": "long",
+  "title": "Formworks Title",
+  "components": [{
+    "text": {
+      "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+      "title": "What is your name?",
+      "description": "Type your name.",
+      "required": true,
+      "validator": "max32",
+      "placeholder": "Your name"
+      }
+    },
+    {
+    "text": {
+      "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+      "title": "What is your e-mail?",
+      "description": "Type your e-mail.",
+      "required": true,
+      "validator": "email",
+      "placeholder": "youremail@example.org"
+      }
+    },
+    {
+    "text": {
+      "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+      "title": "Tell us a little bit about yourself",
+      "description": "We want to know more about you.",
+      "validator": "max32"
+      }
+    },
+    {
+    "text": {
+        "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+        "title": "What is your mother's name?",
+        "description": "Type your name.",
+        "required": true,
+        "validator": "custom",
+        "regex": "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
+        "placeholder": "Your mother's name"
+      }
+    }
+  ]
 }
 ```
 
@@ -141,6 +143,8 @@ func userDidSubmit(_ answers: Data) {
 ### Form
 Parameter | Type | Description | Required | Default Value
 ------------ | ------------- | ------------- | ---------- | ---------
+id | String | Object unique ID | Yes | -
+responseFormat | String | Response format for the form. Can either be "long" or "short" | Yes | -
 title | String | Form title. It will be presented in the top of the form. | Yes | -
 components | [Component] | An array that contains all the components that will be presented in the form. | Yes | -
 
@@ -153,6 +157,7 @@ text | FWTextModel | A text component.
 ### Base Component
 Parameter | Type | Description | Required | Default Value
 ------------ | ------------- | ------------- | ------------- | ---------
+id | String | Object unique ID | Yes | -
 title | String | Component's title. It should be a definition about how the field could be filled. | Yes | -
 description | String | Component's description. It could be an aditional explanation about how the field could be filled. | No | ""
 required | Bool | Specifies if the field has to be filled or not.| No | false
@@ -185,33 +190,33 @@ This regexes can be founded in the `FWRegex` enum.
 
 ```json
 {
-"title": "Your Form Title",
-"components": [
-{
-"id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-"type": "text",
-"title": "Text Field Title",
-"description": "Text Field Description",
-"validator": "max256",
-"required": "false",
-"regex": "Your custom regex",
-"placeholder": "Text Field Placeholder",
-"isMultiline": "false",
-"content": "Text Field Response Value"
-},
-{
-"id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-"type": "text",
-"title": "Text Field Title",
-"description": "Text Field Description",
-"validator": "max256",
-"required": "false",
-"regex": "Your custom regex",
-"placeholder": "Text Field Placeholder",
-"isMultiline": "false",
-"content": "Text Field Response Value"
-}
-]
+  "title": "Your Form Title",
+  "components": [
+    {
+      "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+      "type": "text",
+      "title": "Text Field Title",
+      "description": "Text Field Description",
+      "validator": "max256",
+      "required": "false",
+      "regex": "Your custom regex",
+      "placeholder": "Text Field Placeholder",
+      "isMultiline": "false",
+      "content": "Text Field Response Value"
+    },
+    {
+      "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+      "type": "text",
+      "title": "Text Field Title",
+      "description": "Text Field Description",
+      "validator": "max256",
+      "required": "false",
+      "regex": "Your custom regex",
+      "placeholder": "Text Field Placeholder",
+      "isMultiline": "false",
+      "content": "Text Field Response Value"
+    }
+  ]
 }
 ```
 
