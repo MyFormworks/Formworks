@@ -13,7 +13,7 @@ protocol FWTextComponentViewModelDelegate: AnyObject {
     
 }
 
-final class FWTextComponentViewModel: FWComponentViewModel {
+class FWTextComponentViewModel: FWComponentViewModel {
     // MARK: Properties
     weak var delegate: FWTextComponentViewModelDelegate?
     
@@ -23,18 +23,7 @@ final class FWTextComponentViewModel: FWComponentViewModel {
     // MARK: Init
     init(model: FWTextModel) {
         self.model = model
-        switch model.validator {
-        case "email":
-            self.validator = FWRegexValidator(regex: .email)
-        case "phonenumber":
-            self.validator = FWRegexValidator(regex: .phonenumber)
-        case "max32":
-            self.validator = FWRegexValidator(regex: .max32)
-        case "custom":
-            self.validator = FWRegexValidator(regex: .custom(regex: [model.regex]))
-        default:
-            self.validator = FWRegexValidator(regex: .max32)
-        }
+        self.validator = FWRegexValidator(regex: model.regex)
     }
 
     // MARK: API
@@ -70,10 +59,8 @@ final class FWTextComponentViewModel: FWComponentViewModel {
                                        title: model.title,
                                        description: model.description,
                                        required: model.required,
-                                       validator: model.validator,
                                        regex: model.regex,
                                        placeholder: model.placeholder,
-                                       isMultiline: model.isMultiline,
                                        content: content)
     }
     
