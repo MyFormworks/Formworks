@@ -7,17 +7,25 @@
 
 import UIKit
 
-/// Representation of a form. It displays each component as a cell of a `UICollectionView`.
+// MARK: Protocol-Delegate
+public protocol FWFormViewControllerDelegate: AnyObject {
+    func didSubmit(_ answers: FWFormSnapshot)
+}
+
+/// Representation of a form. It displays each component as a cell of a `UITableView`.
 public final class FWFormViewController: UIViewController {
     // MARK: Properties
     @ManualLayout private var formTableView: UITableView
     
     private let viewModel: FWFormViewModel
+
+    weak var delegate: FWFormViewControllerDelegate?
 	
     // MARK: Init
     /// Initializes a new instance of this type.
-    init(viewModel: FWFormViewModel) {
-        self.viewModel = viewModel
+    /// - Parameter configuration: The configuration used to create a form.
+    public init(configuration: FWConfiguration) {
+        self.viewModel = FWFormViewModel(configuration: configuration)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -29,7 +37,6 @@ public final class FWFormViewController: UIViewController {
     public override func loadView() {
         super.loadView()
         view.backgroundColor = .fwBackground
-        title = viewModel.title
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
@@ -37,14 +44,15 @@ public final class FWFormViewController: UIViewController {
         super.viewDidLoad()
         setUpViewModel()
         setUpTableView()
-        setUpTableViewConstraints()
+        layoutTableViewConstraints()
     }
 	
 	// MARK: ViewModel setup
 	private func setUpViewModel() {
-		
+        viewModel.delegate = self
 	}
-	
+
+    // MARK: TableView setup
     private func setUpTableView() {
         formTableView.delegate = self
         formTableView.dataSource = self
@@ -56,10 +64,11 @@ public final class FWFormViewController: UIViewController {
         formTableView.estimatedRowHeight = 100
         formTableView.separatorStyle = .none
     }
-    
+
+    // MARK: Layout
     /// This function will create the necessary constraints for the CollectionView
     /// to occupy the entire ViewController.
-    private func setUpTableViewConstraints() {
+    private func layoutTableViewConstraints() {
         view.addSubview(formTableView)
         let guides = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
@@ -75,7 +84,13 @@ extension FWFormViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == viewModel.numberOfComponents {
             let didSubmit = viewModel.submit()
-            print(didSubmit)
+            switch didSubmit {
+            case .success(let snapshot):
+                delegate?.didSubmit(snapshot)
+            case .failure(_):
+                break
+                // TODO: Error Handling
+            }
         }
     }
 }
@@ -100,6 +115,13 @@ extension FWFormViewController: UITableViewDataSource {
             return cell
         }
     }
+}
 
-
+// MARK: ViewModel Delegate
+extension FWFormViewController: FWFormViewModelDelegate {
+    func didSetUp(with style: FWStyle) {
+        UIColor.style = style
+        self.title = viewModel.title
+        formTableView.reloadData()
+    }
 }
