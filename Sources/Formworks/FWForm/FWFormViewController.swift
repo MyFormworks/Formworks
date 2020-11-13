@@ -8,6 +8,8 @@
 import UIKit
 
 // MARK: Protocol-Delegate
+/// Responsible for providing a communication path for the
+/// `FWFormViewController`to notify relevant state changes in the form.
 public protocol FWFormViewControllerDelegate: AnyObject {
     func didSubmit(_ answers: FWFormSnapshot)
 }
@@ -16,7 +18,7 @@ public protocol FWFormViewControllerDelegate: AnyObject {
 public final class FWFormViewController: UIViewController {
     // MARK: Properties
     @ManualLayout private var formTableView: UITableView
-    
+
     private let viewModel: FWFormViewModel
 
     weak var delegate: FWFormViewControllerDelegate?
@@ -48,11 +50,13 @@ public final class FWFormViewController: UIViewController {
     }
 	
 	// MARK: ViewModel setup
+    /// Sets up the  `FWFormViewModel`.
 	private func setUpViewModel() {
         viewModel.delegate = self
 	}
 
     // MARK: TableView setup
+    /// Sets up the `formViewTable`.
     private func setUpTableView() {
         formTableView.delegate = self
         formTableView.dataSource = self
@@ -66,8 +70,7 @@ public final class FWFormViewController: UIViewController {
     }
 
     // MARK: Layout
-    /// This function will create the necessary constraints for the CollectionView
-    /// to occupy the entire ViewController.
+    /// Layouts constraints for the `formTableView`.
     private func layoutTableViewConstraints() {
         view.addSubview(formTableView)
         let guides = view.safeAreaLayoutGuide

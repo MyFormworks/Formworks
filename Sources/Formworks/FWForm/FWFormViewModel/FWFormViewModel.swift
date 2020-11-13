@@ -16,17 +16,6 @@ protocol FWFormViewModelDelegate: AnyObject {
     func didSetUp(with style: FWStyle)
 }
 
-enum FWFormViewModelError: Error {
-    case invalidFieldAt(IndexPath)
-
-    var localizedDescription: String {
-        switch self {
-        case .invalidFieldAt(let index):
-            return "Invalid field at section \(index.section) : row \(index.row)."
-        }
-    }
-}
-
 /// A representation of the `FWForm`'s `ViewModel`.
 final class FWFormViewModel {
     // MARK: Properties
