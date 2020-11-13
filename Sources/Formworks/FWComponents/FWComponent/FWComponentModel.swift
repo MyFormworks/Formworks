@@ -8,7 +8,7 @@
 import Foundation
 
 ///This protocol represents a basic component's data structure.
-protocol FWComponentModel: Decodable {
+protocol FWComponentModel: Codable {
     ///The UUID of the component.
     var id: String { get }
     ///The title of the component.
