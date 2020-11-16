@@ -25,19 +25,37 @@ struct FWDecodedComponentModel: Codable {
     /// Component possible types in the JSON.
     enum Types: String, CodingKey {
         case text
+        case multiline
+        case numerical
+        case email
+        case phonenumber
     }
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: Types.self)
-        var decodedComponent: FWComponentModel?
 
-        decodedComponent = try container.decodeIfPresent(FWTextModel.self, forKey: .text)
-
-        if let component = decodedComponent {
+        if let decodedComponent = try container.decodeIfPresent(FWTextModel.self, forKey: .text) {
+            self.base = decodedComponent
+            return
+        } else if let decodedComponent = try container.decodeIfPresent(FWTextModel.self, forKey: .multiline) {
+            self.base = decodedComponent
+            return
+        } else if let decodedComponent = try container.decodeIfPresent(FWTextModel.self, forKey: .numerical) {
+            self.base = decodedComponent
+            return
+        } else if let decodedComponent = try container.decodeIfPresent(FWTextModel.self, forKey: .email) {
+            var component = decodedComponent
+            component.regex = FWRegex.email.rawValue
             self.base = component
-        } else {
-            throw Errors.invalidComponent
+            return
+        } else if let decodedComponent = try container.decodeIfPresent(FWTextModel.self, forKey: .phonenumber) {
+            var component = decodedComponent
+            component.regex = FWRegex.phonenumber.rawValue
+            self.base = component
+            return
         }
+
+        throw Errors.invalidComponent
     }
 
     func encode(to encoder: Encoder) throws {
