@@ -72,13 +72,13 @@ extension FWFormModel: Codable {
         self.id = try container.decode(String.self, forKey: .id)
         self.responseFormat = try container.decode(ResponseFormats.self, forKey: .responseFormat)
         self.title = try container.decode(String.self, forKey: .title)
-        self.components = try container.decode([FWDecodedComponentModel].self, forKey: .components).map { $0.base }
+        self.components = try container.decode([FWComponentModelWrapper].self, forKey: .components).map { $0.base }
         self.style = try container.decode(FWStyleSpecification.self, forKey: .style)
     }
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: FWFormModel.CodingKeys.self)
-        try container.encode(components.map(FWDecodedComponentModel.init), forKey: .components)
+        try container.encode(components.map(FWComponentModelWrapper.init), forKey: .components)
         try id.encode(to: encoder)
         try title.encode(to: encoder)
         try responseFormat.encode(to: encoder)

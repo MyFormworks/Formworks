@@ -84,18 +84,16 @@ extension ExampleClass: FWFormViewControllerDelegate {
       "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
       "title": "What is your name?",
       "description": "Type your name.",
-      "required": true,
-      "validator": "max32",
+      "required": true
       "placeholder": "Your name"
       }
     },
     {
-    "text": {
+    "email": {
       "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
       "title": "What is your e-mail?",
       "description": "Type your e-mail.",
       "required": true,
-      "validator": "email",
       "placeholder": "youremail@example.org"
       }
     },
@@ -103,8 +101,7 @@ extension ExampleClass: FWFormViewControllerDelegate {
     "text": {
       "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
       "title": "Tell us a little bit about yourself",
-      "description": "We want to know more about you.",
-      "validator": "max32"
+      "description": "We want to know more about you."
       }
     },
     {
@@ -113,7 +110,6 @@ extension ExampleClass: FWFormViewControllerDelegate {
         "title": "What is your mother's name?",
         "description": "Type your name.",
         "required": true,
-        "validator": "custom",
         "regex": "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
         "placeholder": "Your mother's name"
       }

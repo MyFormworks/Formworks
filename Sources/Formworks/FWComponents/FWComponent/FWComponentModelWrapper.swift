@@ -8,7 +8,7 @@
 import Foundation
 
 /// Data structure for components being decoded.
-struct FWDecodedComponentModel: Codable {
+struct FWComponentModelWrapper: Codable {
     /// Component data decoded in their respective format
     var base: FWComponentModel
 
