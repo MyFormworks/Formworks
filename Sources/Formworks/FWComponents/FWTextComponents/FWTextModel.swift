@@ -54,3 +54,5 @@ extension FWTextModel {
         try dto.encode(to: encoder)
     }
 }
+
+extension FWTextModel: Equatable {}
