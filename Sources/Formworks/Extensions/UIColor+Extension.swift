@@ -26,12 +26,12 @@ extension UIColor {
         let r, g, b, a: CGFloat
         let lenght = hexSanitized.count
         switch lenght {
-        case 8:
+        case 9:
             r = CGFloat((hexNumber & 0xFF000000) >> 24) / 255
             g = CGFloat((hexNumber & 0x00FF0000) >> 16) / 255
             b = CGFloat((hexNumber & 0x0000FF00) >> 8) / 255
             a = CGFloat(hexNumber & 0x000000FF) / 255
-        case 6:
+        case 7:
             r = CGFloat((hexNumber & 0xFF0000) >> 16) / 255
             g = CGFloat((hexNumber & 0x00FF00) >> 8) / 255
             b = CGFloat(hexNumber & 0x0000FF) / 255

@@ -13,7 +13,7 @@ enum TestFixtures {
     static let emptyFormData = Data("""
     {
         "id": "",
-        "responseType": "",
+        "responseFormat": "",
         "title": "",
         "style": {},
         "components": []
@@ -23,7 +23,7 @@ enum TestFixtures {
     static let formData = Data("""
     {
         "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-        "responseType": "long",
+        "responseFormat": "long",
         "title": "FormTitle",
         "style": {
             "accent": "#F0F0F0FF",
