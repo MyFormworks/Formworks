@@ -8,7 +8,7 @@
 import Foundation
 
 /// The form's color style.
-public enum FWStyle {
+public enum FWStyle: Equatable {
 	/// The default light color style of a form.
 	case light
 	

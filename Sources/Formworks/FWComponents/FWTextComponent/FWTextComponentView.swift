@@ -193,7 +193,7 @@ extension FWTextComponentView: FWTextComponentViewModelDelegate {
             symbolImageView.tintColor = .fwComponentCorrect
         } else {
             symbolImageView.image = UIImage(systemName: "asterisk.circle.fill")
-            symbolImageView.tintColor = .fwComponentCorrect
+            symbolImageView.tintColor = .fwComponentRequired
         }
     }
 }

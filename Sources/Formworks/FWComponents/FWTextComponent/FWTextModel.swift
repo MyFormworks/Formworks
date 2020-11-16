@@ -49,3 +49,5 @@ extension FWTextModel {
         self.isMultiline = dto.isMultiline ?? false
     }
 }
+
+extension FWTextModel: Equatable {}

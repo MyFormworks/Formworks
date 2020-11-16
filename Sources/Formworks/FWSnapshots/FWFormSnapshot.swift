@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FWFormSnapshot: Encodable {
+public struct FWFormSnapshot: Encodable {
 	let title: String
 	var components: [FWTextComponentSnapshot]
 }
