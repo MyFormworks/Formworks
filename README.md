@@ -54,25 +54,9 @@ import Formworks
 ```swift
 let dataFromJSON: Data = // Fetch your JSON data.
 let formConfiguration = FWConfiguration(json: dataFromJSON, style: .light)
-let formGenerator = FWFormGenerator(configuration: formConfiguration)
 
-formGenerator.setUp {[unowned self] (error) in
-    // Error handling
-  }
-}
-
-formGenerator.generate {[unowned self] (result: Result<FWFormViewController, Error>) in
-  switch result {
-  case .success(let formViewController):
-    // Present formViewController
-  case .failure(let error):
-    // Error handling
-  } 
-  }
-}
-
-
-
+let formViewController = FWFormViewController(configuration: formConfiguration)
+/// Present as desired.
 ```
 
 ### Receiving data from a Form
@@ -80,8 +64,8 @@ To get the data from a Form, it is necessary to implement the procotol `FWFormGe
 The answers come in JSON format.
 (For more information, refer to [Form Output Format](#form-output-format))
 ```swift
-extension ExampleClass: FWFormGeneratorDelegate {
-  func userDidSubmit(_ answers: Data) {
+extension ExampleClass: FWFormViewControllerDelegate {
+  func didSubmit(_ answers: FWFormSnapshot) {
     // Handle answers
   }
 }
