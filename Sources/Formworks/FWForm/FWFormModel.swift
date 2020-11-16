@@ -18,7 +18,6 @@ struct FWFormModel  {
     /// A collection of component's data structure contained in this form.
 	let components: [FWComponentModel]
     let style: FWStyleSpecification
-    let response: FWFormResponse?
 
     /// Form Decodification  Errors
     private enum Errors: Error, CustomStringConvertible {
@@ -75,7 +74,6 @@ extension FWFormModel: Codable {
         self.title = try container.decode(String.self, forKey: .title)
         self.components = try container.decode([FWDecodedComponentModel].self, forKey: .components).map { $0.base }
         self.style = try container.decode(FWStyleSpecification.self, forKey: .style)
-        self.response = try container.decodeIfPresent(FWFormResponse.self, forKey: .response)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -85,6 +83,5 @@ extension FWFormModel: Codable {
         try title.encode(to: encoder)
         try responseFormat.encode(to: encoder)
         try style.encode(to: encoder)
-        try response?.encode(to: encoder)
     }
 }

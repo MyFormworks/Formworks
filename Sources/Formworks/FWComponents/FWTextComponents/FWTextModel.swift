@@ -54,8 +54,3 @@ extension FWTextModel {
         try dto.encode(to: encoder)
     }
 }
-
-struct FWTextResponse: FWComponentResponse {
-    static var type: FWResponseType = .text
-    var content: String
-}
