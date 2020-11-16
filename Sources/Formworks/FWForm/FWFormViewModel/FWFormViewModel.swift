@@ -12,8 +12,7 @@ import Foundation
 /// between the `FWFormViewModel` and its `View`.
 protocol FWFormViewModelDelegate: AnyObject {
     /// Notifies the `View` that the setup is done.
-    /// - Parameter style: The form's color style.
-    func didSetUp(with style: FWStyle)
+    func didSetUp()
 }
 
 /// A representation of the `FWForm`'s `ViewModel`.
@@ -22,15 +21,12 @@ final class FWFormViewModel {
     /// The `FWComponent`'s `ViewModels` used to build each component.
     private var viewModels: [FWComponentViewModel] = [FWComponentViewModel]() {
         didSet {
-            delegate?.didSetUp(with: self.style)
+            delegate?.didSetUp()
         }
     }
 
     /// The configuration used to create a form.
     private let configuration: FWConfiguration
-
-    /// The form's color style.
-    private var style: FWStyle = .light
 
     /// Responsible for providing a communication between the `FWFormViewModel`
     /// and its `View`.
@@ -51,6 +47,9 @@ final class FWFormViewModel {
     var numberOfComponents: Int {
         return viewModels.count
     }
+
+    /// The form's color style.
+    var style: FWStyle = .light
 
     /// Returns the component's `ViewModel` for the given index.
     func viewModelAt(index: IndexPath) -> FWComponentViewModel {

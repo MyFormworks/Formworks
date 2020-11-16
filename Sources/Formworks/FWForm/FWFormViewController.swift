@@ -122,8 +122,8 @@ extension FWFormViewController: UITableViewDataSource {
 
 // MARK: ViewModel Delegate
 extension FWFormViewController: FWFormViewModelDelegate {
-    func didSetUp(with style: FWStyle) {
-        UIColor.style = style
+    func didSetUp() {
+        UIColor.style = viewModel.style
         self.title = viewModel.title
         formTableView.reloadData()
     }
