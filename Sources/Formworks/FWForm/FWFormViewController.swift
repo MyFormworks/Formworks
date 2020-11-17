@@ -1,6 +1,6 @@
 //
 //  FWFormController.swift
-//  
+//
 //
 //  Created by Artur Carneiro on 29/09/20.
 //
@@ -39,7 +39,6 @@ public final class FWFormViewController: UIViewController {
 	public override func loadView() {
 		super.loadView()
 		view.backgroundColor = .fwBackground
-		navigationController?.navigationBar.prefersLargeTitles = true
 	}
 	
 	public override func viewDidLoad() {
@@ -63,10 +62,15 @@ public final class FWFormViewController: UIViewController {
 		formTableView.register(FWTextComponentView.self,
 							   forCellReuseIdentifier: FWTextComponentView.identifier)
 		formTableView.register(FWFormSubmitTableCell.self, forCellReuseIdentifier: FWFormSubmitTableCell.identifier)
+		formTableView.register(FWHeader.self, forHeaderFooterViewReuseIdentifier: FWHeader.id)
+		formTableView.register(FWFooter.self, forHeaderFooterViewReuseIdentifier: FWFooter.id)
+		formTableView.register(FWDismissHeader.self, forHeaderFooterViewReuseIdentifier: FWDismissHeader.id)
 		formTableView.backgroundColor = UIColor.fwBackground
 		formTableView.rowHeight = UITableView.automaticDimension
 		formTableView.estimatedRowHeight = 100
 		formTableView.separatorStyle = .none
+		
+//		formTableView.tableHeaderView = FWHeader()
 	}
 	
 	// MARK: Layout
@@ -84,18 +88,18 @@ public final class FWFormViewController: UIViewController {
 }
 // MARK: UITableViewDelegate
 extension FWFormViewController: UITableViewDelegate {
-//	public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//		if indexPath.row == viewModel.numberOfComponents {
-//			let didSubmit = viewModel.submit()
-//			switch didSubmit {
-//				case .success(let snapshot):
-//					delegate?.didSubmit(snapshot)
-//				case .failure(_):
-//					break
-//				// TODO: Error Handling
-//			}
-//		}
-//	}
+	public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		if indexPath.row == viewModel.numberOfComponents {
+			let didSubmit = viewModel.submit()
+			switch didSubmit {
+				case .success(let snapshot):
+					delegate?.didSubmit(snapshot)
+				case .failure(_):
+					break
+				// TODO: Error Handling
+			}
+		}
+	}
 	
 	public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		if ((navigationController?.isBeingPresented) == nil) {
@@ -115,10 +119,6 @@ extension FWFormViewController: UITableViewDelegate {
 	}
 	
 	public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		
-		if section == 0 {
-			return 0
-		}
 		return 50
 	}
 
@@ -128,12 +128,18 @@ extension FWFormViewController: UITableViewDelegate {
 		}
 		return footer
 	}
+	
+	public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+		return 100
+	}
+	
+
 }
 
 // MARK: UITableViewDataSource
 extension FWFormViewController: UITableViewDataSource {
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return viewModel.numberOfComponents + 1
+		return viewModel.numberOfComponents
 	}
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
