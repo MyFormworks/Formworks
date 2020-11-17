@@ -103,10 +103,9 @@ extension FWFormViewController: UITableViewDelegate {
 			}
 			print("é modal")
 			header.setHeaderTitle(text: "Título do formulário aparecerá aqui")
-			header.setHeaderImage(name: viewModel.getTitle(for: section).1)
 			return header
 		} else {
-			guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FWCustomHeader.id) as? FWCustomHeader else {
+			guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FWHeader.id) as? FWCustomHeader else {
 				return UITableViewHeaderFooterView()
 			}
 			header.setHeaderTitle(text: "Título do formulário aparecerá aqui")
