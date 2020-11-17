@@ -95,7 +95,8 @@ extension FWFormViewController: UITableViewDelegate {
 //				// TODO: Error Handling
 //			}
 //		}
-//	}
+//	}
+	
 	public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		if ((navigationController?.isBeingPresented) == nil) {
 			guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FWDismissHeader.id) as? FWDismissHeader else {
@@ -105,7 +106,7 @@ extension FWFormViewController: UITableViewDelegate {
 			header.setHeaderTitle(text: "Título do formulário aparecerá aqui")
 			return header
 		} else {
-			guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FWHeader.id) as? FWCustomHeader else {
+			guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FWHeader.id) as? FWHeader else {
 				return UITableViewHeaderFooterView()
 			}
 			header.setHeaderTitle(text: "Título do formulário aparecerá aqui")
