@@ -44,7 +44,7 @@ struct FWFormModel  {
     }
 }
 
-fileprivate struct FWFormModelDTO {
+fileprivate struct FWFormModelDTO: Decodable {
     /// The UUID of the component.
     let id: String?
     /// The title of the form.
@@ -52,7 +52,7 @@ fileprivate struct FWFormModelDTO {
     /// The format that the form response will have.
     let responseFormat: FWFormModel.ResponseFormats?
     /// A collection of component's data structure contained in this form.
-    let components: [FWComponentModel]
+    let components: [FWComponentModelWrapper]
     let style: FWStyleSpecification?
 }
 
@@ -68,12 +68,14 @@ extension FWFormModel: Codable {
     }
 
     init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: FWFormModel.CodingKeys.self)
-        self.id = try container.decode(String.self, forKey: .id)
-        self.responseFormat = try container.decode(ResponseFormats.self, forKey: .responseFormat)
-        self.title = try container.decode(String.self, forKey: .title)
-        self.components = try container.decode([FWComponentModelWrapper].self, forKey: .components).map { $0.base }
-        self.style = try container.decode(FWStyleSpecification.self, forKey: .style)
+        let dto = try FWFormModelDTO.init(from: decoder)
+        self.id = dto.id ?? UUID().uuidString
+        self.title = dto.title ?? ""
+        self.responseFormat = dto.responseFormat ?? ResponseFormats.long
+        self.components = dto.components.compactMap({
+            $0.base
+        })
+        self.style = dto.style ?? FWStyleSpecification()
     }
 
     func encode(to encoder: Encoder) throws {
