@@ -44,6 +44,7 @@ public final class FWFormViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        self.addKeyboardDismissal()
         setUpViewModel()
         setUpTableView()
         layoutTableViewConstraints()

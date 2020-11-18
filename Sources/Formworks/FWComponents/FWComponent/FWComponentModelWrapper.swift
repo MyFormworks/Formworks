@@ -38,19 +38,25 @@ struct FWComponentModelWrapper: Codable {
             self.base = decodedComponent
             return
         } else if let decodedComponent = try container.decodeIfPresent(FWTextModel.self, forKey: .multiline) {
-            self.base = decodedComponent
+            var component = decodedComponent
+            component.type = FWComponentModelWrapper.Types.multiline
+            self.base = component
             return
         } else if let decodedComponent = try container.decodeIfPresent(FWTextModel.self, forKey: .numerical) {
-            self.base = decodedComponent
+            var component = decodedComponent
+            component.type = FWComponentModelWrapper.Types.numerical
+            self.base = component
             return
         } else if let decodedComponent = try container.decodeIfPresent(FWTextModel.self, forKey: .email) {
             var component = decodedComponent
             component.regex = FWRegex.email.rawValue
+            component.type = .email
             self.base = component
             return
         } else if let decodedComponent = try container.decodeIfPresent(FWTextModel.self, forKey: .phonenumber) {
             var component = decodedComponent
             component.regex = FWRegex.phonenumber.rawValue
+            component.type = .phonenumber
             self.base = component
             return
         }

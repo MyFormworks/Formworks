@@ -20,6 +20,16 @@ final class FWTextComponentView: UITableViewCell, FWComponentCell {
                 self.descriptionLabel.text = viewModel.description
                 self.validatorLabel.text = ""
                 self.textField.placeholder = viewModel.placeholder
+                switch viewModel.type {
+                case .text, .multiline:
+                    self.textField.keyboardType = .default
+                case .numerical:
+                    self.textField.keyboardType = .numberPad
+                case .phonenumber:
+                    self.textField.keyboardType = .phonePad
+                case .email:
+                    self.textField.keyboardType = .emailAddress
+                }
             }
         }
     }

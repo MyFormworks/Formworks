@@ -39,6 +39,9 @@ class FWTextComponentViewModel: FWComponentViewModel {
     var placeholder: String {
         return model.placeholder
     }
+    var type: FWComponentModelWrapper.Types {
+        return model.type
+    }
     
     var isValid: Bool = false {
         didSet {

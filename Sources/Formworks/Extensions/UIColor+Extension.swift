@@ -24,8 +24,8 @@ extension UIColor {
         else { return nil }
 
         let r, g, b, a: CGFloat
-        let lenght = hexSanitized.count
-        switch lenght {
+        let length = hexSanitized.count
+        switch length {
         case 9:
             r = CGFloat((hexNumber & 0xFF000000) >> 24) / 255
             g = CGFloat((hexNumber & 0x00FF0000) >> 16) / 255

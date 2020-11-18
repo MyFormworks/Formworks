@@ -43,6 +43,7 @@ struct FWRegexValidator: FWValidator {
     }
     
     func validate(_ content: String) -> Bool {
+        if regex.isEmpty { return true }
         let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
         if predicate.evaluate(with: content) {
             return true

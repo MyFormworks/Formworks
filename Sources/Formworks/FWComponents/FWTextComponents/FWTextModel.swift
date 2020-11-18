@@ -17,6 +17,8 @@ struct FWTextModel: FWComponentModel {
     var regex: String = ""
     /// Component's text field placeholder string.
     var placeholder: String = ""
+    /// Component Specific Type
+    var type: FWComponentModelWrapper.Types = .text
 }
 
 /// Data Transfer Object for the Text component model.
