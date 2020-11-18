@@ -15,7 +15,7 @@ public struct FWConfiguration {
 	/// The form's color style.
 	public let style: FWStyle
 	
-	public init(json: Data, stye: FWStyle) {
+	public init(json: Data, style: FWStyle) {
 		self.json = json
 		self.style = style
 	}
