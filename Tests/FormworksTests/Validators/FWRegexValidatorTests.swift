@@ -18,7 +18,8 @@ class FWRegexValidatorTests: XCTestCase {
     
     // MARK: Email
     func testEmailValidationSuccess() {
-        sut = FWRegexValidator(regex: .email)
+        let regex = FWRegex.email.rawValue
+        sut = FWRegexValidator(regex: regex)
         
         var result = sut.validate("test@example.com")
         XCTAssertTrue(result)
@@ -31,7 +32,8 @@ class FWRegexValidatorTests: XCTestCase {
     }
     
     func testEmailValidationFail() {
-        sut = FWRegexValidator(regex: .email)
+        let regex = FWRegex.email.rawValue
+        sut = FWRegexValidator(regex: regex)
         
         var result = sut.validate("this is not an email")
         XCTAssertFalse(result)
@@ -57,7 +59,8 @@ class FWRegexValidatorTests: XCTestCase {
     
     // MARK: Phonenumber
     func testPhonenumberValidationSuccess() {
-        sut = FWRegexValidator(regex: .phonenumber)
+        let regex = FWRegex.phonenumber.rawValue
+        sut = FWRegexValidator(regex: regex)
         
         var result = sut.validate("00 1234 1234")
         XCTAssertTrue(result)
@@ -97,7 +100,8 @@ class FWRegexValidatorTests: XCTestCase {
     }
     
     func testPhonenumberValidationFail() {
-        sut = FWRegexValidator(regex: .phonenumber)
+        let regex = FWRegex.phonenumber.rawValue
+        sut = FWRegexValidator(regex: regex)
         
         var result = sut.validate("This is not a phonenumber")
         XCTAssertFalse(result)
@@ -132,7 +136,8 @@ class FWRegexValidatorTests: XCTestCase {
     
     // MARK: Max32
     func testMax32ValidationSuccess() {
-        sut = FWRegexValidator(regex: .max32)
+        let regex = FWRegex.max32.rawValue
+        sut = FWRegexValidator(regex: regex)
         
         var result = sut.validate("This is a test text")
         XCTAssertTrue(result)
@@ -142,7 +147,8 @@ class FWRegexValidatorTests: XCTestCase {
     }
     
     func testMax32ValidationFail() {
-        sut = FWRegexValidator(regex: .max32)
+        let regex = FWRegex.max32.rawValue
+        sut = FWRegexValidator(regex: regex)
         
         var result = sut.validate("This is a text with 33 characters")
         XCTAssertFalse(result)
@@ -153,7 +159,8 @@ class FWRegexValidatorTests: XCTestCase {
     
     // MARK: Custom
     func testCustomValidationSuccess() {
-        sut = FWRegexValidator(regex: .custom(regex: ["[a-z]at"]))
+        let regex = "[a-z]at"
+        sut = FWRegexValidator(regex: regex)
         
         var result = sut.validate("hat")
         XCTAssertTrue(result)
@@ -169,7 +176,8 @@ class FWRegexValidatorTests: XCTestCase {
     }
     
     func testCustomValidationFail() {
-        sut = FWRegexValidator(regex: .custom(regex: ["[a-z]at"]))
+        let regex = "[a-z]at"
+        sut = FWRegexValidator(regex: regex)
         
         var result = sut.validate("1at")
         XCTAssertFalse(result)

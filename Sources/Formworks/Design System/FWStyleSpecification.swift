@@ -8,7 +8,7 @@
 import UIKit
 
 /// The custom color style specification.
-public struct FWStyleSpecification: Decodable {
+public struct FWStyleSpecification: Codable {
 	
     // TODO: Determine which color is applied to each elements.
     var accent: UIColor = .fwAccent
@@ -22,8 +22,7 @@ public struct FWStyleSpecification: Decodable {
     var componentCorrect: UIColor = .fwComponentCorrect
 }
 
-fileprivate struct FWStyleSpecificationDTO: Decodable {
-    // TODO: Determine which color is applied to each elements.
+fileprivate struct FWStyleSpecificationDTO: Codable {
     let accent: String?
     let background: String?
     let componentBackground: String?
@@ -47,6 +46,21 @@ extension FWStyleSpecification: Equatable {
         self.componentInputBackground = UIColor(hex: dto.componentInputBackground ?? "") ?? .fwComponentInputBackground
         self.componentRequired = UIColor(hex: dto.componentRequired ?? "") ?? .fwComponentRequired
         self.componentCorrect = UIColor(hex: dto.componentCorrect ?? "") ?? .fwComponentCorrect
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        let dto = FWStyleSpecificationDTO(
+            accent: self.accent.toHex(true),
+            background: self.background.toHex(true),
+            componentBackground: self.componentBackground.toHex(true),
+            componentTitle: self.componentTitle.toHex(true),
+            componentDescription: self.componentDescription.toHex(true),
+            componentInputText: self.componentInputText.toHex(true),
+            componentInputBackground: self.componentInputBackground.toHex(true),
+            componentRequired: self.componentRequired.toHex(true),
+            componentCorrect: self.componentCorrect.toHex(true)
+        )
+        try dto.encode(to: encoder)
     }
     
     public static func ==(lhs: FWStyleSpecification, rhs: FWStyleSpecification) -> Bool {
