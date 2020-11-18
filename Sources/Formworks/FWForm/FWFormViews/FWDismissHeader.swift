@@ -21,7 +21,7 @@ final class FWDismissHeader: UITableViewHeaderFooterView {
 		super.init(reuseIdentifier: reuseIdentifier)
 		setupImageConstraints()
 		setupTitleConstraints()
-		self.contentView.backgroundColor = .white
+		self.backgroundColor = .white
 	}
 	
 	required init?(coder: NSCoder) {
@@ -30,24 +30,24 @@ final class FWDismissHeader: UITableViewHeaderFooterView {
 	
 	// MARK: Setup Image Constraints
 	private func setupImageConstraints() {
-		contentView.addSubview(button)
+		self.addSubview(button)
 		button.setTitleColor(.systemBlue, for: .normal)
 		NSLayoutConstraint.activate([
-			button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
+			button.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5),
 			button.widthAnchor.constraint(equalToConstant: 75),
 			button.heightAnchor.constraint(equalToConstant: 30),
-			button.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5)
+			button.topAnchor.constraint(equalTo: self.topAnchor, constant: 5)
 		])
 	}
 	
 	// MARK: Setup Title Constraints
 	private func setupTitleConstraints() {
-		contentView.addSubview(title)
+		self.addSubview(title)
 		NSLayoutConstraint.activate([
 			title.widthAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width) - self.button.frame.width - 5),
-			title.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-			title.bottomAnchor.constraint(equalTo:contentView.bottomAnchor),
-			title.topAnchor.constraint(equalTo:contentView.topAnchor)
+			title.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+			title.bottomAnchor.constraint(equalTo:self.bottomAnchor),
+			title.topAnchor.constraint(equalTo:self.topAnchor)
 		])
 	}
 	

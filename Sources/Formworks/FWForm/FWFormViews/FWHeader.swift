@@ -7,15 +7,16 @@
 
 import UIKit
 
+import UIKit
+
 final class FWHeader: UITableViewHeaderFooterView {
 	
 	// MARK: Declarations
-	@ManualLayout private var title: UILabel
+	@ManualLayout private var title: FWLabel
 	
 	static var id: String {
 		return String(describing: self)
 	}
-	
 	// MARK: Init
 	override init(reuseIdentifier: String?) {
 		super.init(reuseIdentifier: reuseIdentifier)

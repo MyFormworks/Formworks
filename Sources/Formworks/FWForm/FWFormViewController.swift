@@ -4,7 +4,6 @@
 //
 //  Created by Artur Carneiro on 29/09/20.
 //
-
 import UIKit
 
 // MARK: Protocol-Delegate
@@ -63,14 +62,13 @@ public final class FWFormViewController: UIViewController {
 							   forCellReuseIdentifier: FWTextComponentView.identifier)
 		formTableView.register(FWFormSubmitTableCell.self, forCellReuseIdentifier: FWFormSubmitTableCell.identifier)
 		formTableView.register(FWHeader.self, forHeaderFooterViewReuseIdentifier: FWHeader.id)
-		formTableView.register(FWFooter.self, forHeaderFooterViewReuseIdentifier: FWFooter.id)
 		formTableView.register(FWDismissHeader.self, forHeaderFooterViewReuseIdentifier: FWDismissHeader.id)
 		formTableView.backgroundColor = UIColor.fwBackground
 		formTableView.rowHeight = UITableView.automaticDimension
 		formTableView.estimatedRowHeight = 100
 		formTableView.separatorStyle = .none
 		
-//		formTableView.tableHeaderView = FWHeader()
+		//		formTableView.tableHeaderView = FWHeader()
 	}
 	
 	// MARK: Layout
@@ -106,7 +104,6 @@ extension FWFormViewController: UITableViewDelegate {
 			guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FWDismissHeader.id) as? FWDismissHeader else {
 				return UITableViewHeaderFooterView()
 			}
-			print("é modal")
 			header.setHeaderTitle(text: "Título do formulário aparecerá aqui")
 			return header
 		} else {
@@ -121,33 +118,27 @@ extension FWFormViewController: UITableViewDelegate {
 	public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 		return 50
 	}
-
-	public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-		guard let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: FWFooter.id) as? FWFooter else {
-			return UITableViewHeaderFooterView()
-		}
-		return footer
-	}
-	
-	public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-		return 100
-	}
-	
-
 }
 
 // MARK: UITableViewDataSource
 extension FWFormViewController: UITableViewDataSource {
 	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return viewModel.numberOfComponents
+		return viewModel.numberOfComponents + 1
 	}
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: FWTextComponentView.identifier) as? FWTextComponentView else {
-			return UITableViewCell()
+		if indexPath.row == viewModel.numberOfComponents{
+			guard let cell = tableView.dequeueReusableCell(withIdentifier: FWFormSubmitTableCell.identifier) as? FWFormSubmitTableCell else {
+				return UITableViewCell()
+			}
+			return cell
+		} else {
+			guard let cell = tableView.dequeueReusableCell(withIdentifier: FWTextComponentView.identifier) as? FWTextComponentView else {
+				return UITableViewCell()
+			}
+			cell.configure(with: viewModel.viewModelAt(index: indexPath))
+			return cell
 		}
-		cell.configure(with: viewModel.viewModelAt(index: indexPath))
-		return cell
 	}
 }
 
