@@ -121,14 +121,6 @@ extension FWFormViewController: UITableViewDelegate {
 	public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 		return 50
 	}
-	
-	public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		if indexPath.row == viewModel.numberOfComponents {
-			return 100
-		}else {
-			return tableView.estimatedRowHeight
-		}
-	}
 }
 
 // MARK: UITableViewDataSource
