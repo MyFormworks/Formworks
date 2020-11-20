@@ -30,7 +30,7 @@ final class FWDismissHeader: UITableViewHeaderFooterView {
 	
 	// MARK: Setup Image Constraints
 	private func setupImageConstraints() {
-		self.addSubview(button)
+		self.contentView.addSubview(button)
 		button.setTitleColor(.systemBlue, for: .normal)
 		NSLayoutConstraint.activate([
 			button.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5),
