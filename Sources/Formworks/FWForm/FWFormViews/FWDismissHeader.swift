@@ -37,7 +37,7 @@ final class FWDismissHeader: UITableViewHeaderFooterView {
 			button.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5),
 			button.widthAnchor.constraint(equalToConstant: 75),
 			button.heightAnchor.constraint(equalToConstant: 30),
-			button.topAnchor.constraint(equalTo: self.topAnchor, constant: 10)
+			button.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
 		])
 	}
 	
