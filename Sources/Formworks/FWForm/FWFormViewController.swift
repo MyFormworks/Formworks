@@ -116,7 +116,7 @@ extension FWFormViewController: UITableViewDelegate {
 			guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FWHeader.id) as? FWHeader else {
 				return UITableViewHeaderFooterView()
 			}
-			header.setHeaderTitle(text: "Título do formulário aparecerá aqui")
+			header.setHeaderTitle(text: viewModel.title)
 			return header
 		}
 	}

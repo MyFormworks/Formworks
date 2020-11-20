@@ -21,12 +21,12 @@ final class FWDismissHeader: UITableViewHeaderFooterView {
 		super.init(reuseIdentifier: reuseIdentifier)
 		setupButtonConstraints()
 		setupTitleConstraints()
-		self.backgroundColor = .white
 	}
 	
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
+	
 	
 	// MARK: Setup Image Constraints
 	private func setupButtonConstraints() {
@@ -60,7 +60,5 @@ final class FWDismissHeader: UITableViewHeaderFooterView {
 	func setHeaderTitle(text: String) {
 		title.text = text
 	}
-	
-	
 }
 

@@ -21,7 +21,6 @@ final class FWHeader: UITableViewHeaderFooterView {
 	override init(reuseIdentifier: String?) {
 		super.init(reuseIdentifier: reuseIdentifier)
 		setupTitleConstraints()
-		self.backgroundColor = .white
 	}
 	
 	required init?(coder: NSCoder) {
