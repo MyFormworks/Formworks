@@ -10,7 +10,7 @@ final class FWDismissHeader: UITableViewHeaderFooterView {
 	
 	// MARK: Declarations
 	@ManualLayout var button: UIButton
-	@ManualLayout private var title: UILabel
+	@ManualLayout private var title: FWLabel
 	
 	static var id: String {
 		return String(describing: self)
