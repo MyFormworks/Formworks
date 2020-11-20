@@ -67,8 +67,6 @@ public final class FWFormViewController: UIViewController {
 		formTableView.rowHeight = UITableView.automaticDimension
 		formTableView.estimatedRowHeight = 100
 		formTableView.separatorStyle = .none
-		
-		//		formTableView.tableHeaderView = FWHeader()
 	}
 	
 	// MARK: Layout
@@ -127,6 +125,8 @@ extension FWFormViewController: UITableViewDelegate {
 	public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		if indexPath.row == viewModel.numberOfComponents {
 			return 100
+		}else {
+			return tableView.estimatedRowHeight
 		}
 	}
 }
