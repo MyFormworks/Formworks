@@ -20,6 +20,7 @@ final class FWTextComponentView: UITableViewCell, FWComponentCell {
                 self.descriptionLabel.text = viewModel.description
                 self.validatorLabel.text = ""
                 self.textField.placeholder = viewModel.placeholder
+                self.symbolImageView.isHidden = !viewModel.required
                 switch viewModel.type {
                 case .text, .multiline:
                     self.textField.keyboardType = .default
@@ -197,7 +198,9 @@ extension FWTextComponentView: FWTextComponentViewModelDelegate {
         guard let viewModel = viewModel else {
             return
         }
-
+        if !viewModel.required {
+            symbolImageView.isHidden = textField.text == nil
+        }
         if viewModel.isValid {
             symbolImageView.image = UIImage(systemName: "checkmark.circle.fill")
             symbolImageView.tintColor = .fwComponentCorrect

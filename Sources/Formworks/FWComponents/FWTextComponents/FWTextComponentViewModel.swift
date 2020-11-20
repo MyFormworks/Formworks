@@ -47,13 +47,21 @@ class FWTextComponentViewModel: FWComponentViewModel {
         didSet {
             if oldValue != isValid {
                 delegate?.update()
+            } else if !required {
+                delegate?.update()
             }
         }
     }
     
     var content: String = "" {
         didSet {
-            isValid = validator.validate(content)
+            if required {
+                isValid = validator.validate(content)
+            } else if content.isEmpty {
+                isValid = true
+            } else {
+                isValid = validator.validate(content)
+            }
         }
     }
     
