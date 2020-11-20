@@ -79,6 +79,17 @@ extension ExampleClass: FWFormViewControllerDelegate {
   "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
   "responseFormat": "long",
   "title": "Formworks Title",
+  "style": {
+    "accent": "#F0F0F0FF",
+    "background": "#CACACAFF",
+    "componentBackground": "#F0F0F0FF",
+    "componentTitle": "#212121FF",
+    "componentDescription": "#212121FF",
+    "componentInputText": "#212121FF",
+    "componentInputBackground": "#FDFDFDFF",
+    "componentRequired": "#FD5C5CFF",
+    "componentCorrect": "#78C256FF"
+  },
   "components": [{
     "text": {
       "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
