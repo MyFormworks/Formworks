@@ -45,7 +45,7 @@ final class FWDismissHeader: UITableViewHeaderFooterView {
 	private func setupTitleConstraints() {
 		self.addSubview(title)
 		NSLayoutConstraint.activate([
-			title.widthAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width) - self.button.frame.width - 5),
+			title.trailingAnchor.constraint(equalTo: button.leadingAnchor, constant: 0),
 			title.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
 			title.bottomAnchor.constraint(equalTo:self.bottomAnchor),
 			title.topAnchor.constraint(equalTo:self.topAnchor)
