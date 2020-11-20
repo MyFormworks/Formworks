@@ -21,6 +21,7 @@ final class FWDismissHeader: UITableViewHeaderFooterView {
 		super.init(reuseIdentifier: reuseIdentifier)
 		setupButtonConstraints()
 		setupTitleConstraints()
+		setHeaderButton()
 	}
 	
 	required init?(coder: NSCoder) {
@@ -52,7 +53,7 @@ final class FWDismissHeader: UITableViewHeaderFooterView {
 	}
 	
 	// MARK: Setup Header Image
-	func setHeaderButton(name: String) {
+	func setHeaderButton() {
 		button.setTitle("Cancel", for: .normal)
 	}
 	

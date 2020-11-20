@@ -108,8 +108,7 @@ extension FWFormViewController: UITableViewDelegate {
 			guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FWDismissHeader.id) as? FWDismissHeader else {
 				return UITableViewHeaderFooterView()
 			}
-			header.setHeaderTitle(text: "Título do formulário aparecerá aqui")
-			header.setHeaderButton(name: "Cancel")
+			header.setHeaderTitle(text: viewModel.title)
 			header.button.addTarget(self, action: #selector(didCancel), for: .allEvents)
 			return header
 		} else {
