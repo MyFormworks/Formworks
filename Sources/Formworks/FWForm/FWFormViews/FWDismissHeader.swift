@@ -21,7 +21,7 @@ final class FWDismissHeader: UITableViewHeaderFooterView {
 		super.init(reuseIdentifier: reuseIdentifier)
 		setupButtonConstraints()
 		setupTitleConstraints()
-//		self.backgroundColor = .white
+		self.backgroundColor = .white
 	}
 	
 	required init?(coder: NSCoder) {
