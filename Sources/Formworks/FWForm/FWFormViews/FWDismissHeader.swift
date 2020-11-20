@@ -19,7 +19,7 @@ final class FWDismissHeader: UITableViewHeaderFooterView {
 	// MARK: Init
 	override init(reuseIdentifier: String?) {
 		super.init(reuseIdentifier: reuseIdentifier)
-		setupImageConstraints()
+		setupButtonConstraints()
 		setupTitleConstraints()
 		self.backgroundColor = .white
 	}
@@ -29,7 +29,7 @@ final class FWDismissHeader: UITableViewHeaderFooterView {
 	}
 	
 	// MARK: Setup Image Constraints
-	private func setupImageConstraints() {
+	private func setupButtonConstraints() {
 		self.contentView.addSubview(button)
 		button.setTitleColor(.systemBlue, for: .normal)
 		NSLayoutConstraint.activate([
@@ -52,7 +52,7 @@ final class FWDismissHeader: UITableViewHeaderFooterView {
 	}
 	
 	// MARK: Setup Header Image
-	func setHeaderImage(name: String) {
+	func setHeaderButton(name: String) {
 		button.setTitle("Cancel", for: .normal)
 	}
 	
