@@ -83,6 +83,10 @@ public final class FWFormViewController: UIViewController {
 			formTableView.rightAnchor.constraint(equalTo: guides.rightAnchor)
 		])
 	}
+	
+	@objc private func didCancel( ) {
+		self.dismiss(animated: true, completion: nil)
+	}
 }
 // MARK: UITableViewDelegate
 extension FWFormViewController: UITableViewDelegate {
@@ -106,6 +110,7 @@ extension FWFormViewController: UITableViewDelegate {
 			}
 			header.setHeaderTitle(text: "Título do formulário aparecerá aqui")
 			header.setHeaderButton(name: "Cancel")
+			header.button.addTarget(self, action: #selector(didCancel), for: .allEvents)
 			return header
 		} else {
 			guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FWHeader.id) as? FWHeader else {

@@ -9,7 +9,7 @@ import UIKit
 final class FWDismissHeader: UITableViewHeaderFooterView {
 	
 	// MARK: Declarations
-	@ManualLayout private var button: UIButton
+	@ManualLayout var button: UIButton
 	@ManualLayout private var title: UILabel
 	
 	static var id: String {
@@ -54,7 +54,6 @@ final class FWDismissHeader: UITableViewHeaderFooterView {
 	// MARK: Setup Header Image
 	func setHeaderButton(name: String) {
 		button.setTitle("Cancel", for: .normal)
-		button.addTarget(self, action: #selector(dismiss), for: .allEvents)
 	}
 	
 	// MARK: Setup Header Title
@@ -62,9 +61,6 @@ final class FWDismissHeader: UITableViewHeaderFooterView {
 		title.text = text
 	}
 	
-	@objc private func dismiss (_ sender: Any ) {
-		guard let viewController = sender as? FWFormViewController else { return }
-		viewController.dismiss(animated: true, completion: nil)
-	}
+	
 }
 
