@@ -62,8 +62,8 @@ final class FWDismissHeader: UITableViewHeaderFooterView {
 		title.text = text
 	}
 	
-	@objc private func dismiss (_ viewController: FWFormViewController) {
-		viewController.dismiss(animated: true, completion: nil)
+	@objc private func dismiss (_ sender: FWFormViewController) {
+		sender.dismiss(animated: true, completion: nil)
 	}
 }
 
