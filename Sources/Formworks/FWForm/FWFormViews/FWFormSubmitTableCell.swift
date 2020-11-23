@@ -37,9 +37,10 @@ final class FWFormSubmitTableCell: UITableViewCell {
 
         NSLayoutConstraint.activate([
 			submitLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            submitLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
+//            submitLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
             submitLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-			submitLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+//			submitLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            submitLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, constant: 30)
         ])
     }
 }
