@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIColor {
-	static var style: FWStyle = .light
+    static var style: FWStyle = .light
 
     /// Creates a color object from a hex string value
     /// - Parameter hex: String Hex value. Formatted in #FFFFFF
@@ -88,6 +88,7 @@ extension UIColor {
 							   alpha: 1.0)
 			case .custom(let specification):
 				return specification.accent
+                
 		}
 	}
 	
@@ -227,4 +228,22 @@ extension UIColor {
 				return specification.componentCorrect
 		}
 	}
+    
+    class var fwComponentPlaceholder: UIColor {
+        switch self.style {
+        case .light:
+            return UIColor(red: 138.0/255.0,
+                           green: 138.0/255.0,
+                           blue: 138.0/255.0,
+                           alpha: 1.0)
+        case .dark:
+            return UIColor(red: 152.0/255.0,
+                           green: 152.0/255.0,
+                           blue: 152.0/255.0,
+                           alpha: 1.0)
+        case .custom(let specification):
+            return specification.componentPlaceholder
+        }
+        
+    }
 }
