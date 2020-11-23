@@ -30,17 +30,25 @@ class FWTextComponentViewModel: FWComponentViewModel {
     var title: String {
         return model.title
     }
+
     var description: String {
         return model.title
     }
+
     var required: Bool {
         return model.required
     }
+
     var placeholder: String {
         return model.placeholder
     }
+
     var type: FWComponentModelWrapper.Types {
         return model.type
+    }
+
+    var validatorRuleMessage: String {
+        return self.validator.validationRuleDescription
     }
     
     var isValid: Bool = false {
