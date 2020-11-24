@@ -59,6 +59,7 @@ final class FWDismissHeader: UITableViewHeaderFooterView {
 	
 	// MARK: Setup Header Title
 	func setHeaderTitle(text: String) {
+		title.numberOfLines = 0
 		title.text = text
 	}
 }
