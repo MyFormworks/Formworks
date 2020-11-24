@@ -130,16 +130,17 @@ extension FWFormViewController: UITableViewDataSource {
 	}
 	
 	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		if indexPath.row == viewModel.numberOfComponents{
+		if indexPath.row == viewModel.numberOfComponents {
 			guard let cell = tableView.dequeueReusableCell(withIdentifier: FWFormSubmitTableCell.identifier) as? FWFormSubmitTableCell else {
 				return UITableViewCell()
-			}
+            }
 			return cell
 		} else {
 			guard let cell = tableView.dequeueReusableCell(withIdentifier: FWTextComponentView.identifier) as? FWTextComponentView else {
 				return UITableViewCell()
 			}
 			cell.configure(with: viewModel.viewModelAt(index: indexPath))
+            print(indexPath)
 			return cell
 		}
 	}

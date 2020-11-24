@@ -57,5 +57,4 @@ extension FWFormModel: Decodable {
         self.components = try container.decode([FWDecodedComponentModel].self, forKey: .components).map { $0.base }
         self.style = try container.decode(FWStyleSpecification.self, forKey: .style)
     }
-
 }
