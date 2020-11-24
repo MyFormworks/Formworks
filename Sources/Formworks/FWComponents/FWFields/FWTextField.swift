@@ -21,6 +21,8 @@ final class FWTextField: UITextField {
 
     private func style() {
         backgroundColor = .fwComponentInputBackground
+        tintColor = .fwComponentInputText
+        textColor = .fwComponentInputText
         borderStyle = .roundedRect
         autocapitalizationType = .none
     }
