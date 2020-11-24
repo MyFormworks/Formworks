@@ -39,7 +39,7 @@ public final class FWFormViewController: UIViewController {
     public override func loadView() {
         super.loadView()
         view.backgroundColor = .fwBackground
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     public override func viewDidLoad() {
@@ -53,6 +53,7 @@ public final class FWFormViewController: UIViewController {
     /// Sets up the  `FWFormViewModel`.
 	private func setUpViewModel() {
         viewModel.delegate = self
+        viewModel.setUp()
 	}
 
     // MARK: TableView setup
