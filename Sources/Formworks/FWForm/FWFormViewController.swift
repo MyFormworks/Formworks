@@ -121,7 +121,7 @@ extension FWFormViewController: UITableViewDelegate {
 	}
 	
 	public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-		return 50
+		return 100
 	}
 	
 	public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -157,6 +157,5 @@ extension FWFormViewController: FWFormViewModelDelegate {
 		UIColor.style = viewModel.style
 		self.title = viewModel.title
 		formTableView.reloadData()
-		formTableView.layoutIfNeeded()
 	}
 }

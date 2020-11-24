@@ -49,6 +49,7 @@ final class FWDismissHeader: UITableViewHeaderFooterView {
 			title.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
 			title.bottomAnchor.constraint(equalTo:self.bottomAnchor),
 			title.topAnchor.constraint(equalTo:self.topAnchor)
+			title.heightAnchor.constraint(equalToConstant: 100)
 		])
 	}
 	
