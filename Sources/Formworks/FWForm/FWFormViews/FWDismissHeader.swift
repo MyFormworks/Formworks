@@ -57,7 +57,7 @@ final class FWDismissHeader: UITableViewHeaderFooterView {
 	func setHeaderButton() {
 		button.setTitle("Cancel", for: .normal)
 		button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title3).rounded().bold()
-		button.titleLabel?.textColor = .fwAccent
+		button.tintColor = .fwAccent
 	}
 	
 	// MARK: Setup Header Title
