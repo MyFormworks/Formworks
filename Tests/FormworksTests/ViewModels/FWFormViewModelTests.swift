@@ -14,6 +14,7 @@ final class FWFormViewModelTests: XCTestCase {
     func testProperties() {
         let configuration = FWConfiguration(json: TestFixtures.formData, style: .light)
         sut = FWFormViewModel(configuration: configuration)
+        sut.setUp()
 
         XCTAssertEqual(sut.title, TestFixtures.form.title)
         XCTAssertEqual(sut.numberOfComponents, TestFixtures.form.components.count)
@@ -23,6 +24,8 @@ final class FWFormViewModelTests: XCTestCase {
     func testViewModelAt() {
         let configuration = FWConfiguration(json: TestFixtures.formData, style: .light)
         sut = FWFormViewModel(configuration: configuration)
+        sut.setUp()
+        
         let sutViewModelAt = sut.viewModelAt(index: IndexPath(row: 0, section: 0))
         let viewModel = FWTextComponentViewModel(model: TestFixtures.form.components[0] as! FWTextModel)
 
