@@ -77,8 +77,6 @@ extension FWFormModel: Codable {
         })
         self.style = dto.style ?? FWStyleSpecification()
     }
-<<<<<<< HEAD
-=======
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: FWFormModel.CodingKeys.self)
@@ -88,5 +86,4 @@ extension FWFormModel: Codable {
         try responseFormat.encode(to: encoder)
         try style.encode(to: encoder)
     }
->>>>>>> 8ec879dc0c4c5b2be223e5b30597600cc994bb0f
 }
