@@ -32,13 +32,31 @@ struct FWFormModel  {
     }
 
     /// Form response formats
-    enum ResponseFormats: String, Decodable {
+    enum ResponseFormats: String, Codable {
+        /// Short response format
+        ///
+        /// Components information contain: ID, title and user inputed value.
         case short
+        /// Long response format
+        ///
+        /// Will return all the information of the component along with the user inputted values.
         case long
     }
 }
 
-extension FWFormModel: Decodable {
+fileprivate struct FWFormModelDTO: Decodable {
+    /// The UUID of the component.
+    let id: String?
+    /// The title of the form.
+    let title: String?
+    /// The format that the form response will have.
+    let responseFormat: FWFormModel.ResponseFormats?
+    /// A collection of component's data structure contained in this form.
+    let components: [FWComponentModelWrapper]
+    let style: FWStyleSpecification?
+}
+
+extension FWFormModel: Codable {
     /**
      Form Coding Keys.
 
@@ -46,15 +64,29 @@ extension FWFormModel: Decodable {
      Used in decoding the JSON.
      */
     private enum CodingKeys: String, CodingKey {
-        case id,responseType,title, components, style
+        case id,responseFormat,title, components, style, response
     }
 
     init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: FWFormModel.CodingKeys.self)
-        self.id = try container.decode(String.self, forKey: .id)
-        self.responseFormat = try container.decode(ResponseFormats.self, forKey: .responseType)
-        self.title = try container.decode(String.self, forKey: .title)
-        self.components = try container.decode([FWDecodedComponentModel].self, forKey: .components).map { $0.base }
-        self.style = try container.decode(FWStyleSpecification.self, forKey: .style)
+        let dto = try FWFormModelDTO.init(from: decoder)
+        self.id = dto.id ?? UUID().uuidString
+        self.title = dto.title ?? ""
+        self.responseFormat = dto.responseFormat ?? ResponseFormats.long
+        self.components = dto.components.compactMap({
+            $0.base
+        })
+        self.style = dto.style ?? FWStyleSpecification()
     }
+<<<<<<< HEAD
+=======
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: FWFormModel.CodingKeys.self)
+        try container.encode(components.map(FWComponentModelWrapper.init), forKey: .components)
+        try id.encode(to: encoder)
+        try title.encode(to: encoder)
+        try responseFormat.encode(to: encoder)
+        try style.encode(to: encoder)
+    }
+>>>>>>> 8ec879dc0c4c5b2be223e5b30597600cc994bb0f
 }

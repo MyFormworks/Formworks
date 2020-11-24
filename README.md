@@ -7,19 +7,19 @@ Formworks is a framework built on UIKit for building forms from JSON files on iO
 1. [Features](#features)
 2. [Requirements](#requirements)
 3. [Usage](#usage)
-  - [Installing using Swift Package Manager](#installing-using-swift-package-manager)
-  - [Creating a Form](#creating-a-form)
-  - [Getting data from a Form](#getting-data-from-a-form)
+    - [Installing using Swift Package Manager](#installing-using-swift-package-manager)
+    - [Creating a Form](#creating-a-form)
+    - [Receiving data from a Form](#receiving-data-from-a-form)
 4. [Form Input Format](#form-input-format)
-  - [Input Example](#input-example)
-  - [Parameters](#parameters)
-    - [Form](#form)
-    - [Components](#components)
-    - [Base Component](#base-component)
-    - [Text Component](#text-component)
-    - [Validators](#validators)
+    - [JSON Input Example](#json-input-example)
+    - [Parameters](#parameters)
+      - [Form](#form)
+      - [Components](#components)
+      - [Base Component](#base-component)
+      - [Text Component](#text-component)
+      - [Validators](#validators)
 5. [Form Output Format](#form-output-format)
-6. [Glossary](Resources/glossary.md)
+6. [Documentation](myformworks.github.io/formworks/)
 7. [Contribuiting](#contribuiting)
 8. [Authors](#authors)
 
@@ -56,11 +56,11 @@ let dataFromJSON: Data = // Fetch your JSON data.
 let formConfiguration = FWConfiguration(json: dataFromJSON, style: .light)
 
 let formViewController = FWFormViewController(configuration: formConfiguration)
-/// Present as desired.
+// Present as desired.
 ```
 
 ### Receiving data from a Form
-To get the data from a Form, it is necessary to implement the procotol `FWFormGeneratorDelegate` in a given class.
+To get the data from a Form, it is necessary to implement the procotol `FWFormViewControllerDelegate` in a given class.
 The answers come in JSON format.
 (For more information, refer to [Form Output Format](#form-output-format))
 ```swift
@@ -79,23 +79,32 @@ extension ExampleClass: FWFormViewControllerDelegate {
   "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
   "responseFormat": "long",
   "title": "Formworks Title",
+  "style": {
+    "accent": "#F0F0F0FF",
+    "background": "#CACACAFF",
+    "componentBackground": "#F0F0F0FF",
+    "componentTitle": "#212121FF",
+    "componentDescription": "#212121FF",
+    "componentInputText": "#212121FF",
+    "componentInputBackground": "#FDFDFDFF",
+    "componentRequired": "#FD5C5CFF",
+    "componentCorrect": "#78C256FF"
+  },
   "components": [{
     "text": {
       "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
       "title": "What is your name?",
       "description": "Type your name.",
       "required": true,
-      "validator": "max32",
       "placeholder": "Your name"
       }
     },
     {
-    "text": {
+    "email": {
       "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
       "title": "What is your e-mail?",
       "description": "Type your e-mail.",
       "required": true,
-      "validator": "email",
       "placeholder": "youremail@example.org"
       }
     },
@@ -103,8 +112,7 @@ extension ExampleClass: FWFormViewControllerDelegate {
     "text": {
       "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
       "title": "Tell us a little bit about yourself",
-      "description": "We want to know more about you.",
-      "validator": "max32"
+      "description": "We want to know more about you."
       }
     },
     {
@@ -113,7 +121,6 @@ extension ExampleClass: FWFormViewControllerDelegate {
         "title": "What is your mother's name?",
         "description": "Type your name.",
         "required": true,
-        "validator": "custom",
         "regex": "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
         "placeholder": "Your mother's name"
       }
@@ -147,28 +154,28 @@ description | String | Component's description. It could be an aditional explana
 required | Bool | Specifies if the field has to be filled or not.| No | false
 validator | Validator | Determines the type of validation.| Yes | -
 
-### Text Component
+### Text
+Default text component with custom validation.
+
 These parameters are in addition to the parameters in the [base components](#base-component).
 Parameter | Type | Description | Required | Default Value
 ------------ | ------------- | ------------- | ------------- | ---------
-placeholder | String | Component's title. It should be a definition about how the field could be filled. | No | ""
-regex | String | This parameter is only necessary if the validator is of `custom` type. In this case, if regex value is wrong or missing, the validator will accept anything. | No | ""
+placeholder | String | Text displayed on the component's field when it's empty. | No | ""
+regex | String | Regular expression used for validating the component's field. If the regex is wrong or missing, the component will accept anything. | No | ""
+
+### Text-Based
+Alternative text components such as  `email`, `numerical`, `phonenumber`, `multiline` that come with a default validation rule.
+
+These parameters are in addition to the parameters in the [base components](#base-component).
+Parameter | Type | Description | Required | Default Value
+------------ | ------------- | ------------- | ------------- | ---------
+placeholder | String | Text displayed on the component's field when it's empty.  | No | ""
 
 ### Validators
 
-The default validator is based on regex. There is the protocol `FWValidator` available for you to implement your own validator when needed.
-
-However, in the **current version** of Formworks registration of a custom validator **is not possible**. Nevertheless it is possible to use custom regexes with `FWRegexValidador`, which is the struct responsible to make validations using any viable regex structure.
-
-Formworks **current** default regex validators are stated below:
-
-* email: ``` [0-9a-z._%+-]+@[a-z0-9.-]+\\.[a-z]{2,64} ```
-* phonenumber: ``` \(?\b([0-9]{2,3}|0((x|[0-9]){2,3}[0-9]{2}))\)?\s*[0-9]{4,5}[- ]*[0-9]{4}\b ```
-* max32: ``` [A-Za-z0-9 !\"#$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~]{0,32} ```
+The default regex for each component can be found in the `FWRegex` enum in our [Documentation](https://myformworks.github.io/Formworks/Enums/FWRegex.html).
 
 In case of a `custom` regex the rule will be determinated by the `regex` key.
-
-This regexes can be founded in the `FWRegex` enum.
 
 ## Form Output Format
 
@@ -181,37 +188,36 @@ This regexes can be founded in the `FWRegex` enum.
       "type": "text",
       "title": "Text Field Title",
       "description": "Text Field Description",
-      "validator": "max256",
-      "required": "false",
-      "regex": "Your custom regex",
+      "required": "true",
+      "regex": "",
       "placeholder": "Text Field Placeholder",
       "isMultiline": "false",
-      "content": "Text Field Response Value"
+      "content": "Components Answer"
     },
     {
       "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-      "type": "text",
+      "type": "email",
       "title": "Text Field Title",
       "description": "Text Field Description",
-      "validator": "max256",
       "required": "false",
-      "regex": "Your custom regex",
+      "regex": "[0-9a-z._%+-]+@[a-z0-9.-]+\\.[a-z]{2,64}",
       "placeholder": "Text Field Placeholder",
       "isMultiline": "false",
-      "content": "Text Field Response Value"
+      "content": "Components Answer"
     }
   ]
 }
 ```
 
-## [Glossary](Resources/glossary.md)
+## [Documentation](https://myformworks.github.io/Formworks/)
 
 ## Contribuiting
 Please see [CONTRIBUTING.md](Resources/CONTRIBUTING.md).
 
 ## Authors
 This project was started by
-Artur Carneiro
+
+[Artur Carneiro](https://csfar.github.io)
 Cassia Barbosa
 Edgar Sgroi
 Rafael Galdino

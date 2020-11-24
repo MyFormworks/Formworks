@@ -15,8 +15,8 @@ public protocol FWFormViewControllerDelegate: AnyObject {
 
 /// Representation of a form. It displays each component as a cell of a `UITableView`.
 public final class FWFormViewController: UIViewController {
-	// MARK: Properties
-	@ManualLayout private var formTableView: UITableView
+    // MARK: Properties
+    @ManualLayout private var formTableView: UITableView
 	
 	private let viewModel: FWFormViewModel
 	
@@ -61,8 +61,7 @@ public final class FWFormViewController: UIViewController {
 		formTableView.register(FWTextComponentView.self,
 							   forCellReuseIdentifier: FWTextComponentView.identifier)
 		formTableView.register(FWFormSubmitTableCell.self, forCellReuseIdentifier: FWFormSubmitTableCell.identifier)
-		formTableView.register(FWHeader.self, forHeaderFooterViewReuseIdentifier: FWHeader.id)
-		formTableView.register(FWDismissHeader.self, forHeaderFooterViewReuseIdentifier: FWDismissHeader.id)
+		formTableView.register(FWDismissHeader.self, forHeaderFooterViewReuseIdentifier: FWDismissHeader.identifier)
 		formTableView.backgroundColor = UIColor.fwBackground
 		formTableView.rowHeight = UITableView.automaticDimension
 		formTableView.estimatedRowHeight = 100
@@ -103,19 +102,14 @@ extension FWFormViewController: UITableViewDelegate {
 	
 	public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		if ((navigationController?.isBeingPresented) == nil) {
-			guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FWDismissHeader.id) as? FWDismissHeader else {
+			guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FWDismissHeader.identifier) as? FWDismissHeader else {
 				return UITableViewHeaderFooterView()
 			}
 			header.setHeaderTitle(text: viewModel.title)
 			header.button.addTarget(self, action: #selector(didCancel), for: .allEvents)
 			return header
-		} else {
-			guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FWHeader.id) as? FWHeader else {
-				return UITableViewHeaderFooterView()
-			}
-			header.setHeaderTitle(text: viewModel.title)
-			return header
 		}
+		return nil
 	}
 	
 	public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
