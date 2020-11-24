@@ -13,7 +13,7 @@ protocol FWTextComponentViewModelDelegate: AnyObject {
     
 }
 
-class FWTextComponentViewModel: FWComponentViewModel {
+final class FWTextComponentViewModel: FWComponentViewModel {
     // MARK: Properties
     weak var delegate: FWTextComponentViewModelDelegate?
     
