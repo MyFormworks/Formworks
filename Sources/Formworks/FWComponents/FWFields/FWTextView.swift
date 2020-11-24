@@ -11,15 +11,17 @@ final class FWTextView: UITextView {
 
     init(frame: CGRect) {
         super.init(frame: frame, textContainer: nil)
-        style()
+        customConfiguration()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func style() {
+    private func customConfiguration() {
         backgroundColor = .fwComponentInputBackground
         autocapitalizationType = .none
+        font = UIFont.preferredFont(forTextStyle: .body).rounded()
+        textColor = .fwComponentInputText
     }
 }

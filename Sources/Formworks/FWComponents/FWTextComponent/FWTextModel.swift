@@ -32,7 +32,6 @@ fileprivate struct FWTextModelDTO: FWComponentModelDTO {
     /// A custom regular expression for the component's text field validation. Only valid if validator attribute is set to "custom".
     var regex: String?
     var placeholder: String?
-    var isMultiline: Bool?
 }
 
 extension FWTextModel {

@@ -63,6 +63,8 @@ public final class FWFormViewController: UIViewController {
         formTableView.dataSource = self
         formTableView.register(FWTextComponentView.self,
                  forCellReuseIdentifier: FWTextComponentView.identifier)
+        formTableView.register(FWMultilineComponentView.self,
+                 forCellReuseIdentifier: FWMultilineComponentView.identifier)
         formTableView.register(FWFormSubmitTableCell.self, forCellReuseIdentifier: FWFormSubmitTableCell.identifier)
         formTableView.backgroundColor = UIColor.fwBackground
         formTableView.rowHeight = UITableView.automaticDimension
@@ -112,11 +114,23 @@ extension FWFormViewController: UITableViewDataSource {
             }
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: FWTextComponentView.identifier) as? FWTextComponentView else {
+            let cellViewModel = viewModel.viewModelAt(index: indexPath)
+            switch cellViewModel {
+            case is FWTextComponentViewModel:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: FWTextComponentView.identifier) as? FWTextComponentView else {
+                    return UITableViewCell()
+                }
+                    cell.configure(with: cellViewModel)
+                    return cell
+            case is FWMultilineComponentViewModel:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: FWMultilineComponentView.identifier) as? FWMultilineComponentView else {
+                    return UITableViewCell()
+                }
+                    cell.configure(with: cellViewModel)
+                    return cell
+            default:
                 return UITableViewCell()
             }
-            cell.configure(with: viewModel.viewModelAt(index: indexPath))
-            return cell
         }
     }
 }

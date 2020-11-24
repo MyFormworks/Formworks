@@ -56,9 +56,9 @@ final class FWMultilineComponentView: UITableViewCell, FWComponentCell {
     }
 
     // MARK: @objc
-    @objc private func didEditingChange(_ textField: FWTextField) {
+    @objc private func didEditingChange(_ textView: FWTextView) {
         if let viewModel = viewModel {
-            viewModel.content = textField.text ?? ""
+            viewModel.content = textView.text ?? ""
         }
     }
 
@@ -69,7 +69,7 @@ final class FWMultilineComponentView: UITableViewCell, FWComponentCell {
         setUpTitleLabel()
         setUpDescriptionLabel()
         setUpValidatorLabel()
-        setUpTextField()
+        setUpTextView()
     }
 
     private func setUpSeparatorView() {
@@ -91,9 +91,9 @@ final class FWMultilineComponentView: UITableViewCell, FWComponentCell {
         validatorLabel.text = "This is a test text for the validator label to see how line breaking works, and how it resizes on the view."
     }
 
-    private func setUpTextField() {
-        textField.placeholder = ""
-        textField.addTarget(self, action: #selector(didEditingChange(_:)), for: .editingChanged)
+    private func setUpTextView() {
+        textView.delegate = self
+        textView.target(forAction: #selector(didEditingChange), withSender: nil)
     }
 
     // MARK: Layout
@@ -102,7 +102,7 @@ final class FWMultilineComponentView: UITableViewCell, FWComponentCell {
         layoutTitleLabelConstraints()
         layoutSymbolImageView()
         layoutDescriptionLabel()
-        layoutTextField()
+        layoutTextView()
         layoutValidatorLabel()
     }
 
@@ -154,16 +154,16 @@ final class FWMultilineComponentView: UITableViewCell, FWComponentCell {
         ])
     }
 
-    private func layoutTextField() {
-        self.contentView.addSubview(textField)
+    private func layoutTextView() {
+        self.contentView.addSubview(textView)
 
         let guide = contentView.layoutMarginsGuide
 
         NSLayoutConstraint.activate([
-            textField.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20),
-            textField.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
-            textField.widthAnchor.constraint(equalTo: guide.widthAnchor),
-            textField.heightAnchor.constraint(equalToConstant: 40)
+            textView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20),
+            textView.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
+            textView.widthAnchor.constraint(equalTo: guide.widthAnchor),
+            textView.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
 
@@ -173,7 +173,7 @@ final class FWMultilineComponentView: UITableViewCell, FWComponentCell {
         let guide = contentView.layoutMarginsGuide
 
         NSLayoutConstraint.activate([
-            validatorLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 16),
+            validatorLabel.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 16),
             validatorLabel.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
             validatorLabel.widthAnchor.constraint(equalTo: guide.widthAnchor),
             validatorLabel.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -8)
@@ -188,7 +188,7 @@ extension FWMultilineComponentView: FWMultilineComponentViewModelDelegate {
             return
         }
         if !viewModel.required {
-            symbolImageView.isHidden = textField.text == nil
+            symbolImageView.isHidden = textView.text == nil
         }
         if viewModel.isValid {
             symbolImageView.image = UIImage(systemName: "checkmark.circle.fill")
