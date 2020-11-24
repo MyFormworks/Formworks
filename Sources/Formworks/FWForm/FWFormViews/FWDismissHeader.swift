@@ -12,7 +12,7 @@ final class FWDismissHeader: UITableViewHeaderFooterView {
 	@ManualLayout var button: UIButton
 	@ManualLayout private var title: FWLabel
 	
-	static var id: String {
+	static var identifier: String {
 		return String(describing: self)
 	}
 	
@@ -49,17 +49,21 @@ final class FWDismissHeader: UITableViewHeaderFooterView {
 			title.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
 			title.bottomAnchor.constraint(equalTo:self.bottomAnchor),
 			title.topAnchor.constraint(equalTo:self.topAnchor),
-			title.heightAnchor.constraint(equalToConstant: 100)
+			title.heightAnchor.constraint(equalToConstant: 50)
 		])
 	}
 	
 	// MARK: Setup Header Image
 	func setHeaderButton() {
 		button.setTitle("Cancel", for: .normal)
+		button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title3).rounded().bold()
+		button.titleLabel?.textColor = .fwAccent
 	}
 	
 	// MARK: Setup Header Title
 	func setHeaderTitle(text: String) {
+		title.font = UIFont.preferredFont(forTextStyle: .title3).rounded().bold()
+		title.textColor = .fwComponentTitle
 		title.numberOfLines = 0
 		title.text = text
 	}
