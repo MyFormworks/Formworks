@@ -66,8 +66,6 @@ public final class FWFormViewController: UIViewController {
 		formTableView.backgroundColor = UIColor.fwBackground
 		formTableView.rowHeight = UITableView.automaticDimension
 		formTableView.estimatedRowHeight = 100
-		formTableView.sectionHeaderHeight = UITableView.automaticDimension
-		formTableView.estimatedSectionHeaderHeight = 50
 		formTableView.separatorStyle = .none
 	}
 	
@@ -118,14 +116,6 @@ extension FWFormViewController: UITableViewDelegate {
 			header.setHeaderTitle(text: viewModel.title)
 			return header
 		}
-	}
-	
-	public func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-		return 100
-	}
-	
-	public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		return UITableView.automaticDimension
 	}
 }
 
