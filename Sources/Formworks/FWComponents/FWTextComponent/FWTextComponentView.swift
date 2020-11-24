@@ -21,16 +21,6 @@ final class FWTextComponentView: UITableViewCell, FWComponentCell {
                 self.validatorLabel.text = viewModel.validatorRuleMessage
                 self.textField.placeholder = viewModel.placeholder
                 self.symbolImageView.isHidden = !viewModel.required
-                switch viewModel.type {
-                case .text, .multiline:
-                    self.textField.keyboardType = .default
-                case .numerical:
-                    self.textField.keyboardType = .numberPad
-                case .phonenumber:
-                    self.textField.keyboardType = .phonePad
-                case .email:
-                    self.textField.keyboardType = .emailAddress
-                }
             }
         }
     }

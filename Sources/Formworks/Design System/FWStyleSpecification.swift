@@ -20,6 +20,7 @@ public struct FWStyleSpecification: Codable {
     var componentInputBackground: UIColor = .fwComponentInputBackground
     var componentRequired: UIColor = .fwComponentRequired
     var componentCorrect: UIColor = .fwComponentCorrect
+    var componentPlaceholder: UIColor = .fwComponentPlaceholder
 }
 
 fileprivate struct FWStyleSpecificationDTO: Codable {
@@ -32,6 +33,7 @@ fileprivate struct FWStyleSpecificationDTO: Codable {
     let componentInputBackground: String?
     let componentRequired: String?
     let componentCorrect: String?
+    let componentPlaceholder: String?
 }
 
 extension FWStyleSpecification: Equatable {
@@ -46,6 +48,7 @@ extension FWStyleSpecification: Equatable {
         self.componentInputBackground = UIColor(hex: dto.componentInputBackground ?? "") ?? .fwComponentInputBackground
         self.componentRequired = UIColor(hex: dto.componentRequired ?? "") ?? .fwComponentRequired
         self.componentCorrect = UIColor(hex: dto.componentCorrect ?? "") ?? .fwComponentCorrect
+        self.componentPlaceholder = UIColor(hex: dto.componentPlaceholder ?? "") ?? .fwComponentPlaceholder
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -58,7 +61,8 @@ extension FWStyleSpecification: Equatable {
             componentInputText: self.componentInputText.toHex(true),
             componentInputBackground: self.componentInputBackground.toHex(true),
             componentRequired: self.componentRequired.toHex(true),
-            componentCorrect: self.componentCorrect.toHex(true)
+            componentCorrect: self.componentCorrect.toHex(true),
+            componentPlaceholder: self.componentPlaceholder.toHex(true)
         )
         try dto.encode(to: encoder)
     }
@@ -72,6 +76,7 @@ extension FWStyleSpecification: Equatable {
             lhs.componentInputText == rhs.componentInputText &&
             lhs.componentInputBackground == rhs.componentInputBackground &&
             lhs.componentRequired == rhs.componentRequired &&
-            lhs.componentCorrect == rhs.componentCorrect
+            lhs.componentCorrect == rhs.componentCorrect &&
+            lhs.componentPlaceholder == rhs.componentPlaceholder
     }
 }

@@ -92,7 +92,6 @@ final class FWMultilineComponentView: UITableViewCell, FWComponentCell {
     }
 
     private func setUpTextView() {
-        textView.delegate = self
         textView.target(forAction: #selector(didEditingChange), withSender: nil)
     }
 
