@@ -117,6 +117,10 @@ extension FWFormViewController: UITableViewDelegate {
 			return header
 		}
 	}
+	
+	public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		return 100
+	}
 }
 
 // MARK: UITableViewDataSource
