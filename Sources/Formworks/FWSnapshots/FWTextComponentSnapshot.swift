@@ -12,9 +12,7 @@ struct FWTextComponentSnapshot: FWComponentSnapshot {
     let title: String
     let description: String
     let required: Bool
-    let validator: String
     let regex: String
     let placeholder: String
-    let isMultiline: Bool
     let content: String
 }

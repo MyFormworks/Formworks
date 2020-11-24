@@ -15,8 +15,8 @@ public protocol FWFormViewControllerDelegate: AnyObject {
 
 /// Representation of a form. It displays each component as a cell of a `UITableView`.
 public final class FWFormViewController: UIViewController {
-	// MARK: Properties
-	@ManualLayout private var formTableView: UITableView
+    // MARK: Properties
+    @ManualLayout private var formTableView: UITableView
 	
 	private let viewModel: FWFormViewModel
 	

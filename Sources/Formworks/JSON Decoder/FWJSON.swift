@@ -70,7 +70,7 @@ struct FWJSON {
     func decode(completionHandler: @escaping (_ result: Result<FWComponentModel, Error>) -> Void) {
         do {
             let decoder = JSONDecoder()
-            let component = try decoder.decode(FWDecodedComponentModel.self, from: data)
+            let component = try decoder.decode(FWComponentModelWrapper.self, from: data)
             completionHandler(.success(component.base))
         } catch {
             completionHandler(.failure(error))

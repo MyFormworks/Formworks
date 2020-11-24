@@ -56,6 +56,7 @@ final class FWLabel: UILabel {
 
     private func styleTitle() {
         font = UIFont.preferredFont(forTextStyle: .title3).bold().rounded()
+        textColor = .fwComponentTitle
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.75
         numberOfLines = 3
@@ -63,6 +64,7 @@ final class FWLabel: UILabel {
 
     private func styleDescription() {
         font = UIFont.preferredFont(forTextStyle: .subheadline).rounded()
+        textColor = .fwComponentDescription
         numberOfLines = 0
     }
 
