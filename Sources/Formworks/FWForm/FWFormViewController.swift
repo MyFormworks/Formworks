@@ -157,5 +157,6 @@ extension FWFormViewController: FWFormViewModelDelegate {
 		UIColor.style = viewModel.style
 		self.title = viewModel.title
 		formTableView.reloadData()
+		formTableView.layoutIfNeeded()
 	}
 }
