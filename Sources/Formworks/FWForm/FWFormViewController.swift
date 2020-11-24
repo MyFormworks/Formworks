@@ -119,7 +119,7 @@ extension FWFormViewController: UITableViewDelegate {
 	}
 	
 	public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		return 100
+		return UITableView.automaticDimension
 	}
 }
 
