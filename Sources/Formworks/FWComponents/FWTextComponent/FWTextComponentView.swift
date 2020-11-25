@@ -21,6 +21,7 @@ final class FWTextComponentView: UITableViewCell, FWComponentCell {
                 self.validatorLabel.text = viewModel.validatorRuleMessage
                 self.textField.placeholder = viewModel.placeholder
                 self.symbolImageView.isHidden = !viewModel.required
+                self.textField.text = viewModel.content
             }
         }
     }

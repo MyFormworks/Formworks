@@ -1,6 +1,6 @@
 //
 //  FWMultilineComponentView.swift
-//  SampleMacro
+// 
 //
 //  Created by Rafael Galdino on 23/11/20.
 //
@@ -20,6 +20,7 @@ final class FWMultilineComponentView: UITableViewCell, FWComponentCell {
                 self.descriptionLabel.text = viewModel.description
                 self.validatorLabel.text = viewModel.validatorRuleMessage
                 self.symbolImageView.isHidden = !viewModel.required
+                self.textView.text = viewModel.content
             }
         }
     }
