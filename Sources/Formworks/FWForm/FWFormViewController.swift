@@ -115,7 +115,7 @@ extension FWFormViewController: UITableViewDelegate {
 	
 	public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 		
-		if   navigationController?.presentingViewController != nil {
+		if (navigationController?.presentingViewController == nil) {
 			return 0
 		} else  {
 			return 50
