@@ -19,7 +19,8 @@ final class FWTextComponentView: UITableViewCell, FWComponentCell {
                 self.titleLabel.text = viewModel.title
                 self.descriptionLabel.text = viewModel.description
                 self.validatorLabel.text = viewModel.validatorRuleMessage
-                self.textField.placeholder = viewModel.placeholder
+				self.textField.attributedPlaceholder = NSAttributedString(string: viewModel.placeholder,
+																		  attributes: [NSAttributedString.Key.foregroundColor: UIColor.fwComponentPlaceholder])
                 self.textField.text = viewModel.content
 				self.update()
             }
