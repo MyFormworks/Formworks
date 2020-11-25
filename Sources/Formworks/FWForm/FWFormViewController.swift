@@ -115,10 +115,10 @@ extension FWFormViewController: UITableViewDelegate {
 	
 	public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 		
-		if (navigationController?.presentingViewController == nil) {
-			return 0
-		} else  {
+		if (self.isModalInPresentation == true) {
 			return 50
+		} else  {
+			return 0
 		}
 	}
 }
