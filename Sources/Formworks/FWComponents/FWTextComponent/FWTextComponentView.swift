@@ -191,27 +191,11 @@ extension FWTextComponentView: FWTextComponentViewModelDelegate {
         }
 		
 		switch (textField.text?.isEmpty, viewModel.isValid, viewModel.required) {
-			case (false, true, true):
+			case (false, true, true), (false, true, false):
 				symbolImageView.image = UIImage(systemName: "checkmark.circle.fill")
 				symbolImageView.tintColor = .fwComponentCorrect
 				symbolImageView.isHidden = false
-			case (false, false, true):
-				symbolImageView.image = UIImage(systemName: "asterisk.circle.fill")
-				symbolImageView.tintColor = .fwComponentRequired
-				symbolImageView.isHidden = false
-			case (true, true, true):
-				symbolImageView.image = UIImage(systemName: "asterisk.circle.fill")
-				symbolImageView.tintColor = .fwComponentRequired
-				symbolImageView.isHidden = false
-			case (true, false, true):
-				symbolImageView.image = UIImage(systemName: "asterisk.circle.fill")
-				symbolImageView.tintColor = .fwComponentRequired
-				symbolImageView.isHidden = false
-			case (false, true, false):
-				symbolImageView.image = UIImage(systemName: "checkmark.circle.fill")
-				symbolImageView.tintColor = .fwComponentCorrect
-				symbolImageView.isHidden = false
-			case (false, false, false):
+			case (false, false, true), (true, true, true), (true, false, true), (false, false, false):
 				symbolImageView.image = UIImage(systemName: "asterisk.circle.fill")
 				symbolImageView.tintColor = .fwComponentRequired
 				symbolImageView.isHidden = false
@@ -226,21 +210,5 @@ extension FWTextComponentView: FWTextComponentViewModelDelegate {
 			default:
 				break
 		}
-//        if !viewModel.required {
-//			/*
-//				textfield.text.isEmpty == false && viewModel.isValid == true -> isHidden = false && symbolImageView = checkmark
-//				textfield.text.isEmpty == false && viewModel.isValid == false -> isHidden = false && symbolImageView = asterisk
-//				textfield.text.isEmpty == true && viewModel.isValid == true -> isHidden = true && symbolImageView = checkmark
-//				textfield.text.isEmpty == true && viewModel.isValid == false -> isHidden = false && symbolImageView = asterisk
-//			*/
-//			symbolImageView.isHidden = ((textField.text?.isEmpty) != nil)
-//        }
-//        if viewModel.isValid {
-//            symbolImageView.image = UIImage(systemName: "checkmark.circle.fill")
-//            symbolImageView.tintColor = .fwComponentCorrect
-//        } else {
-//            symbolImageView.image = UIImage(systemName: "asterisk.circle.fill")
-//            symbolImageView.tintColor = .fwComponentRequired
-//        }
     }
 }
