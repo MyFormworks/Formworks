@@ -137,45 +137,8 @@ Parameter | Type | Description | Required | Default Value
 id | String | Object unique ID | Yes | -
 responseFormat | String | Response format for the form. Can either be "long" or "short" | Yes | -
 title | String | Form title. It will be presented in the top of the form. | Yes | -
-components | [Component] | An array that contains all the components that will be presented in the form. | Yes | -
-
-### Components
-These keys are the type of component that you want. They need to be given as the component key followed by the parameters of Base Component and the parameters of the respective component.
-Key | Type | Description
------------- | ------------- | -------------
-text | FWTextModel | A text component.
-
-### Base Component
-Parameter | Type | Description | Required | Default Value
------------- | ------------- | ------------- | ------------- | ---------
-id | String | Object unique ID | Yes | -
-title | String | Component's title. It should be a definition about how the field could be filled. | Yes | -
-description | String | Component's description. It could be an aditional explanation about how the field could be filled. | No | ""
-required | Bool | Specifies if the field has to be filled or not.| No | false
-validator | Validator | Determines the type of validation.| Yes | -
-
-### Text
-Default text component with custom validation.
-
-These parameters are in addition to the parameters in the [base components](#base-component).
-Parameter | Type | Description | Required | Default Value
------------- | ------------- | ------------- | ------------- | ---------
-placeholder | String | Text displayed on the component's field when it's empty. | No | ""
-regex | String | Regular expression used for validating the component's field. If the regex is wrong or missing, the component will accept anything. | No | ""
-
-### Text-Based
-Alternative text components such as  `email`, `numerical`, `phonenumber`, `multiline` that come with a default validation rule.
-
-These parameters are in addition to the parameters in the [base components](#base-component).
-Parameter | Type | Description | Required | Default Value
------------- | ------------- | ------------- | ------------- | ---------
-placeholder | String | Text displayed on the component's field when it's empty.  | No | ""
-
-### Validators
-
-The default regex for each component can be found in the `FWRegex` enum in our [Documentation](https://myformworks.github.io/Formworks/Enums/FWRegex.html).
-
-In case of a `custom` regex the rule will be determinated by the `regex` key.
+style | FWStyle | A form's visual style. Style provided in the JSON has priority over in-code selection. Hex color format. | Yes | -
+components | [FWComponentModel] | An array that contains all the components that will be presented in the form. | Yes | -
 
 ## Form Output Format
 
@@ -208,6 +171,30 @@ In case of a `custom` regex the rule will be determinated by the `regex` key.
   ]
 }
 ```
+
+## Components
+A form is composed of a series of components, each with a specific type of validation.
+
+### Base Component
+Parameter | Type | Description | Required | Default Value
+------------ | ------------- | ------------- | ------------- | ---------
+id | String | Object unique ID | Yes | -
+title | String | Component's title. It should be a definition about how the field could be filled. | Yes | -
+description | String | Component's description. It could be an aditional explanation about how the field could be filled. | No | ""
+required | Bool | Specifies if the field has to be filled or not.| No | false
+required | FWComponentModelWrapper.Types | Specifies the type of the component| Yes | -
+
+Available components:
+* `text`: a `UITextField` component with default keyboard. Can receive regex through JSON.
+* `email`: a `UITextField` component with e-mail keyboard and regex.
+* `numerical`: a `UITextField` component with numerical keyboard and regex.
+* `phonenumber`: a `UITextField` component with phonepad keyboard and brazillian phonenumbers regex.
+* `multiline`: a `UITextView` component with default keyboard. Can receive regex through JSON.
+
+## Validators
+The default regex for each component can be found in the `FWRegex` enum in our [Documentation](https://myformworks.github.io/Formworks/Enums/FWRegex.html).
+
+In case of a `custom` regex the rule will be determinated by the `regex` key.
 
 ## [Documentation](https://myformworks.github.io/Formworks/)
 
