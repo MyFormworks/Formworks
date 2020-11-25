@@ -189,7 +189,7 @@ extension FWTextComponentView: FWTextComponentViewModelDelegate {
         guard let viewModel = viewModel else {
             return
         }
-		self.symbolImageView.image = UIImage(systemName: "asterisk.circle.fill")
+		
 		switch (textField.text?.isEmpty, viewModel.isValid) {
 			case (false, true):
 				symbolImageView.image = UIImage(systemName: "checkmark.circle.fill")
