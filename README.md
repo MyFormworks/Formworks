@@ -12,9 +12,9 @@ Formworks is a framework built on UIKit for building forms from JSON files on iO
     - [Receiving data from a Form](#receiving-data-from-a-form)
 4. [Form Input Format](#form-input-format)
     - [JSON Input Example](#json-input-example)
+    - [Components](#components)
     - [Parameters](#parameters)
       - [Form](#form)
-      - [Components](#components)
       - [Base Component](#base-component)
       - [Text Component](#text-component)
       - [Validators](#validators)
@@ -28,6 +28,7 @@ Formworks is a framework built on UIKit for building forms from JSON files on iO
 - [x] [Text Components](#supported-components-specifications-parameters) with input validation.
 - [x] Form component requirement: Components can be flaged as required, forcing the user to fill them to submit.
 - [x] Color style customization from the form file.
+- [x] [Text Components](#supported-components-specifications-parameters) with input validation.
 - [ ] Support to other types of components such as option selection or date picker.
 - [ ] Support to networking calls.
 
@@ -76,58 +77,42 @@ extension ExampleClass: FWFormViewControllerDelegate {
 ### JSON Input Example 
 ```json
 {
-  "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-  "responseFormat": "long",
-  "title": "Formworks Title",
-  "style": {
-    "accent": "#F0F0F0FF",
-    "background": "#CACACAFF",
-    "componentBackground": "#F0F0F0FF",
-    "componentTitle": "#212121FF",
-    "componentDescription": "#212121FF",
-    "componentInputText": "#212121FF",
-    "componentInputBackground": "#FDFDFDFF",
-    "componentRequired": "#FD5C5CFF",
-    "componentCorrect": "#78C256FF"
-  },
+  "title": "Artur's Wedding RSVP",
   "components": [{
     "text": {
-      "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-      "title": "What is your name?",
-      "description": "Type your name.",
-      "required": true,
-      "placeholder": "Your name"
+      "title": "What's your name?", 
+      "required": true
       }
     },
     {
     "email": {
-      "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-      "title": "What is your e-mail?",
-      "description": "Type your e-mail.",
-      "required": true,
-      "placeholder": "youremail@example.org"
+      "title": "What is your e-mail?"
       }
     },
     {
-    "text": {
-      "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-      "title": "Tell us a little bit about yourself",
-      "description": "We want to know more about you."
+    "phonenumber": {
+      "title": "What's your phone number?",
+      "description": "Brazilian phone number formats only."
       }
     },
     {
-    "text": {
-        "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-        "title": "What is your mother's name?",
-        "description": "Type your name.",
-        "required": true,
-        "regex": "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-        "placeholder": "Your mother's name"
+    "multiline": {
+        "title": "Would you like to leave a special message to the groom?"
       }
     }
   ]
 }
 ```
+
+### Components
+These keys are the type of component that you want. They need to be given as the component key followed by the parameters of Base Component and the parameters of the respective component.
+Key | Description
+------------ | -------------
+`text` | Single line text inputs. No default validation.
+`multiline` | Long text inputs with multiple lines. No default validation.
+`email` |  Text component for e-mail.
+`numerical` | Text component for numerical.
+`phonenumber` | Text component for phone numbers (Brazillian format).
 
 ### Parameters
 
@@ -139,11 +124,6 @@ responseFormat | String | Response format for the form. Can either be "long" or 
 title | String | Form title. It will be presented in the top of the form. | Yes | -
 components | [Component] | An array that contains all the components that will be presented in the form. | Yes | -
 
-### Components
-These keys are the type of component that you want. They need to be given as the component key followed by the parameters of Base Component and the parameters of the respective component.
-Key | Type | Description
------------- | ------------- | -------------
-text | FWTextModel | A text component.
 
 ### Base Component
 Parameter | Type | Description | Required | Default Value
@@ -154,60 +134,18 @@ description | String | Component's description. It could be an aditional explana
 required | Bool | Specifies if the field has to be filled or not.| No | false
 validator | Validator | Determines the type of validation.| Yes | -
 
-### Text
-Default text component with custom validation.
-
+### Text Components
 These parameters are in addition to the parameters in the [base components](#base-component).
 Parameter | Type | Description | Required | Default Value
------------- | ------------- | ------------- | ------------- | ---------
+------------ | ------------- | ------------- | ------------- | -------------
 placeholder | String | Text displayed on the component's field when it's empty. | No | ""
-regex | String | Regular expression used for validating the component's field. If the regex is wrong or missing, the component will accept anything. | No | ""
-
-### Text-Based
-Alternative text components such as  `email`, `numerical`, `phonenumber`, `multiline` that come with a default validation rule.
-
-These parameters are in addition to the parameters in the [base components](#base-component).
-Parameter | Type | Description | Required | Default Value
------------- | ------------- | ------------- | ------------- | ---------
-placeholder | String | Text displayed on the component's field when it's empty.  | No | ""
+regex | String | Regular expression used for validating the input in `text` components. If the regex is wrong or missing, the component will accept anything. | No | ""
 
 ### Validators
 
 The default regex for each component can be found in the `FWRegex` enum in our [Documentation](https://myformworks.github.io/Formworks/Enums/FWRegex.html).
 
 In case of a `custom` regex the rule will be determinated by the `regex` key.
-
-## Form Output Format
-
-```json
-{
-  "title": "Your Form Title",
-  "components": [
-    {
-      "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-      "type": "text",
-      "title": "Text Field Title",
-      "description": "Text Field Description",
-      "required": "true",
-      "regex": "",
-      "placeholder": "Text Field Placeholder",
-      "isMultiline": "false",
-      "content": "Components Answer"
-    },
-    {
-      "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-      "type": "email",
-      "title": "Text Field Title",
-      "description": "Text Field Description",
-      "required": "false",
-      "regex": "[0-9a-z._%+-]+@[a-z0-9.-]+\\.[a-z]{2,64}",
-      "placeholder": "Text Field Placeholder",
-      "isMultiline": "false",
-      "content": "Components Answer"
-    }
-  ]
-}
-```
 
 ## [Documentation](https://myformworks.github.io/Formworks/)
 
@@ -218,7 +156,12 @@ Please see [CONTRIBUTING.md](Resources/CONTRIBUTING.md).
 This project was started by
 
 [Artur Carneiro](https://csfar.github.io)
-Cassia Barbosa
+
+[Cassia Barbosa](https://cassiaabarbosa.github.io)
+
 Edgar Sgroi
-Rafael Galdino
+
+[Rafael Galdino](https://galdineris.github.io)
+
 Victor Falcetta
+
