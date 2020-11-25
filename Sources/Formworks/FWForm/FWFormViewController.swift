@@ -50,7 +50,8 @@ public final class FWFormViewController: UIViewController {
 	// MARK: ViewModel setup
 	/// Sets up the  `FWFormViewModel`.
 	private func setUpViewModel() {
-		viewModel.delegate = self
+        viewModel.delegate = self
+        viewModel.setUp()
 	}
 	
 	// MARK: TableView setup

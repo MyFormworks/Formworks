@@ -19,11 +19,7 @@ protocol FWFormViewModelDelegate: AnyObject {
 final class FWFormViewModel {
     // MARK: Properties
     /// The `FWComponent`'s `ViewModels` used to build each component.
-    private var viewModels: [FWComponentViewModel] = [FWComponentViewModel]() {
-        didSet {
-            delegate?.didSetUp()
-        }
-    }
+    private var viewModels: [FWComponentViewModel] = [FWComponentViewModel]()
 
     /// The configuration used to create a form.
     private let configuration: FWConfiguration
@@ -37,7 +33,6 @@ final class FWFormViewModel {
     /// - Parameter configuration: The configuration used to create a form.
     init(configuration: FWConfiguration) {
         self.configuration = configuration
-        setUp()
     }
 
     /// The form's title.
@@ -74,7 +69,7 @@ final class FWFormViewModel {
 
     /// Sets the form up using the `FWConfiguration` passed as a paremeter in the
     /// `FWFormViewModel` init.
-    private func setUp() {
+    func setUp() {
         let fwjson = FWJSON(data: configuration.json)
 
         fwjson.decode { [weak self] (result: Result<FWFormModel, Error>) in
@@ -101,6 +96,7 @@ final class FWFormViewModel {
                     self.style = .custom(form.style)
                     self.viewModels = viewModels
                 }
+                self.delegate?.didSetUp()
             case .failure(_):
                 break
                 // TODO: Error Handling
