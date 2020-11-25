@@ -190,7 +190,7 @@ extension FWTextComponentView: FWTextComponentViewModelDelegate {
             return
         }
         if !viewModel.required {
-            symbolImageView.isHidden = textField.text == nil
+			symbolImageView.isHidden = ((textField.text?.isEmpty) != nil)
         }
         if viewModel.isValid {
             symbolImageView.image = UIImage(systemName: "checkmark.circle.fill")
