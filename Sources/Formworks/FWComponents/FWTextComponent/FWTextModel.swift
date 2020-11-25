@@ -17,6 +17,8 @@ struct FWTextModel: FWComponentModel {
     var regex: String = ""
     /// Component's text field placeholder string.
     var placeholder: String = ""
+    /// Component Specific Type
+    var type: FWComponentModelWrapper.Types = .text
 }
 
 /// Data Transfer Object for the Text component model.
@@ -30,7 +32,6 @@ fileprivate struct FWTextModelDTO: FWComponentModelDTO {
     /// A custom regular expression for the component's text field validation. Only valid if validator attribute is set to "custom".
     var regex: String?
     var placeholder: String?
-    var isMultiline: Bool?
 }
 
 extension FWTextModel {

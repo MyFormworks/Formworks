@@ -78,10 +78,15 @@ final class FWFormViewModel {
             case .success(let form):
                 var viewModels: [FWComponentViewModel] = []
                 for component in form.components {
-                    switch component {
-                    case is FWTextModel:
+                    switch component.type {
+                    case .text, .email, .numerical, .phonenumber:
                         if let textModel = component as? FWTextModel {
                             let viewModel = FWTextComponentViewModel(model:textModel)
+                            viewModels.append(viewModel)
+                        }
+                    case .multiline:
+                        if let textModel = component as? FWTextModel {
+                            let viewModel = FWMultilineComponentViewModel(model:textModel)
                             viewModels.append(viewModel)
                         }
                     default:
