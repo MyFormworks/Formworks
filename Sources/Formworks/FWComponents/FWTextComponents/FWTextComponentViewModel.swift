@@ -31,7 +31,7 @@ class FWTextComponentViewModel: FWComponentViewModel {
         return model.title
     }
     var description: String {
-        return model.title
+        return model.description
     }
     var required: Bool {
         return model.required
