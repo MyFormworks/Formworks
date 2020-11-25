@@ -190,23 +190,39 @@ extension FWTextComponentView: FWTextComponentViewModelDelegate {
             return
         }
 		
-		switch (textField.text?.isEmpty, viewModel.isValid) {
-			case (false, true):
+		switch (textField.text?.isEmpty, viewModel.isValid, viewModel.required) {
+			case (false, true, true):
 				symbolImageView.image = UIImage(systemName: "checkmark.circle.fill")
 				symbolImageView.tintColor = .fwComponentCorrect
 				symbolImageView.isHidden = false
-			case (false, false):
+			case (false, false, true):
 				symbolImageView.image = UIImage(systemName: "asterisk.circle.fill")
 				symbolImageView.tintColor = .fwComponentRequired
 				symbolImageView.isHidden = false
-			case (true, true):
+			case (true, true, true):
+				symbolImageView.image = UIImage(systemName: "asterisk.circle.fill")
+				symbolImageView.tintColor = .fwComponentRequired
+				symbolImageView.isHidden = false
+			case (true, false, true):
+				symbolImageView.image = UIImage(systemName: "asterisk.circle.fill")
+				symbolImageView.tintColor = .fwComponentRequired
+				symbolImageView.isHidden = false
+			case (false, true, false):
+				symbolImageView.image = UIImage(systemName: "checkmark.circle.fill")
+				symbolImageView.tintColor = .fwComponentCorrect
+				symbolImageView.isHidden = false
+			case (false, false, false):
+				symbolImageView.image = UIImage(systemName: "asterisk.circle.fill")
+				symbolImageView.tintColor = .fwComponentRequired
+				symbolImageView.isHidden = false
+			case (true, true, false):
 				symbolImageView.image = UIImage(systemName: "checkmark.circle.fill")
 				symbolImageView.tintColor = .fwComponentCorrect
 				symbolImageView.isHidden = true
-			case (true, false):
+			case (true, false, false):
 				symbolImageView.image = UIImage(systemName: "asterisk.circle.fill")
 				symbolImageView.tintColor = .fwComponentRequired
-				symbolImageView.isHidden = false
+				symbolImageView.isHidden = true
 			default:
 				break
 		}
