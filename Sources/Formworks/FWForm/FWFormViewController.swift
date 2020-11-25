@@ -115,7 +115,7 @@ extension FWFormViewController: UITableViewDelegate {
 	
 	public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 		
-		if (self.isModalInPresentation == true) {
+		if (self.isBeingPresented == true) {
 			return 50
 		} else  {
 			return 0
