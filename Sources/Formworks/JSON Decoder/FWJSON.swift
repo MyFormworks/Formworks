@@ -13,7 +13,7 @@ struct FWJSON {
 
     /// Initializes the structure's data instance with the passed URL parameter.
     /// - Parameter url: An URL type parameter that will be used to instaciate a Data var.
-    public init(url: URL) throws {
+    public init(bundleURL url: URL) throws {
         self.data = try Data(contentsOf: url)
     }
     /// Initializes the structure's data instance with the passed data parameter.
@@ -71,7 +71,7 @@ struct FWJSON {
         do {
             let decoder = JSONDecoder()
             let component = try decoder.decode(FWComponentModelWrapper.self, from: data)
-            completionHandler(.success(component.base))
+            completionHandler(.success(component.componentModel))
         } catch {
             completionHandler(.failure(error))
         }

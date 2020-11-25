@@ -17,6 +17,8 @@ protocol FWComponentModel: Codable {
     var description: String { get }
     ///A Boolean value that determines if the component is required to be filled or not.
     var required: Bool { get }
+    /// Component Specific Type
+    var type: FWComponentModelWrapper.Types { get set }
 }
 
 protocol FWComponentModelDTO: Codable {

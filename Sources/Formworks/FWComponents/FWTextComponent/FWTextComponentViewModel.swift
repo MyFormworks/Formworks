@@ -13,7 +13,7 @@ protocol FWTextComponentViewModelDelegate: AnyObject {
     
 }
 
-class FWTextComponentViewModel: FWComponentViewModel {
+final class FWTextComponentViewModel: FWComponentViewModel {
     // MARK: Properties
     weak var delegate: FWTextComponentViewModelDelegate?
     
@@ -30,19 +30,32 @@ class FWTextComponentViewModel: FWComponentViewModel {
     var title: String {
         return model.title
     }
+
     var description: String {
         return model.description
     }
+
     var required: Bool {
         return model.required
     }
+
     var placeholder: String {
         return model.placeholder
+    }
+
+    var type: FWComponentModelWrapper.Types {
+        return model.type
+    }
+
+    var validatorRuleMessage: String {
+        return self.validator.validationRuleDescription
     }
     
     var isValid: Bool = false {
         didSet {
             if oldValue != isValid {
+                delegate?.update()
+            } else if !required {
                 delegate?.update()
             }
         }
@@ -50,7 +63,13 @@ class FWTextComponentViewModel: FWComponentViewModel {
     
     var content: String = "" {
         didSet {
-            isValid = validator.validate(content)
+            if required {
+                isValid = validator.validate(content)
+            } else if content.isEmpty {
+                isValid = true
+            } else {
+                isValid = validator.validate(content)
+            }
         }
     }
     

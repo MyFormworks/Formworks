@@ -10,10 +10,12 @@ import Foundation
 /// Data structure for components being decoded.
 struct FWComponentModelWrapper: Codable {
     /// Component data decoded in their respective format
-    var base: FWComponentModel
+    var componentModel: FWComponentModel
 
+    /// Instantiates a wrapper for FWComponentModel
+    /// - Parameter base: the component model to be contained in this wrapper
     init(_ base: FWComponentModel) {
-        self.base = base
+        self.componentModel = base
     }
 
     /// Component decoding errors
@@ -22,7 +24,11 @@ struct FWComponentModelWrapper: Codable {
         case invalidComponent
     }
 
-    /// Component possible types in the JSON.
+    /// Types of component supported by Formworks.
+    ///
+    /// For decoding techniques of each of these cases, please refer to
+    /// the `init(from decoder: Decoder) throws` method
+    /// from `FWComponentModelWrapper`.
     enum Types: String, CodingKey {
         case text
         case multiline
@@ -31,27 +37,40 @@ struct FWComponentModelWrapper: Codable {
         case phonenumber
     }
 
+    /// Creates a new instance by decoding from the given decoder.
+    ///
+    /// This initializer throws an error if reading from the decoder fails, or
+    /// if the data read is corrupted or otherwise invalid.
+    ///
+    /// - Parameter decoder: The decoder to read data from.
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: Types.self)
 
         if let decodedComponent = try container.decodeIfPresent(FWTextModel.self, forKey: .text) {
-            self.base = decodedComponent
+            self.componentModel = decodedComponent
             return
         } else if let decodedComponent = try container.decodeIfPresent(FWTextModel.self, forKey: .multiline) {
-            self.base = decodedComponent
+            var component = decodedComponent
+            component.type = .multiline
+            self.componentModel = component
             return
         } else if let decodedComponent = try container.decodeIfPresent(FWTextModel.self, forKey: .numerical) {
-            self.base = decodedComponent
+            var component = decodedComponent
+            component.regex = FWRegex.numerical.rawValue
+            component.type = .numerical
+            self.componentModel = component
             return
         } else if let decodedComponent = try container.decodeIfPresent(FWTextModel.self, forKey: .email) {
             var component = decodedComponent
             component.regex = FWRegex.email.rawValue
-            self.base = component
+            component.type = .email
+            self.componentModel = component
             return
         } else if let decodedComponent = try container.decodeIfPresent(FWTextModel.self, forKey: .phonenumber) {
             var component = decodedComponent
             component.regex = FWRegex.phonenumber.rawValue
-            self.base = component
+            component.type = .phonenumber
+            self.componentModel = component
             return
         }
 
@@ -59,6 +78,6 @@ struct FWComponentModelWrapper: Codable {
     }
 
     func encode(to encoder: Encoder) throws {
-        try base.encode(to: encoder)
+        try componentModel.encode(to: encoder)
     }
 }
