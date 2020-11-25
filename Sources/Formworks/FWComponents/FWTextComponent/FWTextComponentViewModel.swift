@@ -53,11 +53,12 @@ final class FWTextComponentViewModel: FWComponentViewModel {
     
     var isValid: Bool = false {
         didSet {
-            if oldValue != isValid {
-                delegate?.update()
-            } else if !required {
-                delegate?.update()
-            }
+//            if oldValue != isValid {
+//                delegate?.update()
+//            } else if !required {
+//                delegate?.update()
+//            }
+			delegate?.update()
         }
     }
     
@@ -65,6 +66,8 @@ final class FWTextComponentViewModel: FWComponentViewModel {
         didSet {
             if required {
                 isValid = validator.validate(content)
+            } else if content.isEmpty {
+                isValid = true
             } else {
                 isValid = validator.validate(content)
             }
