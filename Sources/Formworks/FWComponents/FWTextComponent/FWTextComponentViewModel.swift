@@ -32,7 +32,7 @@ final class FWTextComponentViewModel: FWComponentViewModel {
     }
 
     var description: String {
-        return model.title
+        return model.description
     }
 
     var required: Bool {
