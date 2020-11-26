@@ -2,15 +2,21 @@
 ![Platform](https://img.shields.io/static/v1?label=platform&message=iOS&color=orange)
 ![SPM](https://img.shields.io/static/v1?label=SwiftPackageManager&message=compatible&color=sucess)
 
-Formworks is a framework built on UIKit for building forms from JSON files on iOS.
+Formworks is an Open-Source framework licensed under the MIT license developed with intention of facilitating
+the creation of forms on iOS application. Inspired by Server-driven UI, Formworks works by taking in JSONs
+describing all the components and characteristics of a form. Each componet can have their validation rule set
+using Regex in the JSON.
 
-1. [Features](#features)
-2. [Requirements](#requirements)
+**Formworks aims to be the simplest way to build usable forms.**
+
+1. [Requirements](#requirements)
+2. [Installation](#installation)
+    - [Installing using Xcode](#installing-using-xcode)
+    - [Installing using Package.swift](#installing-using-package.swift)
 3. [Usage](#usage)
-    - [Installing using Swift Package Manager](#installing-using-swift-package-manager)
     - [Creating a Form](#creating-a-form)
     - [Receiving data from a Form](#receiving-data-from-a-form)
-4. [Form Input Format](#form-input-format)
+3. [Form Input Format](#form-input-format)
     - [JSON Input Example](#json-input-example)
     - [Parameters](#parameters)
       - [Form](#form)
@@ -18,26 +24,18 @@ Formworks is a framework built on UIKit for building forms from JSON files on iO
       - [Base Component](#base-component)
       - [Text Component](#text-component)
       - [Validators](#validators)
-5. [Form Output Format](#form-output-format)
-6. [Documentation](myformworks.github.io/formworks/)
-7. [Contribuiting](#contribuiting)
-8. [Authors](#authors)
-
-## Features
-- [x] Create form screens directly from json files.
-- [x] [Text Components](#supported-components-specifications-parameters) with input validation.
-- [x] Form component requirement: Components can be flaged as required, forcing the user to fill them to submit.
-- [x] Color style customization from the form file.
-- [ ] Support to other types of components such as option selection or date picker.
-- [ ] Support to networking calls.
+4. [Form Output Format](#form-output-format)
+5. [Documentation](myformworks.github.io/formworks/)
+6. [Contribuiting](#contribuiting)
+7. [Authors](#authors)
 
 ## Requirements
 - Swift 5.0 or later 
 - iOS 13.0 or later
 - Xcode 10.0 or later
 
-## Usage
-### Installing using Swift Package Manager
+## Installation
+### Importing using Xcode
 1. In a Xcode project, click on "File"
 2. Click on "Swift Packages" and select "Add Package Dependency"
 3. Paste the web url for this repository: https://github.com/Galdineris/Formworks.git
@@ -45,18 +43,33 @@ Formworks is a framework built on UIKit for building forms from JSON files on iO
 5. Done
 After this, you can fetch the latest changes to the framework  by selecting "Update to Latest Package Versions" in step 2.
 
+### Importing using Package.swift
+If you don't already have a `Package.swift` file, create one and add the following `.package` URL.
+```swift
+import PackageDescription
+
+let package = Package(
+    ...
+    dependencies: [
+        .package(url: "https://github.com/myformworks/Formworks.git", .RELEASE VERSION)
+    ],
+    ...
+)
+```
+
 ### Importing Formworks to your Project
 ```swift
 import Formworks
 ```
 
+## Usage
 ### Creating a Form
 ```swift
 let dataFromJSON: Data = // Fetch your JSON data.
 let formConfiguration = FWConfiguration(json: dataFromJSON, style: .light)
 
 let formViewController = FWFormViewController(configuration: formConfiguration)
-// Present as desired.
+// Present as desired
 ```
 
 ### Receiving data from a Form
@@ -72,7 +85,6 @@ extension ExampleClass: FWFormViewControllerDelegate {
 ```
 
 ## Form Input Format
-
 ### JSON Input Example 
 ```json
 {
@@ -130,8 +142,6 @@ extension ExampleClass: FWFormViewControllerDelegate {
 ```
 
 ### Parameters
-
-### Form
 Parameter | Type | Description | Required | Default Value
 ------------ | ------------- | ------------- | ---------- | ---------
 id | String | Object unique ID | Yes | -
@@ -182,7 +192,7 @@ id | String | Object unique ID | Yes | -
 title | String | Component's title. It should be a definition about how the field could be filled. | Yes | -
 description | String | Component's description. It could be an aditional explanation about how the field could be filled. | No | ""
 required | Bool | Specifies if the field has to be filled or not.| No | false
-required | FWComponentModelWrapper.Types | Specifies the type of the component| Yes | -
+type | FWComponentModelWrapper.Types | Specifies the type of the component| Yes | -
 
 Available components:
 * `text`: a `UITextField` component with default keyboard. Can receive regex through JSON.
@@ -202,10 +212,14 @@ In case of a `custom` regex the rule will be determinated by the `regex` key.
 Please see [CONTRIBUTING.md](Resources/CONTRIBUTING.md).
 
 ## Authors
-This project was started by
+This project was created by
 
 [Artur Carneiro](https://csfar.github.io)
-Cassia Barbosa
-Edgar Sgroi
-Rafael Galdino
-Victor Falcetta
+
+[Cassia Barbosa](https://cassiaabarbosa.github.io)
+
+[Edgar Sgroi](https://edgsgroi.github.io)
+
+[Rafael Galdino](https://galdineris.github.io)
+
+[Victor Falcetta](https://github.com/VicFalcetta)
