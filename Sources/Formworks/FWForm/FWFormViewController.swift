@@ -61,6 +61,8 @@ public final class FWFormViewController: UIViewController {
 		formTableView.dataSource = self
 		formTableView.register(FWTextComponentView.self,
 							   forCellReuseIdentifier: FWTextComponentView.identifier)
+        formTableView.register(FWMultilineComponentView.self,
+                               forCellReuseIdentifier: FWMultilineComponentView.identifier)
 		formTableView.register(FWFormSubmitTableCell.self, forCellReuseIdentifier: FWFormSubmitTableCell.identifier)
 		formTableView.register(FWDismissHeader.self, forHeaderFooterViewReuseIdentifier: FWDismissHeader.identifier)
 		formTableView.backgroundColor = UIColor.fwBackground
