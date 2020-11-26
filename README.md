@@ -18,6 +18,7 @@ describing all the components and characteristics of a form.
 3. [Form Input Format](#form-input-format)
     - [JSON Input Example](#json-input-example)
     - [Parameters](#parameters)
+    -[Form's output](#form's-output)
 4. [Components](#components)
       - [Parameters](#parameters)
 5. [Documentation](myformworks.github.io/formworks/)
@@ -35,7 +36,6 @@ describing all the components and characteristics of a form.
 2. Click on "Swift Packages" and select "Add Package Dependency"
 3. Paste the web url for this repository: https://github.com/Galdineris/Formworks.git
 4. Set Rules to Branch on "master"
-5. Done
 
 After this, you can fetch the latest changes to the framework  by selecting "Update to Latest Package Versions" in step 2.
 
