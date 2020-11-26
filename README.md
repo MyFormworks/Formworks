@@ -21,7 +21,7 @@ describing all the components and characteristics of a form.
     - [Output](#output)
 4. [Components](#components)
       - [Parameters](#parameters)
-5. [Documentation](myformworks.github.io/formworks/)
+5. [Documentation](#documentation)
 6. [Contribuiting](#contribuiting)
 7. [Authors](#authors)
 
@@ -146,7 +146,7 @@ title | String | Form's title. It will be presented in the top of the form. | Ye
 style | FWStyle | A form's visual style. Style provided in the JSON has priority over in-code selection. | Yes | -
 components | [FWComponentModel] | An array that contains all the components that will be presented in the form. | Yes | -
 
-### Form's output
+### Output
 A form's output is a `FWFormSnapshot`, more information in the [documentation](https://myformworks.github.io/Formworks/Structs/FWFormSnapshot.html).
 
 ## Components
