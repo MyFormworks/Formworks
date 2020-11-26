@@ -4,8 +4,7 @@
 
 Formworks is an Open-Source framework licensed under the MIT license developed with intention of facilitating
 the creation of forms on iOS application. Inspired by Server-driven UI, Formworks works by taking in JSONs
-describing all the components and characteristics of a form. Each componet can have their validation rule set
-using Regex in the JSON.
+describing all the components and characteristics of a form.
 
 **Formworks aims to be the simplest way to build usable forms.**
 
@@ -147,37 +146,8 @@ title | String | Form's title. It will be presented in the top of the form. | Ye
 style | FWStyle | A form's visual style. Style provided in the JSON has priority over in-code selection. | Yes | -
 components | [FWComponentModel] | An array that contains all the components that will be presented in the form. | Yes | -
 
-## Form Output Format
-
-```json
-{
-  "title": "Your Form Title",
-  "components": [
-    {
-      "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-      "type": "text",
-      "title": "Text Field Title",
-      "description": "Text Field Description",
-      "required": "true",
-      "regex": "",
-      "placeholder": "Text Field Placeholder",
-      "isMultiline": "false",
-      "content": "Components Answer"
-    },
-    {
-      "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-      "type": "email",
-      "title": "Text Field Title",
-      "description": "Text Field Description",
-      "required": "false",
-      "regex": "[0-9a-z._%+-]+@[a-z0-9.-]+\\.[a-z]{2,64}",
-      "placeholder": "Text Field Placeholder",
-      "isMultiline": "false",
-      "content": "Components Answer"
-    }
-  ]
-}
-```
+### Form's output
+A form's output is a `FWFormSnapshot`, more information in the [documentation](https://myformworks.github.io/Formworks/Structs/FWFormSnapshot.html).
 
 ## Components
 A form is composed of a series of components. In the JSON, the component's key determines what kind of component is being created.
@@ -199,7 +169,7 @@ id | String | Unique ID | No | Locally generated UUID as a String
 title | String | Component's title. | Yes | -
 description | String | Component's description.| No | ""
 required | Bool | Specifies if the field has to be filled or not. | No | false
-regex | String | A Regex validation rule. Exclusive to `text` and `multiline`| No | ""
+regex | String | A regex validation rule. Exclusive to `text` and `multiline`| No | ""
 
 The default regex for each component can be found in the `FWRegex` enum in our [documentation](https://myformworks.github.io/Formworks/Enums/FWRegex.html).
 
@@ -212,7 +182,7 @@ Whenever new code is added to the `master` a [GitHub Action](https://github.com/
 deploys it to GitHub Pages.
 
 ## Contribuiting
-Please see [CONTRIBUTING.md](Resources/CONTRIBUTING.md).
+Please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Authors
 This project was created by
