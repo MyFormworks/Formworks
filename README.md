@@ -18,7 +18,7 @@ describing all the components and characteristics of a form.
 3. [Form Input Format](#form-input-format)
     - [JSON Input Example](#json-input-example)
     - [Parameters](#parameters)
-    -[Form's output](#form's-output)
+    - [Form's output](#form's-output)
 4. [Components](#components)
       - [Parameters](#parameters)
 5. [Documentation](myformworks.github.io/formworks/)
@@ -174,7 +174,7 @@ regex | String | A regex validation rule. Exclusive to `text` and `multiline`| N
 The default regex for each component can be found in the `FWRegex` enum in our [documentation](https://myformworks.github.io/Formworks/Enums/FWRegex.html).
 
 ## Documentation
-[Documentation](https://myformworks.github.io/Formworks/)
+Our [documentation](https://myformworks.github.io/Formworks/) is hosted on GitHub Pages.
 
 Formworks uses [Jazzy](https://github.com/realm/jazzy) to generate documentation based on our in-code comments/documentation.
 
