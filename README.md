@@ -18,7 +18,7 @@ describing all the components and characteristics of a form.
 3. [Form Input Format](#form-input-format)
     - [JSON Input Example](#json-input-example)
     - [Parameters](#parameters)
-    - [Form's output](#form's-output)
+    - [Output](#output)
 4. [Components](#components)
       - [Parameters](#parameters)
 5. [Documentation](myformworks.github.io/formworks/)
@@ -178,7 +178,7 @@ Our [documentation](https://myformworks.github.io/Formworks/) is hosted on GitHu
 
 Formworks uses [Jazzy](https://github.com/realm/jazzy) to generate documentation based on our in-code comments/documentation.
 
-Whenever new code is added to the `master` a [GitHub Action](https://github.com/marketplace/actions/swiftpm-jazzy-docs) runs to generate the documentation using Jazzy and
+Whenever new code is added to the `master` a [GitHub Action](https://github.com/marketplace/actions/swiftpm-jazzy-docs) generates the documentation using Jazzy and
 deploys it to GitHub Pages.
 
 ## Contribuiting
