@@ -51,15 +51,11 @@ final class FWTextComponentViewModel: FWComponentViewModel {
         return self.validator.validationRuleDescription
     }
     
-    var isValid: Bool = false {
-        didSet {
-            if oldValue != isValid {
-                delegate?.update()
-            } else if !required {
-                delegate?.update()
-            }
-        }
-    }
+	var isValid: Bool = false {
+		didSet {
+			delegate?.update()
+		}
+	}
     
     var content: String = "" {
         didSet {

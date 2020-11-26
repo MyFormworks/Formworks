@@ -61,6 +61,8 @@ public final class FWFormViewController: UIViewController {
 		formTableView.dataSource = self
 		formTableView.register(FWTextComponentView.self,
 							   forCellReuseIdentifier: FWTextComponentView.identifier)
+        formTableView.register(FWMultilineComponentView.self,
+                               forCellReuseIdentifier: FWMultilineComponentView.identifier)
 		formTableView.register(FWFormSubmitTableCell.self, forCellReuseIdentifier: FWFormSubmitTableCell.identifier)
 		formTableView.register(FWDismissHeader.self, forHeaderFooterViewReuseIdentifier: FWDismissHeader.identifier)
 		formTableView.backgroundColor = UIColor.fwBackground
@@ -102,19 +104,22 @@ extension FWFormViewController: UITableViewDelegate {
 	}
 	
 	public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-		if ((navigationController?.isBeingPresented) == nil) {
-			guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FWDismissHeader.identifier) as? FWDismissHeader else {
-				return UITableViewHeaderFooterView()
-			}
-			header.setHeaderTitle(text: viewModel.title)
-			header.button.addTarget(self, action: #selector(didCancel), for: .allEvents)
-			return header
+		guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FWDismissHeader.identifier) as? FWDismissHeader else {
+			return UITableViewHeaderFooterView()
 		}
-		return nil
+		header.setHeaderTitle(text: viewModel.title)
+		header.button.addTarget(self, action: #selector(didCancel), for: .allEvents)
+		return header
+		
 	}
 	
 	public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		return 50
+		
+		if self.isBeingPresented == true {
+			return 50
+		} else  {
+			return 0
+		}
 	}
 }
 

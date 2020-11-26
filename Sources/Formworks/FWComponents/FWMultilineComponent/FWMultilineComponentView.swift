@@ -56,13 +56,6 @@ final class FWMultilineComponentView: UITableViewCell, FWComponentCell {
         }
     }
 
-    // MARK: @objc
-    @objc private func didEditingChange(_ textView: FWTextView) {
-        if let viewModel = viewModel {
-            viewModel.content = textView.text ?? ""
-        }
-    }
-
     // MARK: Views Setup
     private func setUpViews() {
         contentView.backgroundColor = .fwComponentBackground
@@ -93,7 +86,7 @@ final class FWMultilineComponentView: UITableViewCell, FWComponentCell {
     }
 
     private func setUpTextView() {
-        textView.target(forAction: #selector(didEditingChange), withSender: nil)
+        textView.delegate = self
     }
 
     // MARK: Layout
@@ -187,15 +180,34 @@ extension FWMultilineComponentView: FWMultilineComponentViewModelDelegate {
         guard let viewModel = viewModel else {
             return
         }
-        if !viewModel.required {
-            symbolImageView.isHidden = textView.text == nil
-        }
-        if viewModel.isValid {
+        switch (textView.text?.isEmpty, viewModel.isValid, viewModel.required) {
+        case (false, true, true), (false, true, false):
             symbolImageView.image = UIImage(systemName: "checkmark.circle.fill")
             symbolImageView.tintColor = .fwComponentCorrect
-        } else {
+            symbolImageView.isHidden = false
+        case (false, false, true), (true, true, true), (true, false, true), (false, false, false):
             symbolImageView.image = UIImage(systemName: "asterisk.circle.fill")
             symbolImageView.tintColor = .fwComponentRequired
+            symbolImageView.isHidden = false
+        case (true, true, false):
+            symbolImageView.image = UIImage(systemName: "checkmark.circle.fill")
+            symbolImageView.tintColor = .fwComponentCorrect
+            symbolImageView.isHidden = true
+        case (true, false, false):
+            symbolImageView.image = UIImage(systemName: "asterisk.circle.fill")
+            symbolImageView.tintColor = .fwComponentRequired
+            symbolImageView.isHidden = true
+        default:
+            break
+        }
+    }
+}
+
+// MARK: UITextViewDelegate
+extension FWMultilineComponentView: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        if let viewModel = viewModel {
+            viewModel.content = textView.text ?? ""
         }
     }
 }
