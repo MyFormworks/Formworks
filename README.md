@@ -23,8 +23,6 @@ using Regex in the JSON.
       - [Components](#components)
       - [Base Component](#base-component)
       - [Text Component](#text-component)
-      - [Validators](#validators)
-4. [Form Output Format](#form-output-format)
 5. [Documentation](myformworks.github.io/formworks/)
 6. [Contribuiting](#contribuiting)
 7. [Authors](#authors)
@@ -57,13 +55,13 @@ let package = Package(
 )
 ```
 
-### Importing Formworks to your Project
+## Getting started
+### Import Formworks to your Project
 ```swift
 import Formworks
 ```
 
-## Usage
-### Creating a Form
+### Create a Form
 ```swift
 let dataFromJSON: Data = // Fetch your JSON data.
 let formConfiguration = FWConfiguration(json: dataFromJSON, style: .light)
@@ -72,10 +70,10 @@ let formViewController = FWFormViewController(configuration: formConfiguration)
 // Present as desired
 ```
 
-### Receiving data from a Form
-To get the data from a Form, it is necessary to implement the procotol `FWFormViewControllerDelegate` in a given class.
-The answers come in JSON format.
-(For more information, refer to [Form Output Format](#form-output-format))
+### Receive data from a Form
+To get the data from a Form, it is necessary to implement the procotol `FWFormViewControllerDelegate`.
+A form outputs a `FWFormSnapshot`.
+
 ```swift
 extension ExampleClass: FWFormViewControllerDelegate {
   func didSubmit(_ answers: FWFormSnapshot) {
@@ -183,30 +181,37 @@ components | [FWComponentModel] | An array that contains all the components that
 ```
 
 ## Components
-A form is composed of a series of components, each with a specific type of validation.
+A form is composed of a series of components. In the JSON, the component's key determines what kind of component is being created.
+When a component has no default validation, a regex can be set in the JSON. If no regex rule is given **and** the componet is not required,
+any input is valid, even an empty string. If there is no regex but the component is required, the input is accepted if it is **not** empty.
 
-### Base Component
+### Available components
+Key | Description
+------------ | -------------
+`text` | Single line text inputs. No default validation.
+`multiline` | Long text inputs with multiple lines. No default validation.
+`email` |  Text component for e-mail.
+`numerical` | Text component for numerical.
+`phonenumber` | Text component for phone numbers (Brazillian format).
+
+### Parameters of a component
 Parameter | Type | Description | Required | Default Value
 ------------ | ------------- | ------------- | ------------- | ---------
-id | String | Object unique ID | Yes | -
-title | String | Component's title. It should be a definition about how the field could be filled. | Yes | -
-description | String | Component's description. It could be an aditional explanation about how the field could be filled. | No | ""
-required | Bool | Specifies if the field has to be filled or not.| No | false
-type | FWComponentModelWrapper.Types | Specifies the type of the component| Yes | -
+id | String | Object unique ID | No | Locally generated UUID as a String
+title | String | Component's title. | Yes | -
+description | String | Component's description.| No | ""
+required | Bool | Specifies if the field has to be filled or not. | No | false
+regex | String | A Regex validation rule. Exclusive to `text` and `multiline`| No | ""
 
-Available components:
-* `text`: a `UITextField` component with default keyboard. Can receive regex through JSON.
-* `email`: a `UITextField` component with e-mail keyboard and regex.
-* `numerical`: a `UITextField` component with numerical keyboard and regex.
-* `phonenumber`: a `UITextField` component with phonepad keyboard and brazillian phonenumbers regex.
-* `multiline`: a `UITextView` component with default keyboard. Can receive regex through JSON.
+The default regex for each component can be found in the `FWRegex` enum in our [documentation](https://myformworks.github.io/Formworks/Enums/FWRegex.html).
 
-## Validators
-The default regex for each component can be found in the `FWRegex` enum in our [Documentation](https://myformworks.github.io/Formworks/Enums/FWRegex.html).
+## Documentation
+Formworks is uses [Jazzy](https://github.com/realm/jazzy) to generate documentation based on our in-code comments/documentation.
 
-In case of a `custom` regex the rule will be determinated by the `regex` key.
+[Documentation](https://myformworks.github.io/Formworks/)
 
-## [Documentation](https://myformworks.github.io/Formworks/)
+Whenever new code is added to the `master` a [GitHub Action](https://github.com/marketplace/actions/swiftpm-jazzy-docs) runs to generate the documentation using Jazzy and
+deploys it to GitHub Pages.
 
 ## Contribuiting
 Please see [CONTRIBUTING.md](Resources/CONTRIBUTING.md).
