@@ -19,10 +19,8 @@ using Regex in the JSON.
 3. [Form Input Format](#form-input-format)
     - [JSON Input Example](#json-input-example)
     - [Parameters](#parameters)
-      - [Form](#form)
-      - [Components](#components)
-      - [Base Component](#base-component)
-      - [Text Component](#text-component)
+4. [Components](#components)
+      - [Parameters](#parameters)
 5. [Documentation](myformworks.github.io/formworks/)
 6. [Contribuiting](#contribuiting)
 7. [Authors](#authors)
@@ -39,6 +37,7 @@ using Regex in the JSON.
 3. Paste the web url for this repository: https://github.com/Galdineris/Formworks.git
 4. Set Rules to Branch on "master"
 5. Done
+
 After this, you can fetch the latest changes to the framework  by selecting "Update to Latest Package Versions" in step 2.
 
 ### Importing using Package.swift
@@ -142,10 +141,10 @@ extension ExampleClass: FWFormViewControllerDelegate {
 ### Parameters
 Parameter | Type | Description | Required | Default Value
 ------------ | ------------- | ------------- | ---------- | ---------
-id | String | Object unique ID | Yes | -
-responseFormat | String | Response format for the form. Can either be "long" or "short" | Yes | -
-title | String | Form title. It will be presented in the top of the form. | Yes | -
-style | FWStyle | A form's visual style. Style provided in the JSON has priority over in-code selection. Hex color format. | Yes | -
+id | String | Unique ID | Yes | -
+responseFormat | String | Response format for the form's output. Can either be `long` or `short` | Yes | -
+title | String | Form's title. It will be presented in the top of the form. | Yes | -
+style | FWStyle | A form's visual style. Style provided in the JSON has priority over in-code selection. | Yes | -
 components | [FWComponentModel] | An array that contains all the components that will be presented in the form. | Yes | -
 
 ## Form Output Format
@@ -185,7 +184,6 @@ A form is composed of a series of components. In the JSON, the component's key d
 When a component has no default validation, a regex can be set in the JSON. If no regex rule is given **and** the componet is not required,
 any input is valid, even an empty string. If there is no regex but the component is required, the input is accepted if it is **not** empty.
 
-### Available components
 Key | Description
 ------------ | -------------
 `text` | Single line text inputs. No default validation.
@@ -194,10 +192,10 @@ Key | Description
 `numerical` | Text component for numerical.
 `phonenumber` | Text component for phone numbers (Brazillian format).
 
-### Parameters of a component
+### Parameters
 Parameter | Type | Description | Required | Default Value
 ------------ | ------------- | ------------- | ------------- | ---------
-id | String | Object unique ID | No | Locally generated UUID as a String
+id | String | Unique ID | No | Locally generated UUID as a String
 title | String | Component's title. | Yes | -
 description | String | Component's description.| No | ""
 required | Bool | Specifies if the field has to be filled or not. | No | false
@@ -206,9 +204,9 @@ regex | String | A Regex validation rule. Exclusive to `text` and `multiline`| N
 The default regex for each component can be found in the `FWRegex` enum in our [documentation](https://myformworks.github.io/Formworks/Enums/FWRegex.html).
 
 ## Documentation
-Formworks is uses [Jazzy](https://github.com/realm/jazzy) to generate documentation based on our in-code comments/documentation.
-
 [Documentation](https://myformworks.github.io/Formworks/)
+
+Formworks uses [Jazzy](https://github.com/realm/jazzy) to generate documentation based on our in-code comments/documentation.
 
 Whenever new code is added to the `master` a [GitHub Action](https://github.com/marketplace/actions/swiftpm-jazzy-docs) runs to generate the documentation using Jazzy and
 deploys it to GitHub Pages.
