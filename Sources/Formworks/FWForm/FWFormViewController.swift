@@ -22,7 +22,7 @@ public final class FWFormViewController: UIViewController {
 
 	private let viewModel: FWFormViewModel
 	
-	weak var delegate: FWFormViewControllerDelegate?
+	public weak var delegate: FWFormViewControllerDelegate?
 	
 	// MARK: Init
 	/// Initializes a new instance of this type.
@@ -31,7 +31,8 @@ public final class FWFormViewController: UIViewController {
 		self.viewModel = FWFormViewModel(configuration: configuration)
 		super.init(nibName: nil, bundle: nil)
 	}
-	
+
+    @available(*, unavailable, message: "This class should only be instatiated with ViewCode.")
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
@@ -44,8 +45,9 @@ public final class FWFormViewController: UIViewController {
 	
 	public override func viewDidLoad() {
 		super.viewDidLoad()
-        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+    notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    addKeyboardDismissal()
 		setUpViewModel()
 		setUpTableView()
 		layoutTableViewConstraints()
@@ -87,6 +89,8 @@ public final class FWFormViewController: UIViewController {
 		formTableView.dataSource = self
 		formTableView.register(FWTextComponentView.self,
 							   forCellReuseIdentifier: FWTextComponentView.identifier)
+        formTableView.register(FWMultilineComponentView.self,
+                               forCellReuseIdentifier: FWMultilineComponentView.identifier)
 		formTableView.register(FWFormSubmitTableCell.self, forCellReuseIdentifier: FWFormSubmitTableCell.identifier)
 		formTableView.register(FWDismissHeader.self, forHeaderFooterViewReuseIdentifier: FWDismissHeader.identifier)
 		formTableView.backgroundColor = UIColor.fwBackground
@@ -186,6 +190,9 @@ extension FWFormViewController: FWFormViewModelDelegate {
 	func didSetUp() {
 		UIColor.style = viewModel.style
 		self.title = viewModel.title
+        navigationController?.navigationBar.barTintColor = .fwComponentBackground
+        navigationController?.navigationBar.tintColor = .fwAccent
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.fwAccent]
 		formTableView.reloadData()
 	}
 }

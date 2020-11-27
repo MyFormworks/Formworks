@@ -10,7 +10,6 @@ import Foundation
 // MARK: Protocol-Delegate
 protocol FWTextComponentViewModelDelegate: AnyObject {
     func update()
-    
 }
 
 final class FWTextComponentViewModel: FWComponentViewModel {
@@ -69,7 +68,7 @@ final class FWTextComponentViewModel: FWComponentViewModel {
         }
     }
     
-    func takeSnapshot() -> FWTextComponentSnapshot {
+    func takeSnapshot() -> FWComponentSnapshot {
         return FWTextComponentSnapshot(id: model.id,
                                        title: model.title,
                                        description: model.description,

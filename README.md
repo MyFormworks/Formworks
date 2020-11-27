@@ -2,67 +2,78 @@
 ![Platform](https://img.shields.io/static/v1?label=platform&message=iOS&color=orange)
 ![SPM](https://img.shields.io/static/v1?label=SwiftPackageManager&message=compatible&color=sucess)
 
-Formworks is a framework built on UIKit for building forms from JSON files on iOS.
+![Logo](Resources/logo.png)
 
-1. [Features](#features)
-2. [Requirements](#requirements)
+Formworks is an Open-Source framework licensed under the MIT license developed with intention of facilitating
+the creation of forms on iOS application. Inspired by Server-driven UI, Formworks works by taking in JSONs
+describing all the components and characteristics of a form.
+
+**Formworks aims to be the simplest way to build usable forms.**
+
+1. [Requirements](#requirements)
+2. [Installation](#installation)
+    - [Installing using Xcode](#installing-using-xcode)
+    - [Installing using Package.swift](#installing-using-package.swift)
 3. [Usage](#usage)
-    - [Installing using Swift Package Manager](#installing-using-swift-package-manager)
     - [Creating a Form](#creating-a-form)
     - [Receiving data from a Form](#receiving-data-from-a-form)
-4. [Form Input Format](#form-input-format)
+3. [Form Input Format](#form-input-format)
     - [JSON Input Example](#json-input-example)
     - [Parameters](#parameters)
-      - [Form](#form)
-      - [Components](#components)
-      - [Base Component](#base-component)
-      - [Text Component](#text-component)
-      - [Validators](#validators)
-5. [Form Output Format](#form-output-format)
-6. [Documentation](myformworks.github.io/formworks/)
-7. [Contribuiting](#contribuiting)
-8. [Authors](#authors)
-
-## Features
-- [x] Create form screens directly from json files.
-- [x] [Text Components](#supported-components-specifications-parameters) with input validation.
-- [x] Form component requirement: Components can be flaged as required, forcing the user to fill them to submit.
-- [x] Color style customization from the form file.
-- [ ] Support to other types of components such as option selection or date picker.
-- [ ] Support to networking calls.
+    - [Output](#output)
+4. [Components](#components)
+      - [Parameters](#parameters)
+5. [Documentation](#documentation)
+6. [Contribuiting](#contribuiting)
+7. [Authors](#authors)
 
 ## Requirements
 - Swift 5.0 or later 
 - iOS 13.0 or later
 - Xcode 10.0 or later
 
-## Usage
-### Installing using Swift Package Manager
+## Installation
+### Importing using Xcode
 1. In a Xcode project, click on "File"
 2. Click on "Swift Packages" and select "Add Package Dependency"
 3. Paste the web url for this repository: https://github.com/Galdineris/Formworks.git
 4. Set Rules to Branch on "master"
-5. Done
+
 After this, you can fetch the latest changes to the framework  by selecting "Update to Latest Package Versions" in step 2.
 
-### Importing Formworks to your Project
+### Importing using Package.swift
+If you don't already have a `Package.swift` file, create one and add the following `.package` URL.
+```swift
+import PackageDescription
+
+let package = Package(
+    ...
+    dependencies: [
+        .package(url: "https://github.com/myformworks/Formworks.git", .RELEASE VERSION)
+    ],
+    ...
+)
+```
+
+## Getting started
+### Import Formworks to your Project
 ```swift
 import Formworks
 ```
 
-### Creating a Form
+### Create a Form
 ```swift
 let dataFromJSON: Data = // Fetch your JSON data.
 let formConfiguration = FWConfiguration(json: dataFromJSON, style: .light)
 
 let formViewController = FWFormViewController(configuration: formConfiguration)
-// Present as desired.
+// Present as desired
 ```
 
-### Receiving data from a Form
-To get the data from a Form, it is necessary to implement the procotol `FWFormViewControllerDelegate` in a given class.
-The answers come in JSON format.
-(For more information, refer to [Form Output Format](#form-output-format))
+### Receive data from a Form
+To get the data from a Form, it is necessary to implement the procotol `FWFormViewControllerDelegate`.
+A form outputs a `FWFormSnapshot`.
+
 ```swift
 extension ExampleClass: FWFormViewControllerDelegate {
   func didSubmit(_ answers: FWFormSnapshot) {
@@ -72,7 +83,6 @@ extension ExampleClass: FWFormViewControllerDelegate {
 ```
 
 ## Form Input Format
-
 ### JSON Input Example 
 ```json
 {
@@ -117,12 +127,7 @@ extension ExampleClass: FWFormViewControllerDelegate {
     },
     {
     "text": {
-        "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-        "title": "What is your mother's name?",
-        "description": "Type your name.",
-        "required": true,
-        "regex": "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-        "placeholder": "Your mother's name"
+        "title": "What is your mother's name?"
       }
     }
   ]
@@ -130,95 +135,63 @@ extension ExampleClass: FWFormViewControllerDelegate {
 ```
 
 ### Parameters
-
-### Form
 Parameter | Type | Description | Required | Default Value
 ------------ | ------------- | ------------- | ---------- | ---------
-id | String | Object unique ID | Yes | -
-responseFormat | String | Response format for the form. Can either be "long" or "short" | Yes | -
-title | String | Form title. It will be presented in the top of the form. | Yes | -
-components | [Component] | An array that contains all the components that will be presented in the form. | Yes | -
+id | String | Unique ID | Yes | -
+responseFormat | String | Response format for the form's output. Can either be `long` or `short` | Yes | -
+title | String | Form's title. It will be presented in the top of the form. | Yes | -
+style | FWStyle | A form's visual style. Style provided in the JSON has priority over in-code selection. | Yes | -
+components | [FWComponentModel] | An array that contains all the components that will be presented in the form. | Yes | -
 
-### Components
-These keys are the type of component that you want. They need to be given as the component key followed by the parameters of Base Component and the parameters of the respective component.
-Key | Type | Description
------------- | ------------- | -------------
-text | FWTextModel | A text component.
+### Output
+A form's output is a `FWFormSnapshot`, more information in the [documentation](https://myformworks.github.io/Formworks/Structs/FWFormSnapshot.html).
 
-### Base Component
+## Components
+A form is composed of a series of components. In the JSON, the component's key determines what kind of component is being created.
+When a component has no default validation, a regex can be set in the JSON. If no regex rule is given **and** the componet is not required,
+any input is valid, even an empty string. If there is no regex but the component is required, the input is accepted if it is **not** empty.
+
+Key | Description
+------------ | -------------
+`text` | Single line text inputs. No default validation.
+`multiline` | Long text inputs with multiple lines. No default validation.
+`email` |  Text component for e-mail.
+`numerical` | Text component for numerical.
+`phonenumber` | Text component for phone numbers (Brazillian format).
+
+### Parameters
 Parameter | Type | Description | Required | Default Value
 ------------ | ------------- | ------------- | ------------- | ---------
-id | String | Object unique ID | Yes | -
-title | String | Component's title. It should be a definition about how the field could be filled. | Yes | -
-description | String | Component's description. It could be an aditional explanation about how the field could be filled. | No | ""
-required | Bool | Specifies if the field has to be filled or not.| No | false
-validator | Validator | Determines the type of validation.| Yes | -
+id | String | Unique ID | No | Locally generated UUID as a String
+title | String | Component's title. | Yes | -
+description | String | Component's description.| No | ""
+required | Bool | Specifies if the field has to be filled or not. | No | false
+regex | String | A regex validation rule. Exclusive to `text` and `multiline`| No | ""
 
-### Text
-Default text component with custom validation.
+The default regex for each component can be found in the `FWRegex` enum in our [documentation](https://myformworks.github.io/Formworks/Enums/FWRegex.html).
 
-These parameters are in addition to the parameters in the [base components](#base-component).
-Parameter | Type | Description | Required | Default Value
------------- | ------------- | ------------- | ------------- | ---------
-placeholder | String | Text displayed on the component's field when it's empty. | No | ""
-regex | String | Regular expression used for validating the component's field. If the regex is wrong or missing, the component will accept anything. | No | ""
+## Documentation
+Our [documentation](https://myformworks.github.io/Formworks/) is hosted on GitHub Pages.
 
-### Text-Based
-Alternative text components such as  `email`, `numerical`, `phonenumber`, `multiline` that come with a default validation rule.
+Formworks uses [Jazzy](https://github.com/realm/jazzy) to generate documentation based on our in-code comments/documentation.
 
-These parameters are in addition to the parameters in the [base components](#base-component).
-Parameter | Type | Description | Required | Default Value
------------- | ------------- | ------------- | ------------- | ---------
-placeholder | String | Text displayed on the component's field when it's empty.  | No | ""
+Whenever new code is added to the `master` a [GitHub Action](https://github.com/marketplace/actions/swiftpm-jazzy-docs) generates the documentation using Jazzy and
+deploys it to GitHub Pages.
 
-### Validators
-
-The default regex for each component can be found in the `FWRegex` enum in our [Documentation](https://myformworks.github.io/Formworks/Enums/FWRegex.html).
-
-In case of a `custom` regex the rule will be determinated by the `regex` key.
-
-## Form Output Format
-
-```json
-{
-  "title": "Your Form Title",
-  "components": [
-    {
-      "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-      "type": "text",
-      "title": "Text Field Title",
-      "description": "Text Field Description",
-      "required": "true",
-      "regex": "",
-      "placeholder": "Text Field Placeholder",
-      "isMultiline": "false",
-      "content": "Components Answer"
-    },
-    {
-      "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-      "type": "email",
-      "title": "Text Field Title",
-      "description": "Text Field Description",
-      "required": "false",
-      "regex": "[0-9a-z._%+-]+@[a-z0-9.-]+\\.[a-z]{2,64}",
-      "placeholder": "Text Field Placeholder",
-      "isMultiline": "false",
-      "content": "Components Answer"
-    }
-  ]
-}
-```
-
-## [Documentation](https://myformworks.github.io/Formworks/)
+A [sample project](https://github.com/myformworks/FormworksExample) is provided as an example on how to use Formworks.
 
 ## Contribuiting
-Please see [CONTRIBUTING.md](Resources/CONTRIBUTING.md).
+Please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Authors
-This project was started by
+This project was created by
 
 [Artur Carneiro](https://csfar.github.io)
-Cassia Barbosa
-Edgar Sgroi
-Rafael Galdino
-Victor Falcetta
+
+[Cassia Barbosa](https://cassiaabarbosa.github.io)
+
+[Edgar Sgroi](https://edgsgroi.github.io)
+
+[Rafael Galdino](https://galdineris.github.io)
+
+[Victor Falcetta](https://github.com/VicFalcetta)

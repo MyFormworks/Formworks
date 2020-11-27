@@ -9,17 +9,25 @@ import UIKit
 
 /// The custom color style specification.
 public struct FWStyleSpecification: Codable {
-	
-    // TODO: Determine which color is applied to each elements.
+    /// Used to highlight buttons and interactable elements.
     var accent: UIColor = .fwAccent
+    /// Form view background color.
     var background: UIColor = .fwBackground
+    /// Component view background color.
     var componentBackground: UIColor = .fwComponentBackground
+    /// Component title text color.
     var componentTitle: UIColor = .fwComponentTitle
+    /// Component description text color.
     var componentDescription: UIColor = .fwComponentDescription
+    /// Component input field text color.
     var componentInputText: UIColor = .fwComponentInputText
+    /// Component input background color.
     var componentInputBackground: UIColor = .fwComponentInputBackground
+    /// Component required checkmark color.
     var componentRequired: UIColor = .fwComponentRequired
+    /// Component valid input checkmark color.
     var componentCorrect: UIColor = .fwComponentCorrect
+    /// Component placeholder text color.
     var componentPlaceholder: UIColor = .fwComponentPlaceholder
 }
 
@@ -37,6 +45,12 @@ fileprivate struct FWStyleSpecificationDTO: Codable {
 }
 
 extension FWStyleSpecification: Equatable {
+    /// Creates a new instance by decoding from the given decoder.
+    ///
+    /// This initializer throws an error if reading from the decoder fails, or
+    /// if the data read is corrupted or otherwise invalid.
+    ///
+    /// - Parameter decoder: The decoder to read data from.
     public init(from decoder: Decoder) throws {
         let dto = try FWStyleSpecificationDTO.init(from: decoder)
         self.accent = UIColor(hex: dto.accent ?? "") ?? .fwAccent
@@ -51,6 +65,15 @@ extension FWStyleSpecification: Equatable {
         self.componentPlaceholder = UIColor(hex: dto.componentPlaceholder ?? "") ?? .fwComponentPlaceholder
     }
 
+    /// Encodes this value into the given encoder.
+    ///
+    /// If the value fails to encode anything, `encoder` will encode an empty
+    /// keyed container in its place.
+    ///
+    /// This function throws an error if any values are invalid for the given
+    /// encoder's format.
+    ///
+    /// - Parameter encoder: The encoder to write data to.
     public func encode(to encoder: Encoder) throws {
         let dto = FWStyleSpecificationDTO(
             accent: self.accent.toHex(true),

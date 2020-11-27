@@ -8,6 +8,14 @@
 import Foundation
 
 struct FWTextComponentSnapshot: FWComponentSnapshot {
+    var component: FWComponentModelWrapper.Types {
+        return .text
+    }
+
+    var response: String {
+        return content
+    }
+
     let id: String
     let title: String
     let description: String

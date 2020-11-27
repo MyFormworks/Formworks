@@ -53,11 +53,7 @@ final class FWMultilineComponentViewModel: FWComponentViewModel {
 
     var isValid: Bool = false {
         didSet {
-            if oldValue != isValid {
-                delegate?.update()
-            } else if !required {
-                delegate?.update()
-            }
+            delegate?.update()
         }
     }
 
@@ -73,7 +69,7 @@ final class FWMultilineComponentViewModel: FWComponentViewModel {
         }
     }
 
-    func takeSnapshot() -> FWTextComponentSnapshot {
+    func takeSnapshot() -> FWComponentSnapshot {
         return FWTextComponentSnapshot(id: model.id,
                                        title: model.title,
                                        description: model.description,
