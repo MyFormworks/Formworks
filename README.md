@@ -178,6 +178,8 @@ Formworks uses [Jazzy](https://github.com/realm/jazzy) to generate documentation
 Whenever new code is added to the `master` a [GitHub Action](https://github.com/marketplace/actions/swiftpm-jazzy-docs) generates the documentation using Jazzy and
 deploys it to GitHub Pages.
 
+A [sample project](https://github.com/myformworks/FormworksExample) is provided as an example on how to use Formworks.
+
 ## Contribuiting
 Please see [CONTRIBUTING.md](CONTRIBUTING.md).
 

@@ -20,7 +20,7 @@ public final class FWFormViewController: UIViewController {
 
 	private let viewModel: FWFormViewModel
 	
-	weak var delegate: FWFormViewControllerDelegate?
+	public weak var delegate: FWFormViewControllerDelegate?
 	
 	// MARK: Init
 	/// Initializes a new instance of this type.
