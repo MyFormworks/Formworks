@@ -12,10 +12,15 @@ final class FWLabel: UILabel {
     
     /// Determines a `FWLabel` type.
     enum Style {
+        /// Required Checkmark Label.
         case required
+        /// Title Label.
         case title
+        /// Description Label.
         case description
+        /// Validation Rule Description Label.
         case validator
+        /// Submit Button Text Label.
         case submit
     }
 
@@ -24,6 +29,7 @@ final class FWLabel: UILabel {
 
     }
 
+    @available(*, unavailable, message: "This class should only be instatiated with ViewCode.")
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

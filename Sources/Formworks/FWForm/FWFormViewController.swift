@@ -29,7 +29,8 @@ public final class FWFormViewController: UIViewController {
 		self.viewModel = FWFormViewModel(configuration: configuration)
 		super.init(nibName: nil, bundle: nil)
 	}
-	
+
+    @available(*, unavailable, message: "This class should only be instatiated with ViewCode.")
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
@@ -42,6 +43,7 @@ public final class FWFormViewController: UIViewController {
 	
 	public override func viewDidLoad() {
 		super.viewDidLoad()
+        addKeyboardDismissal()
 		setUpViewModel()
 		setUpTableView()
 		layoutTableViewConstraints()
@@ -162,6 +164,9 @@ extension FWFormViewController: FWFormViewModelDelegate {
 	func didSetUp() {
 		UIColor.style = viewModel.style
 		self.title = viewModel.title
+        navigationController?.navigationBar.barTintColor = .fwComponentBackground
+        navigationController?.navigationBar.tintColor = .fwAccent
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.fwAccent]
 		formTableView.reloadData()
 	}
 }

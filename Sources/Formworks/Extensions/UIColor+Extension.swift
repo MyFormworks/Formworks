@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIColor {
+    /// Form current visual style.
     static var style: FWStyle = .light
 
     /// Creates a color object from a hex string value
@@ -73,7 +74,8 @@ extension UIColor {
     var toHex: String? {
         toHex()
     }
-	
+
+    /// Used to highlight buttons and interactable elements.
 	class var fwAccent: UIColor {
 		switch self.style {
 			case .light:
@@ -92,7 +94,8 @@ extension UIColor {
 		}
 	}
 	
-	
+
+    /// Form view background color.
 	class var fwBackground: UIColor {
 		switch self.style {
 			case .light:
@@ -109,7 +112,8 @@ extension UIColor {
 				return specification.background
 		}
 	}
-	
+
+    /// Component view background color.
 	class var fwComponentBackground: UIColor {
 		switch self.style {
 			case .light:
@@ -126,7 +130,8 @@ extension UIColor {
 				return specification.componentBackground
 		}
 	}
-	
+
+    /// Component title text color.
 	class var fwComponentTitle: UIColor {
 		switch self.style {
 			case .light:
@@ -143,7 +148,8 @@ extension UIColor {
 				return specification.componentTitle
 		}
 	}
-	
+
+    /// Component description text color.
 	class var fwComponentDescription: UIColor {
 		switch self.style {
 			case .light:
@@ -161,6 +167,7 @@ extension UIColor {
 		}
 	}
 
+    /// Component input field text color.
 	class var fwComponentInputText: UIColor {
 		switch self.style {
 			case .light:
@@ -177,7 +184,8 @@ extension UIColor {
 				return specification.componentInputText
 		}
 	}
-	
+
+    /// Component input background color.
 	class var fwComponentInputBackground: UIColor {
 		switch self.style {
 			case .light:
@@ -194,7 +202,8 @@ extension UIColor {
 				return specification.componentInputBackground
 		}
 	}
-	
+
+    /// Component required checkmark color.
 	class var fwComponentRequired: UIColor {
 		switch self.style {
 			case .light:
@@ -211,7 +220,8 @@ extension UIColor {
 				return specification.componentRequired
 		}
 	}
-	
+
+    /// Component valid input checkmark color.
 	class var fwComponentCorrect: UIColor {
 		switch self.style {
 			case .light:
@@ -228,7 +238,8 @@ extension UIColor {
 				return specification.componentCorrect
 		}
 	}
-    
+
+    /// Component placeholder text color.
     class var fwComponentPlaceholder: UIColor {
         switch self.style {
         case .light:

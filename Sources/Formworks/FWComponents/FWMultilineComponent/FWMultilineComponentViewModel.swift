@@ -69,7 +69,7 @@ final class FWMultilineComponentViewModel: FWComponentViewModel {
         }
     }
 
-    func takeSnapshot() -> FWTextComponentSnapshot {
+    func takeSnapshot() -> FWComponentSnapshot {
         return FWTextComponentSnapshot(id: model.id,
                                        title: model.title,
                                        description: model.description,

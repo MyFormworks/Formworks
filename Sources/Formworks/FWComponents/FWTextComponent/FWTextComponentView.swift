@@ -45,7 +45,8 @@ final class FWTextComponentView: UITableViewCell, FWComponentCell {
         setUpViews()
         layoutConstraints()
     }
-    
+
+    @available(*, unavailable, message: "This class should only be instatiated with ViewCode.")
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
