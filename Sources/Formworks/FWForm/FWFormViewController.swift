@@ -43,6 +43,7 @@ public final class FWFormViewController: UIViewController {
 	
 	public override func viewDidLoad() {
 		super.viewDidLoad()
+        addKeyboardDismissal()
 		setUpViewModel()
 		setUpTableView()
 		layoutTableViewConstraints()
@@ -163,6 +164,9 @@ extension FWFormViewController: FWFormViewModelDelegate {
 	func didSetUp() {
 		UIColor.style = viewModel.style
 		self.title = viewModel.title
+        navigationController?.navigationBar.barTintColor = .fwComponentBackground
+        navigationController?.navigationBar.tintColor = .fwAccent
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.fwAccent]
 		formTableView.reloadData()
 	}
 }
