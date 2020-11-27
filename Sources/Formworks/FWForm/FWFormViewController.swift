@@ -17,6 +17,8 @@ public protocol FWFormViewControllerDelegate: AnyObject {
 public final class FWFormViewController: UIViewController {
     // MARK: Properties
     @ManualLayout private var formTableView: UITableView
+    
+    private let notificationCenter = NotificationCenter.default
 
 	private let viewModel: FWFormViewModel
 	
@@ -42,13 +44,16 @@ public final class FWFormViewController: UIViewController {
 	
 	public override func viewDidLoad() {
 		super.viewDidLoad()
-        let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
 		setUpViewModel()
 		setUpTableView()
 		layoutTableViewConstraints()
 	}
+    
+    deinit {
+        notificationCenter.removeObserver(self)
+    }
     
     
     /// Method to make the keyboard adjust when a text field is selected
