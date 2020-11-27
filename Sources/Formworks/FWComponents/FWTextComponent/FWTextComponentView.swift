@@ -22,6 +22,7 @@ final class FWTextComponentView: UITableViewCell, FWComponentCell {
 				self.textField.attributedPlaceholder = NSAttributedString(string: viewModel.placeholder,
 																		  attributes: [NSAttributedString.Key.foregroundColor: UIColor.fwComponentPlaceholder])
                 self.textField.text = viewModel.content
+                
                 switch viewModel.type {
                 case .email:
                     textField.keyboardType = .emailAddress
@@ -31,6 +32,8 @@ final class FWTextComponentView: UITableViewCell, FWComponentCell {
                     textField.keyboardType = .phonePad
                 default:
                     textField.keyboardType = .default
+                }
+
 				self.update()
             }
         }
@@ -107,7 +110,6 @@ final class FWTextComponentView: UITableViewCell, FWComponentCell {
     private func setUpTextField() {
         textField.placeholder = ""
         textField.addTarget(self, action: #selector(didEditingChange(_:)), for: .editingChanged)
-        }
     }
     
     // MARK: Layout
