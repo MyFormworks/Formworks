@@ -58,7 +58,7 @@ public final class FWFormViewController: UIViewController {
     
     /// Method to make the keyboard adjust when a text field is selected
     /// - Parameter notification: This is the observer for the keyboard in the Notification Center
-    @objc func adjustForKeyboard(notification: Notification) {
+    @objc private func adjustForKeyboard(notification: Notification) {
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
 
         let keyboardScreenEndFrame = keyboardValue.cgRectValue
