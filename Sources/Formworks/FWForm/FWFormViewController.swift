@@ -29,7 +29,8 @@ public final class FWFormViewController: UIViewController {
 		self.viewModel = FWFormViewModel(configuration: configuration)
 		super.init(nibName: nil, bundle: nil)
 	}
-	
+
+    @available(*, unavailable, message: "This class should only be instatiated with ViewCode.")
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}

@@ -44,6 +44,7 @@ final class FWMultilineComponentView: UITableViewCell, FWComponentCell {
         layoutConstraints()
     }
 
+    @available(*, unavailable, message: "This class should only be instatiated with ViewCode.")
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -176,6 +177,7 @@ final class FWMultilineComponentView: UITableViewCell, FWComponentCell {
 
 // MARK: ViewModel Delegate
 extension FWMultilineComponentView: FWMultilineComponentViewModelDelegate {
+    /// <#Description#>
     func update() {
         guard let viewModel = viewModel else {
             return
