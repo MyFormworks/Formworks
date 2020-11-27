@@ -49,7 +49,7 @@ import PackageDescription
 let package = Package(
     ...
     dependencies: [
-        .package(url: "https://github.com/myformworks/Formworks.git", .RELEASE VERSION)
+        .package(url: "https://github.com/myformworks/Formworks.git", VERSION)
     ],
     ...
 )
