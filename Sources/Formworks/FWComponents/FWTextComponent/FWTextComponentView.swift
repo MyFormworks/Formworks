@@ -98,6 +98,16 @@ final class FWTextComponentView: UITableViewCell, FWComponentCell {
     private func setUpTextField() {
         textField.placeholder = ""
         textField.addTarget(self, action: #selector(didEditingChange(_:)), for: .editingChanged)
+        switch viewModel?.type {
+        case .email:
+            textField.keyboardType = .emailAddress
+        case .numerical:
+            textField.keyboardType = .numberPad
+        case .phonenumber:
+            textField.keyboardType = .phonePad
+        default:
+            textField.keyboardType = .default
+        }
     }
     
     // MARK: Layout
