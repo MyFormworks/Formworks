@@ -2,6 +2,8 @@
 ![Platform](https://img.shields.io/static/v1?label=platform&message=iOS&color=orange)
 ![SPM](https://img.shields.io/static/v1?label=SwiftPackageManager&message=compatible&color=sucess)
 
+![Logo](Resources/logo.png)
+
 Formworks is an Open-Source framework licensed under the MIT license developed with intention of facilitating
 the creation of forms on iOS application. Inspired by Server-driven UI, Formworks works by taking in JSONs
 describing all the components and characteristics of a form.
@@ -125,12 +127,7 @@ extension ExampleClass: FWFormViewControllerDelegate {
     },
     {
     "text": {
-        "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
-        "title": "What is your mother's name?",
-        "description": "Type your name.",
-        "required": true,
-        "regex": "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
-        "placeholder": "Your mother's name"
+        "title": "What is your mother's name?"
       }
     }
   ]
