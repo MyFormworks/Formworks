@@ -18,7 +18,7 @@ public final class FWFormViewController: UIViewController {
     // MARK: Properties
     @ManualLayout private var formTableView: UITableView
     
-    private let notificationCenter = NotificationCenter.default
+
     
     private let viewModel: FWFormViewModel
     
@@ -45,8 +45,14 @@ public final class FWFormViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(adjustForKeyboard),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(adjustForKeyboard),
+                                               name: UIResponder.keyboardWillChangeFrameNotification,
+                                               object: nil)
         addKeyboardDismissal()
         setUpViewModel()
         setUpTableView()
@@ -54,7 +60,7 @@ public final class FWFormViewController: UIViewController {
     }
     
     deinit {
-        notificationCenter.removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     
