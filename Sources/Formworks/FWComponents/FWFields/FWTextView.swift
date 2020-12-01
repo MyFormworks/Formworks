@@ -24,5 +24,6 @@ final class FWTextView: UITextView {
         autocapitalizationType = .none
         font = UIFont.preferredFont(forTextStyle: .body).rounded()
         textColor = .fwComponentInputText
+        isScrollEnabled = false
     }
 }

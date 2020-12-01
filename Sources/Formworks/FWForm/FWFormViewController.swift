@@ -70,12 +70,13 @@ public final class FWFormViewController: UIViewController {
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         
         let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
 		
-		formTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardScreenEndFrame.height, right: 0)
+        formTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom, right: 0)
         
         formTableView.scrollIndicatorInsets = formTableView.contentInset
+        
 		
-		formTableView.scrollRectToVisible(keyboardScreenEndFrame, animated: true)
     }
     
 	@objc private func keyBoardWillHide(notification: Notification) {
