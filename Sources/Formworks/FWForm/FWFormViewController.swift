@@ -194,7 +194,6 @@ extension FWFormViewController: UITableViewDataSource {
 // MARK: ViewModel Delegate
 extension FWFormViewController: FWFormViewModelDelegate {
     func didSetUp() {
-        UIColor.style = .light
         UIColor.style = viewModel.style
         self.title = viewModel.title
         navigationController?.navigationBar.barTintColor = .fwComponentBackground
