@@ -101,7 +101,6 @@ final class FWFormViewModel {
                     case .custom:
                         self.style = .custom(form.style)
                     }
-//                    self.style = .custom(form.style)
                     self.viewModels = viewModels
                 }
                 self.delegate?.didSetUp()
