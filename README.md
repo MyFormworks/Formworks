@@ -19,7 +19,6 @@ describing all the components and characteristics of a form.
     - [Receiving data from a Form](#receiving-data-from-a-form)
 3. [Form Input Format](#form-input-format)
     - [JSON Input Example](#json-input-example)
-    - [Components](#components)
     - [Parameters](#parameters)
     - [Output](#output)
 4. [Components](#components)
@@ -87,42 +86,53 @@ extension ExampleClass: FWFormViewControllerDelegate {
 ### JSON Input Example 
 ```json
 {
-  "title": "Artur's Wedding RSVP",
+  "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+  "responseFormat": "long",
+  "title": "Formworks Title",
+  "style": {
+    "accent": "#F0F0F0FF",
+    "background": "#CACACAFF",
+    "componentBackground": "#F0F0F0FF",
+    "componentTitle": "#212121FF",
+    "componentDescription": "#212121FF",
+    "componentInputText": "#212121FF",
+    "componentInputBackground": "#FDFDFDFF",
+    "componentRequired": "#FD5C5CFF",
+    "componentCorrect": "#78C256FF"
+  },
   "components": [{
     "text": {
-      "title": "What's your name?", 
-      "required": true
+      "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+      "title": "What is your name?",
+      "description": "Type your name.",
+      "required": true,
+      "placeholder": "Your name"
       }
     },
     {
     "email": {
-      "title": "What is your e-mail?"
+      "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+      "title": "What is your e-mail?",
+      "description": "Type your e-mail.",
+      "required": true,
+      "placeholder": "youremail@example.org"
       }
     },
     {
-    "phonenumber": {
-      "title": "What's your phone number?",
-      "description": "Brazilian phone number formats only."
+    "text": {
+      "id": "87986E91-247F-4F36-A577-19DF6BD165D0",
+      "title": "Tell us a little bit about yourself",
+      "description": "We want to know more about you."
       }
     },
     {
-    "multiline": {
-        "title": "Would you like to leave a special message to the groom?"
+    "text": {
+        "title": "What is your mother's name?"
       }
     }
   ]
 }
 ```
-
-### Components
-These keys are the type of component that you want. They need to be given as the component key followed by the parameters of Base Component and the parameters of the respective component.
-Key | Description
------------- | -------------
-`text` | Single line text inputs. No default validation.
-`multiline` | Long text inputs with multiple lines. No default validation.
-`email` |  Text component for e-mail.
-`numerical` | Text component for numerical.
-`phonenumber` | Text component for phone numbers (Brazillian format).
 
 ### Parameters
 Parameter | Type | Description | Required | Default Value
