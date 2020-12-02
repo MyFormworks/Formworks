@@ -34,7 +34,8 @@ enum TestFixtures {
             "componentInputText": "#212121FF",
             "componentInputBackground": "#FDFDFDFF",
             "componentRequired": "#FD5C5CFF",
-            "componentCorrect": "#78C256FF"
+            "componentCorrect": "#78C256FF",
+            "componentPlaceholder": "#F0F0F0FF"
         },
         "components": [
             {
