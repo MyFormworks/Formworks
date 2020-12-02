@@ -18,8 +18,6 @@ public final class FWFormViewController: UIViewController {
     // MARK: Properties
     @ManualLayout private var formTableView: UITableView
     
-
-    
     private let viewModel: FWFormViewModel
     
     public weak var delegate: FWFormViewControllerDelegate?

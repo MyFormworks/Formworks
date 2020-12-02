@@ -7,9 +7,9 @@
 
 import UIKit
 
-/// A representation of a `Formworks` text field.
+/// `Formworks` custom `UITextField` implementation
 final class FWTextField: UITextField {
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         style()
@@ -19,7 +19,7 @@ final class FWTextField: UITextField {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     private func style() {
         backgroundColor = .fwComponentInputBackground
         tintColor = .fwComponentInputText

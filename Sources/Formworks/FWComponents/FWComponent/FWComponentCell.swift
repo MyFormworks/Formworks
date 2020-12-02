@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Protocol specifying the component's cell view implementation.
 protocol FWComponentCell: UITableViewCell {
     /// Component class cell identifier.
     static var identifier: String { get }
