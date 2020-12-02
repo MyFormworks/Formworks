@@ -26,7 +26,7 @@ final class FWLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    
+
     @available(*, unavailable, message: "This class should only be instatiated with ViewCode.")
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

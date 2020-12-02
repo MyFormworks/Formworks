@@ -9,10 +9,12 @@ import Foundation
 
 /// Snapshot of the information of a text component.
 struct FWTextComponentSnapshot: FWComponentSnapshot {
+
     /// Component's Type.
     var component: FWComponentModelWrapper.Types {
         return .text
     }
+
 
     /// Component's Inputted Value.
     var response: String {

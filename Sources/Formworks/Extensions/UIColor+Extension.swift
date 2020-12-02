@@ -229,7 +229,6 @@ extension UIColor {
             return specification.componentCorrect
         }
     }
-    
     /// Component placeholder text color.
     class var fwComponentPlaceholder: UIColor {
         switch self.style {

@@ -84,7 +84,7 @@ final class FWMultilineComponentViewModel: FWComponentViewModel {
             }
         }
     }
-    
+
     /// Returns a snapshot of the component containing all the information currently stored in them.
     /// - Returns: `FWComponentSnapshot` containing the information of the component.
     func takeSnapshot() -> FWComponentSnapshot {

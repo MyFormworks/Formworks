@@ -20,7 +20,7 @@ final class FWTextView: UITextView {
         super.init(frame: frame, textContainer: nil)
         customConfiguration()
     }
-    
+
     @available(*, unavailable, message: "This class should only be instatiated with ViewCode.")
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

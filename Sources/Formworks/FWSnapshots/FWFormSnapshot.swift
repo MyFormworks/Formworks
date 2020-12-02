@@ -28,6 +28,7 @@ extension FWFormSnapshot {
     }
 }
 
+
 /// Wrapper structure for decoding `FWComponentSnapshot`.
 public struct FWComponentSnapshotWrapper: Encodable {
     /// Wrapped component snapshot.

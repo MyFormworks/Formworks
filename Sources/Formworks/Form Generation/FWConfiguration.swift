@@ -9,6 +9,7 @@ import Foundation
 
 /// The configuration used to create a form.
 public struct FWConfiguration {
+
     /// The JSON provided as `Data`.
     public let json: Data
     
