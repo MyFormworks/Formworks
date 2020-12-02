@@ -26,7 +26,7 @@ enum ComponentSpec {
     
     static let errorMessageLabelTopConstant: CGFloat = 10
     
-    static let keyboardDistanceFromTextField: CGFloat = 32
+    static let keyboardDistanceFromTextField: CGFloat = 24
     
     /// Used to spacificate the `SingleLine` component.
     enum SingleLine {

@@ -44,12 +44,12 @@ public final class FWFormViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(adjustForKeyboard),
+                                               selector: #selector(keyBoardWillHide),
                                                name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(adjustForKeyboard),
-                                               name: UIResponder.keyboardWillChangeFrameNotification,
+                                               selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification,
                                                object: nil)
         addKeyboardDismissal()
         setUpViewModel()
@@ -61,24 +61,28 @@ public final class FWFormViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    
+    // MARK: @objc
     /// Method to make the keyboard adjust when a text field is selected
     /// - Parameter notification: This is the observer for the keyboard in the Notification Center
-    @objc private func adjustForKeyboard(notification: Notification) {
+    @objc private func keyboardWillShow(notification: Notification) {
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         
         let keyboardScreenEndFrame = keyboardValue.cgRectValue
         let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
-        
-        if notification.name == UIResponder.keyboardWillHideNotification {
-            formTableView.contentInset = .zero
-        } else {
-            formTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: (keyboardViewEndFrame.height - view.safeAreaInsets.bottom) + ComponentSpec.keyboardDistanceFromTextField, right: 0)
-        }
+		
+        formTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom + ComponentSpec.keyboardDistanceFromTextField, right: 0)
         
         formTableView.scrollIndicatorInsets = formTableView.contentInset
+        
+		
     }
     
+	@objc private func keyBoardWillHide(notification: Notification) {
+		formTableView.contentInset = .zero
+		
+		formTableView.scrollIndicatorInsets = formTableView.contentInset
+	}
+	
     // MARK: ViewModel setup
     /// Sets up the  `FWFormViewModel`.
     private func setUpViewModel() {
