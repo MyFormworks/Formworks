@@ -12,7 +12,7 @@ final class FWFormViewModelTests: XCTestCase {
     var sut: FWFormViewModel!
 
     func testProperties() {
-        let configuration = FWConfiguration(json: TestFixtures.formData, style: .light)
+        let configuration = FWConfiguration(json: TestFixtures.formData, style: .custom(FWStyleSpecification()))
         sut = FWFormViewModel(configuration: configuration)
         sut.setUp()
 
