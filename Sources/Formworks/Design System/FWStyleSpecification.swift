@@ -29,6 +29,43 @@ public struct FWStyleSpecification: Codable {
     var componentCorrect: UIColor = .fwComponentCorrect
     /// Component placeholder text color.
     var componentPlaceholder: UIColor = .fwComponentPlaceholder
+    
+    /// Creates a new  instance with default values
+    public init() {
+        self.accent = .fwAccent
+        self.background = .fwBackground
+        self.componentBackground = .fwComponentBackground
+        self.componentTitle = .fwComponentTitle
+        self.componentDescription = .fwComponentDescription
+        self.componentInputText = .fwComponentInputText
+        self.componentInputBackground = .fwComponentInputBackground
+        self.componentRequired = .fwComponentRequired
+        self.componentCorrect = .fwComponentCorrect
+        self.componentPlaceholder = .fwComponentPlaceholder
+    }
+    
+    /// Creates a new instance with given values
+    init(accent: UIColor,
+                background: UIColor,
+                componentBackground: UIColor,
+                componentTitle: UIColor,
+                componentDescription: UIColor,
+                componentInputText: UIColor,
+                componentInputBackground: UIColor,
+                componentRequired: UIColor,
+                componentCorrect: UIColor,
+                componentPlaceholder: UIColor) {
+        self.accent = accent
+        self.background = background
+        self.componentBackground = componentBackground
+        self.componentTitle = componentTitle
+        self.componentDescription = componentDescription
+        self.componentInputText = componentInputText
+        self.componentInputBackground = componentInputBackground
+        self.componentRequired = componentRequired
+        self.componentCorrect = componentCorrect
+        self.componentPlaceholder = componentPlaceholder
+    }
 }
 
 fileprivate struct FWStyleSpecificationDTO: Codable {

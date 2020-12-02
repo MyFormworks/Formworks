@@ -93,7 +93,14 @@ final class FWFormViewModel {
                         break
                     }
                     self.title = form.title
-                    self.style = .custom(form.style)
+                    switch self.configuration.style {
+                    case .light:
+                        self.style = .light
+                    case .dark:
+                        self.style = .dark
+                    case .custom:
+                        self.style = .custom(form.style)
+                    }
                     self.viewModels = viewModels
                 }
                 self.delegate?.didSetUp()
