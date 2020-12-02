@@ -7,8 +7,11 @@
 
 import Foundation
 
+/// Form response data structure.
 public struct FWFormSnapshot: Encodable {
-	let title: String
+    /// Title of the form.
+    let title: String
+    /// Components of the Form
 	var components: [FWComponentSnapshot]
 }
 
@@ -25,9 +28,13 @@ extension FWFormSnapshot {
     }
 }
 
+/// Wrapper structure for decoding `FWComponentSnapshot`.
 public struct FWComponentSnapshotWrapper: Encodable {
+    /// Wrapped component snapshot.
     var componentSnapshot: FWComponentSnapshot
 
+    /// Initializes the wrapper from a snapshot.
+    /// - Parameter snapshot: Snapshot being wrapped.
     init(_ snapshot: FWComponentSnapshot) {
         self.componentSnapshot = snapshot
     }

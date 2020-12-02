@@ -7,9 +7,8 @@
 
 import UIKit
 
-/// A  representation of a `Formworks` label.
+/// `Formworks` custom `UILabel` implementation
 final class FWLabel: UILabel {
-    
     /// Determines a `FWLabel` type.
     enum Style {
         /// Required Checkmark Label.
@@ -23,17 +22,16 @@ final class FWLabel: UILabel {
         /// Submit Button Text Label.
         case submit
     }
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-
     }
-
+    
     @available(*, unavailable, message: "This class should only be instatiated with ViewCode.")
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     /// Styles a `FWLabel`according to `Style`.
     func style(_ style: FWLabel.Style) {
         switch style {
@@ -48,9 +46,9 @@ final class FWLabel: UILabel {
         case .submit:
             styleSubmit()
         }
-
+        
     }
-
+    
     private func styleRequired() {
         font = .preferredFont(forTextStyle: .headline)
         textColor = .fwComponentBackground
@@ -59,7 +57,7 @@ final class FWLabel: UILabel {
         layer.cornerRadius = 5
         clipsToBounds = true
     }
-
+    
     private func styleTitle() {
         font = UIFont.preferredFont(forTextStyle: .title3).bold().rounded()
         textColor = .fwComponentTitle
@@ -67,19 +65,19 @@ final class FWLabel: UILabel {
         minimumScaleFactor = 0.75
         numberOfLines = 3
     }
-
+    
     private func styleDescription() {
         font = UIFont.preferredFont(forTextStyle: .subheadline).rounded()
         textColor = .fwComponentDescription
         numberOfLines = 0
     }
-
+    
     private func styleValidator() {
         font = UIFont.preferredFont(forTextStyle: .caption1).rounded()
         textColor = .fwComponentDescription
         numberOfLines = 0
     }
-
+    
     private func styleSubmit() {
         font =  UIFont.preferredFont(forTextStyle: .body).rounded().bold()
         textAlignment = .center

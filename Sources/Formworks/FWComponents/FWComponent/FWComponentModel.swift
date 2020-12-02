@@ -7,7 +7,7 @@
 
 import Foundation
 
-///This protocol represents a basic component's data structure.
+/// Protocol specifying a component's data structure.
 protocol FWComponentModel: Codable {
     ///The UUID of the component.
     var id: String { get }
@@ -21,6 +21,11 @@ protocol FWComponentModel: Codable {
     var type: FWComponentModelWrapper.Types { get set }
 }
 
+/// Protocol specifying a component's data structure transfer object.
+///
+/// Used for decoding the object. We recommend keeping both Model and DTO
+/// implementations in the same files, for one is expected to mirror another and
+/// DTO is generally used only within the Model `Codable` methods.
 protocol FWComponentModelDTO: Codable {
     ///The UUID of the component.
     var id: String? { get set }

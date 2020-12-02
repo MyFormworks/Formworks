@@ -7,8 +7,11 @@
 
 import UIKit
 
+/// Visual representation for the multiline component. Subclasses `UITableViewCell`.
 final class FWTextComponentView: UITableViewCell, FWComponentCell {
     // MARK: Properties
+    
+    /// Component class cell identifier.
     static var identifier: String {
         return String(describing: self)
     }
@@ -19,10 +22,10 @@ final class FWTextComponentView: UITableViewCell, FWComponentCell {
                 self.titleLabel.text = viewModel.title
                 self.descriptionLabel.text = viewModel.description
                 self.validatorLabel.text = viewModel.validatorRuleMessage
-				self.textField.attributedPlaceholder = NSAttributedString(string: viewModel.placeholder,
-																		  attributes: [NSAttributedString.Key.foregroundColor: UIColor.fwComponentPlaceholder])
+                self.textField.attributedPlaceholder = NSAttributedString(string: viewModel.placeholder,
+                                                                          attributes: [NSAttributedString.Key.foregroundColor: UIColor.fwComponentPlaceholder])
                 self.textField.text = viewModel.content
-				self.update()
+                self.update()
             }
         }
     }
@@ -45,7 +48,7 @@ final class FWTextComponentView: UITableViewCell, FWComponentCell {
         setUpViews()
         layoutConstraints()
     }
-
+    
     @available(*, unavailable, message: "This class should only be instatiated with ViewCode.")
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -197,30 +200,32 @@ final class FWTextComponentView: UITableViewCell, FWComponentCell {
 
 // MARK: ViewModel Delegate
 extension FWTextComponentView: FWTextComponentViewModelDelegate {
+    
+    /// Updates the cell checkmark symbol
     func update() {
         guard let viewModel = viewModel else {
             return
         }
-		
-		switch (textField.text?.isEmpty, viewModel.isValid, viewModel.required) {
-			case (false, true, true), (false, true, false):
-				symbolImageView.image = UIImage(systemName: "checkmark.circle.fill")
-				symbolImageView.tintColor = .fwComponentCorrect
-				symbolImageView.isHidden = false
-			case (false, false, true), (true, true, true), (true, false, true), (false, false, false):
-				symbolImageView.image = UIImage(systemName: "asterisk.circle.fill")
-				symbolImageView.tintColor = .fwComponentRequired
-				symbolImageView.isHidden = false
-			case (true, true, false):
-				symbolImageView.image = UIImage(systemName: "checkmark.circle.fill")
-				symbolImageView.tintColor = .fwComponentCorrect
-				symbolImageView.isHidden = true
-			case (true, false, false):
-				symbolImageView.image = UIImage(systemName: "asterisk.circle.fill")
-				symbolImageView.tintColor = .fwComponentRequired
-				symbolImageView.isHidden = true
-			default:
-				break
-		}
+        
+        switch (textField.text?.isEmpty, viewModel.isValid, viewModel.required) {
+        case (false, true, true), (false, true, false):
+            symbolImageView.image = UIImage(systemName: "checkmark.circle.fill")
+            symbolImageView.tintColor = .fwComponentCorrect
+            symbolImageView.isHidden = false
+        case (false, false, true), (true, true, true), (true, false, true), (false, false, false):
+            symbolImageView.image = UIImage(systemName: "asterisk.circle.fill")
+            symbolImageView.tintColor = .fwComponentRequired
+            symbolImageView.isHidden = false
+        case (true, true, false):
+            symbolImageView.image = UIImage(systemName: "checkmark.circle.fill")
+            symbolImageView.tintColor = .fwComponentCorrect
+            symbolImageView.isHidden = true
+        case (true, false, false):
+            symbolImageView.image = UIImage(systemName: "asterisk.circle.fill")
+            symbolImageView.tintColor = .fwComponentRequired
+            symbolImageView.isHidden = true
+        default:
+            break
+        }
     }
 }

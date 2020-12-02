@@ -7,12 +7,15 @@
 
 import UIKit
 
+/// Visual representation for the multiline component. Subclasses `UITableViewCell`.
 final class FWMultilineComponentView: UITableViewCell, FWComponentCell {
     // MARK: Properties
+    
+    /// Component class cell identifier.
     static var identifier: String {
         return String(describing: self)
     }
-
+    
     private var viewModel: FWMultilineComponentViewModel? {
         didSet {
             if let viewModel = viewModel {
@@ -24,7 +27,7 @@ final class FWMultilineComponentView: UITableViewCell, FWComponentCell {
             }
         }
     }
-
+    
     @ManualLayout private var separatorView: UIView
     @ManualLayout private var titleLabel: FWLabel
     @ManualLayout private var descriptionLabel: FWLabel
@@ -36,27 +39,30 @@ final class FWMultilineComponentView: UITableViewCell, FWComponentCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-
+    
     // MARK: Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUpViews()
         layoutConstraints()
     }
-
+    
     @available(*, unavailable, message: "This class should only be instatiated with ViewCode.")
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: API
+    
+    /// Component cell behaviour configuration.
+    /// - Parameter viewModel: The viewModel that will be linked to this view.
     func configure(with viewModel: FWComponentViewModel) {
         if let textViewModel = viewModel as? FWMultilineComponentViewModel {
             self.viewModel = textViewModel
             self.viewModel?.delegate = self
         }
     }
-
+    
     // MARK: Views Setup
     private func setUpViews() {
         contentView.backgroundColor = .fwComponentBackground
@@ -66,30 +72,30 @@ final class FWMultilineComponentView: UITableViewCell, FWComponentCell {
         setUpValidatorLabel()
         setUpTextView()
     }
-
+    
     private func setUpSeparatorView() {
         separatorView.backgroundColor = .fwBackground
     }
-
+    
     private func setUpTitleLabel() {
         titleLabel.style(.title)
         titleLabel.text = ""
     }
-
+    
     private func setUpDescriptionLabel() {
         descriptionLabel.style(.description)
         descriptionLabel.text = ""
     }
-
+    
     private func setUpValidatorLabel() {
         validatorLabel.style(.validator)
         validatorLabel.text = "This is a test text for the validator label to see how line breaking works, and how it resizes on the view."
     }
-
+    
     private func setUpTextView() {
         textView.delegate = self
     }
-
+    
     // MARK: Layout
     private func layoutConstraints() {
         layoutSeparatorViewConstraints()
@@ -99,10 +105,10 @@ final class FWMultilineComponentView: UITableViewCell, FWComponentCell {
         layoutTextView()
         layoutValidatorLabel()
     }
-
+    
     private func layoutSeparatorViewConstraints() {
         self.contentView.addSubview(separatorView)
-
+        
         NSLayoutConstraint.activate([
             separatorView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
             separatorView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
@@ -110,24 +116,24 @@ final class FWMultilineComponentView: UITableViewCell, FWComponentCell {
             separatorView.heightAnchor.constraint(equalToConstant: 12)
         ])
     }
-
+    
     private func layoutTitleLabelConstraints() {
         self.contentView.addSubview(titleLabel)
-
+        
         let guide = contentView.layoutMarginsGuide
-
+        
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 16),
             titleLabel.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
             titleLabel.widthAnchor.constraint(equalTo: guide.widthAnchor, multiplier: 0.85)
         ])
     }
-
+    
     private func layoutSymbolImageView() {
         self.contentView.addSubview(symbolImageView)
-
+        
         let guide = contentView.layoutMarginsGuide
-
+        
         NSLayoutConstraint.activate([
             symbolImageView.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 16),
             symbolImageView.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
@@ -135,24 +141,24 @@ final class FWMultilineComponentView: UITableViewCell, FWComponentCell {
             symbolImageView.heightAnchor.constraint(equalToConstant: 24)
         ])
     }
-
+    
     private func layoutDescriptionLabel() {
         self.contentView.addSubview(descriptionLabel)
-
+        
         let guide = contentView.layoutMarginsGuide
-
+        
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
             descriptionLabel.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
             descriptionLabel.widthAnchor.constraint(equalTo: guide.widthAnchor)
         ])
     }
-
+    
     private func layoutTextView() {
         self.contentView.addSubview(textView)
-
+        
         let guide = contentView.layoutMarginsGuide
-
+        
         NSLayoutConstraint.activate([
             textView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20),
             textView.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
@@ -160,12 +166,12 @@ final class FWMultilineComponentView: UITableViewCell, FWComponentCell {
             textView.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
-
+    
     private func layoutValidatorLabel() {
         self.contentView.addSubview(validatorLabel)
-
+        
         let guide = contentView.layoutMarginsGuide
-
+        
         NSLayoutConstraint.activate([
             validatorLabel.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 16),
             validatorLabel.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
@@ -207,6 +213,14 @@ extension FWMultilineComponentView: FWMultilineComponentViewModelDelegate {
 
 // MARK: UITextViewDelegate
 extension FWMultilineComponentView: UITextViewDelegate {
+    
+    /**
+     Tells the delegate when the user changes the text or attributes in the specified text view.
+     - Parameter textView: The text view containing the changes.
+     
+     The text view calls this method in response to user-initiated changes to the text. This method is not called in response to programmatically initiated changes.
+     Implementation of this method is optional.
+     */
     func textViewDidChange(_ textView: UITextView) {
         if let viewModel = viewModel {
             viewModel.content = textView.text ?? ""
