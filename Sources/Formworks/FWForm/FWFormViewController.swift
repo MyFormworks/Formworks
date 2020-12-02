@@ -72,7 +72,7 @@ public final class FWFormViewController: UIViewController {
         let keyboardScreenEndFrame = keyboardValue.cgRectValue
         let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
 		
-        formTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom, right: 0)
+        formTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom + ComponentSpec.keyboardDistanceFromTextField, right: 0)
         
         formTableView.scrollIndicatorInsets = formTableView.contentInset
         
