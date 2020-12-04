@@ -36,7 +36,7 @@ describing all the components and characteristics of a form.
 ### Importing using Xcode
 1. In a Xcode project, click on "File"
 2. Click on "Swift Packages" and select "Add Package Dependency"
-3. Paste the web url for this repository: https://github.com/Galdineris/Formworks.git
+3. Paste the web url for this repository: https://github.com/MyFormworks/Formworks.git
 4. Set Rules to Branch on "master"
 
 After this, you can fetch the latest changes to the framework  by selecting "Update to Latest Package Versions" in step 2.
@@ -49,7 +49,7 @@ import PackageDescription
 let package = Package(
     ...
     dependencies: [
-        .package(url: "https://github.com/myformworks/Formworks.git", VERSION)
+        .package(url: "https://github.com/myformworks/Formworks.git", "1.0.0")
     ],
     ...
 )
