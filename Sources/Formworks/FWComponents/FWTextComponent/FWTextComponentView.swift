@@ -89,6 +89,7 @@ final class FWTextComponentView: UITableViewCell, FWComponentCell {
         setUpDescriptionLabel()
         setUpValidatorLabel()
         setUpTextField()
+        self.accessibilityHint = "This field is required"
     }
     
     private func setUpSeparatorView() {
