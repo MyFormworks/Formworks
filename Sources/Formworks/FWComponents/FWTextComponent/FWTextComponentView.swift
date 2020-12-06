@@ -89,7 +89,6 @@ final class FWTextComponentView: UITableViewCell, FWComponentCell {
         setUpDescriptionLabel()
         setUpValidatorLabel()
         setUpTextField()
-        self.accessibilityHint = "This field is required"
     }
     
     private func setUpSeparatorView() {
@@ -114,6 +113,12 @@ final class FWTextComponentView: UITableViewCell, FWComponentCell {
     private func setUpTextField() {
         textField.placeholder = ""
         textField.addTarget(self, action: #selector(didEditingChange(_:)), for: .editingChanged)
+    }
+    
+    private func setUpRequiredAccessibilty() {
+        if let viewModel = self.viewModel {
+            self.accessibilityHint = viewModel.required ? "Required field" : nil
+        }
     }
     
     // MARK: Layout
