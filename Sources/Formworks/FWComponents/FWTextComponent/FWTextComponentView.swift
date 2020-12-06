@@ -25,6 +25,7 @@ final class FWTextComponentView: UITableViewCell, FWComponentCell {
                 self.textField.attributedPlaceholder = NSAttributedString(string: viewModel.placeholder,
                                                                           attributes: [NSAttributedString.Key.foregroundColor: UIColor.fwComponentPlaceholder])
                 self.textField.text = viewModel.content
+                self.accessibilityHint = viewModel.required ? "Required field" : nil
                 
                 switch viewModel.type {
                 case .email:
@@ -89,7 +90,6 @@ final class FWTextComponentView: UITableViewCell, FWComponentCell {
         setUpDescriptionLabel()
         setUpValidatorLabel()
         setUpTextField()
-        setUpRequiredAccessibilty()
     }
     
     private func setUpSeparatorView() {
@@ -114,12 +114,6 @@ final class FWTextComponentView: UITableViewCell, FWComponentCell {
     private func setUpTextField() {
         textField.placeholder = ""
         textField.addTarget(self, action: #selector(didEditingChange(_:)), for: .editingChanged)
-    }
-    
-    private func setUpRequiredAccessibilty() {
-        if let viewModel = self.viewModel {
-            self.accessibilityHint = viewModel.required ? "Required field" : nil
-        }
     }
     
     // MARK: Layout
