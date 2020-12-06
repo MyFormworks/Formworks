@@ -89,6 +89,7 @@ final class FWTextComponentView: UITableViewCell, FWComponentCell {
         setUpDescriptionLabel()
         setUpValidatorLabel()
         setUpTextField()
+        setUpRequiredAccessibilty()
     }
     
     private func setUpSeparatorView() {
