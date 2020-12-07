@@ -14,15 +14,15 @@ final class FWJSONSpec: QuickSpec {
     override func spec() {
         var sut: FWJSON!
         
-        describe("the data") {
+        describe("when the data") {
             it("is empty") {
                 sut = FWJSON(data: TestFixtures.emptyFormData)
                 sut.decode { (result: Result<FWFormModel, Error>) in
                     switch result {
                     case .success:
                         fail("InvaldidData: Form successefully decoded.")
-                    case .failure(_):
-                        break
+                    case .failure(let error):
+                        expect(error).notTo(beNil())
                     }
                 }
             }
@@ -33,13 +33,13 @@ final class FWJSONSpec: QuickSpec {
                     switch result {
                     case .success:
                         fail("InvaldidData: Component successefully decoded.")
-                    case .failure(_):
-                        break
+                    case .failure(let error):
+                        expect(error).notTo(beNil())
                     }
                 }
             }
             
-            it("decodes form") {
+            it("can be decoded into a form") {
                 sut = FWJSON(data: TestFixtures.formData)
                 sut.decode { (result: Result<FWFormModel, Error>) in
                     switch result {
@@ -50,12 +50,13 @@ final class FWJSONSpec: QuickSpec {
                         expect(form.responseFormat).to(equal(TestFixtures.form.responseFormat))
                         expect(form.style).to(equal(TestFixtures.form.style))
                     case .failure(let error):
-                        expect(error).to(beNil(), description: "Error decoding form: \(error.localizedDescription)")
+//                        expect(error).to(beNil(), description: "Error decoding form: \(error.localizedDescription)")
+                        fail("Error decoding form: \(error.localizedDescription)")
                     }
                 }
             }
             
-            it("decodes components") {
+            it("can be decoded into components") {
                 sut = FWJSON(data: TestFixtures.textComponentData)
                 sut.decode { (result: Result<FWComponentModel, Error>) in
                     switch result {
@@ -64,7 +65,8 @@ final class FWJSONSpec: QuickSpec {
                         expect(component.description).to(equal(TestFixtures.textComponent.description))
                         expect(component.required).to(equal(TestFixtures.textComponent.required))
                     case .failure(let error):
-                        expect(error).to(beNil(), description: "Error decoding single line component: \(error.localizedDescription)")
+//                        expect(error).to(beNil(), description: "Error decoding single line component: \(error.localizedDescription)")
+                        fail("Error decoding single line component: \(error.localizedDescription)")
                     }
                 }
             }

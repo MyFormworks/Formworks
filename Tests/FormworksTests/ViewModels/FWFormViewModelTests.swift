@@ -14,7 +14,7 @@ final class FWFormViewModelSpec: QuickSpec {
     override func spec() {
         var sut: FWFormViewModel!
         
-        describe("the properties") {
+        describe("when the properties") {
             it ("are correct") {
                 let configuration = FWConfiguration(json: TestFixtures.formData, style: .custom(FWStyleSpecification()))
                 sut = FWFormViewModel(configuration: configuration)
@@ -26,7 +26,7 @@ final class FWFormViewModelSpec: QuickSpec {
             }
         }
         
-        describe("the view model") {
+        describe("when the view model") {
             it("is at index path") {
                 let configuration = FWConfiguration(json: TestFixtures.formData, style: .light)
                 sut = FWFormViewModel(configuration: configuration)
