@@ -1,0 +1,299 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/Design System/ComponentSpec.swift",
+      "line": 13,
+      "symbol": "ComponentSpec.componentBackgroundCornerRadius",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/Design System/ComponentSpec.swift",
+      "line": 14,
+      "symbol": "ComponentSpec.componentBackgroundWidthMultiplier",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/Design System/ComponentSpec.swift",
+      "line": 16,
+      "symbol": "ComponentSpec.titleLabelWidthMultiplier",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/Design System/ComponentSpec.swift",
+      "line": 17,
+      "symbol": "ComponentSpec.titleLabelHeight",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/Design System/ComponentSpec.swift",
+      "line": 19,
+      "symbol": "ComponentSpec.requiredLabelWidthMultiplier",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/Design System/ComponentSpec.swift",
+      "line": 20,
+      "symbol": "ComponentSpec.requiredLabelHeight",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/Design System/ComponentSpec.swift",
+      "line": 22,
+      "symbol": "ComponentSpec.descriptionLabelTopConstant",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/Design System/ComponentSpec.swift",
+      "line": 24,
+      "symbol": "ComponentSpec.specsViewTopConstant",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/Design System/ComponentSpec.swift",
+      "line": 25,
+      "symbol": "ComponentSpec.specsViewHeightConstant",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/Design System/ComponentSpec.swift",
+      "line": 27,
+      "symbol": "ComponentSpec.errorMessageLabelTopConstant",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/Design System/ComponentSpec.swift",
+      "line": 29,
+      "symbol": "ComponentSpec.keyboardDistanceFromTextField",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/Design System/ComponentSpec.swift",
+      "line": 34,
+      "symbol": "ComponentSpec.SingleLine.textFieldHeight",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWComponents/FWComponent/FWComponentModelWrapper.swift",
+      "line": 33,
+      "symbol": "FWComponentModelWrapper.Types.text",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWComponents/FWComponent/FWComponentModelWrapper.swift",
+      "line": 34,
+      "symbol": "FWComponentModelWrapper.Types.multiline",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWComponents/FWComponent/FWComponentModelWrapper.swift",
+      "line": 35,
+      "symbol": "FWComponentModelWrapper.Types.numerical",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWComponents/FWComponent/FWComponentModelWrapper.swift",
+      "line": 36,
+      "symbol": "FWComponentModelWrapper.Types.email",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWComponents/FWComponent/FWComponentModelWrapper.swift",
+      "line": 37,
+      "symbol": "FWComponentModelWrapper.Types.phonenumber",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWComponents/FWFields/FWLabel.swift",
+      "line": 26,
+      "symbol": "FWLabel.init(frame:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWComponents/FWFields/FWTextField.swift",
+      "line": 13,
+      "symbol": "FWTextField.init(frame:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWComponents/FWMultilineComponent/FWMultilineComponentView.swift",
+      "line": 44,
+      "symbol": "FWMultilineComponentView.init(style:reuseIdentifier:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWComponents/FWMultilineComponent/FWMultilineComponentViewModel.swift",
+      "line": 14,
+      "symbol": "FWMultilineComponentViewModelDelegate.update()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWComponents/FWTextComponent/FWTextComponentView.swift",
+      "line": 58,
+      "symbol": "FWTextComponentView.init(style:reuseIdentifier:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWComponents/FWTextComponent/FWTextComponentViewModel.swift",
+      "line": 14,
+      "symbol": "FWTextComponentViewModelDelegate.update()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWForm/FWFormViewController.swift",
+      "line": 13,
+      "symbol": "FWFormViewControllerDelegate.didSubmit(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWForm/FWFormViewController.swift",
+      "line": 23,
+      "symbol": "FWFormViewController.delegate",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWForm/FWFormViewController.swift",
+      "line": 39,
+      "symbol": "FWFormViewController.loadView()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWForm/FWFormViewController.swift",
+      "line": 44,
+      "symbol": "FWFormViewController.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWForm/FWFormViewController.swift",
+      "line": 60,
+      "symbol": "FWFormViewController.deinit",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWForm/FWFormViewController.swift",
+      "line": 129,
+      "symbol": "FWFormViewController.tableView(_:didSelectRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWForm/FWFormViewController.swift",
+      "line": 142,
+      "symbol": "FWFormViewController.tableView(_:viewForHeaderInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWForm/FWFormViewController.swift",
+      "line": 152,
+      "symbol": "FWFormViewController.tableView(_:heightForHeaderInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWForm/FWFormViewController.swift",
+      "line": 164,
+      "symbol": "FWFormViewController.tableView(_:numberOfRowsInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWForm/FWFormViewController.swift",
+      "line": 168,
+      "symbol": "FWFormViewController.tableView(_:cellForRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWForm/FWFormViewModel/FWFormViewModelError.swift",
+      "line": 17,
+      "symbol": "FWFormViewModelError.localizedDescription",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWForm/FWFormViews/FWDismissHeader.swift",
+      "line": 9,
+      "symbol": "FWDismissHeader",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWForm/FWFormViews/FWDismissHeader.swift",
+      "line": 12,
+      "symbol": "FWDismissHeader.button",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWForm/FWFormViews/FWDismissHeader.swift",
+      "line": 15,
+      "symbol": "FWDismissHeader.identifier",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWForm/FWFormViews/FWDismissHeader.swift",
+      "line": 20,
+      "symbol": "FWDismissHeader.init(reuseIdentifier:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWForm/FWFormViews/FWDismissHeader.swift",
+      "line": 57,
+      "symbol": "FWDismissHeader.setHeaderButton()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWForm/FWFormViews/FWDismissHeader.swift",
+      "line": 64,
+      "symbol": "FWDismissHeader.setHeaderTitle(text:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWForm/FWFormViews/FWFormSubmitTableCell.swift",
+      "line": 15,
+      "symbol": "FWFormSubmitTableCell.identifier",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Formworks/Formworks/Sources/Formworks/FWForm/FWFormViews/FWFormSubmitTableCell.swift",
+      "line": 19,
+      "symbol": "FWFormSubmitTableCell.init(style:reuseIdentifier:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/runner/work/Formworks/Formworks/Sources"
+}
