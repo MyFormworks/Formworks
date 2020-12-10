@@ -6,76 +6,74 @@
 //
 
 import XCTest
+import Quick
+import Nimble
 @testable import Formworks
 
-final class FWJSONTests: XCTestCase {
-    var sut: FWJSON!
-
-    override func tearDown() {
-        super.tearDown()
-        sut = nil
-    }
-
-    func testEmptyData() {
-        sut = FWJSON(data: TestFixtures.emptyFormData)
-        sut.decode { (result: Result<FWFormModel, Error>) in
-            switch result {
-            case .success:
-                XCTFail("InvaldidData: Form successefully decoded.")
-            case .failure(let error):
-                XCTAssertNotNil(error, "InvaldidData: Form error nil")
+final class FWJSONSpec: QuickSpec {
+    override func spec() {
+        var sut: FWJSON!
+        
+        describe("when the data") {
+            it("is empty") {
+                sut = FWJSON(data: TestFixtures.emptyFormData)
+                sut.decode { (result: Result<FWFormModel, Error>) in
+                    switch result {
+                    case .success:
+                        fail("InvaldidData: Form successefully decoded.")
+                    case .failure(let error):
+                        expect(error).notTo(beNil())
+                    }
+                }
+            }
+            
+            it("has bad component") {
+                sut = FWJSON(data: TestFixtures.badComponentData)
+                sut.decode { (result: Result<FWComponentModel, Error>) in
+                    switch result {
+                    case .success:
+                        fail("InvaldidData: Component successefully decoded.")
+                    case .failure(let error):
+                        expect(error).notTo(beNil())
+                    }
+                }
+            }
+            
+            it("can be decoded into a form") {
+                sut = FWJSON(data: TestFixtures.formData)
+                sut.decode { (result: Result<FWFormModel, Error>) in
+                    switch result {
+                    case .success(let form):
+                        expect(form.title).to(equal(TestFixtures.form.title))
+                        expect(form.components.count).to(equal(TestFixtures.form.components.count))
+                        expect(form.id).to(equal(TestFixtures.form.id))
+                        expect(form.responseFormat).to(equal(TestFixtures.form.responseFormat))
+                        expect(form.style).to(equal(TestFixtures.form.style))
+                    case .failure(let error):
+//                        expect(error).to(beNil(), description: "Error decoding form: \(error.localizedDescription)")
+                        fail("Error decoding form: \(error.localizedDescription)")
+                    }
+                }
+            }
+            
+            it("can be decoded into components") {
+                sut = FWJSON(data: TestFixtures.textComponentData)
+                sut.decode { (result: Result<FWComponentModel, Error>) in
+                    switch result {
+                    case .success(let component):
+                        expect(component.title).to(equal(TestFixtures.textComponent.title))
+                        expect(component.description).to(equal(TestFixtures.textComponent.description))
+                        expect(component.required).to(equal(TestFixtures.textComponent.required))
+                    case .failure(let error):
+//                        expect(error).to(beNil(), description: "Error decoding single line component: \(error.localizedDescription)")
+                        fail("Error decoding single line component: \(error.localizedDescription)")
+                    }
+                }
             }
         }
     }
     
-    func testBadComponentData() {
-        sut = FWJSON(data: TestFixtures.badComponentData)
-        sut.decode { (result: Result<FWComponentModel, Error>) in
-            switch result {
-            case .success:
-                XCTFail("InvaldidData: Component successefully decoded.")
-            case .failure(let error):
-                XCTAssertNotNil(error, "InvaldidData: Component error nil")
-            }
-        }
-    }
-
-    func testDecodeForm() {
-        sut = FWJSON(data: TestFixtures.formData)
-        sut.decode { (result: Result<FWFormModel, Error>) in
-            switch result {
-            case .success(let form):
-                let errorMessage = "Form does not match it's decoded format"
-                XCTAssertEqual(form.title, TestFixtures.form.title, errorMessage)
-                XCTAssertEqual(form.components.count, TestFixtures.form.components.count, errorMessage)
-                XCTAssertEqual(form.id, TestFixtures.form.id, errorMessage)
-                XCTAssertEqual(form.responseFormat, TestFixtures.form.responseFormat, errorMessage)
-                XCTAssertEqual(form.style, TestFixtures.form.style, errorMessage)
-            case .failure(let error):
-                XCTAssertNil(error, "Error decoding form: \(error.localizedDescription)")
-            }
-        }
-    }
-
-    func testDecodeComponents() {
-        sut = FWJSON(data: TestFixtures.textComponentData)
-        sut.decode { (result: Result<FWComponentModel, Error>) in
-            switch result {
-            case .success(let component):
-                let errorMessage = "Text Component does not match it's decoded format"
-                XCTAssertEqual(component.title, TestFixtures.textComponent.title, errorMessage)
-                XCTAssertEqual(component.description, TestFixtures.textComponent.description, errorMessage)
-                XCTAssertEqual(component.required, TestFixtures.textComponent.required, errorMessage)
-            case .failure(let error):
-                XCTAssertNil(error, "Error decoding single line component: \(error.localizedDescription)")
-            }
-        }
-    }
-
     static var allTests = [
-        ("testEmptyData", testEmptyData),
-        ("testBadComponentData", testBadComponentData),
-        ("testDecodeForm", testDecodeForm),
-        ("testDecodeComponents", testDecodeComponents)
+        ("tests", spec)
     ]
 }

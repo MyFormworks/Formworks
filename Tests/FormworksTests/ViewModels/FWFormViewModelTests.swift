@@ -6,37 +6,44 @@
 //
 
 import XCTest
+import Quick
+import Nimble
 @testable import Formworks
 
-final class FWFormViewModelTests: XCTestCase {
-    var sut: FWFormViewModel!
-
-    func testProperties() {
-        let configuration = FWConfiguration(json: TestFixtures.formData, style: .custom(FWStyleSpecification()))
-        sut = FWFormViewModel(configuration: configuration)
-        sut.setUp()
-
-        XCTAssertEqual(sut.title, TestFixtures.form.title)
-        XCTAssertEqual(sut.numberOfComponents, TestFixtures.form.components.count)
-        XCTAssertEqual(sut.style, FWStyle.custom(TestFixtures.styleSpec))
-    }
-
-    func testViewModelAt() {
-        let configuration = FWConfiguration(json: TestFixtures.formData, style: .light)
-        sut = FWFormViewModel(configuration: configuration)
-        sut.setUp()
+final class FWFormViewModelSpec: QuickSpec {
+    override func spec() {
+        var sut: FWFormViewModel!
         
-        let sutViewModelAt = sut.viewModelAt(index: IndexPath(row: 0, section: 0))
-        let viewModel = FWTextComponentViewModel(model: TestFixtures.form.components[0] as! FWTextModel)
+        describe("when the properties") {
+            it ("are correct") {
+                let configuration = FWConfiguration(json: TestFixtures.formData, style: .custom(FWStyleSpecification()))
+                sut = FWFormViewModel(configuration: configuration)
+                sut.setUp()
 
-        XCTAssertEqual(sutViewModelAt.description, viewModel.description)
-        XCTAssertEqual(sutViewModelAt.isValid, viewModel.isValid)
-        XCTAssertEqual(sutViewModelAt.required, viewModel.required)
-        XCTAssertEqual(sutViewModelAt.title, viewModel.title)
-    }
+                expect(sut.title).to(equal(TestFixtures.form.title))
+                expect(sut.numberOfComponents).to(equal(TestFixtures.form.components.count))
+                expect(sut.style).to(equal(FWStyle.custom(TestFixtures.styleSpec)))
+            }
+        }
+        
+        describe("when the view model") {
+            it("is at index path") {
+                let configuration = FWConfiguration(json: TestFixtures.formData, style: .light)
+                sut = FWFormViewModel(configuration: configuration)
+                sut.setUp()
+                
+                let sutViewModelAt = sut.viewModelAt(index: IndexPath(row: 0, section: 0))
+                let viewModel = FWTextComponentViewModel(model: TestFixtures.form.components[0] as! FWTextModel)
 
-    override func tearDown() {
-        super.tearDown()
-        sut = nil
+                expect(sutViewModelAt.description).to(equal(viewModel.description))
+                expect(sutViewModelAt.isValid).to(equal(viewModel.isValid))
+                expect(sutViewModelAt.required).to(equal(viewModel.required))
+                expect(sutViewModelAt.title).to(equal(viewModel.title))
+            }
+        }
     }
+    
+    static var allTests = [
+        ("tests", spec)
+    ]
 }

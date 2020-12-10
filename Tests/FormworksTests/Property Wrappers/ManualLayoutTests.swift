@@ -7,21 +7,28 @@
 
 import XCTest
 import UIKit
+import Quick
+import Nimble
 @testable import Formworks
 
-final class ManualLayoutTests: XCTestCase {
+final class ManualLayoutSpec: QuickSpec {
     @ManualLayout var sut: UIView
+    override func spec() {
 
-    func testTranslatesAutoresizingMaskIntoConstraints() {
-        XCTAssertFalse(sut.translatesAutoresizingMaskIntoConstraints)
+        describe("when the view") {
+            describe("property") {
+                it("translatesAutoresizingMaskIntoConstraints is set to false") {
+                    expect(self.sut.translatesAutoresizingMaskIntoConstraints).to(beFalse())
+                }
+                
+                it("frame is set to zero") {
+                    expect(self.sut.frame).to(equal(CGRect.zero))
+                }
+            }
+        }
     }
-
-    func testFrameZero() {
-        XCTAssertEqual(sut.frame, CGRect(x: 0, y: 0, width: 0, height: 0))
-    }
-
+    
     static var allTests = [
-        ("testTranslatesAutoresizingMaskIntoConstraints", testTranslatesAutoresizingMaskIntoConstraints),
-        ("testFrameZero", testFrameZero)
+        ("tests", spec)
     ]
 }
