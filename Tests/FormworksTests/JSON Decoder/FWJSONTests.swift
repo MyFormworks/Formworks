@@ -1,10 +1,3 @@
-//
-//  FWJSONTests.swift
-//  
-//
-//  Created by Rafael Galdino on 07/10/20.
-//
-
 import XCTest
 import Quick
 import Nimble
@@ -14,13 +7,15 @@ final class FWJSONSpec: QuickSpec {
     override func spec() {
         var sut: FWJSON!
         
-        describe("when the data") {
+
+        describe("the data") {
             it("is empty") {
                 sut = FWJSON(data: TestFixtures.emptyFormData)
                 sut.decode { (result: Result<FWFormModel, Error>) in
                     switch result {
                     case .success:
                         fail("InvaldidData: Form successefully decoded.")
+
                     case .failure(let error):
                         expect(error).notTo(beNil())
                     }
@@ -38,7 +33,6 @@ final class FWJSONSpec: QuickSpec {
                     }
                 }
             }
-            
             it("can be decoded into a form") {
                 sut = FWJSON(data: TestFixtures.formData)
                 sut.decode { (result: Result<FWFormModel, Error>) in
@@ -50,8 +44,8 @@ final class FWJSONSpec: QuickSpec {
                         expect(form.responseFormat).to(equal(TestFixtures.form.responseFormat))
                         expect(form.style).to(equal(TestFixtures.form.style))
                     case .failure(let error):
-//                        expect(error).to(beNil(), description: "Error decoding form: \(error.localizedDescription)")
-                        fail("Error decoding form: \(error.localizedDescription)")
+                        expect(error).to(beNil(), description: "Error decoding form: \(error.localizedDescription)")
+                        fail("Error decoding form: \(error.localizedDescription)"
                     }
                 }
             }
@@ -65,7 +59,7 @@ final class FWJSONSpec: QuickSpec {
                         expect(component.description).to(equal(TestFixtures.textComponent.description))
                         expect(component.required).to(equal(TestFixtures.textComponent.required))
                     case .failure(let error):
-//                        expect(error).to(beNil(), description: "Error decoding single line component: \(error.localizedDescription)")
+                        expect(error).to(beNil(), description: "Error decoding single line component: \(error.localizedDescription)")
                         fail("Error decoding single line component: \(error.localizedDescription)")
                     }
                 }

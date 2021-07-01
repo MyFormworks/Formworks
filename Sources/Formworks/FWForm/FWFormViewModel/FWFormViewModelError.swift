@@ -1,10 +1,3 @@
-//
-//  FWFormViewModelError.swift
-//  
-//
-//  Created by Artur Carneiro on 13/11/20.
-//
-
 import Foundation
 
 /// Possible errors when interacting with `FWFormViewModel`.

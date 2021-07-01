@@ -1,10 +1,3 @@
-//
-//  FWComponentCell.swift
-//  
-//
-//  Created by Artur Carneiro on 13/10/20.
-//
-
 import UIKit
 
 /// Protocol specifying the component's cell view implementation.

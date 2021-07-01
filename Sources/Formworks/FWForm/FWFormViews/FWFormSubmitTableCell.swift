@@ -1,10 +1,3 @@
-//
-//  FWFormCollectionCell.swift
-//  
-//
-//  Created by Victor Falcetta do Nascimento on 30/09/20.
-//
-
 import UIKit
 
 /// A representation of a `Formworks` `UITableViewCell`'s cell.

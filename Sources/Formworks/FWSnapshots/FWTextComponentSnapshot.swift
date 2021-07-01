@@ -1,10 +1,3 @@
-//
-//  FWTextComponentSnapshot.swift
-//  
-//
-//  Created by Artur Carneiro on 10/11/20.
-//
-
 import Foundation
 
 /// Snapshot of the information of a text component.

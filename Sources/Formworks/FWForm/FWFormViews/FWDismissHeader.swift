@@ -1,10 +1,3 @@
-//
-//  DismissHFWDismissHeadereader.swift
-//  
-//
-//  Created by Cassia Aparecida Barbosa on 16/11/20.
-//
-
 import UIKit
 final class FWDismissHeader: UITableViewHeaderFooterView {
 	

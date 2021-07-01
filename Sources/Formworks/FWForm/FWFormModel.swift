@@ -1,10 +1,3 @@
-//
-//  FWFormModel.swift
-//  
-//
-//  Created by Cassia Aparecida Barbosa on 02/10/20.
-//
-
 import Foundation
 
 /// Data structure for the form.

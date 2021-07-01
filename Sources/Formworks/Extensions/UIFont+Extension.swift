@@ -1,10 +1,3 @@
-//
-//  UIFont+Extension.swift
-//  
-//
-//  Created by Artur Carneiro on 02/10/20.
-//
-
 import UIKit
 
 extension UIFont {

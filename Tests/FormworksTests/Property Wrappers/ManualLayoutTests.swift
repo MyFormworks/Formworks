@@ -1,10 +1,3 @@
-//
-//  ManualLayoutTests.swift
-//  
-//
-//  Created by Artur Carneiro on 28/09/20.
-//
-
 import XCTest
 import UIKit
 import Quick

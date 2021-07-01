@@ -1,10 +1,3 @@
-//
-//  FWRegexValidatorTests.swift
-//  FormworksTests
-//
-//  Created by Edgar Sgroi on 29/10/20.
-//
-
 import XCTest
 import Quick
 import Nimble
@@ -13,9 +6,10 @@ import Nimble
 final class FWRegexValidatorSpec: QuickSpec {
     override func spec() {
         var sut: FWRegexValidator!
-        describe("when the regex is") {
-            context("valid") {
-                it("for email") {
+        
+        describe("is valid") {
+            context("when the regex is") {
+                it("is an email") {
                     let regex = FWRegex.email.rawValue
                     sut = FWRegexValidator(regex: regex)
                     
@@ -29,7 +23,7 @@ final class FWRegexValidatorSpec: QuickSpec {
                     expect(result).to(beTrue())
                 }
                 
-                it ("for phonenumber") {
+                it ("is a phonenumber") {
                     let regex = FWRegex.phonenumber.rawValue
                     sut = FWRegexValidator(regex: regex)
                     
@@ -79,7 +73,7 @@ final class FWRegexValidatorSpec: QuickSpec {
                     expect(result).to(beTrue())
                 }
                 
-                it("for max32") {
+                it("is a max32") {
                     let regex = FWRegex.max32.rawValue
                     sut = FWRegexValidator(regex: regex)
                     
@@ -90,7 +84,7 @@ final class FWRegexValidatorSpec: QuickSpec {
                     expect(result).to(beTrue())
                 }
                 
-                it("for custom") {
+                it("custom") {
                     let regex = "[a-z]at"
                     sut = FWRegexValidator(regex: regex)
                     
@@ -107,9 +101,11 @@ final class FWRegexValidatorSpec: QuickSpec {
                     expect(result).to(beTrue())
                 }
             }
-            
-            context("invalid") {
-                it("for email") {
+        }
+        
+        describe("is invalid") {
+            context("when the regex is") {
+                it("an email") {
                     let regex = FWRegex.email.rawValue
                     sut = FWRegexValidator(regex: regex)
                     
@@ -135,7 +131,7 @@ final class FWRegexValidatorSpec: QuickSpec {
                     expect(result).to(beFalse())
                 }
                 
-                it("for phonenumber") {
+                it("is a phonenumber") {
                     let regex = FWRegex.phonenumber.rawValue
                     sut = FWRegexValidator(regex: regex)
                     
@@ -161,7 +157,8 @@ final class FWRegexValidatorSpec: QuickSpec {
                     expect(result).to(beFalse())
                 }
                 
-                it("for max32") {
+
+                it("is a max32") {
                     let regex = FWRegex.max32.rawValue
                     sut = FWRegexValidator(regex: regex)
                     
@@ -172,7 +169,7 @@ final class FWRegexValidatorSpec: QuickSpec {
                     expect(result).to(beFalse())
                 }
                 
-                it("for custom") {
+                it("is custom") {
                     let regex = "[a-z]at"
                     sut = FWRegexValidator(regex: regex)
                     

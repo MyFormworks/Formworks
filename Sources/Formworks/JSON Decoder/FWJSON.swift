@@ -1,10 +1,3 @@
-//
-//  FWJSONDecoder.swift
-//  
-//
-//  Created by Victor Falcetta do Nascimento on 05/10/20.
-//
-
 import Foundation
 
 /// This class is reponsible to get the JSON and transform in data.

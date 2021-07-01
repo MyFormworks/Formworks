@@ -1,10 +1,3 @@
-//
-//  FWFormViewModelTests.swift
-//  
-//
-//  Created by Artur Carneiro on 13/11/20.
-//
-
 import XCTest
 import Quick
 import Nimble
@@ -14,7 +7,7 @@ final class FWFormViewModelSpec: QuickSpec {
     override func spec() {
         var sut: FWFormViewModel!
         
-        describe("when the properties") {
+        describe("the properties") {
             it ("are correct") {
                 let configuration = FWConfiguration(json: TestFixtures.formData, style: .custom(FWStyleSpecification()))
                 sut = FWFormViewModel(configuration: configuration)
@@ -26,7 +19,7 @@ final class FWFormViewModelSpec: QuickSpec {
             }
         }
         
-        describe("when the view model") {
+        describe("the view model") {
             it("is at index path") {
                 let configuration = FWConfiguration(json: TestFixtures.formData, style: .light)
                 sut = FWFormViewModel(configuration: configuration)
