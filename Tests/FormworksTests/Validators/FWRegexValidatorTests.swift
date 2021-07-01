@@ -1,10 +1,3 @@
-//
-//  FWRegexValidatorTests.swift
-//  FormworksTests
-//
-//  Created by Edgar Sgroi on 29/10/20.
-//
-
 import XCTest
 import Quick
 import Nimble

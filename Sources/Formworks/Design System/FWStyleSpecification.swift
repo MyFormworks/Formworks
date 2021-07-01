@@ -1,10 +1,3 @@
-//
-//  FWStyleSpecification.swift
-//  
-//
-//  Created by Cassia Aparecida Barbosa on 29/10/20.
-//
-
 import UIKit
 
 /// The custom color style specification.

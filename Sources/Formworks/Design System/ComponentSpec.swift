@@ -1,10 +1,3 @@
-//
-//  ComponentSpec.swift
-//  
-//
-//  Created by Artur Carneiro on 02/10/20.
-//
-
 import UIKit
 
 /// Used to specificate the components settings.

@@ -1,10 +1,3 @@
-//
-//  FWSingleLineModel.swift
-//  
-//
-//  Created by Victor Falcetta do Nascimento on 03/11/20.
-//
-
 import Foundation
 
 /// A text component data struct. Title is the only required value for initialising.

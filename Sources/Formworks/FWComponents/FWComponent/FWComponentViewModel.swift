@@ -1,10 +1,3 @@
-//
-//  FWComponentViewModel.swift
-//  
-//
-//  Created by Edgar Sgroi on 15/10/20.
-//
-
 import Foundation
 
 /// Protocol specifying the component's data structure.

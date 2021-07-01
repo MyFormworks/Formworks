@@ -1,10 +1,3 @@
-//
-//  FWRegexValidator.swift
-// 
-//
-//  Created by Edgar Sgroi on 29/10/20.
-//
-
 import Foundation
 
 // MARK: FWRegex

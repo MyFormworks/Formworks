@@ -1,10 +1,3 @@
-//
-//  ManualLayout.swift
-//  
-//
-//  Created by Artur Carneiro on 28/09/20.
-//
-
 import UIKit
 
 /**

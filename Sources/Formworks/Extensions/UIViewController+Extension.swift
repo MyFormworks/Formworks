@@ -1,10 +1,3 @@
-//
-//  UIViewController+Extension.swift
-//  SampleMacro
-//
-//  Created by Rafael Galdino on 18/11/20.
-//
-
 import UIKit
 
 extension UIViewController {

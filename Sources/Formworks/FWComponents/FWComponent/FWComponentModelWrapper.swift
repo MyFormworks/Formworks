@@ -1,10 +1,3 @@
-//
-//  FWDecodedComponentModel.swift
-//  
-//
-//  Created by Victor Falcetta do Nascimento on 03/11/20.
-//
-
 import Foundation
 
 /// Data structure for components being decoded.

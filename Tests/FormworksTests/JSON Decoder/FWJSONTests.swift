@@ -1,10 +1,3 @@
-//
-//  FWJSONTests.swift
-//  
-//
-//  Created by Rafael Galdino on 07/10/20.
-//
-
 import XCTest
 import Quick
 import Nimble

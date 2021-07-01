@@ -1,10 +1,3 @@
-//
-//  FWStyle.swift
-//  
-//
-//  Created by Cassia Aparecida Barbosa on 29/10/20.
-//
-
 import Foundation
 
 /// The form's color style.

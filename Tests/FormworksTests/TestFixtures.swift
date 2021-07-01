@@ -1,10 +1,3 @@
-//
-//  TestFixtures.swift
-//  
-//
-//  Created by Rafael Galdino on 08/10/20.
-//
-
 import Foundation
 import UIKit
 @testable import Formworks

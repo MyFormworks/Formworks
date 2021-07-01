@@ -1,10 +1,3 @@
-//
-//  FWMultilineComponentViewModel.swift
-// 
-//
-//  Created by Rafael Galdino on 23/11/20.
-//
-
 import Foundation
 
 // MARK: Protocol-Delegate

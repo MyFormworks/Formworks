@@ -1,10 +1,3 @@
-//
-//  FWTextView.swift
-// 
-//
-//  Created by Rafael Galdino on 23/11/20.
-//
-
 import UIKit
 
 /// `Formworks` custom `UITextView` implementation

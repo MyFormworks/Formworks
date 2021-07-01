@@ -1,10 +1,3 @@
-//
-//  FWFormViewModel.swift
-//  
-//
-//  Created by Cassia Aparecida Barbosa on 07/10/20.
-//
-
 import Foundation
 
 // MARK: Protocol-delegate

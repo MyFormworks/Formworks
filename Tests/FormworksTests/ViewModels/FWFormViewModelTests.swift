@@ -1,10 +1,3 @@
-//
-//  FWFormViewModelTests.swift
-//  
-//
-//  Created by Artur Carneiro on 13/11/20.
-//
-
 import XCTest
 import Quick
 import Nimble

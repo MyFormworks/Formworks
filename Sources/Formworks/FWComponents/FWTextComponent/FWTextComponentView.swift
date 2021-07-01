@@ -1,10 +1,3 @@
-//
-//  FWTextComponentView.swift
-//  
-//
-//  Created by Victor Falcetta do Nascimento on 05/11/20.
-//
-
 import UIKit
 
 /// Visual representation for the multiline component. Subclasses `UITableViewCell`.
