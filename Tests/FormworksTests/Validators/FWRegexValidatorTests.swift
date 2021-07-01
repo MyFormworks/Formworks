@@ -13,9 +13,10 @@ import Nimble
 final class FWRegexValidatorSpec: QuickSpec {
     override func spec() {
         var sut: FWRegexValidator!
+        
         describe("is valid") {
             context("when the regex is") {
-                it("an email") {
+                it("is an email") {
                     let regex = FWRegex.email.rawValue
                     sut = FWRegexValidator(regex: regex)
                     
@@ -29,7 +30,7 @@ final class FWRegexValidatorSpec: QuickSpec {
                     expect(result).to(beTrue())
                 }
                 
-                it ("a phonenumber") {
+                it ("is a phonenumber") {
                     let regex = FWRegex.phonenumber.rawValue
                     sut = FWRegexValidator(regex: regex)
                     
@@ -79,7 +80,7 @@ final class FWRegexValidatorSpec: QuickSpec {
                     expect(result).to(beTrue())
                 }
                 
-                it("a max32") {
+                it("is a max32") {
                     let regex = FWRegex.max32.rawValue
                     sut = FWRegexValidator(regex: regex)
                     
@@ -137,7 +138,7 @@ final class FWRegexValidatorSpec: QuickSpec {
                     expect(result).to(beFalse())
                 }
                 
-                it("a phonenumber") {
+                it("is a phonenumber") {
                     let regex = FWRegex.phonenumber.rawValue
                     sut = FWRegexValidator(regex: regex)
                     
@@ -163,7 +164,8 @@ final class FWRegexValidatorSpec: QuickSpec {
                     expect(result).to(beFalse())
                 }
                 
-                it("a max32") {
+
+                it("is a max32") {
                     let regex = FWRegex.max32.rawValue
                     sut = FWRegexValidator(regex: regex)
                     
@@ -174,7 +176,7 @@ final class FWRegexValidatorSpec: QuickSpec {
                     expect(result).to(beFalse())
                 }
                 
-                it("custom") {
+                it("is custom") {
                     let regex = "[a-z]at"
                     sut = FWRegexValidator(regex: regex)
                     
